@@ -40,8 +40,14 @@ conditions:
   IDX-O:
     name: Local Ollama model + summaries
     status: planned
-    model: "ollama/llama3.1"     # placeholder — requires a running Ollama service
+    model: "ollama/llama3.1-8b-ctx32k"   # base llama3.1:8b with num_ctx=32768
     uses_llm: true
+    # REQUIRES a running Ollama service AND the enlarged-context derived model:
+    #   ollama pull llama3.1:8b
+    #   ollama create llama3.1-8b-ctx32k -f config/ollama/llama3.1-8b-ctx32k.Modelfile
+    # Ollama's default context (~2-4K) truncates the ~9K-token index tree; see the
+    # Modelfile for the full rationale. The retriever role (RET-OLL) uses the same
+    # model via the tool-calling path: ollama_chat/llama3.1-8b-ctx32k
     flags:
       if_add_node_summary: "yes"
       if_add_doc_description: "yes"

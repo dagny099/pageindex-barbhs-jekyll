@@ -42,14 +42,18 @@ built by a pipeline in the website repo at `dagny099.github.io/experiments/pagei
 Variant letters encode the **index-generation condition**, not a sequence:
 
 - **IDX-D** = **D**eterministic (Markdown headings, no generated summaries). Node schema:
-  `title` / `text` / `node_id` / `line_num`. The baseline most sensitive to heading fidelity.
-- **IDX-C** = capable **C**loud model, with summaries (planned).
-- **IDX-O** = local **O**llama model, with summaries (planned).
+  `title` / `text` / `node_id` / `line_num`. The baseline most sensitive to heading fidelity. **Built.**
+- **IDX-C** = capable **C**loud model (gpt-4o), with summaries + doc description. **Built.**
+- **IDX-O** = local **O**llama model, with summaries (planned). Requires a running Ollama
+  service and the enlarged-context derived model (`ollama create llama3.1-8b-ctx32k -f
+  config/ollama/llama3.1-8b-ctx32k.Modelfile`) — Ollama's default context truncates the
+  ~9K-token tree. See `config/index-conditions.yml` and the README's Ollama section.
 
-Only **IDX-D** exists so far. **It is currently STALE** — built from a pre-audit corpus;
-see `indexes/IDX-D/STALE.md`. Regenerate it after the corpus is finalized, then delete
-the marker. Raw runs write to `results/<doc_name>_structure.json` (includes `summary`,
-`prefix_summary`, `doc_description`); curated variants live in `indexes/IDX-<letter>/index.json`.
+Each built index carries `indexes/IDX-*/provenance.json` (pins `corpus_sha256`, model, flags)
+so staleness against the corpus is detectable. Raw runs write to
+`results/<doc_name>_structure.json`; curated variants live in `indexes/IDX-<letter>/index.json`.
+Retrieval over an index uses `scripts/run_retrieval.py` (OpenAI Agents SDK; non-OpenAI
+retrievers via LiteLLM, e.g. `ollama_chat/llama3.1-8b-ctx32k` or `anthropic/…`).
 
 ## Common commands
 

@@ -97,3 +97,20 @@ Generation behavior (model, summaries, node IDs, thinning) is controlled by
 `vendor/PageIndex/pageindex/config.yaml` and overridable via CLI flags. The default
 model is `gpt-4o-2024-11-20`. Raw runs land in `results/`; curated variants are saved
 to `indexes/IDX-<letter>/index.json`.
+
+## Local models (Ollama) — required setup for IDX-O / RET-OLL
+
+The local conditions (`IDX-O` index, `RET-OLL` retriever) need a running Ollama service
+**and an enlarged-context derived model**. This is not optional: Ollama's default context
+window (~2–4K tokens) truncates the ~9K-token index tree, so the retriever would navigate
+a blind, half-read index. Build the derived model once per machine:
+
+```bash
+ollama pull llama3.1:8b
+ollama create llama3.1-8b-ctx32k -f config/ollama/llama3.1-8b-ctx32k.Modelfile
+```
+
+Then use it: retriever `ollama_chat/llama3.1-8b-ctx32k` (the `ollama_chat/` prefix is the
+tool-calling path), index model `ollama/llama3.1-8b-ctx32k`. The Modelfile
+(`config/ollama/llama3.1-8b-ctx32k.Modelfile`) documents the `num_ctx` rationale and is the
+single source to rebuild on a new machine. Larger `num_ctx` uses more RAM — tune to your box.

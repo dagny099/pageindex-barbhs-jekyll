@@ -1,0 +1,20 @@
+# Derived from llama3.1:8b with an enlarged context window, for the PageIndex
+# retrieval experiment (IDX-O index generation and RET-OLL retrieval).
+#
+# WHY: The IDX-D structure dump the retriever must read is ~9,000 tokens (IDX-C is
+# larger, since summaries inflate the tree). Ollama's DEFAULT context window is only
+# ~2K-4K tokens regardless of what the model architecture supports, so the retriever
+# would silently see a TRUNCATED index and navigate blind. 32768 comfortably fits the
+# structure dump + fetched page content + the tool-calling conversation. llama3.1
+# supports up to 128K if you need more; larger num_ctx uses more RAM (~8B model at
+# 32K ≈ several GB), so tune to your machine.
+#
+# BUILD (required once per machine — a fresh clone / new machine will NOT have this
+# model until you run this):
+#   ollama create llama3.1-8b-ctx32k -f config/ollama/llama3.1-8b-ctx32k.Modelfile
+#
+# USE:
+#   retriever (RET-OLL):     ollama_chat/llama3.1-8b-ctx32k   (ollama_chat = tool-calling path)
+#   index model (IDX-O):     ollama/llama3.1-8b-ctx32k
+FROM llama3.1:8b
+PARAMETER num_ctx 32768

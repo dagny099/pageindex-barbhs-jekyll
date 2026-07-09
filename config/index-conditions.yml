@@ -1,0 +1,57 @@
+# Index-generation conditions for the PageIndex website experiment.
+#
+# Source of truth for how each IDX-* variant is built. The generation commands
+# below pass these as CLI flags to vendor/PageIndex/run_pageindex.py (which
+# override the vendored pageindex/config.yaml — we do not edit that file).
+# Each generated index also carries its own indexes/IDX-*/provenance.json.
+#
+# All variants build the SAME deterministic Markdown-heading tree; they differ
+# only in what is added on top (summaries, doc description) and the model used.
+
+corpus:
+  version: site-book-v1
+  path: corpus/site-book-v1/site-book-v1.md
+
+conditions:
+  IDX-D:
+    name: Deterministic
+    status: built
+    model: null                 # no LLM — pure Markdown-heading parse
+    uses_llm: false
+    flags:
+      if_add_node_summary: "no"
+      if_add_doc_description: "no"
+      if_add_node_text: "yes"
+      if_add_node_id: "yes"
+    purpose: Source-structure baseline; most sensitive to heading fidelity.
+
+  IDX-C:
+    name: Capable cloud model + summaries
+    status: built
+    model: gpt-4o-2024-11-20     # OpenAI (OPENAI_API_KEY)
+    uses_llm: true
+    flags:
+      if_add_node_summary: "yes"
+      if_add_doc_description: "yes"
+      if_add_node_text: "yes"
+      if_add_node_id: "yes"
+    purpose: Test generated summaries over the fixed hierarchy.
+
+  IDX-O:
+    name: Local Ollama model + summaries
+    status: planned
+    model: "ollama/llama3.1"     # placeholder — requires a running Ollama service
+    uses_llm: true
+    flags:
+      if_add_node_summary: "yes"
+      if_add_doc_description: "yes"
+      if_add_node_text: "yes"
+      if_add_node_id: "yes"
+    purpose: Test local viability, JSON reliability, speed, and summary quality.
+
+# Reproduce a built condition, e.g. IDX-C:
+#   cd vendor/PageIndex && python3 run_pageindex.py \
+#     --md_path ../../corpus/site-book-v1/site-book-v1.md \
+#     --model gpt-4o-2024-11-20 \
+#     --if-add-node-summary yes --if-add-doc-description yes --if-add-node-text yes
+#   then: cp results/site-book-v1_structure.json ../../indexes/IDX-C/index.json

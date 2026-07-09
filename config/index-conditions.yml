@@ -39,18 +39,20 @@ conditions:
 
   IDX-O:
     name: Local Ollama model + summaries
-    status: planned
-    model: "ollama/llama3.1-8b-ctx32k"   # base llama3.1:8b with num_ctx=32768
+    status: built
+    model: "ollama_chat/qwen2.5-7b-instruct-ctx32k"   # single local model for both roles
     uses_llm: true
     # REQUIRES a running Ollama service AND the enlarged-context derived model:
-    #   ollama pull llama3.1:8b
-    #   ollama create llama3.1-8b-ctx32k -f config/ollama/llama3.1-8b-ctx32k.Modelfile
+    #   ollama pull qwen2.5:7b-instruct
+    #   ollama create qwen2.5-7b-instruct-ctx32k -f config/ollama/qwen2.5-7b-instruct-ctx32k.Modelfile
     # Ollama's default context (~2-4K) truncates the ~9K-token index tree; see the
     # Modelfile for the full rationale.
-    # RET-OLL (retriever) note: llama3.1:8b FABRICATES tool calls and is NOT viable as a
-    # retriever. Use qwen2.5-7b-instruct instead (ollama_chat/qwen2.5-7b-instruct-ctx32k) —
-    # it navigates reliably but is ~20-40x slower than cloud. See
+    # qwen2.5 chosen over llama3.1:8b to keep the local condition single-model: llama3.1
+    # FABRICATES tool calls and is NOT viable as the RET-OLL retriever, whereas qwen2.5
+    # navigates reliably (though ~20-40x slower than cloud). See
     # reports/findings-retriever-prompt-revision.md.
+    # Operational note: generating 258 summaries floods the serialized Ollama server and
+    # triggers timeouts/retries — see indexes/IDX-O/provenance.json.
     flags:
       if_add_node_summary: "yes"
       if_add_doc_description: "yes"

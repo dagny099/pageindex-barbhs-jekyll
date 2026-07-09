@@ -46,8 +46,11 @@ conditions:
     #   ollama pull llama3.1:8b
     #   ollama create llama3.1-8b-ctx32k -f config/ollama/llama3.1-8b-ctx32k.Modelfile
     # Ollama's default context (~2-4K) truncates the ~9K-token index tree; see the
-    # Modelfile for the full rationale. The retriever role (RET-OLL) uses the same
-    # model via the tool-calling path: ollama_chat/llama3.1-8b-ctx32k
+    # Modelfile for the full rationale.
+    # RET-OLL (retriever) note: llama3.1:8b FABRICATES tool calls and is NOT viable as a
+    # retriever. Use qwen2.5-7b-instruct instead (ollama_chat/qwen2.5-7b-instruct-ctx32k) —
+    # it navigates reliably but is ~20-40x slower than cloud. See
+    # reports/findings-retriever-prompt-revision.md.
     flags:
       if_add_node_summary: "yes"
       if_add_doc_description: "yes"

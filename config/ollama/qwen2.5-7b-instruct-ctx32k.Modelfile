@@ -1,0 +1,15 @@
+# Derived from qwen2.5:7b-instruct with an enlarged context window, evaluated as a
+# tool-calling retriever (RET-OLL) alternative to llama3.1:8b, which fabricated tool
+# calls under our harness (see reports/findings-retriever-prompt-revision.md).
+#
+# WHY num_ctx: same as the llama3.1 derived model — Ollama's default context (~2-4K)
+# truncates the ~9K-token index tree, so the retriever would navigate a half-read index.
+# 32768 fits the structure dump + fetched page content + the tool-calling conversation.
+#
+# BUILD (once per machine):
+#   ollama create qwen2.5-7b-instruct-ctx32k -f config/ollama/qwen2.5-7b-instruct-ctx32k.Modelfile
+#
+# USE:
+#   retriever (RET-OLL):  ollama_chat/qwen2.5-7b-instruct-ctx32k
+FROM qwen2.5:7b-instruct
+PARAMETER num_ctx 32768

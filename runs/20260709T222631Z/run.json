@@ -1,0 +1,276 @@
+{
+  "run_id": "20260709T222631Z",
+  "purpose": "retrieval",
+  "index_id": "IDX-D",
+  "retrievers": [
+    "gpt-4o-2024-11-20",
+    "ollama_chat/qwen2.5-7b-instruct-ctx32k"
+  ],
+  "corpus_version": "site-book-v1",
+  "corpus_sha256": "7379cad3da7b017a6c3524376a8ca6a27e11b18da433edc5ac9329c73bc5b43f",
+  "repo_commit": "7e1b8b92c1fed326f8a9b5e90e5627c445ec7bf6",
+  "results": [
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The site defines \"Knowledge Legibility\" as part of its \"Knowledge Legibility Audit\" service, which is designed for teams asking, “Are we actually ready to use AI on this knowledge?” The definition centers on assessing where knowledge resides—whether in documents, spreadsheets, tickets, databases, or even in people’s heads—and whether it is structured and traceable enough for AI systems to retrieve, cite, and utilize it correctly.\n\nThe deliverables include:\n- A **legibility map** indicating where the knowledge exists,\n- A prioritized list of gaps (e.g., missing, ambiguous, or contradictory elements),\n- A concrete recommendation (e.g., build now, address issues first, or delay building).\n\nThis process addresses a common failure point in AI projects: an early oversight of knowledge readiness before deployment. For further details, it references related content like \"[Metadata Matters](/blog/metadata-matters/)\" and diagnostic tools ([See source](#)).",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "261-275"
+          },
+          "output_chars": 2596,
+          "output_tokens": 595
+        }
+      ],
+      "n_tool_calls": 2,
+      "structure_tokens": 8934,
+      "content_tokens": 595,
+      "usage": {
+        "input_tokens": 19549,
+        "output_tokens": 224,
+        "total_tokens": 19773
+      },
+      "est_cost_usd": 0.0511,
+      "latency_seconds": 7.16,
+      "qid": "DL1",
+      "category": "direct-location",
+      "question": "Where does the site define \"knowledge legibility,\" and what definition does it give?"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The articles critique how organizations adopt AI in two recurring areas: the **skills-vs-judgment gap** and **adoption-vs-value mismatch**:\n\n1. **Skills vs. Judgment**: Many organizations mistake a lack of tool fluency for the root problem, but the articles argue that the critical gap lies in judgment:\n   - Decision-making, problem-framing, and evaluation layers are cited as the scarce and essential skills, which tools themselves cannot provide ([“What Looks Like an AI Skills Gap Is Often a Judgment Gap”](#)).\n   - Strong AI literacy prioritizes understanding what a system produces, challenging results when needed, and determining what must remain human-led ([“AI literacy as a stack”](#)).\n\n2. **Adoption vs. Value**: High adoption rates do not translate into organizational value without supporting infrastructure:\n   - While leaders focus on adoption metrics, key obstacles like operational debt, hidden labor costs, and inadequate quality controls go unnoticed ([“The Missing Layer Between AI Adoption and AI Value”](#)).\n   - The articles emphasize the need for evaluating workflows at a granular level, addressing cost visibility, quality control, and accountability mechanisms.\n\nThese factors suggest that realizing the value of AI demands organizational investment in judgment skills and operational infrastructure rather than simply expanding tool use.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2403-2490"
+          },
+          "output_chars": 9253,
+          "output_tokens": 2154
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2490-2670"
+          },
+          "output_chars": 11698,
+          "output_tokens": 2897
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 8934,
+      "content_tokens": 5051,
+      "usage": {
+        "input_tokens": 24605,
+        "output_tokens": 342,
+        "total_tokens": 24947
+      },
+      "est_cost_usd": 0.0649,
+      "latency_seconds": 11.52,
+      "qid": "CS2",
+      "category": "cross-section-synthesis",
+      "question": "Across the articles, what recurring critique is made about how organizations adopt AI (adoption-vs-value, skills-vs-judgment)?"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The self-hosted ML pipeline for workout/fitness data is the **Self-Hosted Workout Intelligence** project. Here's the tech stack it uses:\n\n- **Programming Languages & Libraries**: Python, Streamlit, MySQL, scikit-learn, Plotly\n- **Cloud Services**: AWS Lambda, AWS RDS (MySQL), S3, SNS notifications\n- **Deployment & Infrastructure**: Docker, systemd\n- **Visualization Tools**: Streamlit (1.44+), Plotly\n\nThis project involves a cloud-based ETL pipeline, ML classification for distinguishing workout types (e.g., runs vs. walk sessions), and a highly interactive, multi-page Streamlit dashboard for trend analysis, anomaly detection, and personalized insights—all self-hosted for complete data ownership.\n\nCited Section: **\"Self-Hosted Workout Intelligence\"**",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1211"
+          },
+          "output_chars": 19851,
+          "output_tokens": 4632
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 8934,
+      "content_tokens": 4632,
+      "usage": {
+        "input_tokens": 24138,
+        "output_tokens": 216,
+        "total_tokens": 24354
+      },
+      "est_cost_usd": 0.0625,
+      "latency_seconds": 6.75,
+      "qid": "DL3",
+      "category": "direct-location",
+      "question": "Which project is a self-hosted ML pipeline for workout/fitness data, and what stack does it describe?"
+    },
+    {
+      "retriever": "ollama_chat/qwen2.5-7b-instruct-ctx32k",
+      "answer": "The section defining \"knowledge legibility\" is primarily covered in the blog post titled **\"What Looks Like an AI Skills Gap Is Often a Judgment Gap\"**, which can be found at [this URL](/blog/ai-literacy-judgment/). Here are some key points from that document:\n\n1. **Summary**:\n   - The core idea is that useful AI systems require judgment, not just tool fluency. Judgment involves framing the problem correctly and evaluating the output.\n   - Speed in AI tools does not equate to understanding or usefulness; the quality of the answer depends on decisions made before running the prompt.\n\n2. **Tool Fluency**:\n   - Tool fluency (e.g., knowing how to use a specific tool) is table stakes but tells you nothing about whether the problem was framed correctly or whether human oversight is needed.\n   \n3. **Speed Magnifies Judgment**:\n   - Speed in AI tools amplifies any inherent judgment issues, meaning that quick answers can be confidently wrong if the framing is poor.\n\n4. **The Missing Layer of AI Adoption**:\n   - AI literacy involves a stack with three tiers: capability (tool choice and workflow debugging), judgment (problem framing and output evaluation), and governance (deciding where human oversight is necessary).\n   - The durable value in AI lies more in judgment and governance than tool fluency.\n\n5. **Key Questions for Judgment**:\n   - Asking key questions before starting the prompt process helps ensure that the problem is framed correctly: \n     1. What am I actually trying to decide, understand, or create?\n     2. What would a genuinely good answer have to account for?\n     3. What part of this should stay human-led?\n     4. How will I know whether the output is any good?\n     5. What does it cost me to be confidently wrong here?\n\n6. **Conclusion**:\n   - The teams getting the most from AI are not simply those moving fastest but those that can sit with a half-formed problem long enough to frame it well and critically evaluate the output.\n\nThis summary captures the essence of \"knowledge legibility\" as described in the blog post, emphasizing that useful AI systems require more than just technical skill—they also need robust judgment processes.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": ""
+          },
+          "output_chars": 121,
+          "output_tokens": 39
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2403-2476"
+          },
+          "output_chars": 8698,
+          "output_tokens": 1979
+        }
+      ],
+      "n_tool_calls": 6,
+      "structure_tokens": 17868,
+      "content_tokens": 2018,
+      "usage": {
+        "input_tokens": 56256,
+        "output_tokens": 718,
+        "total_tokens": 56974
+      },
+      "est_cost_usd": null,
+      "latency_seconds": 296.13,
+      "qid": "DL1",
+      "category": "direct-location",
+      "question": "Where does the site define \"knowledge legibility,\" and what definition does it give?"
+    },
+    {
+      "retriever": "ollama_chat/qwen2.5-7b-instruct-ctx32k",
+      "answer": "The sections \"What Looks Like an AI Skills Gap Is Often a Judgment Gap\" and \"The Missing Layer Between AI Adoption and AI Value\" provide key insights into recurring critiques about how organizations adopt AI.\n\n### What Looks Like an AI Skills Gap Is Often a Judgment Gap\n\nThis article highlights that the critical skill behind useful AI systems is judgment, not tool fluency. Key points include:\n\n- **Summary**: The quality of AI answers depends on decisions made before the prompt runs, such as what counts as the right source, evaluation criteria, and human oversight.\n- **Tool Fluency vs. Judgment**: Tool fluency (operating a model) does not guarantee that the problem is framed correctly or that the output is accurate. Judgment involves framing the problem well, evaluating the outputs, and knowing when human intervention is necessary.\n- **Speed and Flawed Answers**: Speed amplifies the importance of judgment because a fast but flawed answer can be misleading if there are no clear evaluation criteria.\n\n### The Missing Layer Between AI Adoption and AI Value\n\nThis article identifies three key issues that organizations face in realizing value from their AI investments:\n\n1. **Adoption Metrics Can Hide Operational Debt**:\n   - Activity metrics (e.g., tool clicks, token volume) do not reflect whether the work has improved or if hidden labor (e.g., context-loading, rework) is increasing.\n   - The article notes that 95% of enterprise generative-AI pilots never make it into production.\n\n2. **AI Makes Weak Work Harder to See**:\n   - AI can polish outputs, making errors harder to detect and requiring explicit quality bars, review rituals, and ownership rules.\n\n3. **The Scarce Resource is Judgment, Not Access**:\n   - The best AI users are those who can explain the system's outputs, challenge them when necessary, and know when not to use the AI.\n   - Judgment is an organizational capability rather than just an individual virtue.\n\nThese critiques suggest that organizations need to focus on building judgment and governance capabilities as a critical layer between AI adoption and value realization.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2403-2476, 2490-2586"
+          },
+          "output_chars": 15262,
+          "output_tokens": 3632
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 8934,
+      "content_tokens": 3632,
+      "usage": {
+        "input_tokens": 26691,
+        "output_tokens": 587,
+        "total_tokens": 27278
+      },
+      "est_cost_usd": null,
+      "latency_seconds": 173.88,
+      "qid": "CS2",
+      "category": "cross-section-synthesis",
+      "question": "Across the articles, what recurring critique is made about how organizations adopt AI (adoption-vs-value, skills-vs-judgment)?"
+    },
+    {
+      "retriever": "ollama_chat/qwen2.5-7b-instruct-ctx32k",
+      "answer": "The project \"Self-Hosted Workout Intelligence\" is a full-stack fitness analytics platform that addresses the issue of data quality degradation when incorporating daily dog walks into running data. This project uses several technologies including Python, Streamlit, MySQL, scikit-learn, and Plotly.\n\nHere are the key components and stack details:\n\n1. **Cloud ETL Pipeline**: \n   - **Components**:\n     - **MapMyRun CSV Export**: Download workout history.\n     - **S3 Bucket**: Store exported files (triggers Lambda function).\n     - **Lambda Function**: Processes incoming data, identifies new records based on workout IDs.\n     - **RDS MySQL Database**: Stores the cleaned and transformed data for querying.\n\n2. **ML Classification**:\n   - **K-means Clustering**: Automatically classifies workouts as real runs or dog walks using features like pace, distance, and duration patterns.\n\n3. **Multi-Dimensional Analytics**:\n   - **Consistency Scoring**: Evaluates workout consistency.\n   - **Trend Detection**: Identifies trends in exercise performance over time.\n   - **Anomaly Identification**: Detects unusual patterns in the data.\n   - **Forecasting**: Predicts future performance based on historical data.\n\n4. **Interactive Dashboard**:\n   - Built using Streamlit, it provides six specialized views including a \"The Choco Effect\" view which tells the story of how adding a dog changed exercise habits.\n\n5. **Technologies Used**:\n   - **Python**: Primary programming language.\n   - **Streamlit**: For building interactive web applications.\n   - **MySQL/Plotly**: For database management and data visualization.\n   - **AWS Services**: Lambda, S3, RDS for cloud-based ETL pipeline processing.\n\nThis stack allows for complete self-hosting of the analytics platform, ensuring full control over the data and analysis.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-932,544-679"
+          },
+          "output_chars": 20950,
+          "output_tokens": 4826
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 8934,
+      "content_tokens": 4826,
+      "usage": {
+        "input_tokens": 27876,
+        "output_tokens": 851,
+        "total_tokens": 28727
+      },
+      "est_cost_usd": null,
+      "latency_seconds": 207.81,
+      "qid": "DL3",
+      "category": "direct-location",
+      "question": "Which project is a self-hosted ML pipeline for workout/fitness data, and what stack does it describe?"
+    }
+  ]
+}

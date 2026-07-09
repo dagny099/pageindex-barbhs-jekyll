@@ -1,20 +1,34 @@
 #!/usr/bin/env python3
-"""Harness-validation run: query an index with the OpenAI Agents SDK retriever.
+"""Retrieval harness: query an index with one or more retriever models.
 
 Loads a curated index (default IDX-D), exposes PageIndex's three retrieval tools
-(get_document / get_document_structure / get_page_content) over it, and runs an
-agent ("retriever") over a set of questions. Captures each answer, the full
-tool-call trace, timings, and token usage to runs/<timestamp>/ so the harness
-can be inspected before scaling (per the experiment protocol).
+over it (no re-indexing), and runs the OpenAI Agents SDK retriever over questions
+drawn from evaluations/questions.csv. Captures answers, full tool-call traces, and
+the operational metrics that are actually decision-useful — not noise:
+
+  - n_tool_calls        navigation effort
+  - structure_tokens    size of the tree dump the agent pulls (the IDX-D vs IDX-C
+                        headline: how much the index costs to *navigate*)
+  - content_tokens      text actually fetched via get_page_content (retrieval tightness)
+  - input/output/total  tokens the model consumed (from the SDK)
+  - est_cost_usd        approximate $ per question (see PRICING)
+  - latency_seconds
+
+Payload sizes (structure/content tokens) use one fixed reference encoding so they
+are comparable across retrievers regardless of each model's own tokenizer.
 
 Usage:
-  python3 scripts/run_retrieval.py --retriever gpt-4o-2024-11-20 --questions Q3 Q5 Q8
+  python3 scripts/run_retrieval.py --index-id IDX-D --retrievers gpt-4o-2024-11-20 --questions DL3 CS2 CN2
+  python3 scripts/run_retrieval.py --retrievers gpt-4o-mini anthropic/claude-sonnet-4-5 --questions DL3
+  python3 scripts/run_retrieval.py                      # IDX-D, gpt-4o, all questions
 """
 from __future__ import annotations
 
 import argparse
 import asyncio
+import csv
 import json
+import os
 import subprocess
 import sys
 import time
@@ -27,28 +41,45 @@ sys.path.insert(0, str(VENDOR))
 
 from dotenv import load_dotenv
 
-load_dotenv(REPO / ".env")  # OPENAI_API_KEY etc.
+load_dotenv(REPO / ".env")  # OPENAI_API_KEY / ANTHROPIC_API_KEY
 
+import tiktoken
 from agents import Agent, Runner, function_tool, set_tracing_disabled
 import pageindex.retrieve as R
 
-# ── Frozen candidate question bank (see reports/experimental-brief-lab-notebook.html) ──
-QUESTIONS = {
-    "Q3": ("direct-location",
-           "Which project is a self-hosted ML pipeline for workout/fitness data, "
-           "and what stack does it describe?"),
-    "Q5": ("cross-section-synthesis",
-           "Across the articles, what recurring critique is made about how "
-           "organizations adopt AI (adoption-vs-value, skills-vs-judgment)?"),
-    "Q8": ("consistency",
-           "Where is a single project or service described in more than one place "
-           "(project page vs. an article that references it), and do the descriptions "
-           "agree on scope and outcome?"),
+_ENC = tiktoken.get_encoding("o200k_base")  # reference tokenizer for payload accounting
+
+
+def ntok(s: str) -> int:
+    return len(_ENC.encode(s or ""))
+
+
+# Approximate USD per 1M tokens (input, output). Edit as prices change; unknown -> no cost.
+PRICING = {
+    "gpt-4o-2024-11-20": (2.50, 10.00),
+    "gpt-4o": (2.50, 10.00),
+    "gpt-4o-mini": (0.15, 0.60),
+    "gpt-4.1": (2.00, 8.00),
+    "gpt-4.1-mini": (0.40, 1.60),
+    "anthropic/claude-sonnet-4-5": (3.00, 15.00),
+    "anthropic/claude-3-5-sonnet-latest": (3.00, 15.00),
 }
+
+
+def est_cost(model: str, inp, out):
+    if inp is None:
+        return None
+    if model.startswith("ollama/"):
+        return 0.0
+    p = PRICING.get(model)
+    if not p:
+        return None
+    return round(inp / 1e6 * p[0] + out / 1e6 * p[1], 4)
+
 
 AGENT_SYSTEM_PROMPT = """
 You are PageIndex, a document QA assistant answering questions about a personal
-professional website that has been compiled into one Markdown "site book".
+professional website compiled into one Markdown "site book".
 TOOL USE:
 - Call get_document() first to confirm status and line count.
 - Call get_document_structure() to identify relevant sections and their line_num values.
@@ -59,143 +90,169 @@ Answer based only on tool output. Cite the section titles you used. Be concise.
 """.strip()
 
 
+def resolve_model(name: str):
+    """Bare OpenAI names pass through natively; other providers use LiteLLM."""
+    if "/" not in name and name.startswith(("gpt-", "o1", "o3", "o4", "chatgpt")):
+        return name
+    from agents.extensions.models.litellm_model import LitellmModel
+
+    key = None
+    if name.startswith("anthropic/") or "claude" in name:
+        key = os.getenv("ANTHROPIC_API_KEY")
+    elif name.startswith("openai/"):
+        key = os.getenv("OPENAI_API_KEY")
+    return LitellmModel(model=name, api_key=key)
+
+
 def git_head(repo: Path) -> str:
     try:
-        return subprocess.check_output(
-            ["git", "-C", str(repo), "rev-parse", "HEAD"], text=True
-        ).strip()
+        return subprocess.check_output(["git", "-C", str(repo), "rev-parse", "HEAD"], text=True).strip()
     except Exception:
         return "unknown"
+
+
+def load_questions(ids: list[str]) -> list[tuple[str, str, str]]:
+    rows = {r["id"]: r for r in csv.DictReader((REPO / "evaluations" / "questions.csv").open())}
+    ids = ids or list(rows)
+    return [(qid, rows[qid]["category"], rows[qid]["question"]) for qid in ids]
 
 
 def build_documents(index_path: Path) -> tuple[dict, str]:
     idx = json.loads(index_path.read_text())
     doc_id = idx["doc_name"]
-    documents = {
-        doc_id: {
-            "id": doc_id,
-            "type": "md",
-            "doc_name": idx["doc_name"],
-            "doc_description": idx.get("doc_description", ""),
-            "line_count": idx.get("line_count", 0),
-            "structure": idx["structure"],
-        }
-    }
-    return documents, doc_id
+    return {doc_id: {"id": doc_id, "type": "md", "doc_name": idx["doc_name"],
+                     "doc_description": idx.get("doc_description", ""),
+                     "line_count": idx.get("line_count", 0), "structure": idx["structure"]}}, doc_id
 
 
-def run_one(documents: dict, doc_id: str, model: str, question: str) -> dict:
-    """Run the retriever agent for one question; return answer + trace + timing + usage."""
+def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: str) -> dict:
     trace: list[dict] = []
+
+    def _log(tool, out, **args):
+        trace.append({"tool": tool, "args": args, "output_chars": len(out), "output_tokens": ntok(out)})
+        return out
 
     @function_tool
     def get_document() -> str:
         """Get document metadata: doc_name, line_count, status."""
-        out = R.get_document(documents, doc_id)
-        trace.append({"tool": "get_document", "args": {}, "output_chars": len(out)})
-        return out
+        return _log("get_document", R.get_document(documents, doc_id))
 
     @function_tool
     def get_document_structure() -> str:
-        """Get the document's tree structure (titles + line numbers, no body text)."""
-        out = R.get_document_structure(documents, doc_id)
-        trace.append({"tool": "get_document_structure", "args": {}, "output_chars": len(out)})
-        return out
+        """Get the tree structure (titles + summaries + line numbers, no body text)."""
+        return _log("get_document_structure", R.get_document_structure(documents, doc_id))
 
     @function_tool
     def get_page_content(pages: str) -> str:
-        """Get text by Markdown line numbers. Use tight ranges, e.g. '120-160' or '540,2176'."""
-        out = R.get_page_content(documents, doc_id, pages)
-        trace.append({"tool": "get_page_content", "args": {"pages": pages}, "output_chars": len(out)})
-        return out
+        """Get text by Markdown line numbers. Tight ranges, e.g. '120-160' or '540,2176'."""
+        return _log("get_page_content", R.get_page_content(documents, doc_id, pages), pages=pages)
 
-    agent = Agent(
-        name="PageIndex-Retriever",
-        instructions=AGENT_SYSTEM_PROMPT,
-        tools=[get_document, get_document_structure, get_page_content],
-        model=model,
-    )
+    agent = Agent(name="PageIndex-Retriever", instructions=AGENT_SYSTEM_PROMPT,
+                  tools=[get_document, get_document_structure, get_page_content], model=model_obj)
 
     t0 = time.perf_counter()
-    result = asyncio.run(Runner.run(agent, question, max_turns=20))
-    elapsed = round(time.perf_counter() - t0, 2)
-
+    error = None
+    answer = ""
     usage = {}
     try:
-        u = result.context_wrapper.usage
-        usage = {"requests": u.requests, "input_tokens": u.input_tokens,
-                 "output_tokens": u.output_tokens, "total_tokens": u.total_tokens}
-    except Exception:
-        pass
+        result = asyncio.run(Runner.run(agent, question, max_turns=20))
+        answer = str(result.final_output)
+        try:
+            u = result.context_wrapper.usage
+            usage = {"input_tokens": u.input_tokens, "output_tokens": u.output_tokens,
+                     "total_tokens": u.total_tokens}
+        except Exception:
+            pass
+    except Exception as e:
+        error = f"{type(e).__name__}: {e}"
+    elapsed = round(time.perf_counter() - t0, 2)
 
     return {
-        "answer": str(result.final_output),
+        "retriever": model_name,
+        "answer": answer,
+        "error": error,
         "tool_calls": trace,
         "n_tool_calls": len(trace),
-        "latency_seconds": elapsed,
+        "structure_tokens": sum(t["output_tokens"] for t in trace if t["tool"] == "get_document_structure"),
+        "content_tokens": sum(t["output_tokens"] for t in trace if t["tool"] == "get_page_content"),
         "usage": usage,
+        "est_cost_usd": est_cost(model_name, usage.get("input_tokens"), usage.get("output_tokens")),
+        "latency_seconds": elapsed,
     }
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--index", default=str(REPO / "indexes" / "IDX-D" / "index.json"))
+    ap.add_argument("--index", default=None, help="path to index.json (default derived from --index-id)")
     ap.add_argument("--index-id", default="IDX-D")
-    ap.add_argument("--retriever", default="gpt-4o-2024-11-20")
-    ap.add_argument("--questions", nargs="+", default=["Q3", "Q5", "Q8"])
+    ap.add_argument("--retrievers", nargs="+", default=["gpt-4o-2024-11-20"])
+    ap.add_argument("--questions", nargs="*", default=[], help="question ids (default: all in the CSV)")
     args = ap.parse_args()
 
     set_tracing_disabled(True)
-    index_path = Path(args.index)
+    index_path = Path(args.index) if args.index else REPO / "indexes" / args.index_id / "index.json"
     documents, doc_id = build_documents(index_path)
     provenance = json.loads((REPO / "corpus" / "site-book-v1" / "provenance.json").read_text())
+    questions = load_questions(args.questions)
 
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     run_dir = REPO / "runs" / ts
     run_dir.mkdir(parents=True, exist_ok=True)
 
-    record = {
-        "run_id": ts,
-        "purpose": "harness-validation",
-        "index_id": args.index_id,
-        "retriever_model": args.retriever,
-        "retriever_provider": "openai",
-        "corpus_version": provenance["corpus_version"],
-        "corpus_sha256": provenance["corpus_sha256"],
-        "pageindex_commit": provenance["pageindex_commit"],
-        "repo_commit": git_head(REPO),
-        "results": [],
-    }
+    record = {"run_id": ts, "purpose": "retrieval", "index_id": args.index_id,
+              "retrievers": args.retrievers, "corpus_version": provenance["corpus_version"],
+              "corpus_sha256": provenance["corpus_sha256"], "repo_commit": git_head(REPO), "results": []}
 
-    for qid in args.questions:
-        category, question = QUESTIONS[qid]
-        print(f"\n{'='*70}\n{qid} [{category}]  {question}\n{'='*70}")
-        res = run_one(documents, doc_id, args.retriever, question)
-        res.update({"qid": qid, "category": category, "question": question})
-        record["results"].append(res)
-        print(f"tools={res['n_tool_calls']}  {res['latency_seconds']}s  "
-              f"tokens={res['usage'].get('total_tokens','?')}")
-        print(f"ANSWER:\n{res['answer']}")
+    for model_name in args.retrievers:
+        model_obj = resolve_model(model_name)
+        for qid, category, question in questions:
+            print(f"\n{'='*70}\n[{model_name}] {qid} [{category}]\n{question}\n{'='*70}")
+            res = run_one(documents, doc_id, model_name, model_obj, question)
+            res.update({"qid": qid, "category": category, "question": question})
+            record["results"].append(res)
+            if res["error"]:
+                print(f"ERROR: {res['error']}")
+            else:
+                print(f"tools={res['n_tool_calls']}  struct_tok={res['structure_tokens']}  "
+                      f"content_tok={res['content_tokens']}  total_tok={res['usage'].get('total_tokens','?')}  "
+                      f"${res['est_cost_usd']}  {res['latency_seconds']}s")
+                print(f"ANSWER:\n{res['answer']}")
 
     (run_dir / "run.json").write_text(json.dumps(record, indent=2, ensure_ascii=False))
 
-    # Human-readable summary
-    lines = [f"# Retrieval run {ts} — harness validation", "",
+    # human-readable summary + per-retriever comparison table
+    lines = [f"# Retrieval run {ts}", "",
              f"- Index: **{args.index_id}** ({provenance['corpus_version']}, corpus `{provenance['corpus_sha256'][:12]}…`)",
-             f"- Retriever: **{args.retriever}** (openai)",
-             f"- Repo commit: `{record['repo_commit'][:10]}`", ""]
+             f"- Retrievers: {', '.join(f'`{m}`' for m in args.retrievers)}",
+             f"- Repo commit: `{record['repo_commit'][:10]}`", "",
+             "## Comparison (means across questions)", "",
+             "| Retriever | n | tools | struct_tok | content_tok | total_tok | $ | s |",
+             "|---|---|---|---|---|---|---|---|"]
+    for m in args.retrievers:
+        rs = [r for r in record["results"] if r["retriever"] == m and not r["error"]]
+        if not rs:
+            lines.append(f"| `{m}` | 0 | — | — | — | — | — | — | (all errored) |"); continue
+        n = len(rs)
+        avg = lambda k: round(sum(r[k] for r in rs) / n, 1)
+        tt = round(sum(r["usage"].get("total_tokens", 0) for r in rs) / n)
+        cost = sum(r["est_cost_usd"] or 0 for r in rs)
+        lines.append(f"| `{m}` | {n} | {avg('n_tool_calls')} | {avg('structure_tokens')} | "
+                     f"{avg('content_tokens')} | {tt} | {round(cost,4)} | {avg('latency_seconds')} |")
+    lines.append("")
     for r in record["results"]:
-        lines += [f"## {r['qid']} — {r['category']}", "",
-                  f"**Q:** {r['question']}", "",
-                  f"**Tool calls ({r['n_tool_calls']})**, {r['latency_seconds']}s, "
-                  f"{r['usage'].get('total_tokens','?')} tokens:", ""]
+        head = f"## [{r['retriever']}] {r['qid']} — {r['category']}"
+        lines += [head, "", f"**Q:** {r['question']}", ""]
+        if r["error"]:
+            lines += [f"**ERROR:** {r['error']}", "", "---", ""]; continue
+        lines += [f"tools={r['n_tool_calls']} · struct_tok={r['structure_tokens']} · "
+                  f"content_tok={r['content_tokens']} · total_tok={r['usage'].get('total_tokens','?')} · "
+                  f"${r['est_cost_usd']} · {r['latency_seconds']}s", ""]
         for tc in r["tool_calls"]:
-            arg = tc["args"].get("pages", "")
-            lines.append(f"- `{tc['tool']}({arg})` → {tc['output_chars']} chars")
+            lines.append(f"- `{tc['tool']}({tc['args'].get('pages','')})` → {tc['output_tokens']} tok")
         lines += ["", "**Answer:**", "", r["answer"], "", "---", ""]
     (run_dir / "run.md").write_text("\n".join(lines))
 
-    print(f"\nSaved: {run_dir}/run.json  and  run.md")
+    print(f"\nSaved: {run_dir}/run.json and run.md")
     return 0
 
 

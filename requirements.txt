@@ -1,0 +1,19 @@
+# PageIndex Website Experiment — Python dependencies (Python 3.12).
+# Install into a local .venv/ (not committed):
+#   python3.12 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt
+#
+# Note: PageIndex itself is a git submodule (vendor/PageIndex/) with its own
+# requirements.txt; the versions below are the union actually used by this repo's
+# index generation and retrieval harness.
+
+# --- Index generation (PageIndex markdown pipeline) ---
+openai==2.44.0
+tiktoken==0.13.0
+pydantic==2.13.4
+python-dotenv==1.2.2
+PyYAML==6.0.2
+requests==2.34.2
+
+# --- Retrieval harness (scripts/run_retrieval.py) ---
+openai-agents==0.18.0
+litellm==1.84.0          # enables non-OpenAI retrievers (Claude, Ollama) via the Agents SDK

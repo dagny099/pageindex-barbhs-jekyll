@@ -1,0 +1,16 @@
+id,category,question,expected_evidence,ground_truth,status,notes
+DL1,direct-location,"Where does the site define ""knowledge legibility,"" and what definition does it give?",,,draft,
+DL2,direct-location,"What consulting services are offered, and what specifically does the ""Knowledge Legibility Audit"" involve?",,,draft,Work With Me page
+DL3,direct-location,"Which project is a self-hosted ML pipeline for workout/fitness data, and what stack does it describe?","Project: Self-Hosted Workout Intelligence (fitness-dashboard). Stack: Python, Streamlit, MySQL, scikit-learn, Plotly, AWS Lambda/RDS, K-means.",Self-Hosted Workout Intelligence; full-stack ETL + K-means classification + Streamlit dashboard.,validated,Answered correctly in run 20260709T202248Z
+CS1,cross-section-synthesis,What evidence across the portfolio supports the claim that Barbara builds inspectable / verifiable AI systems?,,,draft,Expect multiple projects + articles
+CS2,cross-section-synthesis,"Across the articles, what recurring critique is made about how organizations adopt AI (adoption-vs-value, skills-vs-judgment)?",Articles: 'AI Skills Gap Is Often a Judgment Gap' and 'The Missing Layer Between AI Adoption and AI Value'.,Judgment gap + infrastructure/value gap; adoption metrics != value.,validated,Answered well in run 20260709T202248Z
+CS3,cross-section-synthesis,"What stance on retrieval architecture emerges from the RAG work (Poolula, GraphRAG migration, 'RAG Without the Theater', 'Chunking Is All You Need')?",,,draft,
+CN1,consistency,"Is the 'cognitive scientist' vs 'data scientist' identity framed consistently across the homepage, Start Here, and My Journey?",,,draft,
+CN2,consistency,"Where is a single project or service described in more than one place (project page vs. an article that references it), and do the descriptions agree on scope and outcome?",,,draft,"VALIDATION FLAG: retriever returned a thematic (governance) pairing, not a true same-entity cross-reference. Sharpen expected_evidence: name the specific project + article that reference each other, or mark 'no clean instance exists'."
+CN3,consistency,"Do project pages and the articles/resources use consistent terminology for core concepts (e.g., 'harness', 'governance', 'evaluation')?",,,draft,
+EG1,evidence-gap,"Which consulting or positioning claims rest primarily on assertion rather than a linked project, article, or evaluation result?",,,draft,
+EG2,evidence-gap,"The site leans on 'human-centered AI' — which pages back that with concrete method or evidence, and which only assert it?",,,draft,
+EG3,evidence-gap,"Which projects claim outcomes (performance, adoption, impact) without linking to data or an evaluation?",,,draft,
+RD1,reflective-discovery,What idea is central to Barbara's work even when she doesn't name it consistently across pages?,,,draft,
+RD2,reflective-discovery,"Reading only the Resources section (harness, memory, metadata, instruction-file scoring), what worldview about building reliable AI emerges — and does the rest of the site reflect it?",,,draft,
+RD3,reflective-discovery,"If a hiring manager read the whole corpus, what one-sentence positioning would they infer, and what evidence most supports it?",,,draft,

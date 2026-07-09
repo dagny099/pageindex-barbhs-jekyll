@@ -3,10 +3,10 @@
 ## Corpus Preface
 
 Purpose: Derived experimental Markdown corpus for PageIndex hierarchy and navigation experiments.
-Snapshot date: 2026-07-04
-Git commit: `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
-Source documents: 26
-Content-type counts: Core Positioning Pages=4, Project Portfolio=6, Articles=10, Resources=6
+Snapshot date: 2026-07-08
+Git commit: `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
+Source documents: 25
+Content-type counts: Core Positioning Pages=4, Project Portfolio=6, Articles=10, Resources=5
 This document is a derived experimental corpus for PageIndex-oriented navigation experiments.
 The original website source files remain authoritative.
 
@@ -19,7 +19,7 @@ The original website source files remain authoritative.
 **Source path:** `index.md`
 **Source type:** page
 **Canonical URL:** /
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -136,7 +136,7 @@ Made it this far? If anything resonated — a project, a principle, a half-finis
 **Source path:** `_pages/start_here.md`
 **Source type:** page
 **Canonical URL:** /start-here/
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -238,7 +238,7 @@ Browse by expertise area: cognitive science, data analysis, visualization and ma
 **Source path:** `_pages/work-with-me.md`
 **Source type:** page
 **Canonical URL:** /work-with-me/
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -353,13 +353,13 @@ I bring research-grade rigor and full-stack execution to systems where the data 
 **Source path:** `_pages/my-journey.html`
 **Source type:** page
 **Canonical URL:** /my-journey/
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
 From MIT eye-tracking research to building human-centered data systems - how cognitive science principles shape modern AI workflows and data platform design
 
-#### The Cognitive Scientist Who Builds Data Systems
+**The Cognitive Scientist Who Builds Data Systems**
 
 ![Barbara Hidalgo-Sotelo](/assets/images/biopic/bhs_forweb.png)
 
@@ -369,29 +369,33 @@ From MIT eye-tracking research to building human-centered data systems - how cog
 
 [Jump to timeline ↓](#journey-turns)
 
-##### Lenses I Bring to Every Problem
+The purpose of computing is insight, not numbers.
 
-###### 🧠The Cognitive Scientist Asks:
+— Richard W. Hamming
+
+#### Lenses I Bring to Every Problem
+
+**🧠The Cognitive Scientist Asks:**
 
 "How will a tired human at 3pm on Friday actually use this?" I test interfaces under cognitive load. If it doesn't work when you're distracted, it doesn't work.
 
-###### 🔍The Data Scientist Asks:
+**🔍The Data Scientist Asks:**
 
 "What patterns are hiding in this chaos?" But more importantly: "How do I surface them so humans can see them instantly?" Statistical significance means nothing if humans can't grasp it.
 
-###### 🎯The Consultant Asks:
+**🎯The Consultant Asks:**
 
 "What decision does this enable?" Every visualization, every model, every interface must answer: what action should someone take based on this? No action, no value.
 
-###### 🏗️The System Builder Asks:
+**🏗️The System Builder Asks:**
 
 "How does this scale cognitively?" A system that works for 10 items might break human comprehension at 100. I design for cognitive scalability, not just computational.
 
-##### The Big Turns
+#### The Big Turns
 
 2009
 
-###### Learning to See How We See
+##### Learning to See How We See
 
 At MIT, I didn't just study vision—I mapped it. Tracking thousands of eye movements across visual scenes revealed how humans construct meaning from chaos in milliseconds. We discovered that attention isn't random; it follows predictable patterns based on both visual features and personal experience. This research into human information processing became my foundation for understanding why some data visualizations work instantly while others fail despite being "correct."
 
@@ -399,7 +403,7 @@ At MIT, I didn't just study vision—I mapped it. Tracking thousands of eye move
 
 2013
 
-###### From Lab Theory to Human Impact
+##### From Lab Theory to Human Impact
 
 At UT Austin's HABLA lab, I discovered the messy reality of applied cognitive science. Working on NIH-funded bilingualism research meant designing experiments that 5-year-olds could complete while generating data rigorous enough for clinical decisions. I built data pipelines that tracked language development patterns across hundreds of children—learning that the best system architecture means nothing if humans can't use it under pressure. This taught me that cognitive principles only matter when they solve real problems for real people.
 
@@ -407,13 +411,13 @@ At UT Austin's HABLA lab, I discovered the messy reality of applied cognitive sc
 
 2015
 
-###### Healthcare Through a Cognitive Lens
+##### Healthcare Through a Cognitive Lens
 
 Running BALEX Healthcare Services revealed why healthcare technology often fails: it's designed for ideal scenarios, not cognitive reality. Nurses making decisions at 3am don't have working memory to spare. Our interfaces needed to work when users were exhausted, stressed, and multitasking. Three years of building systems under these constraints taught me that successful technology doesn't just process data correctly—it presents information in ways that reduce cognitive load when it matters most.
 
 2017
 
-###### The Pattern Recognition Years
+##### The Pattern Recognition Years
 
 Consulting across industries revealed a universal pattern: technical solutions fail when they ignore human cognition. Whether helping a risk management firm visualize threats or designing medical bill classification systems, the challenge was always the same—how do we present complex information so humans can act on it quickly and accurately? My cognitive science training became invaluable for designing interfaces that guide attention to what matters and hide complexity until it's needed.
 
@@ -421,51 +425,51 @@ Consulting across industries revealed a universal pattern: technical solutions f
 
 2021
 
-###### Making Metadata Human-Friendly
+##### Making Metadata Human-Friendly
 
 Supporting the SEC's data catalog initiative brought everything full circle. Most data discovery fails because systems are organized for machines, not human memory. We built interfaces that mirror how people actually recall information—through association and context, not alphabetical lists. My role wasn't just technical; it was cognitive translation. I helped teams understand that findability isn't about perfect taxonomies—it's about matching how humans naturally organize and retrieve information. The Python tools I built reflected this: simple surfaces hiding sophisticated information architecture designed around human memory patterns.
 
-##### Beyond the Data
+#### Beyond the Data
 
 The same curiosity that drives my research shows up everywhere else in life.
 
 🏃‍♀️
 
-###### Marathon Runner
+**Marathon Runner**
 
 Long-distance thinking, one mile at a time
 
 🎤
 
-###### Bilingual Toastmaster
+**Bilingual Toastmaster**
 
 [Club 7032821](https://7032821.toastmastersclubs.org/) — practice explaining complex ideas clearly
 
 🗳️
 
-###### Deputy Voter Registrar
+**Deputy Voter Registrar**
 
 Civic engagement via [Foundation Communities](https://foundcom.org/)
 
 🐝
 
-###### Backyard Beekeeper
+**Backyard Beekeeper**
 
 4 years of hives, now a [data project](/projects/beehive-tracker/)
 
 🌐
 
-###### Open Data Advocate
+**Open Data Advocate**
 
 Striving to expand knowledge for the public good — Inspired by the stunningly informative visuals at [Our World in Data](https://distill.pub/)
 
 🤖
 
-###### AI Literacy Mentor
+**AI Literacy Mentor**
 
 Translating complex ideas into approachable insights — Explore one of my favorite visual explainers at [Distill.pub](https://distill.pub/)
 
-##### Now & Next
+#### Now & Next
 
 Today, I'm applying 15+ years of cognitive insights to the hardest problems in data and AI: How do we make machine learning explainable? How do we build dashboards that actually drive decisions? How do we design human-AI collaboration that amplifies rather than replaces human intelligence?
 
@@ -473,13 +477,13 @@ My recent projects—from knowledge graphs that mirror human memory to workout t
 
 I'm actively exploring the intersection of attention mechanisms in transformers and human visual attention. The parallels aren't coincidental—the same principles that help humans find meaning in visual chaos are now helping machines process language. This convergence is where I want to build next.
 
-##### Dive Deeper
+#### Dive Deeper
 
 [
 
 💼
 
-###### Experience
+**Experience**
 
 Filterable role cards with highlights and tech tags
 
@@ -487,7 +491,7 @@ Filterable role cards with highlights and tech tags
 
 🔬
 
-###### Research & Publications
+**Research & Publications**
 
 Eye-tracking papers, posters, and 430+ citations
 
@@ -495,7 +499,7 @@ Eye-tracking papers, posters, and 430+ citations
 
 📄
 
-###### Resume (PDF)
+**Resume (PDF)**
 
 One-page professional summary
 
@@ -503,7 +507,7 @@ One-page professional summary
 
 🎓
 
-###### Academic CV (PDF)
+**Academic CV (PDF)**
 
 Full academic history and publications
 
@@ -511,7 +515,7 @@ Full academic history and publications
 
 🗺️
 
-###### Projects
+**Projects**
 
 Sensemaking AI — knowledge graphs, RAG, and built work
 
@@ -519,13 +523,13 @@ Sensemaking AI — knowledge graphs, RAG, and built work
 
 🕸️
 
-###### Semantic Web Curriculum
+**Semantic Web Curriculum**
 
 A 12-week RDF, OWL & SPARQL journey, published as I learn
 
 ](https://curriculum.barbhs.com)
 
-###### Looking for someone who designs data systems that think with people, not against them?
+##### Looking for someone who designs data systems that think with people, not against them?
 
 I specialize in the intersection of human understanding and technical execution—turning cognitive science into systems that genuinely serve their users.
 
@@ -547,7 +551,7 @@ I specialize in the intersection of human understanding and technical execution�
 **Tags:** RAG, NLP, FastAPI, SQLModel, ChromaDB, Claude, Evaluation, Data Lineage, Python
 **Categories:** AI Systems & MLOps (Pragmatic)
 **Demo URL:** /projects/poolula-platform/
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -804,7 +808,7 @@ When the AI cites a transaction, you can trace it back to the original source fi
 **Tags:** machine-learning, data-pipeline, etl, analytics, streamlit
 **Demo URL:** /projects/fitness-dashboard/
 **Docs URL:** https://docs.barbhs.com/fitness-dashboard/
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -1223,7 +1227,7 @@ else:
 **Tags:** computer-vision, data-pipeline, api-integration, streamlit
 **Demo URL:** /projects/beehive-tracker/
 **Docs URL:** https://docs.barbhs.com/beehive-tracker/
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -1485,7 +1489,7 @@ All API tests use mocks—no real API calls in test suite.
 **Categories:** Data Products & Interfaces
 **Demo URL:** /projects/chronoscope/
 **Docs URL:** https://chronoscope-docs.github.io
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -1721,7 +1725,7 @@ See [docs/assets/images/](https://github.com/dagny099/chrono-scope/tree/main/doc
 **Categories:** Data Products & Interfaces
 **Demo URL:** /projects/digital-memory-chest/
 **Docs URL:** https://github.com/dagny099/digital-memory-chest/tree/main/docs
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -1972,7 +1976,7 @@ Creates a complete memorial for "Eleanor Thompson" with sample photos, videos, a
 **Tags:** llm, multi-provider, chat, model-comparison, streamlit
 **Demo URL:** /projects/convoscope/
 **Docs URL:** https://docs.barbhs.com/convoscope/
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -2182,7 +2186,7 @@ The system works with any subset of these—if you only have an OpenAI key, it r
 **Technologies:** GPT-4.1, Gemini 2.5 Flash, Python, OpenAI API, Google AI
 **Tags:** LLM, evaluation, digital-twin, RAG, AI, GPT-4, Gemini
 **Categories:** data-science
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -2288,7 +2292,7 @@ Three things are on the list.
 **Technologies:** Neo4j, ChromaDB, Python, OpenAI embeddings, Cypher, GPT-4.1
 **Tags:** LLM, evaluation, digital-twin, RAG, GraphRAG, Neo4j, knowledge-graph, AI
 **Categories:** data-science
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -2405,7 +2409,7 @@ The deeper goal is the one underneath the model-comparison post and this one and
 **Technologies:** LLM evaluation, RAG, problem framing, AI governance
 **Tags:** AI, AI-literacy, AI-governance, judgment, evaluation, digital-twin, LLM
 **Categories:** data-science
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -2492,7 +2496,7 @@ If this framing is useful, I’d love to hear how it shows up in your own AI wor
 **Last modified:** 2026-06-30
 **Tags:** AI, enterprise-AI, AI-governance, AI-adoption, AI-value, AI-strategy, evaluation, judgment, work-design, cost-visibility, ROI, KPMG, Glean
 **Categories:** thinking, data-science
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -2672,7 +2676,7 @@ AI value does not come from the tool alone. It comes from the organizational lay
 **Last modified:** 2026-07-04
 **Tags:** claude-code, agents-md, cursorrules, AI, evaluation, documentation, developer-tools, LLM
 **Categories:** data-science
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -2779,7 +2783,7 @@ And I'd genuinely like to compare notes. How long is your instruction file? If y
 **Publication date:** 2026-03-12
 **Tags:** metadata, seo, open-graph, structured-data, knowledge-representation, github-pages, jekyll
 **Categories:** applied-thinking, website-building
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -2868,7 +2872,7 @@ The companion piece, *Implementing Structured Metadata on a Jekyll + GitHub Page
 **Technologies:** Schema.org, Python, Jekyll, YAML
 **Tags:** metadata, seo, schema-org, content-strategy, documentation
 **Categories:** tutorial
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -3033,7 +3037,7 @@ The time investment is front-loaded, but the long-term benefits—better SEO, ea
 **Last modified:** 2025-01-15
 **Tags:** rag, retrieval, evaluation, prompting, governance, prod-readiness
 **Categories:** Thinking, AI Systems
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -3136,7 +3140,7 @@ User Q
 **Technologies:** Neo4j, Python, EXIF, NOAA API
 **Tags:** knowledge-graph, metadata, data-governance, ux-for-analytics, explainability
 **Categories:** thinking
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -3231,7 +3235,7 @@ Provenance: ingest_v0.3 · weather_api v2.1 · camera iPhone15 · tz:America/Den
 **Last modified:** 2025-01-15
 **Tags:** visual-working-memory, data-visualization, visual-attention, ux-for-analytics
 **Categories:** thinking
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -3371,7 +3375,7 @@ I build data tools and interfaces where cognitive science meets practice. If you
 **Source path:** `resources/index.md`
 **Source type:** resource_index
 **Canonical URL:** /resources/
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -3629,155 +3633,6 @@ A ready-to-use template for small multiples — the most underused way to compar
 
 <!-- END SOURCE: resources/index.md -->
 
-<!-- BEGIN SOURCE: _resources/knowledge-legibility-diagnostic.md -->
-
-### Is Your Knowledge Ready for AI?
-
-**Source path:** `_resources/knowledge-legibility-diagnostic.md`
-**Source type:** resource
-**Canonical URL:** /resources/knowledge-legibility-diagnostic/
-**Publication date:** 2026-07-04
-**Last modified:** 2026-07-04
-**Tags:** knowledge-systems, ai-readiness, rag, evaluation, metadata
-**Categories:** Knowledge Systems
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
-
-#### Summary
-
-Fifteen questions across five dimensions — findability, structure, provenance, ownership, and verification — to check whether your organizational knowledge is in good enough shape for AI to use and for humans to verify.
-
-Before an AI system can answer from your organization's knowledge, that knowledge has to be findable, structured, traceable, owned, and checkable. Most teams evaluate the model first. The model is usually fine. The documents, spreadsheets, tickets, and unwritten decisions underneath it are usually where the trouble starts.
-
-This diagnostic is fifteen questions across those five dimensions. It takes about twenty minutes with the right people in the room, and it will tell you more about your AI readiness than a vendor demo will.
-
-#### Who this is for
-
-- Teams exploring RAG, AI assistants, workflow automation, or internal knowledge tools
-- Leaders whose AI pilot sounds promising in the demo but is hard to trust in practice
-- Anyone who suspects the model isn't the real bottleneck
-
-There's a companion to this diagnostic: [the integration test](/assets/downloads/missing-layer-two-reports.pdf) asks whether an AI-assisted *workflow* is ready — who owns the decision, who can override the output. This one asks whether the *knowledge underneath* that workflow is ready. They fail independently.
-
-#### How to use it
-
-Pick one real workflow or knowledge domain — customer support answers, pricing rules, compliance procedures, engineering runbooks. Not "our knowledge" in general; one specific domain where you're considering AI.
-
-Answer each question **yes**, **no**, or **not sure** for that domain. "Not sure" counts as a finding, and it's often the most useful one: it means nobody in the room knows, which is its own answer.
-
-Answer honestly. Nobody scores this, and flattering answers only postpone the same discoveries to a more expensive stage.
-
-#### The five dimensions
-
-##### 1. Findability
-
-*Can people and systems find the knowledge they need?*
-
-Knowledge spread across Slack, email, Drive, Confluence, tickets, spreadsheets, and people's heads is invisible to a retrieval system — and half-invisible to your own team. If humans have to ask around to find the current answer, an AI will retrieve whichever version it happens to reach.
-
-**Q1.** If a new teammate needed the current answer to a routine question in this domain — a policy, a rate, a procedure — could they find it without asking anyone?
-
-**Q2.** Is there one agreed first place to look for this domain, or are there several plausible "sources of truth"?
-
-**Q3.** When an answer changes, does the old version get retired or clearly marked — or does it stay findable alongside the new one?
-
-**Weak signals:** the real answer lives in a long Slack thread; two teams maintain parallel spreadsheets; the wiki page everyone distrusts still ranks first in search.
-
-##### 2. Structure
-
-*Is the knowledge in a form AI systems can use?*
-
-Retrieval and reasoning work far better over knowledge with visible structure: named entities, consistent categories, explicit rules. Knowledge buried in prose, PDFs, screenshots, and threads forces the AI to reconstruct that structure on every query — and it will reconstruct it differently each time.
-
-**Q4.** Could the core facts of this domain be laid out as a table, checklist, or set of rules without losing what matters?
-
-**Q5.** Is the same concept called the same name everywhere it appears — or is it "customer" in one system, "account" in another, and "client" in the contract?
-
-**Q6.** Are the decision rules written down as rules, or would someone have to reconstruct them from prose, screenshots, and old email threads?
-
-**Weak signals:** the critical constraint exists only as a paragraph in a 40-page PDF; categories mean different things to different teams; the process diagram is a photo of a whiteboard from 2023.
-
-##### 3. Provenance
-
-*Can you trace where knowledge came from?*
-
-An AI answer is only checkable if it points back to a source, and a source is only trustworthy if you can tell who wrote it, when, and with what authority. Decisions that were made in a meeting and remembered rather than recorded have no provenance at all.
-
-**Q7.** Pick a key document in this domain: can you tell who wrote it, when it was last updated, and whether it's still current?
-
-**Q8.** If an AI answered a question from your documents today, could you trace that answer back to the specific passage that supports it?
-
-**Q9.** When a significant decision gets made in this domain, is it recorded somewhere a person — or a system — could find it a year later?
-
-**Weak signals:** documents with no date or author; drafts and finals living side by side; "we decided this in Q3" with nothing written down; approval status that exists only in someone's memory.
-
-##### 4. Ownership
-
-*Who maintains the knowledge?*
-
-Knowledge without an owner drifts. Outdated pages persist because deleting them is nobody's job; contradictions get resolved informally by whoever notices; maintenance happens after something breaks. An AI system makes this worse, because it surfaces the stale and contradictory material at scale — and when it does, someone has to be responsible for fixing the source.
-
-**Q10.** For each major source in this domain, can you name the person responsible for keeping it current?
-
-**Q11.** When two sources disagree, is there a defined way to resolve it — or does it depend on who notices and how much they care?
-
-**Q12.** Has anything in this domain been updated in the last quarter for a reason other than something breaking?
-
-**Weak signals:** the definitive doc was written by someone who left; "everyone" owns the wiki, so no one does; the AI pilot surfaced errors months ago and the sources still say the same thing.
-
-##### 5. Verification
-
-*How would you know whether an AI answer is right?*
-
-This is the dimension teams skip, and the one that determines whether anyone ends up trusting the system. Without known-correct answers to test against, a definition of unacceptable error, and a review path for high-stakes outputs, "the answers look good" is the only quality bar — and it's not one.
-
-**Q13.** Do you have even ten questions from this domain with known-correct answers you could test an AI against?
-
-**Q14.** Could your team agree on which errors are merely annoying and which are unacceptable — and write that down?
-
-**Q15.** If the AI gives a confident wrong answer in a high-stakes situation, who catches it, how fast, and can they override it?
-
-**Weak signals:** quality gets judged by vibes in a demo; nobody has written down what "good" means; there's no path for a domain expert to challenge or correct an answer; the plan for errors is "we'll review outputs for a while."
-
-#### How to read your answers
-
-There's no score. Fifteen questions can't measure an organization to two decimal places, and pretending otherwise would tell you less than the pattern of your answers already does.
-
-- **Mostly yes.** Your knowledge may be ready for a narrow, well-scoped AI use case in this domain. Start small, keep the verification questions (Q13–Q15) answered in writing, and expand from what you can check.
-- **Mixed.** Common, and workable — but the gaps will surface as "AI problems" if you build first. You likely need some cleanup, modeling, or ownership decisions before a build, in whichever dimensions came up weak.
-- **Mostly no, or mostly not sure.** You probably need a knowledge audit before relying on AI outputs in this domain. Building now means paying engineers to discover these same gaps one incident at a time.
-
-What each weak dimension tends to mean:
-
-- **If findability is weak**, the AI will answer from whichever version it retrieves — including the ones your team knows to ignore. Consolidating to one source of truth per domain matters more than any retrieval technique.
-- **If structure is weak**, expect inconsistent answers to identical questions. The fix is modeling work — naming entities, making rules explicit, turning prose into tables and schemas — and it's work a model can't do for you reliably.
-- **If provenance is weak**, you can't cite sources, which means humans can't verify answers, which means trust never forms — even when the answers are right.
-- **If ownership is weak**, any cleanup you do decays. The system's quality will quietly track the staleness of its worst-maintained source.
-- **If verification is weak**, you have no way to distinguish a system that works from one that sounds like it works. Fix this one regardless of the others; it's the cheapest to start and the most expensive to skip.
-
-#### What to do next
-
-Five steps, all doable without a consultant:
-
-1. **Pick one knowledge domain** — the one where AI help would matter most, not the tidiest one.
-2. **Identify the current source of truth** for it. If there are several, choose one and say so out loud.
-3. **Mark the contradictions and missing owners** you found in Q10–Q12. A list is enough.
-4. **Write a small golden question set** — ten real questions with answers a domain expert signs off on. This becomes your test the day any AI touches this domain.
-5. **Decide what should not be automated yet**, and write that down too. A short "not yet" list prevents the most expensive category of mistake.
-
-#### Related resources
-
-- [The integration test](/assets/downloads/missing-layer-two-reports.pdf) — the companion diagnostic for the workflow layer, from [The Missing Layer](/blog/missing-layer-ai-adoption-value/)
-- [Memory is more than storage](/resources/memory-is-more-than-storage/) — why useful knowledge systems need selection, structure, revision, and forgetting
-- [What does "harness" mean in AI?](/resources/what-is-a-harness-in-ai/) — the machinery that turns a capable model into a checkable system
-- [Metadata Matters](/blog/metadata-matters/) — the structure dimension, in depth
-- [Comparing models for the digital twin](/blog/twin-evaluate-models/) and the [GraphRAG reference](/graphrag-reference/) — what verification looks like on a real system I run
-
----
-
-If you worked through this and found more "no" and "not sure" than you expected, that's the diagnostic doing its job. These are the questions a [Knowledge Legibility Audit](/work-with-me/) answers with evidence instead of estimates — tracing where your knowledge actually lives, what state it's in, and whether to build now, fix things first, or wait.
-
-<!-- END SOURCE: _resources/knowledge-legibility-diagnostic.md -->
-
 <!-- BEGIN SOURCE: _resources/what-is-a-harness-in-ai.md -->
 
 ### What Does 'Harness' Mean in AI?
@@ -3789,7 +3644,7 @@ If you worked through this and found more "no" and "not sure" than you expected,
 **Last modified:** 2026-07-04
 **Tags:** evaluation, ai-agents, llm, testing, knowledge-systems
 **Categories:** Knowledge Systems
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -3825,7 +3680,7 @@ Building this layer — the evaluation and verification structure that earns tru
 **Last modified:** 2026-07-04
 **Tags:** memory, ai-agents, cognitive-science, knowledge-systems
 **Categories:** Knowledge Systems
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -3870,7 +3725,7 @@ The papers are quite different, and I'm not suggesting that human and agent memo
 **Last modified:** 2026-06-22
 **Tags:** data-architecture, json-schema, automation, systems-design
 **Categories:** Technical Documentation
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 
@@ -4097,7 +3952,7 @@ This schema powers my [experience page](/experience/) and maintains consistency 
 **Last modified:** 2026-07-04
 **Tags:** claude-code, agents-md, cursorrules, evaluation, documentation, AI
 **Categories:** Working with AI
-**Snapshot:** `c06389f1bca9bc014a8dfeaae0cc53a18589f4bd`
+**Snapshot:** `7d3ea3e68bdee14e7c386b99d235ec64f1472e77`
 
 #### Summary
 

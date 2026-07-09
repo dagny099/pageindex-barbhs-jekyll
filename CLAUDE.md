@@ -6,48 +6,70 @@ Guidance for Claude Code when working in this repo. See `README.md` for the huma
 
 An experiment harness for running [PageIndex](https://github.com/VectifyAI/PageIndex)
 (vectorless, reasoning-based RAG that builds a hierarchical tree over a document)
-against a frozen Markdown snapshot of the barbhs.com website. We compare index
-variants over one reproducible corpus.
+against a frozen Markdown snapshot of the barbhs.com website. The full experimental
+design lives in `reports/experimental-brief-lab-notebook.html`.
 
 ## Key facts
 
 - **Python 3.12**, local `.venv/` (not committed). Key packages: `openai`, `tiktoken`, `pydantic`, `pyyaml`.
-- **PageIndex is a git submodule** at `vendor/PageIndex/`, pinned via `.gitmodules`. Do **not** edit files inside it — it's vendored upstream. If it's missing, run `git submodule update --init --recursive`.
+- **PageIndex is a git submodule** at `vendor/PageIndex/`, pinned via `.gitmodules`. Do **not** edit files inside it — it's vendored upstream. If missing, run `git submodule update --init --recursive`.
 - PageIndex needs an LLM API key in `vendor/PageIndex/.env` (LiteLLM-compatible; `OPENAI_API_KEY` by default). Never commit keys — `.env` is gitignored.
 - Generation config lives in `vendor/PageIndex/pageindex/config.yaml` (default model `gpt-4o-2024-11-20`); CLI flags override it.
 
-## The corpus is authoritative-by-hash — do not hand-edit it
+## The corpus is produced ELSEWHERE — do not hand-edit it
 
-`corpus/site-book-v1/site-book-v1.md` is a **derived** artifact whose SHA256 is pinned
-in both `provenance.json` and `site-book-v1.manifest.json`. Do not edit it by hand — it
-is regenerated upstream from the website source. If the corpus changes, its hashes and
-provenance must change together. Treat `corpus/` as read-only unless the task is
-explicitly about re-syncing the corpus.
+`corpus/site-book-v1/` is a **frozen, consumed snapshot**, not a source. The corpus is
+built by a pipeline in the website repo at `dagny099.github.io/experiments/pageindex/`
+(scripts, config, tests, QC/normalization reports). That repo is the authoritative producer.
 
-## Artifacts: raw runs vs. curated indexes
+- **To change the corpus, fix the pipeline in the website repo, rebuild + revalidate there,
+  then re-sync into this repo.** Never edit `corpus/site-book-v1.md` or its manifest by hand.
+- The snapshot is pinned in `corpus/site-book-v1/provenance.json`: `source_repo`, `source_path`,
+  `website_commit`, `pageindex_commit`, `corpus_sha256`, `normalization_manifest_sha256`, `synced_at`.
 
-- **Raw output** → `results/<doc_name>_structure.json`. This is PageIndex's default write
-  location and includes `summary`, `prefix_summary`, and `doc_description`.
-- **Curated variants** → `indexes/IDX-<letter>/index.json`. Named, evaluated variants
-  derived from a run. `IDX-D` is structure-only: nodes carry `title` / `text` /
-  `node_id` / `line_num`, no summaries or doc description. Same 369-node tree as the raw run.
+### Re-sync procedure
 
-When creating a new variant, follow the `indexes/IDX-<letter>/index.json` convention and
-keep the node schema consistent within a variant.
+1. `cp` the corpus `.md` and `.manifest.json` verbatim from the website repo's
+   `experiments/pageindex/corpus/` into `corpus/site-book-v1/` (preserve bytes so hashes match).
+2. Recompute both SHA256s and update `provenance.json` (`corpus_sha256`,
+   `normalization_manifest_sha256`, `website_commit`, `synced_at`).
+3. Verify the on-disk files hash to the values in `provenance.json`.
+4. **Any existing index is now stale** — the corpus changed underneath it. Regenerate
+   affected `indexes/IDX-*` and mark stale ones (see the STALE.md convention).
+
+## Index conditions and variants
+
+Variant letters encode the **index-generation condition**, not a sequence:
+
+- **IDX-D** = **D**eterministic (Markdown headings, no generated summaries). Node schema:
+  `title` / `text` / `node_id` / `line_num`. The baseline most sensitive to heading fidelity.
+- **IDX-C** = capable **C**loud model, with summaries (planned).
+- **IDX-O** = local **O**llama model, with summaries (planned).
+
+Only **IDX-D** exists so far. **It is currently STALE** — built from a pre-audit corpus;
+see `indexes/IDX-D/STALE.md`. Regenerate it after the corpus is finalized, then delete
+the marker. Raw runs write to `results/<doc_name>_structure.json` (includes `summary`,
+`prefix_summary`, `doc_description`); curated variants live in `indexes/IDX-<letter>/index.json`.
 
 ## Common commands
 
 ```bash
-# Generate a tree from the corpus (writes to vendor/PageIndex/results/)
-cd vendor/PageIndex && python3 run_pageindex.py --md_path ../../corpus/site-book-v1/site-book-v1.md
+# Generate the deterministic (IDX-D) tree (writes to vendor/PageIndex/results/)
+cd vendor/PageIndex && python3 run_pageindex.py --md_path ../../corpus/site-book-v1/site-book-v1.md \
+  --if-add-node-summary no --if-add-doc-description no
 
-# Validate any index JSON is well-formed
+# Verify an index/corpus JSON is well-formed
 python3 -c "import json,sys; json.load(open(sys.argv[1])); print('ok')" indexes/IDX-D/index.json
+
+# Verify corpus on disk matches pinned provenance hashes
+python3 -c "import json,hashlib as h; p=json.load(open('corpus/site-book-v1/provenance.json')); \
+print('corpus', p['corpus_sha256']==h.sha256(open('corpus/site-book-v1/site-book-v1.md','rb').read()).hexdigest()); \
+print('manifest', p['normalization_manifest_sha256']==h.sha256(open('corpus/site-book-v1/site-book-v1.manifest.json','rb').read()).hexdigest())"
 ```
 
 ## Conventions
 
-- `indexes/` is tracked (committed); `results/`, `logs/`, `workspace(s)/` are gitignored — they're scratch/raw.
-- Commit only what the task calls for. Don't commit `.venv/`, `.env`, `.DS_Store`, or anything under `vendor/PageIndex/results/`.
-- The scaffolding dirs (`config/`, `evaluations/`, `reports/`, `runs/`, `scripts/`) are currently empty; populate them as the experiment grows rather than scattering files at the root.
-- Preserve reproducibility: any new corpus or index artifact should carry or reference its provenance (source commit + hash).
+- `indexes/` is tracked (committed); `results/`, `logs/`, `workspace(s)/` are gitignored scratch.
+- Don't commit `.venv/`, `.env`, `.DS_Store`, or anything under `vendor/PageIndex/results/`.
+- Scaffolding dirs (`config/`, `evaluations/`, `runs/`, `scripts/`) are currently empty; populate them as the experiment grows rather than scattering files at the root.
+- Any new corpus or index artifact must carry or reference its provenance (source commit + hash).

@@ -1,8 +1,10 @@
 {
   "corpus_version": "site-book-v1",
-  "website_commit": "ad965bf9983d9526bef7b64aa6005eb2a624f0c6",
+  "source_repo": "https://github.com/dagny099/dagny099.github.io",
+  "source_path": "experiments/pageindex/corpus/site-book-v1.md",
+  "website_commit": "e4605281802d1fdfec52f5879c88f35cae78b3c5",
   "pageindex_commit": "f413c66fee0bfbb7291c389333f9cc1adac68d57",
-  "corpus_sha256": "409f9f1450b376e28a5ec76f7a728257c45a95f2f91e8a48a4ea0eb09710aaaf",
-  "normalization_manifest_sha256": "57eafc87d9f3e205c0576445385fd6de02b5c389ddf75ecacf6e7454ed86b02b",
-  "synced_at": "2026-07-08T05:06:52Z"
+  "corpus_sha256": "7379cad3da7b017a6c3524376a8ca6a27e11b18da433edc5ac9329c73bc5b43f",
+  "normalization_manifest_sha256": "867f3e0bd154ac99b4c656236f38f0a31e47aba90d9f69bc4c86e93399334588",
+  "synced_at": "2026-07-09T19:24:20Z"
 }

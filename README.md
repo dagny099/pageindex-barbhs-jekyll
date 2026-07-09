@@ -86,9 +86,10 @@ source .venv/bin/activate
 #    OPENAI_API_KEY=sk-...
 
 # 4. Generate the deterministic (IDX-D) tree from the corpus
+#    (built purely from Markdown headings — no LLM call, no API key needed)
 cd vendor/PageIndex
 python3 run_pageindex.py --md_path ../../corpus/site-book-v1/site-book-v1.md \
-  --if-add-node-summary no --if-add-doc-description no
+  --if-add-node-summary no --if-add-doc-description no --if-add-node-text yes
 # → writes results/site-book-v1_structure.json inside vendor/PageIndex/results/
 ```
 

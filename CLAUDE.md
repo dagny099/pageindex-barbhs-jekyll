@@ -55,8 +55,9 @@ the marker. Raw runs write to `results/<doc_name>_structure.json` (includes `sum
 
 ```bash
 # Generate the deterministic (IDX-D) tree (writes to vendor/PageIndex/results/)
+# Markdown-heading tree only: no LLM call, no API key. Curate result into indexes/IDX-D/.
 cd vendor/PageIndex && python3 run_pageindex.py --md_path ../../corpus/site-book-v1/site-book-v1.md \
-  --if-add-node-summary no --if-add-doc-description no
+  --if-add-node-summary no --if-add-doc-description no --if-add-node-text yes
 
 # Verify an index/corpus JSON is well-formed
 python3 -c "import json,sys; json.load(open(sys.argv[1])); print('ok')" indexes/IDX-D/index.json

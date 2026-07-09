@@ -1,0 +1,23 @@
+{
+  "index_id": "IDX-D",
+  "condition": "deterministic",
+  "description": "Deterministic index built directly from Markdown headings; no model, no generated summaries.",
+  "corpus_version": "site-book-v1",
+  "corpus_sha256": "7379cad3da7b017a6c3524376a8ca6a27e11b18da433edc5ac9329c73bc5b43f",
+  "pageindex_commit": "f413c66fee0bfbb7291c389333f9cc1adac68d57",
+  "generation": {
+    "tool": "run_pageindex.py",
+    "mode": "markdown",
+    "flags": {
+      "if_add_node_summary": "no",
+      "if_add_doc_description": "no",
+      "if_add_node_text": "yes",
+      "if_add_node_id": "yes",
+      "if_thinning": "no"
+    },
+    "uses_llm": false
+  },
+  "node_count": 339,
+  "node_fields": ["title", "text", "node_id", "line_num"],
+  "generated_at": "2026-07-09T19:36:38Z"
+}

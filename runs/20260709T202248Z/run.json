@@ -1,0 +1,126 @@
+{
+  "run_id": "20260709T202248Z",
+  "purpose": "harness-validation",
+  "index_id": "IDX-D",
+  "retriever_model": "gpt-4o-2024-11-20",
+  "retriever_provider": "openai",
+  "corpus_version": "site-book-v1",
+  "corpus_sha256": "7379cad3da7b017a6c3524376a8ca6a27e11b18da433edc5ac9329c73bc5b43f",
+  "pageindex_commit": "f413c66fee0bfbb7291c389333f9cc1adac68d57",
+  "repo_commit": "5c2dbb8f34c081033d0162d93a72d8017bb62742",
+  "results": [
+    {
+      "answer": "The project \"Self-Hosted Workout Intelligence\" is a self-hosted machine-learning pipeline for workout/fitness data. It uses a full-stack setup involving Python, Streamlit, MySQL, scikit-learn, Plotly, AWS Lambda, and AWS RDS. It features a cloud ETL pipeline for ingestion, ML models (K-means clustering) to classify workouts, and a Streamlit dashboard for insights ([“The Solution: Full-Stack Fitness Intelligence”](#)).",
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1211"
+          },
+          "output_chars": 19851
+        }
+      ],
+      "n_tool_calls": 3,
+      "latency_seconds": 19.13,
+      "usage": {
+        "requests": 4,
+        "input_tokens": 23786,
+        "output_tokens": 141,
+        "total_tokens": 23927
+      },
+      "qid": "Q3",
+      "category": "direct-location",
+      "question": "Which project is a self-hosted ML pipeline for workout/fitness data, and what stack does it describe?"
+    },
+    {
+      "answer": "The recurring critique found in the articles is in how organizations prioritize tool adoption without addressing the underlying judgment and infrastructure required for effective AI use. Specifically:\n\n1. **Judgment Gap**: Many organizations and users mistake tool fluency as sufficient when, in fact, the critical skill is exercising judgment—defining what constitutes a good outcome, evaluating results, and knowing when tasks should remain human-led. This is emphasized in _[\"What Looks Like an AI Skills Gap Is Often a Judgment Gap\"]_.\n\n2. **Infrastructure Gap**: AI adoption often focuses on visible metrics (e.g., usage, clicks) but neglects the operational systems, such as governance, cost controls, and quality checks, that convert adoption into real value. This gap between adoption and outcomes is described in _[\"The Missing Layer Between AI Adoption and AI Value\"]_.\n\nBoth emphasize that speed, access to tools, or adoption metrics alone don’t ensure value; organizations need clearer problem framing, accountability, and human judgment mechanisms to integrate AI meaningfully.",
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2403-2476"
+          },
+          "output_chars": 8698
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2490-2660"
+          },
+          "output_chars": 11218
+        }
+      ],
+      "n_tool_calls": 4,
+      "latency_seconds": 8.07,
+      "usage": {
+        "requests": 4,
+        "input_tokens": 23926,
+        "output_tokens": 286,
+        "total_tokens": 24212
+      },
+      "qid": "Q5",
+      "category": "cross-section-synthesis",
+      "question": "Across the articles, what recurring critique is made about how organizations adopt AI (adoption-vs-value, skills-vs-judgment)?"
+    },
+    {
+      "answer": "The \"Poolula Platform: RAG-Powered Business Intelligence\" project (sections from **Project Portfolio**) and the article \"Bees, Graphs, and Governance — Turning Unruly Observations into Evidence-Ready Decisions\" (sections from **Articles**) both address governance and data lineage, though in different contexts (finance and beekeeping, respectively).\n\n- **Scope Agreement:** Both emphasize capturing provenance (data's origin and context). While Poolula focuses on structured data validation and governance for RAG systems, the Beehive article extends this to knowledge graphs with schema-enforced relations. Both models are adaptable across domains, as suggested by Poolula's transferable \"patterns\" and the Beehive's \"adapt for any domain\" mantra.\n- **Outcome Agreement:** Both stress that effective decision-making depends on comprehensive governance and provable data lineage. Poolula achieves this through audit logs and evaluation harnesses, while the Beehive article uses entity-relationship modeling and contextual tracking.\n\nThe descriptions align in scope and outcome despite differing vocabularies.",
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "544-800"
+          },
+          "output_chars": 10869
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3133-3262"
+          },
+          "output_chars": 7876
+        }
+      ],
+      "n_tool_calls": 4,
+      "latency_seconds": 7.27,
+      "usage": {
+        "requests": 4,
+        "input_tokens": 23995,
+        "output_tokens": 289,
+        "total_tokens": 24284
+      },
+      "qid": "Q8",
+      "category": "consistency",
+      "question": "Where is a single project or service described in more than one place (project page vs. an article that references it), and do the descriptions agree on scope and outcome?"
+    }
+  ]
+}

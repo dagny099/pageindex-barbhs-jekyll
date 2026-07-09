@@ -13,7 +13,7 @@ design lives in `reports/experimental-brief-lab-notebook.html`.
 
 - **Python 3.12**, local `.venv/` (not committed). Key packages: `openai`, `tiktoken`, `pydantic`, `pyyaml`.
 - **PageIndex is a git submodule** at `vendor/PageIndex/`, pinned via `.gitmodules`. Do **not** edit files inside it — it's vendored upstream. If missing, run `git submodule update --init --recursive`.
-- PageIndex needs an LLM API key in `vendor/PageIndex/.env` (LiteLLM-compatible; `OPENAI_API_KEY` by default). Never commit keys — `.env` is gitignored.
+- Model-based conditions need an LLM API key in the **repo-root `.env`** (auto-loaded by python-dotenv's walk-up when running from `vendor/PageIndex/`; `.env.example` is the committed template). The deterministic **IDX-D** needs no key. Never commit keys — `.env` is gitignored.
 - Generation config lives in `vendor/PageIndex/pageindex/config.yaml` (default model `gpt-4o-2024-11-20`); CLI flags override it.
 
 ## The corpus is produced ELSEWHERE — do not hand-edit it

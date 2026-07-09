@@ -81,9 +81,9 @@ git submodule update --init --recursive
 # 2. Activate the environment
 source .venv/bin/activate
 
-# 3. Provide an API key for PageIndex (LiteLLM-compatible; OpenAI by default)
-#    Create vendor/PageIndex/.env with e.g.:
-#    OPENAI_API_KEY=sk-...
+# 3. (Only for model-based conditions — IDX-D below needs no key.)
+#    Provide an API key: cp .env.example .env  and fill it in.
+#    The repo-root .env is auto-loaded (python-dotenv walk-up); see .env.example.
 
 # 4. Generate the deterministic (IDX-D) tree from the corpus
 #    (built purely from Markdown headings — no LLM call, no API key needed)

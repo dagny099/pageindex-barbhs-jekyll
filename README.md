@@ -55,9 +55,12 @@ Two axes, held one-at-a-time (not a full factorial to start):
 **Retrieval / answer-generation conditions** — which model navigates the index:
 `RET-OAI` (OpenAI), `RET-ANT` (Anthropic), `RET-OLL` (Ollama, tool-capable).
 
-Evaluated against a frozen **15-question set** across 5 categories (direct location,
-cross-section synthesis, consistency, evidence gap, reflective discovery), scored on a
-5-layer rubric (preprocessing / index / retrieval / answer / operational).
+Evaluated against a frozen **14-question set** across 5 categories (direct location ×4,
+cross-section synthesis ×3, consistency ×2, evidence gap ×3, reflective discovery ×2),
+scored on a 5-layer rubric (preprocessing / index / retrieval / answer / operational).
+The frozen set — with per-question `expected_evidence` and `ground_truth` — lives in
+[`evaluations/questions.csv`](evaluations/questions.csv) and is read directly by the
+retrieval harness (`scripts/run_retrieval.py`).
 
 ## Layout
 

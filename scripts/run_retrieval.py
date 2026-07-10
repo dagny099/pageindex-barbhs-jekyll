@@ -18,7 +18,7 @@ Payload sizes (structure/content tokens) use one fixed reference encoding so the
 are comparable across retrievers regardless of each model's own tokenizer.
 
 Usage:
-  python3 scripts/run_retrieval.py --index-id IDX-D --retrievers gpt-4o-2024-11-20 --questions DL3 CS2 CN2
+  python3 scripts/run_retrieval.py --index-id IDX-D --retrievers gpt-4o-2024-11-20 --questions DL3 CS2 CN4
   python3 scripts/run_retrieval.py --retrievers gpt-4o-mini anthropic/claude-sonnet-4-5 --questions DL3
   python3 scripts/run_retrieval.py                      # IDX-D, gpt-4o, all questions
 """
@@ -126,6 +126,9 @@ def git_head(repo: Path) -> str:
 def load_questions(ids: list[str]) -> list[tuple[str, str, str]]:
     rows = {r["id"]: r for r in csv.DictReader((REPO / "evaluations" / "questions.csv").open())}
     ids = ids or list(rows)
+    unknown = [q for q in ids if q not in rows]
+    if unknown:
+        raise SystemExit(f"Unknown question id(s): {unknown}. Valid ids: {sorted(rows)}")
     return [(qid, rows[qid]["category"], rows[qid]["question"]) for qid in ids]
 
 

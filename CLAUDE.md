@@ -44,10 +44,14 @@ Variant letters encode the **index-generation condition**, not a sequence:
 - **IDX-D** = **D**eterministic (Markdown headings, no generated summaries). Node schema:
   `title` / `text` / `node_id` / `line_num`. The baseline most sensitive to heading fidelity. **Built.**
 - **IDX-C** = capable **C**loud model (gpt-4o), with summaries + doc description. **Built.**
-- **IDX-O** = local **O**llama model, with summaries (planned). Requires a running Ollama
-  service and the enlarged-context derived model (`ollama create llama3.1-8b-ctx32k -f
-  config/ollama/llama3.1-8b-ctx32k.Modelfile`) — Ollama's default context truncates the
-  ~9K-token tree. See `config/index-conditions.yml` and the README's Ollama section.
+- **IDX-O** = local **O**llama model (qwen2.5), with summaries. **Built.** Requires a running
+  Ollama service and the enlarged-context derived model (`ollama create qwen2.5-7b-instruct-ctx32k
+  -f config/ollama/qwen2.5-7b-instruct-ctx32k.Modelfile`) — Ollama's default context truncates the
+  ~9K-token tree. qwen2.5 (not llama3.1, which fabricates tool calls) also serves as the RET-OLL
+  retriever. See `config/index-conditions.yml` and `reports/findings-retriever-prompt-revision.md`.
+
+All three index conditions (IDX-D / IDX-C / IDX-O) are built; the 14-question evaluation set is
+frozen in `evaluations/questions.csv`. Retrieval runs record to `runs/<timestamp>/`.
 
 Each built index carries `indexes/IDX-*/provenance.json` (pins `corpus_sha256`, model, flags)
 so staleness against the corpus is detectable. Raw runs write to

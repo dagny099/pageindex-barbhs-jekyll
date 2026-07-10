@@ -155,15 +155,21 @@ def main():
         for ci, (cid, _) in enumerate(COLUMNS):
             x = GRID_X + ci * (COL_W + GAP)
             cell = cells.get((rid, cid))
-            ccx = x + COL_W / 2 + (18 if ci == 0 else 0)  # clear the vertical arrow
+            ccx = x + COL_W / 2 + (28 if ci == 0 else 0)  # clear the vertical arrow
             if cell:
                 svg.append(
                     f'<rect x="{x}" y="{ry}" width="{COL_W}" height="{ROW_H}" rx="8" '
                     f'fill="{CARD}" stroke="{PRIMARY}" stroke-width="3"/>'
                 )
                 svg.append(
-                    f'<text x="{ccx}" y="{ry + 84}" text-anchor="middle" '
-                    f'font-size="15.5" font-weight="600" fill="{PRIMARY}">run ✓</text>'
+                    f'<text x="{ccx - 7}" y="{ry + 84}" text-anchor="middle" '
+                    f'font-size="15.5" font-weight="600" fill="{PRIMARY}">run</text>'
+                )
+                # hand-drawn check: glyph-safe across renderers (cairo lacks ✓ fallback)
+                svg.append(
+                    f'<polyline points="{ccx + 12},{ry + 78} {ccx + 16},{ry + 82} {ccx + 24},{ry + 71}" '
+                    f'fill="none" stroke="{PRIMARY}" stroke-width="2.6" '
+                    f'stroke-linecap="round" stroke-linejoin="round"/>'
                 )
                 models = sorted(cell["models"])
                 for mi, m in enumerate(models[:3]):
@@ -190,13 +196,9 @@ def main():
     grid_bottom = GRID_Y + 3 * ROW_H + 2 * GAP
 
     # Accent arrow: across row IDX-D — vary the navigator, hold the map
-    hy = GRID_Y + 26
+    hy = GRID_Y + 30
     hx1, hx2 = GRID_X + 40, GRID_X + 3 * COL_W + 2 * GAP - 14
-    svg.append(
-        f'<text x="{(hx1 + hx2) / 2 + 20}" y="{hy - 9}" text-anchor="middle" '
-        f'font-family="{SERIF}" font-size="17" font-style="italic" font-weight="600" '
-        f'fill="{PRIMARY}">vary the navigator, hold the map</text>'
-    )
+    hcx = (hx1 + hx2) / 2 + 20
     svg.append(
         f'<line x1="{hx1}" y1="{hy}" x2="{hx2 - 12}" y2="{hy}" stroke="{PRIMARY}" '
         f'stroke-width="2.5"/>'
@@ -205,10 +207,19 @@ def main():
         f'<polygon points="{hx2},{hy} {hx2 - 13},{hy - 6} {hx2 - 13},{hy + 6}" '
         f'fill="{PRIMARY}"/>'
     )
+    # cell-colored halo so the serif label reads cleanly over cell borders
+    svg.append(
+        f'<rect x="{hcx - 145}" y="{hy - 27}" width="290" height="22" fill="{CARD}"/>'
+    )
+    svg.append(
+        f'<text x="{hcx}" y="{hy - 10}" text-anchor="middle" '
+        f'font-family="{SERIF}" font-size="17" font-style="italic" font-weight="600" '
+        f'fill="{PRIMARY}">vary the navigator, hold the map</text>'
+    )
 
     # Accent arrow: down column RET-OAI — vary the map, hold the navigator
-    vx = GRID_X + 26
-    vy1, vy2 = GRID_Y + 44, grid_bottom - 14
+    vx = GRID_X + 46  # inside the cells, clear of the cell borders
+    vy1, vy2 = GRID_Y + 48, grid_bottom - 14
     svg.append(
         f'<line x1="{vx}" y1="{vy1}" x2="{vx}" y2="{vy2 - 12}" stroke="{PRIMARY}" '
         f'stroke-width="2.5"/>'
@@ -218,11 +229,17 @@ def main():
         f'fill="{PRIMARY}"/>'
     )
     vmy = (vy1 + vy2) / 2
+    vlx = vx - 13
+    svg.append(f'<g transform="rotate(-90 {vlx} {vmy})">')
     svg.append(
-        f'<text x="{vx - 10}" y="{vmy}" text-anchor="middle" font-family="{SERIF}" '
-        f'font-size="17" font-style="italic" font-weight="600" fill="{PRIMARY}" '
-        f'transform="rotate(-90 {vx - 10} {vmy})">vary the map, hold the navigator</text>'
+        f'<rect x="{vlx - 145}" y="{vmy - 17}" width="290" height="22" fill="{CARD}"/>'
     )
+    svg.append(
+        f'<text x="{vlx}" y="{vmy}" text-anchor="middle" font-family="{SERIF}" '
+        f'font-size="17" font-style="italic" font-weight="600" '
+        f'fill="{PRIMARY}">vary the map, hold the navigator</text>'
+    )
+    svg.append("</g>")
 
     # Legend
     lg = grid_bottom + 42

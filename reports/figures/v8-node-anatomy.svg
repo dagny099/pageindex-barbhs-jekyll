@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
+<rect width="1400" height="700" fill="#F4F0E8"/>
+<text x="70" y="46" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="30" font-weight="600" fill="#1C3A55">Anatomy of a Node — IDX-D vs IDX-C</text>
+<text x="70" y="73" font-size="15" fill="#2B2B2B">One node, both indexes: “Evaluation Harness” · node 0068 · line 681 · Project Portfolio › Poolula Platform: RAG-Powered Business Intelligence › Governance &amp; Reliability</text>
+<text x="70" y="95" font-size="15" fill="#6B6B66">The hierarchy is identical. What differs is what the node carries — what a navigator can read before paying to fetch the text.</text>
+<rect x="70" y="122" width="540" height="460" rx="10" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1.5"/>
+<path d="M 80 122 h 520 a 10 10 0 0 1 10 10 v 34 h -540 v -34 a 10 10 0 0 1 10 -10 Z" fill="#1C3A55"/>
+<text x="94" y="151" font-size="17" font-weight="600" fill="#F4F0E8">IDX-D</text>
+<text x="586" y="151" font-size="13" fill="#F4F0E8" text-anchor="end" opacity="0.85">deterministic · Markdown headings, no LLM</text>
+<text x="94" y="204" font-size="11" letter-spacing="1.5" fill="#6B6B66">TITLE</text>
+<text x="94" y="225" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15" font-weight="600" fill="#2B2B2B">Evaluation Harness</text>
+<text x="94" y="260" font-size="11" letter-spacing="1.5" fill="#6B6B66">NODE_ID</text>
+<text x="94" y="281" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15" font-weight="600" fill="#2B2B2B">0068</text>
+<text x="294" y="260" font-size="11" letter-spacing="1.5" fill="#6B6B66">LINE_NUM</text>
+<text x="294" y="281" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15" font-weight="600" fill="#2B2B2B">681</text>
+<text x="94" y="322" font-size="11" letter-spacing="1.5" fill="#6B6B66">SUMMARY</text>
+<rect x="94" y="332" width="492" height="218" rx="6" fill="none" stroke="#6B6B66" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="340.0" y="437.0" font-size="14" font-style="italic" fill="#6B6B66" text-anchor="middle">no summary field —</text>
+<text x="340.0" y="457.0" font-size="14" font-style="italic" fill="#6B6B66" text-anchor="middle">the title is all the signage there is</text>
+<rect x="790" y="122" width="540" height="460" rx="10" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1.5"/>
+<path d="M 800 122 h 520 a 10 10 0 0 1 10 10 v 34 h -540 v -34 a 10 10 0 0 1 10 -10 Z" fill="#186090"/>
+<text x="814" y="151" font-size="17" font-weight="600" fill="#F4F0E8">IDX-C</text>
+<text x="1306" y="151" font-size="13" fill="#F4F0E8" text-anchor="end" opacity="0.85">gpt-4o · adds generated summaries</text>
+<text x="814" y="204" font-size="11" letter-spacing="1.5" fill="#6B6B66">TITLE</text>
+<text x="814" y="225" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15" font-weight="600" fill="#2B2B2B">Evaluation Harness</text>
+<text x="814" y="260" font-size="11" letter-spacing="1.5" fill="#6B6B66">NODE_ID</text>
+<text x="814" y="281" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15" font-weight="600" fill="#2B2B2B">0068</text>
+<text x="1014" y="260" font-size="11" letter-spacing="1.5" fill="#6B6B66">LINE_NUM</text>
+<text x="1014" y="281" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="15" font-weight="600" fill="#2B2B2B">681</text>
+<text x="814" y="322" font-size="11" letter-spacing="1.5" fill="#6B6B66">SUMMARY</text>
+<rect x="814" y="332" width="492" height="218" rx="6" fill="none" stroke="#186090" stroke-width="1.5"/>
+<text x="828" y="354" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#186090">##### Evaluation Harness The platform includes a rigorous</text>
+<text x="828" y="371" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#186090">testing system with a golden question set: ```bash uv run python</text>
+<text x="828" y="388" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#186090">apps/evaluator/evaluation_harness.py # Outputs:</text>
+<text x="828" y="405" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#186090">docs/evaluation/evaluation_report_YYYYMMDD_HHMMSS.json ```</text>
+<text x="828" y="422" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#186090">**Five scoring dimensions:** | Dimension | What It Measures |</text>
+<text x="828" y="439" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#186090">|-----------|------------------| | **Tool Usage** | Did …</text>
+<text x="814" y="566" font-size="11" font-style="italic" fill="#6B6B66">first 40 of 100 words — for this leaf, the generated summary reproduces the node text verbatim</text>
+<text x="814" y="608" font-size="12" fill="#6B6B66">+ IDX-C also carries a document-level doc_description; IDX-D has none.</text>
+<text x="700.0" y="330" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="21" font-style="italic" fill="#F0A818" text-anchor="middle">same map —</text>
+<text x="700.0" y="357" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="21" font-style="italic" fill="#F0A818" text-anchor="middle">different signage</text>
+<line x1="634" y1="384" x2="766" y2="384" stroke="#F0A818" stroke-width="2"/>
+<path d="M 624 384 l 11 -6 v 12 Z" fill="#F0A818"/>
+<path d="M 776 384 l -11 -6 v 12 Z" fill="#F0A818"/>
+<text x="70" y="670" font-size="13" fill="#6B6B66">Fig. V8 · generated by scripts/gen_fig_v8_node_anatomy.py from indexes/IDX-D/index.json + indexes/IDX-C/index.json · all field values verbatim from the JSON</text>
+</svg>

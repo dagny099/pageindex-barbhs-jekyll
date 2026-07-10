@@ -11,51 +11,62 @@
 <text x="270" y="289.0" text-anchor="end" font-size="17" font-weight="600" fill="#1C3A55">IDX-D</text>
 <text x="270" y="309.0" text-anchor="end" font-size="12.5" fill="#6B6B66">Deterministic</text>
 <rect x="300" y="210" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
-<text x="443.0" y="294" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
-<text x="443.0" y="316" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-2024-11-20</text>
-<text x="443.0" y="332" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-mini</text>
-<text x="443.0" y="368" text-anchor="middle" font-size="11" fill="#6B6B66">21 result rows</text>
+<text x="446.0" y="294" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run</text>
+<polyline points="465.0,288 469.0,292 477.0,281" fill="none" stroke="#C04818" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="453.0" y="316" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-2024-11-20</text>
+<text x="453.0" y="332" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-mini</text>
+<text x="453.0" y="368" text-anchor="middle" font-size="11" fill="#6B6B66">35 result rows</text>
 <rect x="564" y="210" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
-<text x="689.0" y="294" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
+<text x="682.0" y="294" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run</text>
+<polyline points="701.0,288 705.0,292 713.0,281" fill="none" stroke="#C04818" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="689.0" y="316" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">claude-sonnet-4-5</text>
-<text x="689.0" y="368" text-anchor="middle" font-size="11" fill="#6B6B66">1 result row</text>
+<text x="689.0" y="368" text-anchor="middle" font-size="11" fill="#6B6B66">15 result rows</text>
 <rect x="828" y="210" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
-<text x="953.0" y="294" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
+<text x="946.0" y="294" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run</text>
+<polyline points="965.0,288 969.0,292 977.0,281" fill="none" stroke="#C04818" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="953.0" y="316" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">llama3.1-8b-ctx32k</text>
 <text x="953.0" y="332" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">qwen2.5-7b-instruct-ctx32k</text>
-<text x="953.0" y="368" text-anchor="middle" font-size="11" fill="#6B6B66">4 result rows</text>
+<text x="953.0" y="368" text-anchor="middle" font-size="11" fill="#6B6B66">18 result rows</text>
 <text x="270" y="473.0" text-anchor="end" font-size="17" font-weight="600" fill="#1C3A55">IDX-C</text>
 <text x="270" y="493.0" text-anchor="end" font-size="12.5" fill="#6B6B66">Capable cloud model +</text>
 <text x="270" y="509.0" text-anchor="end" font-size="12.5" fill="#6B6B66">summaries</text>
 <rect x="300" y="394" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
-<text x="443.0" y="478" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
-<text x="443.0" y="500" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-2024-11-20</text>
-<text x="443.0" y="552" text-anchor="middle" font-size="11" fill="#6B6B66">28 result rows</text>
+<text x="446.0" y="478" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run</text>
+<polyline points="465.0,472 469.0,476 477.0,465" fill="none" stroke="#C04818" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="453.0" y="500" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-2024-11-20</text>
+<text x="453.0" y="552" text-anchor="middle" font-size="11" fill="#6B6B66">28 result rows</text>
 <rect x="564" y="394" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
-<text x="689.0" y="478" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
+<text x="682.0" y="478" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run</text>
+<polyline points="701.0,472 705.0,476 713.0,465" fill="none" stroke="#C04818" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="689.0" y="500" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">claude-sonnet-4-5</text>
 <text x="689.0" y="552" text-anchor="middle" font-size="11" fill="#6B6B66">14 result rows</text>
 <rect x="828" y="394" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
-<text x="953.0" y="478" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
+<text x="946.0" y="478" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run</text>
+<polyline points="965.0,472 969.0,476 977.0,465" fill="none" stroke="#C04818" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="953.0" y="500" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">qwen2.5-7b-instruct-ctx32k</text>
 <text x="953.0" y="552" text-anchor="middle" font-size="11" fill="#6B6B66">14 result rows</text>
 <text x="270" y="657.0" text-anchor="end" font-size="17" font-weight="600" fill="#1C3A55">IDX-O</text>
 <text x="270" y="677.0" text-anchor="end" font-size="12.5" fill="#6B6B66">Local Ollama model +</text>
 <text x="270" y="693.0" text-anchor="end" font-size="12.5" fill="#6B6B66">summaries</text>
 <rect x="300" y="578" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
-<text x="443.0" y="662" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
-<text x="443.0" y="684" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-2024-11-20</text>
-<text x="443.0" y="736" text-anchor="middle" font-size="11" fill="#6B6B66">14 result rows</text>
+<text x="446.0" y="662" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run</text>
+<polyline points="465.0,656 469.0,660 477.0,649" fill="none" stroke="#C04818" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="453.0" y="684" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-2024-11-20</text>
+<text x="453.0" y="736" text-anchor="middle" font-size="11" fill="#6B6B66">14 result rows</text>
 <rect x="564" y="578" width="250" height="170" rx="8" fill="#EBE6DA" stroke="#6B6B66" stroke-width="1.5" stroke-dasharray="6 5"/>
 <text x="689.0" y="668.0" text-anchor="middle" font-size="14" fill="#6B6B66">planned</text>
 <rect x="828" y="578" width="250" height="170" rx="8" fill="#EBE6DA" stroke="#6B6B66" stroke-width="1.5" stroke-dasharray="6 5"/>
 <text x="953.0" y="668.0" text-anchor="middle" font-size="14" fill="#6B6B66">planned</text>
-<text x="722.0" y="227" text-anchor="middle" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="17" font-style="italic" font-weight="600" fill="#C04818">vary the navigator, hold the map</text>
-<line x1="340" y1="236" x2="1052" y2="236" stroke="#C04818" stroke-width="2.5"/>
-<polygon points="1064,236 1051,230 1051,242" fill="#C04818"/>
-<line x1="326" y1="254" x2="326" y2="722" stroke="#C04818" stroke-width="2.5"/>
-<polygon points="326,734 320,721 332,721" fill="#C04818"/>
-<text x="316" y="494.0" text-anchor="middle" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="17" font-style="italic" font-weight="600" fill="#C04818" transform="rotate(-90 316 494.0)">vary the map, hold the navigator</text>
+<line x1="340" y1="240" x2="1052" y2="240" stroke="#C04818" stroke-width="2.5"/>
+<polygon points="1064,240 1051,234 1051,246" fill="#C04818"/>
+<rect x="577.0" y="213" width="290" height="22" fill="#FBF8F0"/>
+<text x="722.0" y="230" text-anchor="middle" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="17" font-style="italic" font-weight="600" fill="#C04818">vary the navigator, hold the map</text>
+<line x1="346" y1="258" x2="346" y2="722" stroke="#C04818" stroke-width="2.5"/>
+<polygon points="346,734 340,721 352,721" fill="#C04818"/>
+<g transform="rotate(-90 333 496.0)">
+<rect x="188" y="479.0" width="290" height="22" fill="#FBF8F0"/>
+<text x="333" y="496.0" text-anchor="middle" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="17" font-style="italic" font-weight="600" fill="#C04818">vary the map, hold the navigator</text>
+</g>
 <rect x="300" y="776" width="20" height="20" rx="4" fill="#FBF8F0" stroke="#C04818" stroke-width="2.5"/>
 <text x="330" y="791" font-size="13" fill="#2B2B2B">run — recorded in runs/&lt;timestamp&gt;/run.json</text>
 <rect x="640" y="776" width="20" height="20" rx="4" fill="#EBE6DA" stroke="#6B6B66" stroke-width="1.5" stroke-dasharray="5 4"/>

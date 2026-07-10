@@ -30,7 +30,8 @@ SANS = "'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif"
 MONO = "'SF Mono', Menlo, Consolas, monospace"
 
 W, H = 1600, 600
-BOX_Y, BOX_H = 250, 110
+BOX_Y, BOX_H = 260, 110
+BOUND_Y, BOUND_H = 120, 320
 MID_Y = BOX_Y + BOX_H / 2
 
 
@@ -81,7 +82,7 @@ def main():
 
     # Boundary: website repo (authoritative producer)
     svg.append(
-        '<rect x="40" y="120" width="290" height="360" rx="12" fill="none" '
+        f'<rect x="40" y="{BOUND_Y}" width="290" height="{BOUND_H}" rx="12" fill="none" '
         f'stroke="{INK}" stroke-width="1.5" stroke-dasharray="8 6"/>'
     )
     svg.append(
@@ -98,7 +99,7 @@ def main():
 
     # Boundary: this repo (consumer)
     svg.append(
-        '<rect x="470" y="120" width="1090" height="360" rx="12" fill="none" '
+        f'<rect x="470" y="{BOUND_Y}" width="1090" height="{BOUND_H}" rx="12" fill="none" '
         f'stroke="{INK}" stroke-width="1.5" stroke-dasharray="8 6"/>'
     )
     svg.append(

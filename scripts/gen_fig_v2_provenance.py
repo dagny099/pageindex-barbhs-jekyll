@@ -145,7 +145,7 @@ def main():
     for i, step in enumerate(["1 · copy verbatim", "2 · recompute SHA256", "3 · update provenance.json"]):
         svg.append(
             f'<text x="{mid}" y="{ay - 64 + i * 18}" text-anchor="middle" '
-            f'font-size="12.5" fill="{TEXT}">{esc(step)}</text>'
+            f'font-size="12" fill="{TEXT}">{esc(step)}</text>'
         )
     svg.append(
         f'<line x1="{gx1}" y1="{ay}" x2="{gx2 - 12}" y2="{ay}" stroke="{COBALT}" '

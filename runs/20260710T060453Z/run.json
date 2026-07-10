@@ -1,0 +1,2097 @@
+{
+  "run_id": "20260710T060453Z",
+  "purpose": "retrieval",
+  "indexes": [
+    "IDX-D",
+    "IDX-C",
+    "IDX-O"
+  ],
+  "retrievers": [
+    "gpt-4o-2024-11-20"
+  ],
+  "questions": [
+    "DL3",
+    "DL4",
+    "DL5",
+    "DL9",
+    "CS2",
+    "CS6",
+    "CS8",
+    "CN4",
+    "CN6",
+    "EG4",
+    "EG5",
+    "EG6",
+    "RD4",
+    "RD6"
+  ],
+  "corpus_version": "site-book-v1",
+  "corpus_sha256": "7379cad3da7b017a6c3524376a8ca6a27e11b18da433edc5ac9329c73bc5b43f",
+  "repo_commit": "d4b2025facdcfd98363941efbc2b2dca120c203c",
+  "results": [
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The project that is a self-hosted machine learning pipeline for workout/fitness data is titled **\"Self-Hosted Workout Intelligence.\"** It focuses on transforming 14 years of workout data into actionable insights, including the classification of runs versus dog walks, trend analysis, and dashboards for self-hosted analytics.\n\n### Technology Stack:\n- **Cloud backend**: AWS Lambda, AWS RDS (MySQL), S3, and SNS for the ETL pipeline.\n- **Machine Learning**: scikit-learn (K-means clustering for classification), scipy (analytics).\n- **Frontend**: Streamlit for the multi-page dashboard and visualizations.\n- **Visualization tools**: Plotly for interactive charts.\n- **Programming Language**: Python.\n- **Infrastructure**: Docker and systemd for deployment and configuration.\n\nCited Sections:\n- **Self-Hosted Workout Intelligence**\n- **The Solution: Full-Stack Fitness Intelligence**\n- **Architecture**",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1211"
+          },
+          "output_chars": 19851,
+          "output_tokens": 4632
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 8934,
+      "content_tokens": 4632,
+      "usage": {
+        "input_tokens": 24138,
+        "output_tokens": 235,
+        "total_tokens": 24373
+      },
+      "est_cost_usd": 0.0627,
+      "latency_seconds": 5.81,
+      "index_id": "IDX-D",
+      "qid": "DL3",
+      "category": "direct-location",
+      "question": "Which project is a self-hosted ML pipeline for workout/fitness data, and what stack does it describe?",
+      "expected_evidence": "Project: Self-Hosted Workout Intelligence (fitness-dashboard). Stack: Python, Streamlit, MySQL, scikit-learn, Plotly, AWS Lambda/RDS, K-means.",
+      "ground_truth": "Self-Hosted Workout Intelligence; full-stack ETL + K-means classification + Streamlit dashboard."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The Poolula platform's evaluation harness scores AI on the following five dimensions:\n\n1. **Tool Usage**: Whether the AI invoked the correct tools.\n2. **Content Relevance**: If the answer addresses the actual question.\n3. **Semantic Similarity**: Alignment of the answer with expected content (embedding comparison).\n4. **Numerical Accuracy**: Consistency of financial figures with expected values.\n5. **Citation Accuracy**: Correctness and relevance of cited sources.\n\nA composite score of at least 90% is required before production deployment. \n\nThis information is from the \"Evaluation Harness\" section.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "681-702"
+          },
+          "output_chars": 1095,
+          "output_tokens": 250
+        }
+      ],
+      "n_tool_calls": 2,
+      "structure_tokens": 8934,
+      "content_tokens": 250,
+      "usage": {
+        "input_tokens": 19237,
+        "output_tokens": 156,
+        "total_tokens": 19393
+      },
+      "est_cost_usd": 0.0497,
+      "latency_seconds": 4.03,
+      "index_id": "IDX-D",
+      "qid": "DL4",
+      "category": "direct-location",
+      "question": "According to the Poolula platform page, what five dimensions does its evaluation harness score, and what composite target must be met before production deployment?",
+      "expected_evidence": "Poolula Platform § Governance & Reliability → Evaluation Harness (node 0068, L681–700; dimensions table L690–699, target L700).",
+      "ground_truth": "Tool Usage, Content Relevance, Semantic Similarity, Numerical Accuracy, Citation Accuracy; target ≥90% composite score before production deployment."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The \"era-based smart defaults\" fallback in the fitness dashboard's workout classification is a system used when there is insufficient data for clustering (<5 workouts). It leverages historical behavioral patterns to assign classifications based on whether the workout occurred before or after a specific boundary date:\n\n1. **Pre-Choco (before June 1, 2018):** Defaults to `real_run`.\n2. **Post-Choco (after June 1, 2018):** Defaults to `pup_walk`.\n\nThe boundary date is **June 1, 2018**, marked by the arrival of a chocolate lab puppy named Choco, which significantly shifted the patterns in the user's fitness data.\n\nThis information is based on the section \"ML Classification System\" and the project summary under \"Self-Hosted Workout Intelligence.\"",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "972-1004"
+          },
+          "output_chars": 1569,
+          "output_tokens": 422
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-813"
+          },
+          "output_chars": 3286,
+          "output_tokens": 739
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 8934,
+      "content_tokens": 1161,
+      "usage": {
+        "input_tokens": 20704,
+        "output_tokens": 238,
+        "total_tokens": 20942
+      },
+      "est_cost_usd": 0.0541,
+      "latency_seconds": 5.09,
+      "index_id": "IDX-D",
+      "qid": "DL5",
+      "category": "direct-location",
+      "question": "What is the \"era-based smart defaults\" fallback in the fitness dashboard's workout classification, and what date defines the era boundary?",
+      "expected_evidence": "Self-Hosted Workout Intelligence § How It Works → ML Classification System, the \"Era-Based Smart Defaults\" details block (node 0084, L972–1000; the fallback hierarchy L983–1000).",
+      "ground_truth": "When K-means has <5 workouts, classification falls back to era defaults at medium confidence (0.5): before June 1, 2018 (Choco's arrival) → real_run; after → pup_walk; tertiary fallback is rule-based pace thresholds."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The instruction file scoring post cites Anthropic's guidance that frontier models like Claude follow approximately 150–200 instructions reliably, with about 50 instructions accounted for by the system prompt. The author's CLAUDE.md file contained around 150 individual instructions, which, when combined with the baseline 50, positioned it at the 200-instruction ceiling.\n\nFor their own file, key points included:\n- The file initially reached 800 lines but was reduced to 650 after optimization.\n- It ranked at 88/100 using the author's six-category scoring system, which highlighted areas for improvement like outdated fields and incomplete coverage.\n\nRefer to the section **\"What the research says about size\"** and **\"The framework: six categories, 100 points\"** for detailed analysis.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2670-2767"
+          },
+          "output_chars": 9621,
+          "output_tokens": 2323
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 8934,
+      "content_tokens": 2323,
+      "usage": {
+        "input_tokens": 21866,
+        "output_tokens": 201,
+        "total_tokens": 22067
+      },
+      "est_cost_usd": 0.0567,
+      "latency_seconds": 6.33,
+      "index_id": "IDX-D",
+      "qid": "DL9",
+      "category": "direct-location",
+      "question": "What instruction-count ceiling does the instruction-file scoring post cite from Anthropic's guidance, and how did the author's own CLAUDE.md measure against it?",
+      "expected_evidence": "A Scoring System for AI Instruction Files § What the research says about size (node 0210, L2703–2709).",
+      "ground_truth": "Frontier models follow roughly 150–200 instructions reliably; Claude Code's system prompt accounts for ~50. Her CLAUDE.md contained ~150 instructions, putting the total at ~200 — right at the ceiling."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Across the articles, the recurring critique regarding how organizations adopt AI revolves around their failure to address structural gaps between adoption and value, as well as the misalignment between \"skills\" and \"judgment\" in leveraging AI effectively.\n\n### Key Points of Critique\n1. **Judgment Gap vs. Skills Gap**:\n   - Organizations often emphasize \"tool fluency\" (how to operate AI tools) over developing \"judgment\" (how to frame the problem, evaluate outputs, and decide what should remain human-led). This judgment is critical for ensuring that AI use aligns with organizational goals and produces trustworthy results. \n   - Judgment moves beyond operating tools—it includes understanding what makes an AI workflow trustworthy and effective, such as defining clear evaluation criteria and identifying when AI should or should not make primary decisions.\n   - Focusing solely on speed and fluency risks accelerating errors rather than meaningful results. ([Source: \"What Looks Like an AI Skills Gap Is Often a Judgment Gap\"](2403-2490))\n\n2. **Adoption Metrics Hide Operational Debt**:\n   - Organizations prioritize adoption metrics like usage frequency and breadth but fail to measure the hidden costs of integrating AI into workflows. For instance:\n     - Operational debt accrues from supervision, reworking AI outputs, and managing tool-switching inefficiencies.\n     - This focus on activity over measurable value means AI's outputs can appear polished while introducing new inefficiencies at points of implementation. ([Source: \"The Missing Layer Between AI Adoption and AI Value\"](2490-2660))\n\n3. **Importance of Judgment as an Infrastructure**:\n   - Effective AI adoption requires an organizational infrastructure that includes accountability, shared context, quality controls, and work design. This infrastructure determines how AI capabilities translate into real organizational value.\n   - In the absence of defined processes for accountability, decision ownership, and human oversight, adoption trends may veer into misuse or organizational failures. ([Source: \"The Missing Layer Between AI Adoption and AI Value\"](2490-2660))\n\nThese critiques highlight how organizations must move beyond mere adoption-focused narratives and tool-centric training to focus on durable judgment and structural integration that convert AI usage into tangible value.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2403-2490"
+          },
+          "output_chars": 9253,
+          "output_tokens": 2154
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2490-2660"
+          },
+          "output_chars": 11218,
+          "output_tokens": 2745
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 8934,
+      "content_tokens": 4899,
+      "usage": {
+        "input_tokens": 24453,
+        "output_tokens": 515,
+        "total_tokens": 24968
+      },
+      "est_cost_usd": 0.0663,
+      "latency_seconds": 7.65,
+      "index_id": "IDX-D",
+      "qid": "CS2",
+      "category": "cross-section-synthesis",
+      "question": "Across the articles, what recurring critique is made about how organizations adopt AI (adoption-vs-value, skills-vs-judgment)?",
+      "expected_evidence": "Articles: 'AI Skills Gap Is Often a Judgment Gap' and 'The Missing Layer Between AI Adoption and AI Value'.",
+      "ground_truth": "Judgment gap + infrastructure/value gap; adoption metrics != value."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The idea that \"retrieval works through context and association, not brute-force search\" appears in two parts of the corpus, applied differently in each case:\n\n1. **\"Same questions, two retrieval systems\"** ([source](#line-2323-2339)):\n   - **Technical Domain:** Retrieval system architecture.\n   - **Context/Application:** Compares a vector-based database with a graph-based system that employs contextual relationships (e.g., explicit connections between projects, skills, and technologies). This shift enhances answers to relationship-based and multi-project queries.\n\n2. **\"RAG Without the Theater — Evidence‑Linked Retrieval Patterns You Can Defend\"** ([source](#line-3031-3057)):\n   - **Technical Domain:** Retrieval-Augmented Generation (RAG).\n   - **Context/Application:** Advocates for defensible, evidence-grounded retrieval pipelines, highlighting that retrieval should link evidence to responses rather than relying on one-dimensional vector systems alone (referred to as \"vector monoculture\").\n\nThese sections illustrate contrasting retrieval methodologies, focusing respectively on graph-enhanced data structuring and defensible answer linkage in RAG systems.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3031-3057"
+          },
+          "output_chars": 1682,
+          "output_tokens": 452
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2323-2339"
+          },
+          "output_chars": 3781,
+          "output_tokens": 797
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 8934,
+      "content_tokens": 1249,
+      "usage": {
+        "input_tokens": 20851,
+        "output_tokens": 310,
+        "total_tokens": 21161
+      },
+      "est_cost_usd": 0.0552,
+      "latency_seconds": 5.6,
+      "index_id": "IDX-D",
+      "qid": "CS6",
+      "category": "cross-section-synthesis",
+      "question": "The idea that \"retrieval works through context and association, not brute-force search\" recurs across the corpus. Where does it appear, and to what different technical domain does each instance apply it?",
+      "expected_evidence": "Homepage § Cognitive Principles in Practice → Metadata Matters card (node 0015, L98–102); My Journey § The Big Turns → Making Metadata Human-Friendly (node 0053, L428–430); Three Readers § The deeper idea (node 0223, L2843–2852); Memory Is More Than Storage resource (node ~0263, L3689–3696). At least three of the four.",
+      "ground_truth": "Acceptance criteria: identify ≥3 instances and their domains — (a) homepage: web metadata as \"digital equivalent of cognitive context\"; (b) My Journey: SEC data-catalog design mirroring associative human recall; (c) Three Readers: structured data as the associations that let queries surface a page (\"the page is the memory\"); (d) Memory resource: selection/structure/retrieval/revision/forgetting for AI agents. Strong answers name the shared claim; which instances are cited may reasonably vary."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Three portfolio projects include the use of **Streamlit**:\n\n1. **Self-Hosted Workout Intelligence**: A fitness analytics platform with a multi-page Streamlit dashboard for workout trend analysis and AI classification (\"Summary,\" \"How It Works\").\n2. **ChronoScope: AI-Powered Timeline Builder**: Visualizes life events as interactive timelines using Streamlit for the UI (\"Technologies\").\n3. **Digital Memory Chest**: An AI-powered platform for creating memorials, featuring a Streamlit-based interface (\"Technologies\").\n\nThe recurring trade-off noted for using Streamlit is its **limited UI customization** compared to frameworks like React. Streamlit was chosen for its rapid app development capabilities, such as native Pandas/Plotly integration and single Python codebase convenience, despite these limitations (\"Architecture\" under Self-Hosted Workout Intelligence and ChronoScope).",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "1481-1203"
+          },
+          "output_chars": 135,
+          "output_tokens": 48
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1211"
+          },
+          "output_chars": 19851,
+          "output_tokens": 4632
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "1481-1950"
+          },
+          "output_chars": 20522,
+          "output_tokens": 4769
+        }
+      ],
+      "n_tool_calls": 5,
+      "structure_tokens": 8934,
+      "content_tokens": 9449,
+      "usage": {
+        "input_tokens": 43111,
+        "output_tokens": 271,
+        "total_tokens": 43382
+      },
+      "est_cost_usd": 0.1105,
+      "latency_seconds": 7.89,
+      "index_id": "IDX-D",
+      "qid": "CS8",
+      "category": "cross-section-synthesis",
+      "question": "Which of the six portfolio projects use Streamlit, and what trade-off do the project pages repeatedly acknowledge for choosing it?",
+      "expected_evidence": "Technology headers of all six project pages (L550, L807, L1226, L1487, L1723, L1975); \"Why Streamlit?\" details blocks in Fitness (L1102–1115) and Beehive (L1394–1406); Convoscope § Why These Choices (L2129–2131).",
+      "ground_truth": "Five of six: Fitness, Beehive, ChronoScope, Digital Memory Chest, Convoscope. Poolula is the exception (FastAPI + CLI; no Streamlit in its stack). Trade-off, stated near-verbatim in multiple places: less UI customization (than React) and Streamlit-specific session/state patterns, accepted for much faster data-app development."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The corpus discusses workout and running data across three sections: **Start Here**, **Self-Hosted Workout Intelligence (Fitness Project Page)**, and the essay **7±2 is Everywhere**. Below is a summary and comparison of the claims across these sections regarding the timeline of workout data:\n\n---\n\n### Start Here\n- Refers to a “data story about analyzing **13 years** of running data” in the essay titled “[Rescuing my Exercise KPIs from a Puppy-shaped Root Cause](/data-stories/exercise-dashboard/)”.\n\n---\n\n### Self-Hosted Workout Intelligence (Fitness Project Page)\n- The page notes **14 years of workout data** were analyzed, extending from pre-2018 running metrics to post-2018, including both runs and dog walks. The central timeline covers **7 years of pre-Choco data (2011–2018)** and **6.5 years of post-Choco data (2018 onward)**, totaling roughly **14 years**.\n\n---\n\n### 7±2 is Everywhere: Chunking is All You Need\n- The essay claims a total of **2,593 workouts** tracked over **14 years**, showing how clustering methods were applied to this dataset to classify activities into three main categories (runs, walks, and transitions).\n\n---\n\n### Comparison and Agreement\n- The **Start Here** section mentions **13 years**, likely a rounded or conservative figure for simplicity. Both the **Fitness Project Page** and **7±2 Essay** explicitly state **14 years** of data, supported by details about the project's timeline. Therefore, the latter two sources align, but **Start Here** slightly underestimates the duration.\n\n---\n\n### Final Determination\n- The strongest data-based claim is **14 years of workout/running data**, which is corroborated by the **Fitness Project Page** and **7±2 is Everywhere Essay**.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "134-236"
+          },
+          "output_chars": 5680,
+          "output_tokens": 1477
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3229-3369"
+          },
+          "output_chars": 7443,
+          "output_tokens": 1854
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1220"
+          },
+          "output_chars": 20379,
+          "output_tokens": 4795
+        }
+      ],
+      "n_tool_calls": 5,
+      "structure_tokens": 8934,
+      "content_tokens": 8126,
+      "usage": {
+        "input_tokens": 27295,
+        "output_tokens": 492,
+        "total_tokens": 27787
+      },
+      "est_cost_usd": 0.0732,
+      "latency_seconds": 6.19,
+      "index_id": "IDX-D",
+      "qid": "CN4",
+      "category": "consistency",
+      "question": "How many years of workout/running data does the corpus claim? Compare Start Here, the fitness project page, and the 7±2 essay — do they agree?",
+      "expected_evidence": "Start Here § quickest path, item 2 (node 0021 area, L185: \"13 years of running data\"); Self-Hosted Workout Intelligence § Summary / 30-second version (L815–817: \"14 years\") and The Problem (L843: \"14 years\"); Choco Effect table (L1060–1065: 7 yrs + 6.5 yrs ≈ 13.5); 7±2 essay § Evidence across three domains (L3252: \"14 years, 2,593 workouts\").",
+      "ground_truth": "They do not fully agree: Start Here says 13 years; the project page and the essay say 14; the project's own pre/post table sums to ~13.5. A correct answer surfaces the discrepancy (plausibly drift as time passed) rather than picking one number."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The metadata header states the publication date as **2025-11-7**, while the body mentions a publication date of **2025-11-15**.\n\nThese dates do not agree.\n\nCited sections:\n- \"Why Metadata Matters\" source metadata (header)\n- \"The Meta-Meta Insight\" (body)",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2866-3030"
+          },
+          "output_chars": 8906,
+          "output_tokens": 2100
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 8934,
+      "content_tokens": 2100,
+      "usage": {
+        "input_tokens": 21647,
+        "output_tokens": 110,
+        "total_tokens": 21757
+      },
+      "est_cost_usd": 0.0552,
+      "latency_seconds": 4.85,
+      "index_id": "IDX-D",
+      "qid": "CN6",
+      "category": "consistency",
+      "question": "What publication date does \"Why Metadata Matters\" carry in its metadata header, and what date does the post's body claim it was published? Do they agree?",
+      "expected_evidence": "Why Metadata Matters header block (node 0225, L2866–2875: \"Publication date: 2025-11-7\") and § The Meta-Meta Insight (node 0235, L2992–3001: \"It was published on 2025-11-15\").",
+      "ground_truth": "They disagree: header says Nov 7, 2025; the body's self-describing example says Nov 15, 2025. Bonus for noting the irony (a post about metadata consistency, whose author later wrote \"dates are promises you'll break\" in the instruction-file scoring post, L2743)."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The phrase \"Resume Explorer\" is mentioned in the \"Work With Me\" section under \"Live, deployed systems.\" However, the content references no dedicated project page or detailed description for \"Resume Explorer\" within the corpus. Work described in the \"Project Portfolio\" highlights other systems (e.g., Poolula Platform, Self-Hosted Workout Intelligence, Beehive Analytics), and there is no mention or documentation of any \"Resume Explorer\" application among those projects.\n\n### Summary:\n- **Mention**: \"Resume Explorer\" named in \"Work With Me\" under [Browse Projects](/projects/).\n- **Project page or description available**: None located in the corpus.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "236-335"
+          },
+          "output_chars": 6874,
+          "output_tokens": 1640
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "540-1699"
+          },
+          "output_chars": 53246,
+          "output_tokens": 12601
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 8934,
+      "content_tokens": 14241,
+      "usage": {
+        "input_tokens": 33844,
+        "output_tokens": 212,
+        "total_tokens": 34056
+      },
+      "est_cost_usd": 0.0867,
+      "latency_seconds": 5.8,
+      "index_id": "IDX-D",
+      "qid": "EG4",
+      "category": "evidence-gap",
+      "question": "Work With Me names \"Resume Explorer\" among \"live, deployed systems\" to browse. Is there a Resume Explorer project page in the corpus, and where — if anywhere — is that work actually described?",
+      "expected_evidence": "Work With Me § Browse projects card (node 0042, L329–331); the Project Portfolio section as a whole (nodes 0059–0167, L540–2174 — six projects, none of them Resume Explorer); indirect descriptions: Twin GraphRAG post (L2317, L2333–2337, \"Resume Graph Explorer\") and the Resume Data Schema resource (L3717 onward).",
+      "ground_truth": "No project page exists. The system appears only obliquely: as an anecdote in the GraphRAG article and via the resume-data-schema resource that documents its underlying JSON. A strong answer states the absence confidently and cites the two indirect traces. Personally actionable: a showcased system with no portfolio page."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The \"Work With Me\" section of the document cites two professional certifications:\n\n1. **CDMP-certified in data management** (Certified Data Management Professional)\n2. **Azure AI Engineer Associate**\n\nThese certifications are listed under the \"Production AI\" subheading, highlighting expertise in shipped systems and operational AI.\n\nIn addition, the \"My Journey\" section refers to extensive cognitive science experience, a PhD dissertation with over 430 citations, and practical human-centered design systems. However, there’s no explicit mention of these certifications in related content outside of the \"Work With Me\" section. This indicates the certifications are primarily contextually used within professional positioning.\n\n**Sources**:\n- \"Work With Me\" section, \"Production AI\" subheading\n- Verified by reviewing \"My Journey\" and surrounding potential overlaps",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "236-335"
+          },
+          "output_chars": 6874,
+          "output_tokens": 1640
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "351-480"
+          },
+          "output_chars": 7770,
+          "output_tokens": 1786
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 8934,
+      "content_tokens": 3426,
+      "usage": {
+        "input_tokens": 22964,
+        "output_tokens": 237,
+        "total_tokens": 23201
+      },
+      "est_cost_usd": 0.0598,
+      "latency_seconds": 5.18,
+      "index_id": "IDX-D",
+      "qid": "EG5",
+      "category": "evidence-gap",
+      "question": "Work With Me cites two professional certifications. What are they, and does any other document in the corpus mention or evidence them?",
+      "expected_evidence": "Work With Me § Production AI (node 0040, L315–317). Negative evidence: My Journey (incl. § Dive Deeper, L480–530) and the rest of the corpus contain no mention; the resume PDF is referenced (L171, L299, L506) but is outside the corpus.",
+      "ground_truth": "CDMP (data management) and Azure AI Engineer Associate. No other corpus document mentions either — the claims rest on assertion plus a pointer to an out-of-corpus resume PDF. (They are plausible, just unevidenced here.)"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The \"7±2\" essay includes quantitative evidence from three domains with actual numbers and placeholders denoted as follows:\n\n1. **Fitness Tracker (14 years, 2,593 workouts)**: \n   - Actual numbers: 14 years, 2,593 workouts, pace and cadence features for clustering.\n   - Placeholder: **[X%]**, representing the variance explained by the clusters.\n\n2. **Beehive Monitoring (4 seasons, 400+ photo-inspections)**: \n   - Actual numbers: 4 seasons, 400+ inspections, 5 weather variables, 7 edge types.\n   - Placeholder: **[Y%]**, representing the percentage of production queries covered by edge types.\n\n3. **Convoscope Interface (multi-model comparison)**: \n   - Actual numbers: 10 models initially, reduced to 3 model cards, incorporating 5 visible topic chips.\n   - Placeholder: **[Z%]**, representing the increase in engagement metrics like dwell time or click-through.\n\nThis reflects a mix of solid data and placeholders awaiting specific values. Referenced section: **\"Evidence across three domains\"**.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3250-3284"
+          },
+          "output_chars": 2185,
+          "output_tokens": 513
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 8934,
+      "content_tokens": 513,
+      "usage": {
+        "input_tokens": 20044,
+        "output_tokens": 277,
+        "total_tokens": 20321
+      },
+      "est_cost_usd": 0.0529,
+      "latency_seconds": 5.22,
+      "index_id": "IDX-D",
+      "qid": "EG6",
+      "category": "evidence-gap",
+      "question": "The 7±2 essay presents quantitative evidence from three domains. Which of its statistics are actual numbers, and which are unfilled placeholders?",
+      "expected_evidence": "7±2 essay § Evidence across three domains (L3252–3275): real figures at L3252, L3263–3266, L3272–3274; placeholder lines L3260 (\"[X%] of variance\"), L3269 (\"[Y%] of production queries\"), L3275 (\"[Z%] dwell time\").",
+      "ground_truth": "Real: 2,593 workouts / 14 years; 3 clusters; 400+ inspections / 4 seasons; 5 weather variables; 7 edge types; the Convoscope 10-vs-3 model card anecdote. Placeholders (literal bracketed stubs labeled \"optional … placeholder\"): variance explained, query coverage, engagement lift. A correct answer must not launder the placeholders into claimed results."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The \"exhausted human\" figure appears in several contexts throughout the corpus, encoding a design principle focused on respecting human cognitive limitations:\n\n1. **Cognitive Offloading (lines 106-114)**\n   - This section emphasizes designing dashboards and interfaces that minimize cognitive strain by using preattentive attributes (e.g., position and luminance). This acknowledges that tired or distracted individuals may need interfaces that reduce cognitive overhead.\n\n2. **7±2 is Everywhere (lines 3240-3296)**\n   - This article explains that people act effectively when data is chunked into three to seven meaningful units. Decisions made under stress or distraction benefit from interfaces that support sensemaking by chunking information and applying principles like primacy, recency, and progressive disclosure.\n\nBoth sections converge on a principle: systems should accommodate the limitations of stressed or distracted human users by simplifying and structuring information to facilitate judgment and reduce extraneous effort.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "106-114"
+          },
+          "output_chars": 571,
+          "output_tokens": 146
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3240-3296"
+          },
+          "output_chars": 3619,
+          "output_tokens": 844
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 8934,
+      "content_tokens": 990,
+      "usage": {
+        "input_tokens": 20574,
+        "output_tokens": 267,
+        "total_tokens": 20841
+      },
+      "est_cost_usd": 0.0541,
+      "latency_seconds": 5.05,
+      "index_id": "IDX-D",
+      "qid": "RD4",
+      "category": "reflective-discovery",
+      "question": "A recurring character in this corpus is the exhausted human — someone making decisions while tired, stressed, or distracted. Where does this figure appear, and what design principle does it encode?",
+      "expected_evidence": "My Journey § Lenses I Bring to Every Problem (node 0047, L378–380: \"a tired human at 3pm on Friday\") and § Healthcare Through a Cognitive Lens (node 0051, L414–416: \"Nurses making decisions at 3am\"); reinforced by the 7±2 essay's cognitive-load design rules (L3286–3311).",
+      "ground_truth": "Acceptance criteria: find both My Journey instances; articulate the principle — systems must work under real cognitive load, not ideal conditions (\"If it doesn't work when you're distracted, it doesn't work\"). Strong answers connect it to chunking/progressive-disclosure rules; which connections are drawn may vary."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The resource \"What Does 'Harness' Mean in AI?\" outlines five meanings for the term: **evaluation harness**, **agent harness**, **readiness harness**, **judge harness**, and **fuzzing/test harness**, acknowledging its diverse technical origins.\n\nAcross the corpus, **evaluation harness** dominates the author's usage. It is featured in project discussions, such as under \"Evaluation Harness\" in the Poolula platform, where it refers to a structured testing system focused on performance metrics like tool usage and numerical or citation accuracy. The resource briefly mentions these origins but does not specifically highlight evaluation harness as the most used by the author.\n\n**Sources used**:\n- \"What Does 'Harness' Mean in AI?\" (both infographics and its resource overview)\n- \"Evaluation Harness\" (Poolula platform).",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3424-3429"
+          },
+          "output_chars": 424,
+          "output_tokens": 117
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3493-3500"
+          },
+          "output_chars": 391,
+          "output_tokens": 100
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "681-701"
+          },
+          "output_chars": 800,
+          "output_tokens": 188
+        }
+      ],
+      "n_tool_calls": 5,
+      "structure_tokens": 8934,
+      "content_tokens": 405,
+      "usage": {
+        "input_tokens": 29679,
+        "output_tokens": 258,
+        "total_tokens": 29937
+      },
+      "est_cost_usd": 0.0768,
+      "latency_seconds": 6.2,
+      "index_id": "IDX-D",
+      "qid": "RD6",
+      "category": "reflective-discovery",
+      "question": "The harness resource decodes five meanings of \"harness\" in AI. Judged across the whole corpus, which meaning dominates the author's own usage, and does the resource itself acknowledge that origin?",
+      "expected_evidence": "What Does 'Harness' Mean in AI? (node ~0261, L3653–3668, esp. L3659 and § See one in practice); usage sites: Poolula evaluation harness (L560, L681+), Twin posts (L2387, L2426, \"evaluation harness\"), Work With Me Offer 2 (L279).",
+      "ground_truth": "Meaning #1 — the evaluation harness — dominates every corpus usage; the resource explicitly says she built the decoder while building the Twin's evaluation setup, and its \"See one in practice\" links point to the two Twin posts. Consistent usage; the other four meanings appear only inside the decoder."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The project titled **\"Self-Hosted Workout Intelligence\"** is a self-hosted machine learning (ML) pipeline focused on workout and fitness data. This platform addresses challenges such as distinguishing between running and dog-walking data, automating data ingestion, and providing actionable insights with full control over data.\n\n### Stack and Components:\n- **Core Tools and Technologies**:\n  - **Programming Language**: Python\n  - **Visualization**: Streamlit, Plotly\n  - **Database**: AWS RDS (MySQL)\n  - **Machine Learning**: scikit-learn (K-means clustering, trend detection, etc.)\n  - **Cloud Services**: AWS Lambda (ETL), AWS S3 (file storage), AWS SNS\n  - **Infrastructure**: Docker, systemd\n\n- **Pipeline Features**:\n  - A **cloud ETL pipeline** processes and ingests fitness data, starting from MapMyRun CSV files.\n  - **ML classification system** for workout types (e.g., runs, walks).\n  - Interactive dashboards, including \"The Choco Effect\" story that visualizes the impact of a new training variable (a pet dog).\n\nThis solution showcases a sophisticated use of end-to-end ML and data visualization to create a personalized fitness analytics platform. **(Source: \"Self-Hosted Workout Intelligence\" section)**.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1219"
+          },
+          "output_chars": 19851,
+          "output_tokens": 4632
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43730,
+      "content_tokens": 4632,
+      "usage": {
+        "input_tokens": 93871,
+        "output_tokens": 319,
+        "total_tokens": 94190
+      },
+      "est_cost_usd": 0.2379,
+      "latency_seconds": 8.64,
+      "index_id": "IDX-C",
+      "qid": "DL3",
+      "category": "direct-location",
+      "question": "Which project is a self-hosted ML pipeline for workout/fitness data, and what stack does it describe?",
+      "expected_evidence": "Project: Self-Hosted Workout Intelligence (fitness-dashboard). Stack: Python, Streamlit, MySQL, scikit-learn, Plotly, AWS Lambda/RDS, K-means.",
+      "ground_truth": "Self-Hosted Workout Intelligence; full-stack ETL + K-means classification + Streamlit dashboard."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "According to the Poolula platform page, its evaluation harness scores five dimensions:\n\n1. **Tool Usage**: Did the AI invoke the correct tools?\n2. **Content Relevance**: Does the answer address the actual question?\n3. **Semantic Similarity**: Does the answer match expected content (embedding comparison)?\n4. **Numerical Accuracy**: Do financial figures match expected values?\n5. **Citation Accuracy**: Are sources correct and relevant?\n\nBefore production deployment, the system must achieve a composite score of **≥90%**. \n\n(*Referenced: \"Evaluation Harness\" section from the Poolula platform page.*)",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "681-702"
+          },
+          "output_chars": 1095,
+          "output_tokens": 250
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43730,
+      "content_tokens": 250,
+      "usage": {
+        "input_tokens": 89512,
+        "output_tokens": 170,
+        "total_tokens": 89682
+      },
+      "est_cost_usd": 0.2255,
+      "latency_seconds": 6.06,
+      "index_id": "IDX-C",
+      "qid": "DL4",
+      "category": "direct-location",
+      "question": "According to the Poolula platform page, what five dimensions does its evaluation harness score, and what composite target must be met before production deployment?",
+      "expected_evidence": "Poolula Platform § Governance & Reliability → Evaluation Harness (node 0068, L681–700; dimensions table L690–699, target L700).",
+      "ground_truth": "Tool Usage, Content Relevance, Semantic Similarity, Numerical Accuracy, Citation Accuracy; target ≥90% composite score before production deployment."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The \"Era-Based Smart Defaults\" fallback in the fitness dashboard's workout classification applies when there are less than 5 data points available for clustering via machine learning. It uses a hierarchical fallback:\n\n1. **Primary**: K-means clustering if sufficient data is present (≥5 workouts).\n2. **Secondary**: Era-based defaults, leveraging a key date—**June 1, 2018**, known as \"The Choco Effect Date.\" Behavioral patterns define the defaults:\n   - **Before June 1, 2018**: Defaults to `real_run` (focused training sessions).\n   - **After June 1, 2018**: Defaults to `pup_walk` (dominated by dog walks).\n\n3. **Tertiary**: A rule-based classification based on pace thresholds for cases where era-based defaults don't resolve ambiguities.\n\nThis fallback mechanism reflects a shift in workout patterns before and after the user's rescue puppy, Choco, joined their routine. [Source: ML Classification System in Self-Hosted Workout Intelligence]",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "972-1004"
+          },
+          "output_chars": 1569,
+          "output_tokens": 422
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43730,
+      "content_tokens": 422,
+      "usage": {
+        "input_tokens": 89677,
+        "output_tokens": 256,
+        "total_tokens": 89933
+      },
+      "est_cost_usd": 0.2268,
+      "latency_seconds": 7.54,
+      "index_id": "IDX-C",
+      "qid": "DL5",
+      "category": "direct-location",
+      "question": "What is the \"era-based smart defaults\" fallback in the fitness dashboard's workout classification, and what date defines the era boundary?",
+      "expected_evidence": "Self-Hosted Workout Intelligence § How It Works → ML Classification System, the \"Era-Based Smart Defaults\" details block (node 0084, L972–1000; the fallback hierarchy L983–1000).",
+      "ground_truth": "When K-means has <5 workouts, classification falls back to era defaults at medium confidence (0.5): before June 1, 2018 (Choco's arrival) → real_run; after → pup_walk; tertiary fallback is rule-based pace thresholds."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Anthropic's guidance for Claude Code recommends a ceiling of *150–200 instructions* for frontier models, noting that 50 of these are already accounted for by Claude Code’s system prompt. The author's own **CLAUDE.md** file precisely hit this ceiling, with 150 instructions plus the base 50, summing to 200 total instructions. \n\nThis insight highlights both performance and readability challenges, as every line of such a file contributes to interaction and processing costs. \n\nReferenced sections:\n- *\"What the research says about size\"*\n- *\"The framework: six categories, 100 points\"*",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2703-2711,2711-2711"
+          },
+          "output_chars": 2317,
+          "output_tokens": 547
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43730,
+      "content_tokens": 547,
+      "usage": {
+        "input_tokens": 89829,
+        "output_tokens": 174,
+        "total_tokens": 90003
+      },
+      "est_cost_usd": 0.2263,
+      "latency_seconds": 6.34,
+      "index_id": "IDX-C",
+      "qid": "DL9",
+      "category": "direct-location",
+      "question": "What instruction-count ceiling does the instruction-file scoring post cite from Anthropic's guidance, and how did the author's own CLAUDE.md measure against it?",
+      "expected_evidence": "A Scoring System for AI Instruction Files § What the research says about size (node 0210, L2703–2709).",
+      "ground_truth": "Frontier models follow roughly 150–200 instructions reliably; Claude Code's system prompt accounts for ~50. Her CLAUDE.md contained ~150 instructions, putting the total at ~200 — right at the ceiling."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Across the articles \"What Looks Like an AI Skills Gap Is Often a Judgment Gap\" and \"The Missing Layer Between AI Adoption and AI Value,\" a recurring critique concerns insufficient organizational focus on judgment and governance during AI adoption. These pieces argue that successful AI implementation is not just a matter of tool fluency or increasing adoption rates but also about embedding robust judgment and evaluation frameworks within the organization.\n\nKey themes include:\n\n1. **Framing and Evaluation Over Speed**:\n   - In \"What Looks Like an AI Skills Gap Is Often a Judgment Gap,\" the priority is framing problems and defining evaluation criteria before engaging AI tools. Speed magnifies well-framed problems or amplifies vague ones, leading to either efficient, trustworthy outputs or confidently wrong answers (\\*[source](#)\\*).\n\n2. **Operational Gaps in AI Value Creation**:\n   - \"The Missing Layer Between AI Adoption and AI Value\" identifies that while organizations focus on adoption metrics, value often depends on hidden labor, downstream evaluations, and achieving true accountability for AI outputs. This “missing layer” involves practical governance and shared context to convert adoption into measurable outcomes (\\*[source](#)\\*).\n\n3. **Judgment as a Scarce Resource**:\n   - Both articles highlight judgment as a scarce skill. In individual contexts, it involves problem framing, testing outputs, and deciding trustworthiness. In organizations, it requires defining decision ownership, quality standards, and the ability to override AI decisions (\\*[source](#)\\*).\n\n4. **Governance and Organizational Readiness**:\n   - Governance must reach the operational level. This includes accountability, context-aware decision-making, and ensuring outputs meet defined quality bars before moving further (\\*[source](#)\\*).\n\nTogether, these articles emphasize that AI is only as effective as the human and organizational infrastructure supporting its deployment. Building this layer of infrastructure transforms raw adoption into sustained value.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2403-2476"
+          },
+          "output_chars": 8698,
+          "output_tokens": 1979
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2490-2660"
+          },
+          "output_chars": 11218,
+          "output_tokens": 2745
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 43730,
+      "content_tokens": 4724,
+      "usage": {
+        "input_tokens": 94011,
+        "output_tokens": 459,
+        "total_tokens": 94470
+      },
+      "est_cost_usd": 0.2396,
+      "latency_seconds": 9.99,
+      "index_id": "IDX-C",
+      "qid": "CS2",
+      "category": "cross-section-synthesis",
+      "question": "Across the articles, what recurring critique is made about how organizations adopt AI (adoption-vs-value, skills-vs-judgment)?",
+      "expected_evidence": "Articles: 'AI Skills Gap Is Often a Judgment Gap' and 'The Missing Layer Between AI Adoption and AI Value'.",
+      "ground_truth": "Judgment gap + infrastructure/value gap; adoption metrics != value."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The idea that \"retrieval works through context and association, not brute-force search\" recurs across the corpus in different contexts and technical domains:\n\n1. **Cognitive Offloading**:\n   - **Domain**: User-interface and dashboard design.\n   - **Application**: Describes leveraging attributes like position and luminance to optimize dashboards, focusing on respecting cognitive load rather than relying on exhaustive methods.\n   - [Source: *Cognitive Offloading* → Core Positioning Pages](#106-114).\n\n2. **Why Metadata Matters**:\n   - **Domain**: Web metadata and search engine optimization (SEO).\n   - **Application**: Highlights metadata as the “connective tissue” enabling content relationships and discoverability, contrasting structured pathways versus dumping content into a search void.\n   - [Source: *Why Metadata Matters → Articles*](#2866-2889).\n\n3. **Bees, Graphs, and Governance**:\n   - **Domain**: Knowledge graphs and data governance.\n   - **Application**: Explains modeling relationships (e.g., photos, weather) as first-class graph entities to enable queries like \"high-humidity inspections within 24 hours of reduced foraging,\" shifting focus from raw datasets to queryable patterns.\n   - [Source: *Bees, Graphs, and Governance → Articles*](#3133-3173). \n\nThese instances reinforce using structured relationships and context to guide retrieval across diverse systems, from visual designs to metadata and knowledge graphs.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "106-114"
+          },
+          "output_chars": 571,
+          "output_tokens": 146
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2866-2889"
+          },
+          "output_chars": 2455,
+          "output_tokens": 558
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3133-3173"
+          },
+          "output_chars": 2956,
+          "output_tokens": 816
+        }
+      ],
+      "n_tool_calls": 5,
+      "structure_tokens": 43730,
+      "content_tokens": 1520,
+      "usage": {
+        "input_tokens": 90879,
+        "output_tokens": 402,
+        "total_tokens": 91281
+      },
+      "est_cost_usd": 0.2312,
+      "latency_seconds": 8.23,
+      "index_id": "IDX-C",
+      "qid": "CS6",
+      "category": "cross-section-synthesis",
+      "question": "The idea that \"retrieval works through context and association, not brute-force search\" recurs across the corpus. Where does it appear, and to what different technical domain does each instance apply it?",
+      "expected_evidence": "Homepage § Cognitive Principles in Practice → Metadata Matters card (node 0015, L98–102); My Journey § The Big Turns → Making Metadata Human-Friendly (node 0053, L428–430); Three Readers § The deeper idea (node 0223, L2843–2852); Memory Is More Than Storage resource (node ~0263, L3689–3696). At least three of the four.",
+      "ground_truth": "Acceptance criteria: identify ≥3 instances and their domains — (a) homepage: web metadata as \"digital equivalent of cognitive context\"; (b) My Journey: SEC data-catalog design mirroring associative human recall; (c) Three Readers: structured data as the associations that let queries surface a page (\"the page is the memory\"); (d) Memory resource: selection/structure/retrieval/revision/forgetting for AI agents. Strong answers name the shared claim; which instances are cited may reasonably vary."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The three portfolio projects using **Streamlit** are:\n\n1. **Self-Hosted Workout Intelligence**:\n   - A Streamlit-based fitness analytics platform for classifying and visualizing workout data with ML-driven insights.\n   - Dashboard components include trends analysis, monthly workout densities, and a feature called \"The Choco Effect.\"\n\n2. **Beehive Analytics Platform**:\n   - A Streamlit interface for turning beekeeping inspection photos into analyzable data. The UI includes interactive timelines and galleries for exploring relationships between weather, photos, and hive health.\n\n3. **ChronoScope: AI-Powered Timeline Builder**:\n   - A platform where users upload documents to extract career milestones and visualize them as timelines. The tool uses Streamlit for interactive plotting and local machine-based processing for privacy.\n\nThe **acknowledged trade-off** for Streamlit, noted across projects, is its **reduced UI customization** compared to frameworks like React. However, the simplicity of its Python-centric development pipeline and rapid app creation often outweighs these limitations in data-centric use cases. \n\nThese details were referenced from sections titled:\n- \"Self-Hosted Workout Intelligence\"\n- \"Beehive Analytics Platform\"\n- \"ChronoScope: AI-Powered Timeline Builder.\"",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "1481-1699"
+          },
+          "output_chars": 10428,
+          "output_tokens": 2431
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "1220-1472"
+          },
+          "output_chars": 11980,
+          "output_tokens": 2877
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1211"
+          },
+          "output_chars": 19851,
+          "output_tokens": 4632
+        }
+      ],
+      "n_tool_calls": 5,
+      "structure_tokens": 43730,
+      "content_tokens": 9940,
+      "usage": {
+        "input_tokens": 99236,
+        "output_tokens": 351,
+        "total_tokens": 99587
+      },
+      "est_cost_usd": 0.2516,
+      "latency_seconds": 8.96,
+      "index_id": "IDX-C",
+      "qid": "CS8",
+      "category": "cross-section-synthesis",
+      "question": "Which of the six portfolio projects use Streamlit, and what trade-off do the project pages repeatedly acknowledge for choosing it?",
+      "expected_evidence": "Technology headers of all six project pages (L550, L807, L1226, L1487, L1723, L1975); \"Why Streamlit?\" details blocks in Fitness (L1102–1115) and Beehive (L1394–1406); Convoscope § Why These Choices (L2129–2131).",
+      "ground_truth": "Five of six: Fitness, Beehive, ChronoScope, Digital Memory Chest, Convoscope. Poolula is the exception (FastAPI + CLI; no Streamlit in its stack). Trade-off, stated near-verbatim in multiple places: less UI customization (than React) and Streamlit-specific session/state patterns, accepted for much faster data-app development."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The corpus provides three claims regarding years of workout/running data:\n\n1. **Start Here Page**: The essay title “Rescuing my Exercise KPIs from a Puppy-shaped Root Cause” discusses analyzing \"**13 years** of running data\" using ML and reveals insights about data disruptions caused by a dog [Source: *Start Here*].\n   \n2. **The Fitness Project**:\n   - The fitness dashboard explicitly mentions \"**14 years** of workout data\" transformed into actionable intelligence.\n   - An ML pipeline reclaims data affected after adopting a puppy in 2018, with metrics like a 4x increase in workout frequency post-Choco [Source: *Fitness Dashboard Project Page*].\n   \n3. **7±2 Essay**:\n   - References \"**14 years** of activity logs\" clustering into three groups (runs, walks, transitions) according to behavioral insights [Source: *7±2 Article*].\n\n### Agreement Analysis\n- The **Fitness Project** and **7±2 Essay** both agree on \"14 years\" of data.\n- The **Start Here Page** mentions \"13 years,\" which could indicate a slight discrepancy, possible due to rounding differences or data updates.\n\nThese sections mostly align but slightly diverge in precision.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3229-3363"
+          },
+          "output_chars": 7355,
+          "output_tokens": 1830
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "134-358"
+          },
+          "output_chars": 13949,
+          "output_tokens": 3435
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1203"
+          },
+          "output_chars": 19448,
+          "output_tokens": 4525
+        }
+      ],
+      "n_tool_calls": 5,
+      "structure_tokens": 43730,
+      "content_tokens": 9790,
+      "usage": {
+        "input_tokens": 98645,
+        "output_tokens": 366,
+        "total_tokens": 99011
+      },
+      "est_cost_usd": 0.2503,
+      "latency_seconds": 10.85,
+      "index_id": "IDX-C",
+      "qid": "CN4",
+      "category": "consistency",
+      "question": "How many years of workout/running data does the corpus claim? Compare Start Here, the fitness project page, and the 7±2 essay — do they agree?",
+      "expected_evidence": "Start Here § quickest path, item 2 (node 0021 area, L185: \"13 years of running data\"); Self-Hosted Workout Intelligence § Summary / 30-second version (L815–817: \"14 years\") and The Problem (L843: \"14 years\"); Choco Effect table (L1060–1065: 7 yrs + 6.5 yrs ≈ 13.5); 7±2 essay § Evidence across three domains (L3252: \"14 years, 2,593 workouts\").",
+      "ground_truth": "They do not fully agree: Start Here says 13 years; the project page and the essay say 14; the project's own pre/post table sums to ~13.5. A correct answer surfaces the discrepancy (plausibly drift as time passed) rather than picking one number."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The metadata header lists the publication date of \"Why Metadata Matters\" as November 7, 2025. The post's body does not specifically claim a different publication date. Therefore, the dates agree. \n\n**Source:** Section \"Why Metadata Matters.\"",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2866-2889"
+          },
+          "output_chars": 2455,
+          "output_tokens": 558
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43730,
+      "content_tokens": 558,
+      "usage": {
+        "input_tokens": 89838,
+        "output_tokens": 96,
+        "total_tokens": 89934
+      },
+      "est_cost_usd": 0.2256,
+      "latency_seconds": 6.3,
+      "index_id": "IDX-C",
+      "qid": "CN6",
+      "category": "consistency",
+      "question": "What publication date does \"Why Metadata Matters\" carry in its metadata header, and what date does the post's body claim it was published? Do they agree?",
+      "expected_evidence": "Why Metadata Matters header block (node 0225, L2866–2875: \"Publication date: 2025-11-7\") and § The Meta-Meta Insight (node 0235, L2992–3001: \"It was published on 2025-11-15\").",
+      "ground_truth": "They disagree: header says Nov 7, 2025; the body's self-describing example says Nov 15, 2025. Bonus for noting the irony (a post about metadata consistency, whose author later wrote \"dates are promises you'll break\" in the instruction-file scoring post, L2743)."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The website corpus includes references to a \"Resume Explorer\" but does not have a dedicated project page named specifically as \"Resume Explorer.\" The relevant mentions and descriptions of similar tools appear in the broader \"Work With Me\" section, as well as in live projects like the \"Poolula Platform,\" which may share methodologies and design principles applicable to such a system. Below are the details:\n\n1. **Mention in the \"Work With Me\" Section**:\n   - The \"Work With Me\" page lists \"Resume Explorer\" among live, deployed systems alongside other projects such as Beehive Tracker, ConvoScope, and the Fitness Dashboard ([Work With Me](#work-with-me)).\n   - This suggests it is part of the professional portfolio but does not provide further details directly in the section.\n\n2. **Project Portfolio Context**:\n   - **Possible association**: The \"Resume Data Schema\" project outlines a JSON-based system as the core of resume automation. This structured data can power output formats for resumes, websites, and other applications ([Poolula Platform](#poolula-platform)).\n   - Key features like provenance tracking, schema design, and multi-output compatibility indicate possible overlap with the goals of \"Resume Explorer.\"\n\n### Conclusion\nThe work behind \"Resume Explorer\" appears embedded in initiatives concerning digital tools and schema-backed deployment systems like the \"Resume Data Schema.\" Explicit descriptions beyond the modular schema for resumes are not available. If you'd require further alignment references, feel free to follow up.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "236-351"
+          },
+          "output_chars": 7570,
+          "output_tokens": 1834
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "540-750"
+          },
+          "output_chars": 8750,
+          "output_tokens": 2135
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 43730,
+      "content_tokens": 3969,
+      "usage": {
+        "input_tokens": 93304,
+        "output_tokens": 374,
+        "total_tokens": 93678
+      },
+      "est_cost_usd": 0.237,
+      "latency_seconds": 9.82,
+      "index_id": "IDX-C",
+      "qid": "EG4",
+      "category": "evidence-gap",
+      "question": "Work With Me names \"Resume Explorer\" among \"live, deployed systems\" to browse. Is there a Resume Explorer project page in the corpus, and where — if anywhere — is that work actually described?",
+      "expected_evidence": "Work With Me § Browse projects card (node 0042, L329–331); the Project Portfolio section as a whole (nodes 0059–0167, L540–2174 — six projects, none of them Resume Explorer); indirect descriptions: Twin GraphRAG post (L2317, L2333–2337, \"Resume Graph Explorer\") and the Resume Data Schema resource (L3717 onward).",
+      "ground_truth": "No project page exists. The system appears only obliquely: as an anecdote in the GraphRAG article and via the resume-data-schema resource that documents its underlying JSON. A strong answer states the absence confidently and cites the two indirect traces. Personally actionable: a showcased system with no portfolio page."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The \"Work With Me\" page cites two professional certifications for Barbara Hidalgo-Sotelo:  \n1. **CDMP-certified in data management**  \n2. **Azure AI Engineer Associate**\n\nThese certifications are mentioned under the \"Production AI\" section, highlighting her real operational experience and technical credentials.\n\nAs for other mentions in the corpus:\n- The **Resume Data Schema** resource itemizes a `certifications` section for structured data, but its full description does not explicitly list these two certificates.  \n- The **My Journey** section, including professional milestones, does not directly reference the certifications either.  \n\nThus, the certifications are uniquely detailed only on the \"Work With Me\" page.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "351-475"
+          },
+          "output_chars": 7048,
+          "output_tokens": 1543
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "236-335"
+          },
+          "output_chars": 6874,
+          "output_tokens": 1640
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 43730,
+      "content_tokens": 3183,
+      "usage": {
+        "input_tokens": 92454,
+        "output_tokens": 214,
+        "total_tokens": 92668
+      },
+      "est_cost_usd": 0.2333,
+      "latency_seconds": 7.67,
+      "index_id": "IDX-C",
+      "qid": "EG5",
+      "category": "evidence-gap",
+      "question": "Work With Me cites two professional certifications. What are they, and does any other document in the corpus mention or evidence them?",
+      "expected_evidence": "Work With Me § Production AI (node 0040, L315–317). Negative evidence: My Journey (incl. § Dive Deeper, L480–530) and the rest of the corpus contain no mention; the resume PDF is referenced (L171, L299, L506) but is outside the corpus.",
+      "ground_truth": "CDMP (data management) and Azure AI Engineer Associate. No other corpus document mentions either — the claims rest on assertion plus a pointer to an out-of-corpus resume PDF. (They are plausible, just unevidenced here.)"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "In the \"7±2 is Everywhere: Chunking is All You Need\" essay, quantitative evidence is presented across three domains:\n\n1. **Fitness Tracker Data**:\n   - **Actual Numbers**: 2,593 workouts spanning 14 years. Activity labels were condensed into three meaningful clusters: fast (runs), slow (walks), and transitions.\n   - **Placeholder**: The percentage of variance explained by the three clusters is left as a placeholder: **[X%]**.\n\n2. **Beehive Monitoring**:\n   - **Actual Numbers**: 400+ photo-inspections over four seasons, with decision-making concentrated around seven edge types in a knowledge graph (e.g., “Inspections before swarms”).\n   - **Placeholder**: The coverage provided by these seven edge types is left as a placeholder: **[Y%]**.\n\n3. **Convoscope Interface (AI Comparison Tool)**:\n   - **Actual Numbers**: Users engaged better with three model cards and five topic chips compared to a larger, ten-model display.\n   - **Placeholder**: The improvement in user engagement metrics (e.g., dwell time or click-through rate) is also a placeholder: **[Z%]**.\n\nOverall, the document mixes concrete figures (e.g., counts of workouts and inspections) with illustrative placeholders, inviting further specific quantification.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3229-3240,3250-3270"
+          },
+          "output_chars": 3270,
+          "output_tokens": 807
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43730,
+      "content_tokens": 807,
+      "usage": {
+        "input_tokens": 90077,
+        "output_tokens": 330,
+        "total_tokens": 90407
+      },
+      "est_cost_usd": 0.2285,
+      "latency_seconds": 9.94,
+      "index_id": "IDX-C",
+      "qid": "EG6",
+      "category": "evidence-gap",
+      "question": "The 7±2 essay presents quantitative evidence from three domains. Which of its statistics are actual numbers, and which are unfilled placeholders?",
+      "expected_evidence": "7±2 essay § Evidence across three domains (L3252–3275): real figures at L3252, L3263–3266, L3272–3274; placeholder lines L3260 (\"[X%] of variance\"), L3269 (\"[Y%] of production queries\"), L3275 (\"[Z%] dwell time\").",
+      "ground_truth": "Real: 2,593 workouts / 14 years; 3 clusters; 400+ inspections / 4 seasons; 5 weather variables; 7 edge types; the Convoscope 10-vs-3 model card anecdote. Placeholders (literal bracketed stubs labeled \"optional … placeholder\"): variance explained, query coverage, engagement lift. A correct answer must not launder the placeholders into claimed results."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The recurring figure of an exhausted human—someone making decisions while tired, stressed, or distracted—appears prominently in this corpus in two areas:\n\n1. **Healthcare Through a Cognitive Lens**  \n   This section describes the challenges faced by nurses working under conditions of exhaustion and cognitive overload (e.g., 3 AM shifts). The interfaces needed to reduce cognitive burdens by presenting information in a way suited to multitasking, stress, and fatigue. It emphasizes that tools have to work under real-world conditions of strain and distraction, not just in idealized scenarios. ([Source: Healthcare Through a Cognitive Lens](#))\n\n2. **Lenses I Bring to Every Problem**  \n   Here, a cognitive science principle is articulated as a design guideline: \"How will a tired human at 3pm on Friday actually use this?\" This lens is used to evaluate interfaces under cognitive load and ensure usability when users are distracted or fatigued. ([Source: Lenses I Bring to Every Problem](#))  \n\n### Encoded Design Principle\nThe design principle these examples encode is **reducing cognitive load** under real-world constraints. Whether in healthcare systems or broader applications, successful designs are those that account for real-life user states like fatigue, stress, or multitasking, ensuring decision-making is still effective.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "376-394"
+          },
+          "output_chars": 959,
+          "output_tokens": 240
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "414-421"
+          },
+          "output_chars": 1159,
+          "output_tokens": 214
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 43730,
+      "content_tokens": 454,
+      "usage": {
+        "input_tokens": 89769,
+        "output_tokens": 334,
+        "total_tokens": 90103
+      },
+      "est_cost_usd": 0.2278,
+      "latency_seconds": 7.63,
+      "index_id": "IDX-C",
+      "qid": "RD4",
+      "category": "reflective-discovery",
+      "question": "A recurring character in this corpus is the exhausted human — someone making decisions while tired, stressed, or distracted. Where does this figure appear, and what design principle does it encode?",
+      "expected_evidence": "My Journey § Lenses I Bring to Every Problem (node 0047, L378–380: \"a tired human at 3pm on Friday\") and § Healthcare Through a Cognitive Lens (node 0051, L414–416: \"Nurses making decisions at 3am\"); reinforced by the 7±2 essay's cognitive-load design rules (L3286–3311).",
+      "ground_truth": "Acceptance criteria: find both My Journey instances; articulate the principle — systems must work under real cognitive load, not ideal conditions (\"If it doesn't work when you're distracted, it doesn't work\"). Strong answers connect it to chunking/progressive-disclosure rules; which connections are drawn may vary."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The concept of \"harness\" in AI, as explained in the resource \"What Does 'Harness' Mean in AI?,\" encompasses five primary meanings drawn from various technical domains:\n\n1. **Evaluation Harness**: Implements systematic testing of AI tools using repeatable tasks, scoring metrics, and regression tests.\n2. **Agent Harness**: Acts as a runtime layer for LLM agents, managing memory, state, and tool invocation.\n3. **Readiness Harness**: Evaluates a system's deployment readiness through observability, safety checks, and performance metrics.\n4. **Judge Harness**: Focuses on the reliability and fairness of LLMs when used for scoring or judgment roles.\n5. **Test/Fuzzing Harness**: Tests system robustness by bombarding code or AI systems with diverse input scenarios, originating from software security practices.\n\nThe resource positions the harness as a structural support that amplifies specific AI capabilities: \"The model gives the power; the harness makes that power usable.\" However, it does not explicitly acknowledge the author’s primary focus on evaluation harnesses, which dominates her professional engagements. The section connects indirectly, noting the deployment of an evaluation harness in key projects (e.g., behavioral comparison or retrieval system migrations), showcasing its foundational role in her consulting work.\n\nSources:\n- \"What Does 'Harness' Mean in AI?\"",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 429,
+          "output_tokens": 92
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 182006,
+          "output_tokens": 43730
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "141-33"
+          },
+          "output_chars": 129,
+          "output_tokens": 44
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3424-3663"
+          },
+          "output_chars": 14798,
+          "output_tokens": 3773
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 43730,
+      "content_tokens": 3817,
+      "usage": {
+        "input_tokens": 93146,
+        "output_tokens": 349,
+        "total_tokens": 93495
+      },
+      "est_cost_usd": 0.2364,
+      "latency_seconds": 13.61,
+      "index_id": "IDX-C",
+      "qid": "RD6",
+      "category": "reflective-discovery",
+      "question": "The harness resource decodes five meanings of \"harness\" in AI. Judged across the whole corpus, which meaning dominates the author's own usage, and does the resource itself acknowledge that origin?",
+      "expected_evidence": "What Does 'Harness' Mean in AI? (node ~0261, L3653–3668, esp. L3659 and § See one in practice); usage sites: Poolula evaluation harness (L560, L681+), Twin posts (L2387, L2426, \"evaluation harness\"), Work With Me Offer 2 (L279).",
+      "ground_truth": "Meaning #1 — the evaluation harness — dominates every corpus usage; the resource explicitly says she built the decoder while building the Twin's evaluation setup, and its \"See one in practice\" links point to the two Twin posts. Consistent usage; the other four meanings appear only inside the decoder."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The project titled **\"Self-Hosted Workout Intelligence\"** is a self-hosted machine learning pipeline designed for workout and fitness data.\n\n### Stack and Technologies Used\n- **Backend & Data Processing:**\n  - **AWS Lambda**: For event-triggered cloud processing of workout data.\n  - **AWS S3**: For data storage.\n  - **AWS RDS (MySQL)**: For centralized workout data storage.\n  - **Python**: With libraries such as scikit-learn and Plotly.\n  \n- **Machine Learning:**\n  - **K-means Clustering**: For workout classification (e.g., runs, dog walks, outliers).\n  \n- **Visualization and Frontend:**\n  - **Streamlit**: Multi-page dashboards for analysis and user interaction.\n  - **Plotly**: For interactive charts.\n\n- **Infrastructure:**\n  - **Systemd**: For production deployment.\n  - **Docker**: For containerized deployment and portability.\n\n### Features\n1. **Cloud ETL Pipeline** for data ingestion and processing.\n2. **ML-driven Classification** of workouts into runs, dog walks, etc.\n3. **Interactive Dashboards** with views such as \"The Choco Effect,\" monthly trends, and SQL exploration.\n4. **Data Consistency Scoring** to measure workout regularity and performance over time.\n\nThis platform addresses challenges like segregating workout types (runs vs. dog walks), enhancing data quality, ensuring ownership, and providing actionable insights.  \n(From **\"Self-Hosted Workout Intelligence\"**, **\"The Solution: Full-Stack Fitness Intelligence\"**, and related sections.)",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1211"
+          },
+          "output_chars": 19851,
+          "output_tokens": 4632
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43245,
+      "content_tokens": 4632,
+      "usage": {
+        "input_tokens": 93120,
+        "output_tokens": 379,
+        "total_tokens": 93499
+      },
+      "est_cost_usd": 0.2366,
+      "latency_seconds": 16.0,
+      "index_id": "IDX-O",
+      "qid": "DL3",
+      "category": "direct-location",
+      "question": "Which project is a self-hosted ML pipeline for workout/fitness data, and what stack does it describe?",
+      "expected_evidence": "Project: Self-Hosted Workout Intelligence (fitness-dashboard). Stack: Python, Streamlit, MySQL, scikit-learn, Plotly, AWS Lambda/RDS, K-means.",
+      "ground_truth": "Self-Hosted Workout Intelligence; full-stack ETL + K-means classification + Streamlit dashboard."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "According to the Poolula platform page, the evaluation harness scores AI performance on five dimensions:\n\n1. **Tool Usage**: Did the AI invoke the correct tools?\n2. **Content Relevance**: Does the answer address the actual question?\n3. **Semantic Similarity**: Does the answer match expected content (via embedding comparison)?\n4. **Numerical Accuracy**: Are financial figures accurate?\n5. **Citation Accuracy**: Are sources correct and relevant?\n\nThe composite target of achieving a ≥90% score across these dimensions must be met before production deployment. \n\n*Cited: \"Evaluation Harness\"*",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "681-702"
+          },
+          "output_chars": 1095,
+          "output_tokens": 250
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43245,
+      "content_tokens": 250,
+      "usage": {
+        "input_tokens": 88761,
+        "output_tokens": 165,
+        "total_tokens": 88926
+      },
+      "est_cost_usd": 0.2236,
+      "latency_seconds": 6.49,
+      "index_id": "IDX-O",
+      "qid": "DL4",
+      "category": "direct-location",
+      "question": "According to the Poolula platform page, what five dimensions does its evaluation harness score, and what composite target must be met before production deployment?",
+      "expected_evidence": "Poolula Platform § Governance & Reliability → Evaluation Harness (node 0068, L681–700; dimensions table L690–699, target L700).",
+      "ground_truth": "Tool Usage, Content Relevance, Semantic Similarity, Numerical Accuracy, Citation Accuracy; target ≥90% composite score before production deployment."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The \"era-based smart defaults\" fallback is used when K-means clustering has insufficient data (fewer than 5 workouts) to categorize workouts. It applies medium-confidence defaults based on whether the date is before or after June 1, 2018 (the \"Choco Effect Date\"). Before this date, activities default to \"real_run,\" and after, they default to \"pup_walk,\" reflecting shifts in behavior related to the adoption of a pet. \n\nCited from: **ML Classification System** section.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "972-984, 972-984"
+          },
+          "output_chars": 1185,
+          "output_tokens": 323
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43245,
+      "content_tokens": 323,
+      "usage": {
+        "input_tokens": 88831,
+        "output_tokens": 153,
+        "total_tokens": 88984
+      },
+      "est_cost_usd": 0.2236,
+      "latency_seconds": 14.62,
+      "index_id": "IDX-O",
+      "qid": "DL5",
+      "category": "direct-location",
+      "question": "What is the \"era-based smart defaults\" fallback in the fitness dashboard's workout classification, and what date defines the era boundary?",
+      "expected_evidence": "Self-Hosted Workout Intelligence § How It Works → ML Classification System, the \"Era-Based Smart Defaults\" details block (node 0084, L972–1000; the fallback hierarchy L983–1000).",
+      "ground_truth": "When K-means has <5 workouts, classification falls back to era defaults at medium confidence (0.5): before June 1, 2018 (Choco's arrival) → real_run; after → pup_walk; tertiary fallback is rule-based pace thresholds."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Anthropic's guidance in the [Claude Code best practices](https://www.anthropic.com/engineering/claude-code-best-practices) places the instruction count ceiling at **150-200 instructions**, with roughly 50 instructions already used by Claude Code's system prompt. The author's CLAUDE.md was found to have **150 individual instructions**, matching this ceiling when combined with the baseline instructions.\n\nUpon scoring the file with a custom framework, it received **88/100 points**, losing 12 points mainly for issues like a misleading \"Last Updated\" date, an incomplete section, missing security guidance, and overly detailed UI specifications. These results helped prioritize fixes, focusing on accuracy first. \n\n(*Sources: \"What the research says about size\" and \"The framework: six categories, 100 points\" sections*)",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2703-2711"
+          },
+          "output_chars": 2317,
+          "output_tokens": 547
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43245,
+      "content_tokens": 547,
+      "usage": {
+        "input_tokens": 89072,
+        "output_tokens": 210,
+        "total_tokens": 89282
+      },
+      "est_cost_usd": 0.2248,
+      "latency_seconds": 11.75,
+      "index_id": "IDX-O",
+      "qid": "DL9",
+      "category": "direct-location",
+      "question": "What instruction-count ceiling does the instruction-file scoring post cite from Anthropic's guidance, and how did the author's own CLAUDE.md measure against it?",
+      "expected_evidence": "A Scoring System for AI Instruction Files § What the research says about size (node 0210, L2703–2709).",
+      "ground_truth": "Frontier models follow roughly 150–200 instructions reliably; Claude Code's system prompt accounts for ~50. Her CLAUDE.md contained ~150 instructions, putting the total at ~200 — right at the ceiling."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Across the articles, a recurring critique about how organizations adopt AI focuses on the **mismatch between adoption metrics and meaningful organizational value**. This critique spans concerns about the importance of **judgment over operational fluency**, the **hidden operational and oversight costs of using AI**, and the lack of governance frameworks that ensure reliability and accountability. Here are the highlights:\n\n1. **Operational Gap Between Adoption and Value**:\n   - Adoption metrics, such as tool usage and token volumes, often mask inefficiencies, including the hidden labor needed to make AI outputs usable (e.g., rework, context-loading). This is described as \"operational debt\" that organizations fail to measure while focusing solely on AI adoption metrics. ([The Missing Layer Between AI Adoption and AI Value](#))\n\n2. **Judgment as a Scarce Resource**:\n   - Judgment is a critical skill that bridges the gap between AI outputs and actionable value. Beyond tool operation, organizations need personnel capable of framing problems clearly, evaluating whether AI outputs are trustworthy, and determining what roles must remain human-led due to the high cost of error. ([What Looks Like an AI Skills Gap Is Often a Judgment Gap](#))\n\n3. **AI Changes How Errors Appear**:\n   - By polishing results, AI can obscure underlying weaknesses, making errors harder to identify without robust review processes like source checks and quality bars. This points to the need for explicit evaluation frameworks and organizational governance. ([The Missing Layer Between AI Adoption and AI Value](#))\n\n4. **Infrastructure is Key**:\n   - The real value of AI is realized when governance, quality control, work design, cost visibility, and shared context form the infrastructure that translates individual AI use into organizational outcomes. ([The Missing Layer Between AI Adoption and AI Value](#))\n\nThese critiques underscore the importance of defining \"good\" AI usage through quality, accountability, and governance, rather than focusing on adoption speed or tool sophistication.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2403-2476"
+          },
+          "output_chars": 8698,
+          "output_tokens": 1979
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2490-2660"
+          },
+          "output_chars": 11218,
+          "output_tokens": 2745
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 43245,
+      "content_tokens": 4724,
+      "usage": {
+        "input_tokens": 93260,
+        "output_tokens": 469,
+        "total_tokens": 93729
+      },
+      "est_cost_usd": 0.2378,
+      "latency_seconds": 15.62,
+      "index_id": "IDX-O",
+      "qid": "CS2",
+      "category": "cross-section-synthesis",
+      "question": "Across the articles, what recurring critique is made about how organizations adopt AI (adoption-vs-value, skills-vs-judgment)?",
+      "expected_evidence": "Articles: 'AI Skills Gap Is Often a Judgment Gap' and 'The Missing Layer Between AI Adoption and AI Value'.",
+      "ground_truth": "Judgment gap + infrastructure/value gap; adoption metrics != value."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The idea that \"retrieval works through context and association, not brute-force search\" appears in the following section:\n\n1. **\"Metadata Matters\" (under Cognitive Principles in Practice)**: It applies this idea to the web, emphasizing that metadata serves as the web's equivalent of \"cognitive context,\" ensuring that meaning is surfaced in non-random, associative ways. [Source: Metadata Matters → Cognitive Principles in Practice].\n\nNo additional instances for other domains were found.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2275-2285"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "98-106"
+          },
+          "output_chars": 564,
+          "output_tokens": 145
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 43245,
+      "content_tokens": 146,
+      "usage": {
+        "input_tokens": 88728,
+        "output_tokens": 172,
+        "total_tokens": 88900
+      },
+      "est_cost_usd": 0.2235,
+      "latency_seconds": 6.39,
+      "index_id": "IDX-O",
+      "qid": "CS6",
+      "category": "cross-section-synthesis",
+      "question": "The idea that \"retrieval works through context and association, not brute-force search\" recurs across the corpus. Where does it appear, and to what different technical domain does each instance apply it?",
+      "expected_evidence": "Homepage § Cognitive Principles in Practice → Metadata Matters card (node 0015, L98–102); My Journey § The Big Turns → Making Metadata Human-Friendly (node 0053, L428–430); Three Readers § The deeper idea (node 0223, L2843–2852); Memory Is More Than Storage resource (node ~0263, L3689–3696). At least three of the four.",
+      "ground_truth": "Acceptance criteria: identify ≥3 instances and their domains — (a) homepage: web metadata as \"digital equivalent of cognitive context\"; (b) My Journey: SEC data-catalog design mirroring associative human recall; (c) Three Readers: structured data as the associations that let queries surface a page (\"the page is the memory\"); (d) Memory resource: selection/structure/retrieval/revision/forgetting for AI agents. Strong answers name the shared claim; which instances are cited may reasonably vary."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "### Projects Using Streamlit\n1. **Self-Hosted Workout Intelligence**:\n   - A full-stack fitness analytics platform with Streamlit-based dashboards for analyzing 14 years of workout data. It includes ML classifications, trends, and custom visualizations like the \"Choco Effect\" dashboard.\n   - [Details](https://workouts.barbhs.com)\n\n2. **Beehive Analytics Platform**:\n   - Converts scattered honeybee inspection photos into structured insights using a Streamlit-based interactive timeline. It integrates weather, GPS, and computer vision data for rich visualization.\n   - [Details](https://docs.barbhs.com/beehive-tracker)\n\n### Trade-offs Acknowledged for Streamlit\nBoth projects recognize the trade-offs involved in using Streamlit:\n- **Advantages**:\n  - Faster development for data-centric UIs.\n  - Seamless integration with Pandas, Plotly, and session management.\n  - A single Python codebase simplifies deployment.\n\n- **Trade-offs Accepted**:\n  - Limited UI customization compared to traditional web frameworks like React.\n  - The need to adopt Streamlit-specific session and navigation patterns.\n\nThese recurring acknowledgments highlight how Streamlit accelerates prototyping and functionality but sacrifices UI flexibility. \n\nCited Sections:\n- \"Self-Hosted Workout Intelligence\"\n- \"Beehive Analytics Platform\"",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "1220-1480"
+          },
+          "output_chars": 11980,
+          "output_tokens": 2877
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1203"
+          },
+          "output_chars": 19448,
+          "output_tokens": 4525
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 43245,
+      "content_tokens": 7402,
+      "usage": {
+        "input_tokens": 95921,
+        "output_tokens": 349,
+        "total_tokens": 96270
+      },
+      "est_cost_usd": 0.2433,
+      "latency_seconds": 19.93,
+      "index_id": "IDX-O",
+      "qid": "CS8",
+      "category": "cross-section-synthesis",
+      "question": "Which of the six portfolio projects use Streamlit, and what trade-off do the project pages repeatedly acknowledge for choosing it?",
+      "expected_evidence": "Technology headers of all six project pages (L550, L807, L1226, L1487, L1723, L1975); \"Why Streamlit?\" details blocks in Fitness (L1102–1115) and Beehive (L1394–1406); Convoscope § Why These Choices (L2129–2131).",
+      "ground_truth": "Five of six: Fitness, Beehive, ChronoScope, Digital Memory Chest, Convoscope. Poolula is the exception (FastAPI + CLI; no Streamlit in its stack). Trade-off, stated near-verbatim in multiple places: less UI customization (than React) and Streamlit-specific session/state patterns, accepted for much faster data-app development."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The corpus references 14 years of workout/running data as central to Barbara Hidalgo-Sotelo's fitness project, explicitly span from 2011 to 2025. Here are the specific findings from the three sources:\n\n### 1. **Start Here**\nThe summarized timeline mentions tracking 13 years of running data. (\"Rescuing my Exercise KPIs from a Puppy-shaped Root Cause\" discusses analyzing running data over this period using machine learning and visualization.) This implies coverage until at least 2023.\n\n### 2. **Fitness Project Page**\nA detailed summary confirms the use of 14 years of data (2011–2025), emphasizing the transformative \"Choco Effect\" starting in 2018, which disrupted clean data categorization between runs and walks. The ML model and architecture are applied to recover consistent insights. Thus, 2011–2025 is explicitly stated.\n\n### 3. **\"7±2 is Everywhere\" Essay**\nWhile referencing fitness data, this essay concisely states the analysis of 2,593 workouts spanning 14 years. The timeline aligns with tracking beginning in 2011 and extending to 2025.\n\n**Finding: All three sources agree on a clear 14-year dataset (2011–2025).**",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "134-236"
+          },
+          "output_chars": 5680,
+          "output_tokens": 1477
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3229-3363"
+          },
+          "output_chars": 7355,
+          "output_tokens": 1830
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1211"
+          },
+          "output_chars": 19851,
+          "output_tokens": 4632
+        }
+      ],
+      "n_tool_calls": 5,
+      "structure_tokens": 43245,
+      "content_tokens": 7939,
+      "usage": {
+        "input_tokens": 95970,
+        "output_tokens": 370,
+        "total_tokens": 96340
+      },
+      "est_cost_usd": 0.2436,
+      "latency_seconds": 7.96,
+      "index_id": "IDX-O",
+      "qid": "CN4",
+      "category": "consistency",
+      "question": "How many years of workout/running data does the corpus claim? Compare Start Here, the fitness project page, and the 7±2 essay — do they agree?",
+      "expected_evidence": "Start Here § quickest path, item 2 (node 0021 area, L185: \"13 years of running data\"); Self-Hosted Workout Intelligence § Summary / 30-second version (L815–817: \"14 years\") and The Problem (L843: \"14 years\"); Choco Effect table (L1060–1065: 7 yrs + 6.5 yrs ≈ 13.5); 7±2 essay § Evidence across three domains (L3252: \"14 years, 2,593 workouts\").",
+      "ground_truth": "They do not fully agree: Start Here says 13 years; the project page and the essay say 14; the project's own pre/post table sums to ~13.5. A correct answer surfaces the discrepancy (plausibly drift as time passed) rather than picking one number."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The post \"Why Metadata Matters\" carries a **metadata header publication date** of **2025-11-07**, and the body text acknowledges that this review and discussion on metadata were posted as part of the author's information architecture review efforts \"today.\" However, no specific alternate publication date is explicitly mentioned within the body text.\n\nThe metadata header date and the text's context are aligned, as they both reflect the post's created timeframe. \n\n(Cited: *Why Metadata Matters*)",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "2866-2888"
+          },
+          "output_chars": 1765,
+          "output_tokens": 409
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43245,
+      "content_tokens": 409,
+      "usage": {
+        "input_tokens": 88938,
+        "output_tokens": 141,
+        "total_tokens": 89079
+      },
+      "est_cost_usd": 0.2238,
+      "latency_seconds": 11.32,
+      "index_id": "IDX-O",
+      "qid": "CN6",
+      "category": "consistency",
+      "question": "What publication date does \"Why Metadata Matters\" carry in its metadata header, and what date does the post's body claim it was published? Do they agree?",
+      "expected_evidence": "Why Metadata Matters header block (node 0225, L2866–2875: \"Publication date: 2025-11-7\") and § The Meta-Meta Insight (node 0235, L2992–3001: \"It was published on 2025-11-15\").",
+      "ground_truth": "They disagree: header says Nov 7, 2025; the body's self-describing example says Nov 15, 2025. Bonus for noting the irony (a post about metadata consistency, whose author later wrote \"dates are promises you'll break\" in the instruction-file scoring post, L2743)."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The Resume Explorer is listed as one of the \"live, deployed systems\" in the \"Work With Me\" page. However, no specific project page exclusively describes the Resume Explorer. It is mentioned among other tools in the general \"Project Portfolio\" section, which serves as the repository for detailed descriptions of various projects.\n\nThe \"Resume Data Schema\" resource at /resources/resume-data-schema/ provides significant information about how a JSON-based schema feeds into resume automation, powering dynamic outputs like website sections and PDFs. This may underpin functionality relevant to \"Resume Explorer,\" but no dedicated project page for it is explicitly available. \n\nReferenced Pages:\n1. **Work With Me**: [Browse projects → Live, deployed systems](#)\n2. **Resources**: [\"Resume Data Schema\"](https://barbhidalgo.com/resources/resume-data-schema/)",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "329-335"
+          },
+          "output_chars": 503,
+          "output_tokens": 131
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "540-752"
+          },
+          "output_chars": 9226,
+          "output_tokens": 2235
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 43245,
+      "content_tokens": 2366,
+      "usage": {
+        "input_tokens": 90950,
+        "output_tokens": 244,
+        "total_tokens": 91194
+      },
+      "est_cost_usd": 0.2298,
+      "latency_seconds": 14.96,
+      "index_id": "IDX-O",
+      "qid": "EG4",
+      "category": "evidence-gap",
+      "question": "Work With Me names \"Resume Explorer\" among \"live, deployed systems\" to browse. Is there a Resume Explorer project page in the corpus, and where — if anywhere — is that work actually described?",
+      "expected_evidence": "Work With Me § Browse projects card (node 0042, L329–331); the Project Portfolio section as a whole (nodes 0059–0167, L540–2174 — six projects, none of them Resume Explorer); indirect descriptions: Twin GraphRAG post (L2317, L2333–2337, \"Resume Graph Explorer\") and the Resume Data Schema resource (L3717 onward).",
+      "ground_truth": "No project page exists. The system appears only obliquely: as an anecdote in the GraphRAG article and via the resume-data-schema resource that documents its underlying JSON. A strong answer states the absence confidently and cites the two indirect traces. Personally actionable: a showcased system with no portfolio page."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The \"Work With Me\" section cites two certifications under \"Production AI\":\n1. **CDMP-certified in data management.**\n2. **Azure AI Engineer Associate.**\n\nNo other sections in the document explicitly provide evidence or mention these certifications in detail beyond what is stated in the \"Work With Me\" page.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "311-319"
+          },
+          "output_chars": 576,
+          "output_tokens": 128
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "236-343"
+          },
+          "output_chars": 7367,
+          "output_tokens": 1758
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 43245,
+      "content_tokens": 1886,
+      "usage": {
+        "input_tokens": 90406,
+        "output_tokens": 139,
+        "total_tokens": 90545
+      },
+      "est_cost_usd": 0.2274,
+      "latency_seconds": 12.25,
+      "index_id": "IDX-O",
+      "qid": "EG5",
+      "category": "evidence-gap",
+      "question": "Work With Me cites two professional certifications. What are they, and does any other document in the corpus mention or evidence them?",
+      "expected_evidence": "Work With Me § Production AI (node 0040, L315–317). Negative evidence: My Journey (incl. § Dive Deeper, L480–530) and the rest of the corpus contain no mention; the resume PDF is referenced (L171, L299, L506) but is outside the corpus.",
+      "ground_truth": "CDMP (data management) and Azure AI Engineer Associate. No other corpus document mentions either — the claims rest on assertion plus a pointer to an out-of-corpus resume PDF. (They are plausible, just unevidenced here.)"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The \"7±2\" essay examines three domains to demonstrate the practicality of chunking for sensemaking:\n\n1. **Fitness Tracker Data (14 years, 2,593 workouts):** Clustering reduced 10+ activity labels into three durable groups: fast (runs), slow (walks), and transitional (brisk walks or jogs). These three clusters captured key distinctions while minimizing complexity.\n\n2. **Beehive Monitoring (4 seasons, 400+ photo inspections):** Inspections clustered into coherent ~4-hour event arcs. While many edge types were used in a knowledge graph for event analysis, decisions relied on the top 3–7 edges (e.g., “Inspections before swarms”).\n\n3. **Convoscope Interface (Multi-model AI comparison):** While a ten-model comparison appeared comprehensive, users overwhelmingly engaged with just three models, each paired with five prominent topic chips. This simplified design yielded clearer decisions and faster engagement.\n\nThe essay states statistics like the activity clusters (three groups in fitness tracking), edge types (seven covering queries in beehive monitoring), and model focus (three in Convoscope) as actual, meaningful outputs rather than placeholders. Some optional performance metrics (e.g., variance explained or engagement increases) are left as **placeholders** indicated by markup (e.g., \"X%\" or \"Z%\"). \n\nCited sections: **Evidence across three domains** and **What 7±2 actually says**.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3229-3284"
+          },
+          "output_chars": 3623,
+          "output_tokens": 888
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 43245,
+      "content_tokens": 888,
+      "usage": {
+        "input_tokens": 89401,
+        "output_tokens": 341,
+        "total_tokens": 89742
+      },
+      "est_cost_usd": 0.2269,
+      "latency_seconds": 13.27,
+      "index_id": "IDX-O",
+      "qid": "EG6",
+      "category": "evidence-gap",
+      "question": "The 7±2 essay presents quantitative evidence from three domains. Which of its statistics are actual numbers, and which are unfilled placeholders?",
+      "expected_evidence": "7±2 essay § Evidence across three domains (L3252–3275): real figures at L3252, L3263–3266, L3272–3274; placeholder lines L3260 (\"[X%] of variance\"), L3269 (\"[Y%] of production queries\"), L3275 (\"[Z%] dwell time\").",
+      "ground_truth": "Real: 2,593 workouts / 14 years; 3 clusters; 400+ inspections / 4 seasons; 5 weather variables; 7 edge types; the Convoscope 10-vs-3 model card anecdote. Placeholders (literal bracketed stubs labeled \"optional … placeholder\"): variance explained, query coverage, engagement lift. A correct answer must not launder the placeholders into claimed results."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The recurring figure of the \"exhausted human\" appears in the following contexts:\n\n1. **Healthcare Systems**: While running BALEX Healthcare Services, interfaces were designed to operate effectively under conditions where nurses, at 3 AM, were exhausted, stressed, and multitasking. The principle emphasized here is reducing cognitive load by presenting information in ways that work during high-pressure, low-attention scenarios. (Source: *Healthcare Through a Cognitive Lens*)\n\n2. **General Cognitive Lens**: The author consistently asks, “How will a tired human at 3 PM on Friday actually use this?” when designing systems. This underscores a design focus on usability under cognitive load, ensuring that interfaces function even when users are tired, distracted, or cognitively overburdened. (Source: *Lenses I Bring to Every Problem*)\n\nThese examples encode the overarching principle of designing with cognitive reality in mind, emphasizing clarity, reduced complexity, and user-centered operational resilience.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "430-420"
+          },
+          "output_chars": 131,
+          "output_tokens": 44
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "376-394"
+          },
+          "output_chars": 959,
+          "output_tokens": 240
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "414-420"
+          },
+          "output_chars": 1159,
+          "output_tokens": 214
+        }
+      ],
+      "n_tool_calls": 5,
+      "structure_tokens": 43245,
+      "content_tokens": 498,
+      "usage": {
+        "input_tokens": 133229,
+        "output_tokens": 286,
+        "total_tokens": 133515
+      },
+      "est_cost_usd": 0.3359,
+      "latency_seconds": 16.75,
+      "index_id": "IDX-O",
+      "qid": "RD4",
+      "category": "reflective-discovery",
+      "question": "A recurring character in this corpus is the exhausted human — someone making decisions while tired, stressed, or distracted. Where does this figure appear, and what design principle does it encode?",
+      "expected_evidence": "My Journey § Lenses I Bring to Every Problem (node 0047, L378–380: \"a tired human at 3pm on Friday\") and § Healthcare Through a Cognitive Lens (node 0051, L414–416: \"Nurses making decisions at 3am\"); reinforced by the 7±2 essay's cognitive-load design rules (L3286–3311).",
+      "ground_truth": "Acceptance criteria: find both My Journey instances; articulate the principle — systems must work under real cognitive load, not ideal conditions (\"If it doesn't work when you're distracted, it doesn't work\"). Strong answers connect it to chunking/progressive-disclosure rules; which connections are drawn may vary."
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Across the corpus, the dominant meaning of \"harness\" in the author's work refers to the **evaluation harness**, which provides a systematic framework of pre-defined tasks, questions, and tools to test AI applications. This is integrally linked to the author's emphasis on trustworthy, systematic evaluation setups for improving AI systems. Specifically, the author has used such harnesses in their Digital Twin to assess and improve performance through repeatable tests and checks.\n\nThe resource \"What Does 'Harness' Mean in AI?\" acknowledges this origin and offers a broader lens by describing five meanings: evaluation harness (most aligned with the author’s usage), agent harness, readiness harness, judge harness, and test/fuzzing harness. The author frames these as technical structures enabling usability and reliability across various AI contexts.\n\n### Sources Cited:\n- **\"What Does 'Harness' Mean in AI?\"** - Descriptions of five types of harnesses including the evaluation one in detail.\n- **Infographic on \"What does 'harness' mean in AI?\"** - Highlights evaluation harness alongside others, emphasizing its roots in software testing.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 756,
+          "output_tokens": 165
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 177502,
+          "output_tokens": 43245
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3422-3424"
+          },
+          "output_chars": 472,
+          "output_tokens": 132
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "3638-3663"
+          },
+          "output_chars": 3515,
+          "output_tokens": 833
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 43245,
+      "content_tokens": 965,
+      "usage": {
+        "input_tokens": 89545,
+        "output_tokens": 300,
+        "total_tokens": 89845
+      },
+      "est_cost_usd": 0.2269,
+      "latency_seconds": 12.76,
+      "index_id": "IDX-O",
+      "qid": "RD6",
+      "category": "reflective-discovery",
+      "question": "The harness resource decodes five meanings of \"harness\" in AI. Judged across the whole corpus, which meaning dominates the author's own usage, and does the resource itself acknowledge that origin?",
+      "expected_evidence": "What Does 'Harness' Mean in AI? (node ~0261, L3653–3668, esp. L3659 and § See one in practice); usage sites: Poolula evaluation harness (L560, L681+), Twin posts (L2387, L2426, \"evaluation harness\"), Work With Me Offer 2 (L279).",
+      "ground_truth": "Meaning #1 — the evaluation harness — dominates every corpus usage; the resource explicitly says she built the decoder while building the Twin's evaluation setup, and its \"See one in practice\" links point to the two Twin posts. Consistent usage; the other four meanings appear only inside the decoder."
+    }
+  ]
+}

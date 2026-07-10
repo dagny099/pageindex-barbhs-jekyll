@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="900" viewBox="0 0 1100 900" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
+<rect width="1100" height="900" fill="#F4F0E8"/>
+<text x="40" y="46" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="28" font-weight="600" fill="#1C3A55">The condition matrix: three maps × three navigators</text>
+<text x="40" y="72" font-size="14.5" fill="#2B2B2B">index-generation conditions (rows) × retrieval models (columns) — varied one axis at a time, not full-factorial</text>
+<text x="425.0" y="166" text-anchor="middle" font-size="17" font-weight="600" fill="#1C3A55">RET-OAI</text>
+<text x="425.0" y="186" text-anchor="middle" font-size="12.5" fill="#6B6B66">OpenAI (cloud)</text>
+<text x="689.0" y="166" text-anchor="middle" font-size="17" font-weight="600" fill="#1C3A55">RET-ANT</text>
+<text x="689.0" y="186" text-anchor="middle" font-size="12.5" fill="#6B6B66">Anthropic (cloud)</text>
+<text x="953.0" y="166" text-anchor="middle" font-size="17" font-weight="600" fill="#1C3A55">RET-OLL</text>
+<text x="953.0" y="186" text-anchor="middle" font-size="12.5" fill="#6B6B66">Ollama (local)</text>
+<text x="270" y="289.0" text-anchor="end" font-size="17" font-weight="600" fill="#1C3A55">IDX-D</text>
+<text x="270" y="309.0" text-anchor="end" font-size="12.5" fill="#6B6B66">Deterministic</text>
+<rect x="300" y="210" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
+<text x="443.0" y="294" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
+<text x="443.0" y="316" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-2024-11-20</text>
+<text x="443.0" y="332" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-mini</text>
+<text x="443.0" y="368" text-anchor="middle" font-size="11" fill="#6B6B66">21 result rows</text>
+<rect x="564" y="210" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
+<text x="689.0" y="294" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
+<text x="689.0" y="316" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">claude-sonnet-4-5</text>
+<text x="689.0" y="368" text-anchor="middle" font-size="11" fill="#6B6B66">1 result row</text>
+<rect x="828" y="210" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
+<text x="953.0" y="294" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
+<text x="953.0" y="316" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">llama3.1-8b-ctx32k</text>
+<text x="953.0" y="332" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">qwen2.5-7b-instruct-ctx32k</text>
+<text x="953.0" y="368" text-anchor="middle" font-size="11" fill="#6B6B66">4 result rows</text>
+<text x="270" y="473.0" text-anchor="end" font-size="17" font-weight="600" fill="#1C3A55">IDX-C</text>
+<text x="270" y="493.0" text-anchor="end" font-size="12.5" fill="#6B6B66">Capable cloud model +</text>
+<text x="270" y="509.0" text-anchor="end" font-size="12.5" fill="#6B6B66">summaries</text>
+<rect x="300" y="394" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
+<text x="443.0" y="478" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
+<text x="443.0" y="500" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-2024-11-20</text>
+<text x="443.0" y="552" text-anchor="middle" font-size="11" fill="#6B6B66">28 result rows</text>
+<rect x="564" y="394" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
+<text x="689.0" y="478" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
+<text x="689.0" y="500" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">claude-sonnet-4-5</text>
+<text x="689.0" y="552" text-anchor="middle" font-size="11" fill="#6B6B66">14 result rows</text>
+<rect x="828" y="394" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
+<text x="953.0" y="478" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
+<text x="953.0" y="500" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">qwen2.5-7b-instruct-ctx32k</text>
+<text x="953.0" y="552" text-anchor="middle" font-size="11" fill="#6B6B66">14 result rows</text>
+<text x="270" y="657.0" text-anchor="end" font-size="17" font-weight="600" fill="#1C3A55">IDX-O</text>
+<text x="270" y="677.0" text-anchor="end" font-size="12.5" fill="#6B6B66">Local Ollama model +</text>
+<text x="270" y="693.0" text-anchor="end" font-size="12.5" fill="#6B6B66">summaries</text>
+<rect x="300" y="578" width="250" height="170" rx="8" fill="#FBF8F0" stroke="#C04818" stroke-width="3"/>
+<text x="443.0" y="662" text-anchor="middle" font-size="15.5" font-weight="600" fill="#C04818">run ✓</text>
+<text x="443.0" y="684" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#2B2B2B">gpt-4o-2024-11-20</text>
+<text x="443.0" y="736" text-anchor="middle" font-size="11" fill="#6B6B66">14 result rows</text>
+<rect x="564" y="578" width="250" height="170" rx="8" fill="#EBE6DA" stroke="#6B6B66" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="689.0" y="668.0" text-anchor="middle" font-size="14" fill="#6B6B66">planned</text>
+<rect x="828" y="578" width="250" height="170" rx="8" fill="#EBE6DA" stroke="#6B6B66" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="953.0" y="668.0" text-anchor="middle" font-size="14" fill="#6B6B66">planned</text>
+<text x="722.0" y="227" text-anchor="middle" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="17" font-style="italic" font-weight="600" fill="#C04818">vary the navigator, hold the map</text>
+<line x1="340" y1="236" x2="1052" y2="236" stroke="#C04818" stroke-width="2.5"/>
+<polygon points="1064,236 1051,230 1051,242" fill="#C04818"/>
+<line x1="326" y1="254" x2="326" y2="722" stroke="#C04818" stroke-width="2.5"/>
+<polygon points="326,734 320,721 332,721" fill="#C04818"/>
+<text x="316" y="494.0" text-anchor="middle" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="17" font-style="italic" font-weight="600" fill="#C04818" transform="rotate(-90 316 494.0)">vary the map, hold the navigator</text>
+<rect x="300" y="776" width="20" height="20" rx="4" fill="#FBF8F0" stroke="#C04818" stroke-width="2.5"/>
+<text x="330" y="791" font-size="13" fill="#2B2B2B">run — recorded in runs/&lt;timestamp&gt;/run.json</text>
+<rect x="640" y="776" width="20" height="20" rx="4" fill="#EBE6DA" stroke="#6B6B66" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="680" y="791" font-size="13" fill="#2B2B2B">planned — no recorded run yet</text>
+<text x="300" y="818" font-size="12.5" fill="#6B6B66">7 of 9 cells run · snapshot of runs/ at generation time (evaluation runs in progress)</text>
+<text x="40" y="872" font-size="13" fill="#6B6B66">Fig. V3 · generated by scripts/gen_fig_v3_condition_matrix.py from config/index-conditions.yml + runs/*/run.json</text>
+</svg>

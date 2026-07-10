@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="880" viewBox="0 0 1600 880" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
+<defs>
+<marker id="arr-1C3A55" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1C3A55"/></marker>
+<marker id="arr-186090" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#186090"/></marker>
+<marker id="arr-C04818" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#C04818"/></marker>
+<marker id="arr-6B6B66" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6B6B66"/></marker>
+<marker id="arr-F0A818" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F0A818"/></marker>
+</defs>
+<rect width="1600" height="880" fill="#F4F0E8"/>
+<text x="48" y="54" font-size="30" fill="#1C3A55" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-weight="600">Navigate, then read — the retriever's tool loop</text>
+<text x="48" y="84" font-size="15" fill="#2B2B2B" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">PageIndex retrieval is agentic: the LLM must walk the tree, then pay to read. Weak models break the loop in two places.</text>
+<rect x="370.0" y="112" width="200" height="46" rx="6" fill="#1C3A55"/>
+<text x="470" y="141" font-size="17" fill="#F4F0E8" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="600" text-anchor="middle">Retriever LLM</text>
+<line x1="470" y1="158" x2="470" y2="782" stroke="#6B6B66" stroke-width="1.5" stroke-dasharray="3 5"/>
+<line x1="461" y1="782" x2="479" y2="782" stroke="#6B6B66" stroke-width="1.5"/>
+<rect x="800.0" y="112" width="200" height="46" rx="6" fill="#186090"/>
+<text x="900" y="141" font-size="17" fill="#F4F0E8" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="600" text-anchor="middle">PageIndex tools</text>
+<line x1="900" y1="158" x2="900" y2="782" stroke="#6B6B66" stroke-width="1.5" stroke-dasharray="3 5"/>
+<line x1="891" y1="782" x2="909" y2="782" stroke="#6B6B66" stroke-width="1.5"/>
+<rect x="1160.0" y="112" width="200" height="46" rx="6" fill="#F4F0E8" stroke="#1C3A55" stroke-width="2"/>
+<text x="1260" y="141" font-size="17" fill="#1C3A55" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="600" text-anchor="middle">Corpus</text>
+<line x1="1260" y1="158" x2="1260" y2="782" stroke="#6B6B66" stroke-width="1.5" stroke-dasharray="3 5"/>
+<line x1="1251" y1="782" x2="1269" y2="782" stroke="#6B6B66" stroke-width="1.5"/>
+<rect x="894" y="202" width="12" height="52" fill="#186090" opacity="0.25"/>
+<rect x="894" y="302" width="12" height="52" fill="#186090" opacity="0.25"/>
+<rect x="894" y="518" width="12" height="124" fill="#186090" opacity="0.25"/>
+<rect x="1254" y="548" width="12" height="60" fill="#1C3A55" opacity="0.25"/>
+<line x1="470" y1="212" x2="900" y2="212" stroke="#1C3A55" stroke-width="2" marker-end="url(#arr-1C3A55)"/>
+<text x="685.0" y="203" font-size="15" fill="#1C3A55" font-family="'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace" text-anchor="middle">get_document()</text>
+<line x1="900" y1="248" x2="470" y2="248" stroke="#6B6B66" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arr-6B6B66)"/>
+<text x="685.0" y="239" font-size="14" fill="#6B6B66" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" text-anchor="middle">line count · status: ok</text>
+<line x1="470" y1="312" x2="900" y2="312" stroke="#1C3A55" stroke-width="2" marker-end="url(#arr-1C3A55)"/>
+<text x="685.0" y="303" font-size="15" fill="#1C3A55" font-family="'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace" text-anchor="middle">get_document_structure()</text>
+<line x1="900" y1="348" x2="470" y2="348" stroke="#6B6B66" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arr-6B6B66)"/>
+<text x="685.0" y="339" font-size="14" fill="#6B6B66" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" text-anchor="middle">tree of section titles + line numbers</text>
+<text x="685.0" y="368" font-size="13.5" fill="#186090" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" text-anchor="middle" font-style="italic">titles only — no body text</text>
+<rect x="305.0" y="402" width="330" height="56" rx="6" fill="#F4F0E8" stroke="#186090" stroke-width="2"/>
+<text x="470" y="426" font-size="15" fill="#2B2B2B" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="600" text-anchor="middle">reasons over the tree</text>
+<text x="470" y="446" font-size="13.5" fill="#6B6B66" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" text-anchor="middle">picks sections + tight line ranges</text>
+<line x1="470" y1="528" x2="900" y2="528" stroke="#C04818" stroke-width="3" marker-end="url(#arr-C04818)"/>
+<text x="685.0" y="519" font-size="15" fill="#C04818" font-family="'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace" font-weight="600" text-anchor="middle">get_page_content(pages=&quot;2403-2476&quot;)</text>
+<line x1="900" y1="564" x2="1260" y2="564" stroke="#186090" stroke-width="2" marker-end="url(#arr-186090)"/>
+<text x="1080.0" y="555" font-size="14" fill="#186090" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" text-anchor="middle">read lines 2403–2476</text>
+<line x1="1260" y1="600" x2="900" y2="600" stroke="#6B6B66" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arr-6B6B66)"/>
+<text x="1080.0" y="591" font-size="14" fill="#6B6B66" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" text-anchor="middle">raw text</text>
+<line x1="900" y1="636" x2="470" y2="636" stroke="#C04818" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arr-C04818)"/>
+<text x="685.0" y="627" font-size="14" fill="#C04818" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="600" text-anchor="middle">body text of the chosen sections</text>
+<text x="1310" y="560" font-size="14.5" fill="#C04818" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-style="italic">the step that separates</text>
+<text x="1310" y="580" font-size="14.5" fill="#C04818" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-style="italic">real retrieval</text>
+<text x="1310" y="600" font-size="14.5" fill="#C04818" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-style="italic">from theater</text>
+<rect x="305.0" y="684" width="330" height="56" rx="6" fill="#1C3A55"/>
+<text x="470" y="708" font-size="15" fill="#F4F0E8" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="600" text-anchor="middle">answers the question</text>
+<text x="470" y="728" font-size="13.5" fill="#F4F0E8" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" text-anchor="middle">grounded in fetched text · cites pages</text>
+<rect x="48" y="388" width="344" height="84" rx="6" fill="#F4F0E8" stroke="#F0A818" stroke-width="2.5"/>
+<text x="62" y="414" font-size="19" fill="#F0A818" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="700">✗</text>
+<text x="86" y="414" font-size="15" fill="#2B2B2B" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="700">the title shortcut</text>
+<text x="62" y="436" font-size="13.5" fill="#2B2B2B" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">answers from the titles alone —</text>
+<text x="62" y="454" font-size="13.5" fill="#2B2B2B" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">never reads the body text</text>
+<line x1="392" y1="430.0" x2="301.0" y2="430.0" stroke="#F0A818" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr-F0A818)"/>
+<rect x="48" y="500" width="344" height="142" rx="6" fill="#F4F0E8" stroke="#F0A818" stroke-width="2.5"/>
+<text x="62" y="526" font-size="19" fill="#F0A818" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="700">✗</text>
+<text x="86" y="526" font-size="15" fill="#2B2B2B" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="700">the fabricated call</text>
+<text x="62" y="548" font-size="13.5" fill="#2B2B2B" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">narrates the call in prose — never makes it:</text>
+<text x="62" y="572" font-size="12.5" fill="#6B6B66" font-family="'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace">&quot;I will call get_page_content(</text>
+<text x="62" y="590" font-size="12.5" fill="#6B6B66" font-family="'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace"> pages=120-160)… Here's the output:&quot;</text>
+<text x="62" y="618" font-size="13" fill="#C04818" font-family="'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace" font-weight="600">content_tokens = 0</text>
+<line x1="392" y1="542" x2="462" y2="528" stroke="#F0A818" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr-F0A818)"/>
+<text x="48" y="846" font-size="13" fill="#6B6B66" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">Fig. V5 · generated by scripts/gen_fig_v5_retrieval_loop.py · loop and failure modes per reports/findings-retriever-prompt-revision.md (llama3.1:8b, original prompt)</text>
+</svg>

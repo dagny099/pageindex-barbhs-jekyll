@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="700" viewBox="0 0 1500 700" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
+<rect width="1500" height="700" fill="#F4F0E8"/>
+<text x="40" y="44" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="30" font-weight="600" fill="#1C3A55">The Question Set — 14 questions, five jobs</text>
+<text x="40" y="70" font-size="15" fill="#2B2B2B">Frozen evaluation set (evaluations/questions.csv) · 3 easy · 9 medium · 2 hard · 2 pre-validated</text>
+<text x="990" y="43" font-size="13" fill="#6B6B66">difficulty</text>
+<rect x="1060" y="30" width="62" height="18" rx="9" fill="#F4F0E8" stroke="#1C3A55" stroke-width="1.2"/>
+<text x="1091" y="43" font-size="11" fill="#1C3A55" text-anchor="middle">easy</text>
+<rect x="1134" y="30" width="62" height="18" rx="9" fill="#186090" stroke="#186090" stroke-width="1.2"/>
+<text x="1165" y="43" font-size="11" fill="#F4F0E8" text-anchor="middle">medium</text>
+<rect x="1208" y="30" width="62" height="18" rx="9" fill="#C04818" stroke="#C04818" stroke-width="1.2"/>
+<text x="1239" y="43" font-size="11" fill="#F4F0E8" text-anchor="middle">hard</text>
+<path d="M 1060 58 l 18 0 l 0 18 Z" fill="#F0A818"/>
+<text x="1086" y="72" font-size="13" fill="#2B2B2B">amber corner = validated in a prior run</text>
+<text x="40.0" y="132" font-size="15" font-weight="600" fill="#1C3A55">direct-location</text>
+<text x="304.8" y="132" font-size="13" fill="#6B6B66" text-anchor="end">×4</text>
+<line x1="40.0" y1="140" x2="304.8" y2="140" stroke="#1C3A55" stroke-width="1"/>
+<rect x="40.0" y="152" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<path d="M 280.8 153 h 17 a 6 6 0 0 1 6 6 v 17 Z" fill="#F0A818"/>
+<text x="52.0" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">DL3</text>
+<rect x="104.0" y="163" width="62" height="18" rx="9" fill="#F4F0E8" stroke="#1C3A55" stroke-width="1.2"/>
+<text x="135.0" y="176" font-size="11" fill="#1C3A55" text-anchor="middle">easy</text>
+<text x="52.0" y="201" font-size="12" fill="#2B2B2B">Which project is a self-hosted ML</text>
+<text x="52.0" y="217" font-size="12" fill="#2B2B2B">pipeline for workout/fitness data,</text>
+<text x="52.0" y="233" font-size="12" fill="#2B2B2B">and what stack does it describe?</text>
+<rect x="40.0" y="264" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="52.0" y="288" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">DL4</text>
+<rect x="104.0" y="275" width="62" height="18" rx="9" fill="#F4F0E8" stroke="#1C3A55" stroke-width="1.2"/>
+<text x="135.0" y="288" font-size="11" fill="#1C3A55" text-anchor="middle">easy</text>
+<text x="52.0" y="313" font-size="12" fill="#2B2B2B">According to the Poolula platform</text>
+<text x="52.0" y="329" font-size="12" fill="#2B2B2B">page, what five dimensions does its</text>
+<text x="52.0" y="345" font-size="12" fill="#2B2B2B">evaluation harness score, and what …</text>
+<rect x="40.0" y="376" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="52.0" y="400" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">DL5</text>
+<rect x="104.0" y="387" width="62" height="18" rx="9" fill="#186090" stroke="#186090" stroke-width="1.2"/>
+<text x="135.0" y="400" font-size="11" fill="#F4F0E8" text-anchor="middle">medium</text>
+<text x="52.0" y="425" font-size="12" fill="#2B2B2B">What is the &quot;era-based smart</text>
+<text x="52.0" y="441" font-size="12" fill="#2B2B2B">defaults&quot; fallback in the fitness</text>
+<text x="52.0" y="457" font-size="12" fill="#2B2B2B">dashboard's workout classification, …</text>
+<rect x="40.0" y="488" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="52.0" y="512" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">DL9</text>
+<rect x="104.0" y="499" width="62" height="18" rx="9" fill="#F4F0E8" stroke="#1C3A55" stroke-width="1.2"/>
+<text x="135.0" y="512" font-size="11" fill="#1C3A55" text-anchor="middle">easy</text>
+<text x="52.0" y="537" font-size="12" fill="#2B2B2B">What instruction-count ceiling does</text>
+<text x="52.0" y="553" font-size="12" fill="#2B2B2B">the instruction-file scoring post</text>
+<text x="52.0" y="569" font-size="12" fill="#2B2B2B">cite from Anthropic's guidance, and …</text>
+<text x="172.4" y="620" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="18" font-style="italic" fill="#C04818" text-anchor="middle">find it</text>
+<text x="328.8" y="132" font-size="15" font-weight="600" fill="#1C3A55">cross-section-synthesis</text>
+<text x="593.6" y="132" font-size="13" fill="#6B6B66" text-anchor="end">×3</text>
+<line x1="328.8" y1="140" x2="593.6" y2="140" stroke="#1C3A55" stroke-width="1"/>
+<rect x="328.8" y="152" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<path d="M 569.6 153 h 17 a 6 6 0 0 1 6 6 v 17 Z" fill="#F0A818"/>
+<text x="340.8" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">CS2</text>
+<rect x="392.8" y="163" width="62" height="18" rx="9" fill="#186090" stroke="#186090" stroke-width="1.2"/>
+<text x="423.8" y="176" font-size="11" fill="#F4F0E8" text-anchor="middle">medium</text>
+<text x="340.8" y="201" font-size="12" fill="#2B2B2B">Across the articles, what recurring</text>
+<text x="340.8" y="217" font-size="12" fill="#2B2B2B">critique is made about how</text>
+<text x="340.8" y="233" font-size="12" fill="#2B2B2B">organizations adopt AI …</text>
+<rect x="328.8" y="264" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="340.8" y="288" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">CS6</text>
+<rect x="392.8" y="275" width="62" height="18" rx="9" fill="#C04818" stroke="#C04818" stroke-width="1.2"/>
+<text x="423.8" y="288" font-size="11" fill="#F4F0E8" text-anchor="middle">hard</text>
+<text x="340.8" y="313" font-size="12" fill="#2B2B2B">The idea that &quot;retrieval works</text>
+<text x="340.8" y="329" font-size="12" fill="#2B2B2B">through context and association, not</text>
+<text x="340.8" y="345" font-size="12" fill="#2B2B2B">brute-force search&quot; recurs across …</text>
+<rect x="328.8" y="376" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="340.8" y="400" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">CS8</text>
+<rect x="392.8" y="387" width="62" height="18" rx="9" fill="#186090" stroke="#186090" stroke-width="1.2"/>
+<text x="423.8" y="400" font-size="11" fill="#F4F0E8" text-anchor="middle">medium</text>
+<text x="340.8" y="425" font-size="12" fill="#2B2B2B">Which of the six portfolio projects</text>
+<text x="340.8" y="441" font-size="12" fill="#2B2B2B">use Streamlit, and what trade-off do</text>
+<text x="340.8" y="457" font-size="12" fill="#2B2B2B">the project pages repeatedly …</text>
+<text x="461.2" y="620" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="18" font-style="italic" fill="#C04818" text-anchor="middle">connect it</text>
+<text x="617.6" y="132" font-size="15" font-weight="600" fill="#1C3A55">consistency</text>
+<text x="882.4" y="132" font-size="13" fill="#6B6B66" text-anchor="end">×2</text>
+<line x1="617.6" y1="140" x2="882.4" y2="140" stroke="#1C3A55" stroke-width="1"/>
+<rect x="617.6" y="152" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="629.6" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">CN4</text>
+<rect x="681.6" y="163" width="62" height="18" rx="9" fill="#186090" stroke="#186090" stroke-width="1.2"/>
+<text x="712.6" y="176" font-size="11" fill="#F4F0E8" text-anchor="middle">medium</text>
+<text x="629.6" y="201" font-size="12" fill="#2B2B2B">How many years of workout/running</text>
+<text x="629.6" y="217" font-size="12" fill="#2B2B2B">data does the corpus claim? Compare</text>
+<text x="629.6" y="233" font-size="12" fill="#2B2B2B">Start Here, the fitness project …</text>
+<rect x="617.6" y="264" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="629.6" y="288" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">CN6</text>
+<rect x="681.6" y="275" width="62" height="18" rx="9" fill="#186090" stroke="#186090" stroke-width="1.2"/>
+<text x="712.6" y="288" font-size="11" fill="#F4F0E8" text-anchor="middle">medium</text>
+<text x="629.6" y="313" font-size="12" fill="#2B2B2B">What publication date does &quot;Why</text>
+<text x="629.6" y="329" font-size="12" fill="#2B2B2B">Metadata Matters&quot; carry in its</text>
+<text x="629.6" y="345" font-size="12" fill="#2B2B2B">metadata header, and what date does …</text>
+<text x="750.0" y="620" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="18" font-style="italic" fill="#C04818" text-anchor="middle">does it agree?</text>
+<text x="906.4" y="132" font-size="15" font-weight="600" fill="#1C3A55">evidence-gap</text>
+<text x="1171.2" y="132" font-size="13" fill="#6B6B66" text-anchor="end">×3</text>
+<line x1="906.4" y1="140" x2="1171.2" y2="140" stroke="#1C3A55" stroke-width="1"/>
+<rect x="906.4" y="152" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="918.4" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">EG4</text>
+<rect x="970.4" y="163" width="62" height="18" rx="9" fill="#C04818" stroke="#C04818" stroke-width="1.2"/>
+<text x="1001.4" y="176" font-size="11" fill="#F4F0E8" text-anchor="middle">hard</text>
+<text x="918.4" y="201" font-size="12" fill="#2B2B2B">Work With Me names &quot;Resume Explorer&quot;</text>
+<text x="918.4" y="217" font-size="12" fill="#2B2B2B">among &quot;live, deployed systems&quot; to</text>
+<text x="918.4" y="233" font-size="12" fill="#2B2B2B">browse. Is there a Resume Explorer …</text>
+<rect x="906.4" y="264" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="918.4" y="288" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">EG5</text>
+<rect x="970.4" y="275" width="62" height="18" rx="9" fill="#186090" stroke="#186090" stroke-width="1.2"/>
+<text x="1001.4" y="288" font-size="11" fill="#F4F0E8" text-anchor="middle">medium</text>
+<text x="918.4" y="313" font-size="12" fill="#2B2B2B">Work With Me cites two professional</text>
+<text x="918.4" y="329" font-size="12" fill="#2B2B2B">certifications. What are they, and</text>
+<text x="918.4" y="345" font-size="12" fill="#2B2B2B">does any other document in the …</text>
+<rect x="906.4" y="376" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="918.4" y="400" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">EG6</text>
+<rect x="970.4" y="387" width="62" height="18" rx="9" fill="#186090" stroke="#186090" stroke-width="1.2"/>
+<text x="1001.4" y="400" font-size="11" fill="#F4F0E8" text-anchor="middle">medium</text>
+<text x="918.4" y="425" font-size="12" fill="#2B2B2B">The 7±2 essay presents quantitative</text>
+<text x="918.4" y="441" font-size="12" fill="#2B2B2B">evidence from three domains. Which of</text>
+<text x="918.4" y="457" font-size="12" fill="#2B2B2B">its statistics are actual numbers, …</text>
+<text x="1038.8" y="620" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="18" font-style="italic" fill="#C04818" text-anchor="middle">what's missing?</text>
+<text x="1195.2" y="132" font-size="15" font-weight="600" fill="#1C3A55">reflective-discovery</text>
+<text x="1460.0" y="132" font-size="13" fill="#6B6B66" text-anchor="end">×2</text>
+<line x1="1195.2" y1="140" x2="1460.0" y2="140" stroke="#1C3A55" stroke-width="1"/>
+<rect x="1195.2" y="152" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="1207.2" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">RD4</text>
+<rect x="1259.2" y="163" width="62" height="18" rx="9" fill="#186090" stroke="#186090" stroke-width="1.2"/>
+<text x="1290.2" y="176" font-size="11" fill="#F4F0E8" text-anchor="middle">medium</text>
+<text x="1207.2" y="201" font-size="12" fill="#2B2B2B">A recurring character in this corpus</text>
+<text x="1207.2" y="217" font-size="12" fill="#2B2B2B">is the exhausted human — someone</text>
+<text x="1207.2" y="233" font-size="12" fill="#2B2B2B">making decisions while tired, …</text>
+<rect x="1195.2" y="264" width="264.8" height="98" rx="6" fill="#FBF7EE" stroke="#1C3A55" stroke-width="1"/>
+<text x="1207.2" y="288" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">RD6</text>
+<rect x="1259.2" y="275" width="62" height="18" rx="9" fill="#186090" stroke="#186090" stroke-width="1.2"/>
+<text x="1290.2" y="288" font-size="11" fill="#F4F0E8" text-anchor="middle">medium</text>
+<text x="1207.2" y="313" font-size="12" fill="#2B2B2B">The harness resource decodes five</text>
+<text x="1207.2" y="329" font-size="12" fill="#2B2B2B">meanings of &quot;harness&quot; in AI. Judged</text>
+<text x="1207.2" y="345" font-size="12" fill="#2B2B2B">across the whole corpus, which …</text>
+<text x="1327.6" y="620" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="18" font-style="italic" fill="#C04818" text-anchor="middle">what does it mean?</text>
+<text x="40" y="672" font-size="13" fill="#6B6B66">Fig. V6 · generated by scripts/gen_fig_v6_question_set.py from evaluations/questions.csv · one card per question · chip = difficulty</text>
+</svg>

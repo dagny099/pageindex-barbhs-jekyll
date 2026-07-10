@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
+<rect width="1400" height="800" fill="#F4F0E8"/>
+<text x="40" y="46" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="28" font-weight="600" fill="#1C3A55">Two repos, one contract: who owns the corpus</text>
+<text x="40" y="72" font-size="14.5" fill="#2B2B2B">the website repo builds and validates the corpus; this repo consumes a frozen, SHA-pinned snapshot of it</text>
+<rect x="60" y="140" width="560" height="480" rx="12" fill="none" stroke="#1C3A55" stroke-width="2"/>
+<text x="100" y="182" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="18" font-weight="600" fill="#1C3A55">dagny099.github.io</text>
+<text x="100" y="206" font-size="13" letter-spacing="1" font-weight="600" fill="#186090">AUTHORITATIVE PRODUCER</text>
+<text x="100" y="226" font-size="12.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#6B6B66">experiments/pageindex/</text>
+<rect x="100" y="250" width="480" height="60" rx="8" fill="#FBF8F0" stroke="#186090" stroke-width="1.8"/>
+<text x="118" y="276" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">build + validate scripts</text>
+<text x="118" y="296" font-size="12.5" fill="#6B6B66">selection config · corpus stitching</text>
+<rect x="100" y="330" width="480" height="60" rx="8" fill="#FBF8F0" stroke="#186090" stroke-width="1.8"/>
+<text x="118" y="356" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">normalization tests</text>
+<text x="118" y="376" font-size="12.5" fill="#6B6B66">heading fidelity, structure checks</text>
+<rect x="100" y="410" width="480" height="60" rx="8" fill="#FBF8F0" stroke="#186090" stroke-width="1.8"/>
+<text x="118" y="436" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">QC + normalization reports</text>
+<text x="118" y="456" font-size="12.5" fill="#6B6B66">the corpus paper trail lives here</text>
+<text x="100" y="560" font-size="12.5" fill="#6B6B66" font-style="italic">the original website source stays authoritative</text>
+<text x="100" y="578" font-size="12.5" fill="#6B6B66" font-style="italic">over the corpus — always</text>
+<rect x="780" y="140" width="560" height="480" rx="12" fill="none" stroke="#1C3A55" stroke-width="2"/>
+<text x="820" y="182" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="18" font-weight="600" fill="#1C3A55">pageindex-website-experiment</text>
+<text x="820" y="206" font-size="13" letter-spacing="1" font-weight="600" fill="#186090">CONSUMER (THIS REPO)</text>
+<text x="820" y="226" font-size="12.5" fill="#6B6B66">experiment harness · never edits the corpus</text>
+<rect x="820" y="250" width="480" height="60" rx="8" fill="#FBF8F0" stroke="#186090" stroke-width="1.8"/>
+<text x="838" y="276" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">corpus/site-book-v1/</text>
+<text x="838" y="296" font-size="12.5" fill="#6B6B66">frozen snapshot — consumed, not produced</text>
+<rect x="840" y="318" width="440" height="36" rx="8" fill="#C04818"/>
+<text x="1060.0" y="341" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="600" fill="#F4F0E8">provenance.json — pins website_commit + SHA256</text>
+<rect x="820" y="380" width="480" height="60" rx="8" fill="#FBF8F0" stroke="#186090" stroke-width="1.8"/>
+<text x="838" y="406" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">indexes/IDX-D · IDX-C · IDX-O</text>
+<text x="838" y="426" font-size="12.5" fill="#6B6B66">each carries its own provenance vs the corpus</text>
+<rect x="820" y="460" width="480" height="60" rx="8" fill="#FBF8F0" stroke="#186090" stroke-width="1.8"/>
+<text x="838" y="486" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#1C3A55">evaluations/ · runs/ · scripts/</text>
+<text x="838" y="506" font-size="12.5" fill="#6B6B66">14-question set · retrieval harness · run log</text>
+<text x="700.0" y="232" text-anchor="middle" font-size="14" font-weight="600" letter-spacing="1" fill="#1C3A55">RE-SYNC</text>
+<text x="700.0" y="256" text-anchor="middle" font-size="12.5" fill="#2B2B2B">1 · copy verbatim</text>
+<text x="700.0" y="274" text-anchor="middle" font-size="12.5" fill="#2B2B2B">2 · recompute SHA256</text>
+<text x="700.0" y="292" text-anchor="middle" font-size="12.5" fill="#2B2B2B">3 · update provenance.json</text>
+<line x1="620" y1="320" x2="768" y2="320" stroke="#186090" stroke-width="3"/>
+<polygon points="780,320 766,313 766,327" fill="#186090"/>
+<line x1="780" y1="520" x2="632" y2="520" stroke="#6B6B66" stroke-width="2" stroke-dasharray="7 6"/>
+<polygon points="620,520 634,513 634,527" fill="#6B6B66"/>
+<text x="700.0" y="544" text-anchor="middle" font-size="12.5" font-style="italic" fill="#6B6B66">corpus fixes go back</text>
+<text x="700.0" y="561" text-anchor="middle" font-size="12.5" font-style="italic" fill="#6B6B66">to the pipeline —</text>
+<text x="700.0" y="578" text-anchor="middle" font-size="12.5" font-style="italic" fill="#6B6B66">never edited here</text>
+<rect x="780" y="654" width="560" height="60" rx="8" fill="#F0A818" stroke="#1C3A55" stroke-width="1.5"/>
+<text x="1060.0" y="680" text-anchor="middle" font-size="14.5" font-weight="600" fill="#2B2B2B">corpus change ⇒ existing indexes stale</text>
+<text x="1060.0" y="700" text-anchor="middle" font-size="12.5" fill="#2B2B2B">regenerate affected IDX-* and mark stale ones (STALE.md)</text>
+<text x="40" y="772" font-size="13" fill="#6B6B66">Fig. V2 · generated by scripts/gen_fig_v2_provenance.py · re-sync procedure in CLAUDE.md · snapshot pins in corpus/site-book-v1/provenance.json</text>
+</svg>

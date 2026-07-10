@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
+<rect width="1600" height="600" fill="#F4F0E8"/>
+<text x="40" y="46" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="28" font-weight="600" fill="#1C3A55">One-way pipeline: the corpus is consumed here, not produced</text>
+<text x="40" y="72" font-size="14.5" fill="#2B2B2B">website source → frozen snapshot → PageIndex tree generation → raw results → curated index variants</text>
+<rect x="40" y="120" width="290" height="360" rx="12" fill="none" stroke="#1C3A55" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text x="60" y="150" font-size="13" font-weight="600" letter-spacing="1" fill="#1C3A55">WEBSITE REPO</text>
+<text x="60" y="169" font-size="12" fill="#6B6B66">authoritative producer</text>
+<text x="60" y="188" font-size="12" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#6B6B66">dagny099.github.io</text>
+<rect x="470" y="120" width="1090" height="360" rx="12" fill="none" stroke="#1C3A55" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text x="490" y="150" font-size="13" font-weight="600" letter-spacing="1" fill="#1C3A55">THIS REPO</text>
+<text x="490" y="169" font-size="12" fill="#6B6B66">consumer</text>
+<text x="490" y="188" font-size="12" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#6B6B66">pageindex-website-experiment</text>
+<rect x="65" y="250" width="240" height="110" rx="10" fill="#FBF8F0" stroke="#1C3A55" stroke-width="2"/>
+<text x="185.0" y="284" text-anchor="middle" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-size="15.5" font-weight="600" fill="#1C3A55">barbhs.com website source</text>
+<text x="185.0" y="308" text-anchor="middle" font-size="12.5" fill="#6B6B66">26 documents</text>
+<text x="185.0" y="326" text-anchor="middle" font-size="12.5" fill="#6B6B66">build scripts · QC · normalization</text>
+<rect x="500" y="250" width="250" height="110" rx="10" fill="#C04818" stroke="#C04818" stroke-width="2"/>
+<text x="625.0" y="284" text-anchor="middle" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-size="15.5" font-weight="600" fill="#F4F0E8">corpus/site-book-v1.md</text>
+<text x="625.0" y="308" text-anchor="middle" font-size="12.5" fill="#F6DFD2">frozen snapshot — SHA-pinned</text>
+<text x="625.0" y="326" text-anchor="middle" font-size="12.5" fill="#F6DFD2">the contract between repos</text>
+<rect x="800" y="250" width="230" height="110" rx="10" fill="#FBF8F0" stroke="#186090" stroke-width="2"/>
+<text x="915.0" y="284" text-anchor="middle" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-size="15.5" font-weight="600" fill="#186090">PageIndex tree generation</text>
+<text x="915.0" y="308" text-anchor="middle" font-size="12.5" fill="#6B6B66">vendor/PageIndex (submodule)</text>
+<text x="915.0" y="326" text-anchor="middle" font-size="12.5" fill="#6B6B66">IDX-D needs no LLM</text>
+<rect x="1080" y="250" width="190" height="110" rx="10" fill="#FBF8F0" stroke="#6B6B66" stroke-width="2"/>
+<text x="1175.0" y="284" text-anchor="middle" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-size="15.5" font-weight="600" fill="#2B2B2B">results/</text>
+<text x="1175.0" y="308" text-anchor="middle" font-size="12.5" fill="#6B6B66">raw run output</text>
+<text x="1175.0" y="326" text-anchor="middle" font-size="12.5" fill="#6B6B66">(gitignored scratch)</text>
+<rect x="1320" y="250" width="210" height="110" rx="10" fill="#FBF8F0" stroke="#1C3A55" stroke-width="2"/>
+<text x="1425.0" y="284" text-anchor="middle" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" font-size="15.5" font-weight="600" fill="#1C3A55">indexes/IDX-*</text>
+<text x="1425.0" y="308" text-anchor="middle" font-size="12.5" fill="#6B6B66">IDX-D · IDX-C · IDX-O</text>
+<text x="1425.0" y="326" text-anchor="middle" font-size="12.5" fill="#6B6B66">curated + provenance.json</text>
+<line x1="305" y1="305.0" x2="489" y2="305.0" stroke="#186090" stroke-width="2.5"/>
+<polygon points="500,305.0 488,299.0 488,311.0" fill="#186090"/>
+<line x1="750" y1="305.0" x2="789" y2="305.0" stroke="#186090" stroke-width="2.5"/>
+<polygon points="800,305.0 788,299.0 788,311.0" fill="#186090"/>
+<line x1="1030" y1="305.0" x2="1069" y2="305.0" stroke="#186090" stroke-width="2.5"/>
+<polygon points="1080,305.0 1068,299.0 1068,311.0" fill="#186090"/>
+<line x1="1270" y1="305.0" x2="1309" y2="305.0" stroke="#186090" stroke-width="2.5"/>
+<polygon points="1320,305.0 1308,299.0 1308,311.0" fill="#186090"/>
+<text x="402" y="339.0" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="600" fill="#C04818">provenance.json</text>
+<text x="402" y="357.0" text-anchor="middle" font-size="12" fill="#C04818">pins commit + SHA256</text>
+<text x="402" y="289.0" text-anchor="middle" font-size="12" fill="#6B6B66">re-sync (verbatim copy)</text>
+<text x="40" y="570" font-size="13" fill="#6B6B66">Fig. V1 · generated by scripts/gen_fig_v1_pipeline.py · to change the corpus, fix the pipeline in the website repo and re-sync — never edit corpus/ here (see CLAUDE.md)</text>
+</svg>

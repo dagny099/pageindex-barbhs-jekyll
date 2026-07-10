@@ -62,13 +62,31 @@ never white). Palette: burnt orange (#C04818) as the single warm lead, golden am
 (#F0A818) as one small spark accent, cobalt blue (#186090) as the cool counterweight,
 charcoal (#2B2B2B) details. Generous negative space; the composition breathes. Subtle
 paper grain or stipple texture. Sophisticated, warm, a little witty — drawn by a
-cognitive scientist who likes people. No photorealism, no 3D render, no corporate
-flat-design clip art, no childish cartoon, no neon, no pure white background.
-Contains NO text, NO words, NO letters, NO labels — all labeling happens in the caption.
+cognitive scientist who likes people.
+
+RECURRING CHARACTER: a small honeybee naturalist — navy ink linework with amber-and-
+charcoal striping, round spectacles, drawn as an earnest working field scientist. She
+is capable and busy, never a mascot sticker: no giant eyes, no smiley face, no
+anthropomorphic gloves. Think scientific-illustration bee granted one professional prop.
+
+TEXT: the image includes ONLY the exact quoted strings specified in the scene, and no
+other words, letters, or scribbles anywhere. Hand-lettered serif for title strings;
+small-caps sans for labels; typewriter monospace for code/transcript strings. Every
+string must be spelled exactly as given.
+
+No photorealism, no 3D render, no corporate flat-design clip art, no childish cartoon,
+no neon, no pure white background.
 ```
 
-(The no-text instruction matters: image models garble text, and your captions will do
-that job better anyway. For diagrams that *need* labels, use Tier 1/2 — code, not pixels.)
+**On-image text rules** (the policy behind that TEXT paragraph):
+- Specify every string **in quotes** in the scene prompt; end with "no other words."
+  Models render short text faithfully but improvise when underspecified.
+- Budget ≈3 strings per image, each ≤8 words (transcript strings may run longer —
+  they're the ones worth a retry).
+- Three type voices, semantically assigned: **serif = the idea** (titles), **sans
+  small-caps = labels**, **monospace = what the machine actually said**. That last one
+  is this project's signature move — real transcript lines rendered as evidence.
+- Proofread every generation letter-by-letter; text is the highest-retry element.
 
 ### 1.5 Diagram (Mermaid/SVG) theme
 
@@ -114,7 +132,7 @@ Three tiers by production method. Priority column says where the leverage is.
 | V9 | Results heatmap (question × condition) | 2 data | later (needs scored runs) |
 | V10 | Hero: the map vs. the navigator | 3 image-gen | ★★★ |
 | V11 | The truncated map (Ollama gotcha) | 3 image-gen | ★★★ |
-| V12 | The librarian who never opens the book | 3 image-gen | ★★★ |
+| V12 | The waggle dance (fabricated fetch) | 3 image-gen | ★★★ |
 | V13 | Vectorless vs. vector retrieval | 3 image-gen | ★★ |
 | V14 | The evidence auditor | 3 image-gen | ★ (optional) |
 
@@ -221,6 +239,9 @@ Three tiers by production method. Priority column says where the leverage is.
   > burnt orange — the figure's point is that identical titles pepper the map, so naive
   > title-matching is ambiguous by construction. Legend: "orange = this title appears
   > 2+ times". Height-scale nodes by line span. Export at 1600px wide.
+- **Option:** render nodes as honeycomb hexagons to rhyme with the Tier-3 world. Try
+  rectangles first — if the hexagons cost legibility at ~270 nodes, the rhyme isn't
+  worth it.
 
 ### V8 · IDX-D vs IDX-C node anatomy
 - **Source:** same node from `indexes/IDX-D/index.json` and `indexes/IDX-C/index.json`.
@@ -251,95 +272,121 @@ Three tiers by production method. Priority column says where the leverage is.
 ## 5. Tier 3 — Image-generation prompts (the non-mathy ones)
 
 Assembly: **paste the style preamble (§1.4), a blank line, then the scene prompt.**
-Aspect ratios given per image. All are text-free by design — pair each with the caption
-provided.
+Aspect ratios given per image.
+
+**The world (shared across all five):** one recurring character — the honeybee
+naturalist — in one visual universe. The corpus is a hand-drawn field map; the index is
+honeycomb; content/answers are flowers; retrieval is her flight path; the waggle dance
+is how findings get reported. The metaphor is earned in-corpus: the Beehive Analytics
+Platform is one of the six portfolio projects and "Bees, Graphs & Governance" is one of
+the indexed essays. Flowers are supporting cast (content), never a second character.
 
 ### V10 · Hero — the map and the navigator ★
 - **Placement:** README top / OG image / write-up hero. 1200×630 (OG) and 1600×900.
 - **Concept:** the experiment's thesis — *building a map of knowledge* and *reasoning
   over that map* are different jobs.
 - **Scene prompt:**
-  > A wide desk scene viewed slightly from above. On the left, a large hand-drawn
-  > hierarchical map spread across the desk — a tree of nested territories drawn like a
-  > vintage cartographic survey in navy ink on cream, with one small region glowing warm
-  > burnt orange. On the right, a small owl wearing round spectacles peers at the map
-  > through a magnifying lens, one wing tracing a dotted cobalt route that descends the
-  > tree's branches toward the glowing region. The route makes two thoughtful zigzag
-  > detours before arriving. A warm amber desk lamp lights the scene from the corner.
-  > Composition: map dominates left two-thirds; navigator and lens on the right third;
-  > generous cream margins.
+  > A wide naturalist's desk viewed slightly from above. Spread across it, a large
+  > hand-drawn hierarchical map — a tree of nested territories drawn like a vintage
+  > cartographic survey in navy ink on cream, its margins decorated with small
+  > honeycomb-hexagon legend cells, one small region glowing warm burnt orange. Above
+  > the map hovers the honeybee naturalist, trailing a dotted cobalt flight line that
+  > descends the tree's branches with two thoughtful zigzag detours before arriving at
+  > the glowing region. A warm amber desk lamp lights the scene from the corner.
+  > Composition: map dominates the left two-thirds; the bee and her flight line enter
+  > from the right; generous cream margins. On-image text, exactly: title across the
+  > top margin in hand-lettered serif: "THE MAP AND THE NAVIGATOR"; small-caps sans
+  > label pinned to the map legend: "index"; small-caps sans label along the flight
+  > line: "retrieval". No other words.
 - **Caption:** *Two jobs, deliberately separated: building the map (indexing) and
   navigating it (retrieval).*
-- **Note:** if the owl reads too whimsical for the README, swap "a small owl wearing
-  round spectacles" for "a pair of human hands holding a brass magnifying lens" — same
-  composition otherwise.
 
-### V11 · The truncated map (the Ollama context gotcha) ★
+### V11 · The map that arrived (the Ollama context gotcha) ★
 - **Placement:** findings report §"Gotcha #0"; write-up. 1600×900.
 - **Concept:** the local model silently received half the index and navigated blind —
   no error, just a map that ends.
 - **Scene prompt:**
-  > A lone hiker with a walking stick stands mid-stride on a hand-drawn trail map that
-  > extends under their feet like a paper landscape, navy ink paths on cream. Ahead of
-  > them, the map is torn cleanly off — beyond the tear is only blank cream paper, no
-  > lines at all. The hiker, oblivious, consults a small map copy and points confidently
-  > into the blankness. Behind them, the intact half of the map is dense with lovely
-  > branching trails and small landmarks in cobalt, with one destination marked in burnt
-  > orange — located in the torn-off missing half, faintly visible like a ghost. A tiny
-  > amber warning flag planted exactly at the tear line is the only honest object in the
-  > scene. Flat editorial style, big negative space above the horizon.
+  > The honeybee naturalist flies confidently over a paper landscape — a meadow drawn
+  > as a hand-drawn map extending beneath her like terrain, navy trails and cobalt
+  > landmarks on cream. Midway across the scene the map is torn cleanly off; beyond the
+  > tear there is only blank cream paper, no lines at all. She consults a small copy of
+  > the map and points ahead into the blankness, oblivious. In the missing half, one
+  > flower rendered ghost-faint in burnt orange — the destination she cannot see. A
+  > small amber flag planted exactly at the tear line is the only honest object in the
+  > scene. Flat editorial style, big negative space above the horizon. On-image text,
+  > exactly: on the amber flag in small-caps sans: "CONTEXT ENDS HERE"; faint charcoal
+  > note floating in the blank region in typewriter monospace: "~5,000 tokens missing";
+  > title along the bottom margin in hand-lettered serif: "THE MAP THAT ARRIVED".
+  > No other words.
 - **Caption:** *Ollama's default context window truncated the ~9K-token index mid-tree —
   no error raised. The retriever navigated the half that arrived.*
 
-### V12 · The librarian who never opens the book ★
+### V12 · The waggle dance (retrieval theater) ★
 - **Placement:** findings report (the llama3.1 fabrication story); write-up. 1600×900.
-- **Concept:** the model answered from section titles and *narrated* a content fetch it
-  never performed — retrieval theater.
+- **Concept:** the model *narrated* a content fetch it never performed and reported
+  findings from a source it never visited. In bee terms: dancing directions to a flower
+  you never foraged. The on-image transcript strings are the model's real output.
 - **Scene prompt:**
-  > Interior of a small warm library, cream walls, navy-ink shelving. A theatrical cat
-  > librarian in a bow tie stands on a stool before a wall of books, gesturing grandly
-  > with one paw pressed to its chest, eyes closed in confident recitation, mouth open
-  > mid-proclamation. Every book on the shelf is firmly CLOSED; their spines are
-  > beautifully decorated in cobalt and navy. One book — the relevant one — has a burnt
-  > orange spine and sits within easy reach, with a fine layer of dust and a tiny cobweb
-  > connecting it to the shelf, clearly never touched. On the floor, a single amber
-  > reading lamp beside an empty, unused reading chair. Flat editorial illustration,
-  > gentle wit, no cruelty — the cat believes itself.
+  > Interior of a hive drawn as a warm study: a wall of hexagonal honeycomb cells in
+  > navy ink on cream, a few cells filled with amber honey. Center stage, the honeybee
+  > naturalist performs an extravagant waggle dance on the comb — wings flared,
+  > theatrical, eyes closed in confident recitation — while a semicircle of three
+  > smaller bees takes earnest notes in tiny field notebooks. Her pollen baskets are
+  > visibly, conspicuously EMPTY. Through the hive entrance behind her, far away and
+  > untouched, the flower she claims to describe glows burnt orange with an unbroken
+  > cobweb between its petals — never visited. Gentle wit, no cruelty; she believes
+  > herself. On-image text, exactly: a speech ribbon above her in typewriter monospace:
+  > "I will call get_page_content(pages=120-160)... Here's the output:"; a small
+  > charcoal ledger tag at the base of the comb in typewriter monospace:
+  > "content_tokens = 0"; title along the top margin in hand-lettered serif:
+  > "THE WAGGLE DANCE". No other words.
+- **Fallback:** if the long transcript string garbles after two retries, shorten the
+  speech ribbon to exactly: "Here's the output: { ... }" — keep the ledger tag; it
+  carries the punchline.
 - **Caption:** *llama3.1:8b made one real structure call, then narrated a content fetch
-  it never performed — answering from spines, not pages.*
+  it never performed — reporting on a flower it never visited. The ledger doesn't lie:
+  `content_tokens = 0`.*
 
 ### V13 · Vectorless vs. vector retrieval
 - **Placement:** write-up background section (explaining PageIndex to newcomers). 1600×800, two-panel.
 - **Concept:** navigating a table of contents vs. matching against shredded fragments.
+  The bee appears only in the left panel — the navigate world is hers; the right panel
+  is a machine with no navigator at all.
 - **Scene prompt:**
-  > A two-panel editorial diptych, same warm library-desk world in both panels, divided
-  > by a thin navy rule. LEFT PANEL: an intact book stands open to its table of contents,
-  > drawn as an elegant indented tree in navy ink; a dotted cobalt path descends the
-  > entries and dives into the page block at one spot marked burnt orange — deliberate,
-  > sequential, legible. RIGHT PANEL: the same book has been passed through a paper
-  > shredder that sits proudly on the desk; hundreds of small cream paper strips float
-  > in a loose cloud, and a claw-machine-style magnet hovers above, pulling toward it
-  > the handful of strips that happen to shimmer cobalt — nearby strips of nearly
-  > identical shade drift ignored. One strip caught by the magnet glows faintly orange.
-  > Neither panel is mocked; both are honest machines. Flat editorial style.
+  > A two-panel editorial diptych on one warm desk, divided by a thin navy rule. LEFT
+  > PANEL: an intact book stands open to its table of contents, drawn as an elegant
+  > indented tree in navy ink; the honeybee naturalist descends the entries along a
+  > dotted cobalt flight line and dives into the page block at one spot marked burnt
+  > orange — deliberate, sequential, legible. RIGHT PANEL: the same book has been passed
+  > through a paper shredder that sits proudly on the desk; hundreds of small cream
+  > paper strips float in a loose cloud, and a claw-machine-style magnet hovers above,
+  > pulling toward it the handful of strips that happen to shimmer cobalt — nearby
+  > strips of nearly identical shade drift ignored; one caught strip glows faintly
+  > orange. No bee anywhere in the right panel. Neither panel is mocked; both are honest
+  > machines. On-image text, exactly: left panel header in hand-lettered serif:
+  > "NAVIGATE"; right panel header in hand-lettered serif: "MATCH"; small-caps sans
+  > label under the left book: "table of contents"; small-caps sans label under the
+  > strip cloud: "embedded chunks". No other words.
 - **Caption:** *Two retrieval philosophies: navigate the document's own structure
   (PageIndex), or embed shredded chunks and fish by similarity (vector RAG).*
 
-### V14 · The evidence auditor *(optional)*
+### V14 · The evidence audit *(optional)*
 - **Placement:** write-up section on the consistency / evidence-gap question categories. 1200×1200.
 - **Concept:** the question set doesn't just ask "find it" — it asks "do these two pages
   agree?" and "is this claim backed anywhere?"
 - **Scene prompt:**
-  > A meticulous badger in a cardigan sits at a cream desk with two open documents, one
-  > under each paw, drawn in navy ink. Red thread — rendered burnt orange — connects a
-  > passage in the left document to a contradicting passage in the right, pinned like a
-  > detective's cork board. Around the desk, a few more orange threads run from claims
-  > on the pages to small empty picture frames on the wall labeled by their emptiness —
-  > where the supporting evidence should hang, there is nothing. One frame does hold a
-  > small cobalt certificate. Amber desk lamp, evening warmth, patient rather than
-  > accusatory mood.
+  > The honeybee naturalist as inspector, wearing a small inspector's sash and holding
+  > a clipboard, walking along a wall of hexagonal honeycomb cells drawn in navy ink on
+  > cream. Some cells are capped and full of amber honey; several are conspicuously
+  > empty. Beside the comb, claim-notes on small paper scraps are pinned like a
+  > detective's cork board, and burnt orange threads run from each note to a cell —
+  > some threads end at full amber cells, others dangle at empty ones. She examines one
+  > dangling thread through her spectacles, patient rather than accusatory. Amber desk-
+  > lamp warmth, evening mood. On-image text, exactly: clipboard header in small-caps
+  > sans: "EVIDENCE AUDIT"; label beside a full cell in small-caps sans: "supported";
+  > label beside an empty cell in small-caps sans: "asserted". No other words.
 - **Caption:** *Beyond lookup: consistency questions ask whether pages agree; evidence-gap
-  questions ask which claims have nothing behind them.*
+  questions ask which claims have honey behind them.*
 
 ---
 
@@ -356,20 +403,29 @@ provided.
 
 1. **V7** (index tree render) — signature figure, pure data, no taste risk.
 2. **V1 + V3 + V5** (core diagrams) — biggest README/notebook payoff per effort.
-3. **V10 → V11 → V12** (image-gen set) — generate V10 first to calibrate the style
-   preamble against your image agent; iterate the preamble once, then batch the rest.
+3. **V10 → V12 → V11** (image-gen set) — V10 first: it calibrates the two risky
+   elements (character design + text rendering) on the simplest composition. Lock the
+   bee's look there, fold any preamble fixes back into §1.4, then batch the rest —
+   reusing V10's accepted output as a style/character reference image if your agent
+   supports it.
 4. **V6, V8, V4, V2** — fill in.
 5. **V9** — the moment scored runs exist.
 
-## 8. Open questions / ideas parked for Barbara
+## 8. Decisions made / ideas parked
 
-- **Mascot consistency:** V10 (owl), V12 (cat), V14 (badger) each carry their own animal.
-  Charming as a menagerie, stronger as a recurring single character ("the navigator")
-  if these ever live in one article. Decide before batch-generating.
+- **Character: DECIDED (2026-07-10) — the honeybee naturalist.** One character, one
+  world (map = corpus, comb = index, flowers = content, flight = retrieval, waggle
+  dance = reporting). Earned in-corpus via the Beehive Analytics project and "Bees,
+  Graphs & Governance." Guardrail: she is a field scientist, not a mascot sticker —
+  if a generation drifts cute (giant eyes, waving gloves), reject on style.
+- **On-image text: DECIDED — allowed and semantic.** Serif = idea, sans small-caps =
+  label, monospace = machine transcript. Every string specified exactly; "no other
+  words" closes every prompt. Real transcript lines as in-image evidence is the
+  signature move.
 - **Dark-mode variants:** the lab notebook and barbhs.com may want `ground-dark`
   (`#0E0E12`) versions. Cheap for Tier 1/2 (swap tokens); a re-roll for Tier 3.
 - **Figure numbering:** if the write-up is real, adopt `Fig. N` numbering + a
   `reports/figures/captions.md` so captions stay in one place.
-- **Style preamble is v1:** expect one calibration round on your image agent; the
-  preamble's *negative* clauses (no white ground, no corporate clip-art, no text) are
-  the part most models need repeated.
+- **Style preamble is v1:** expect one calibration round on your image agent (V10);
+  the *negative* clauses (no white ground, no clip-art, no mascot-cute) and exact
+  text strings are the parts most models need repeated.

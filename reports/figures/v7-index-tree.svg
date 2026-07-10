@@ -1,0 +1,417 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1552" viewBox="0 0 1600 1552" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
+<rect width="1600" height="1552" fill="#F4F0E8"/>
+<text x="40" y="44" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="30" font-weight="600" fill="#1C3A55">The Map of Knowledge — one website, one tree</text>
+<text x="40" y="70" font-size="15" fill="#2B2B2B">IDX-D (deterministic Markdown headings) over site-book-v1 · 3,973 lines · 339 nodes · depth 5</text>
+<text x="40" y="92" font-size="15" fill="#6B6B66">The navigation hazard: “Summary” ×25 · “How It Works” ×6 · “Architecture” ×6 · “What's Next” ×6</text>
+<rect x="1140" y="30" width="16" height="16" fill="#C04818"/>
+<text x="1164" y="43" font-size="14" fill="#2B2B2B">title appears 2+ times (21 titles, 89 nodes)</text>
+<rect x="1140" y="56" width="16" height="16" fill="#AEBFC9"/>
+<text x="1164" y="69" font-size="14" fill="#2B2B2B">unique title (shade = depth)</text>
+<rect x="40.0" y="108.0" width="40.0" height="1400.0" fill="#1C3A55" stroke="#F4F0E8" stroke-width="0.8"><title>Barbara Hidalgo-Sotelo Website Corpus (lines 1–3973)</title></rect>
+<rect x="84.0" y="108.7" width="292.0" height="3.5" fill="#186090" stroke="#F4F0E8" stroke-width="0.8"><title>Corpus Preface (lines 3–12)</title></rect>
+<rect x="84.0" y="112.2" width="292.0" height="185.7" fill="#186090" stroke="#F4F0E8" stroke-width="0.8"><title>Core Positioning Pages (lines 13–539)</title></rect>
+<text x="90.0" y="209.6" font-size="12.5" fill="#F4F0E8">Core Positioning Pages</text>
+<rect x="84.0" y="297.9" width="292.0" height="576.5" fill="#186090" stroke="#F4F0E8" stroke-width="0.8"><title>Project Portfolio (lines 540–2175)</title></rect>
+<text x="90.0" y="590.7" font-size="12.5" fill="#F4F0E8">Project Portfolio</text>
+<rect x="84.0" y="874.4" width="292.0" height="420.4" fill="#186090" stroke="#F4F0E8" stroke-width="0.8"><title>Articles (lines 2176–3368)</title></rect>
+<text x="90.0" y="1089.1" font-size="12.5" fill="#F4F0E8">Articles</text>
+<rect x="84.0" y="1294.8" width="292.0" height="213.2" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Resources (lines 3369–3973)</title></rect>
+<text x="90.0" y="1405.9" font-size="12.5" fill="#F4F0E8">Resources</text>
+<rect x="380.0" y="113.6" width="292.0" height="41.2" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>Barbara Hidalgo-Sotelo, PhD | Applied AI &amp; Data Systems (lines 17–133)</title></rect>
+<text x="386.0" y="138.8" font-size="12.5" fill="#2B2B2B">Barbara Hidalgo-Sotelo, PhD | Applied A…</text>
+<rect x="380.0" y="154.9" width="292.0" height="35.9" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>Start Here (lines 134–235)</title></rect>
+<text x="386.0" y="177.3" font-size="12.5" fill="#2B2B2B">Start Here</text>
+<rect x="380.0" y="190.8" width="292.0" height="40.5" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>Work With Me (lines 236–350)</title></rect>
+<text x="386.0" y="215.6" font-size="12.5" fill="#2B2B2B">Work With Me</text>
+<rect x="380.0" y="231.3" width="292.0" height="66.6" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>My Journey (lines 351–539)</title></rect>
+<text x="386.0" y="269.1" font-size="12.5" fill="#2B2B2B">My Journey</text>
+<rect x="380.0" y="299.3" width="292.0" height="90.6" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>Poolula Platform: RAG-Powered Business Intelligence (lines 544–800)</title></rect>
+<text x="386.0" y="349.1" font-size="12.5" fill="#2B2B2B">Poolula Platform: RAG-Powered Business …</text>
+<rect x="380.0" y="389.9" width="292.0" height="147.6" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>Self-Hosted Workout Intelligence (lines 801–1219)</title></rect>
+<text x="386.0" y="468.2" font-size="12.5" fill="#2B2B2B">Self-Hosted Workout Intelligence</text>
+<rect x="380.0" y="537.5" width="292.0" height="92.0" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>Beehive Analytics Platform (lines 1220–1480)</title></rect>
+<text x="386.0" y="588.0" font-size="12.5" fill="#2B2B2B">Beehive Analytics Platform</text>
+<rect x="380.0" y="629.5" width="292.0" height="83.2" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>ChronoScope: AI-Powered Timeline Builder (lines 1481–1716)</title></rect>
+<text x="386.0" y="675.6" font-size="12.5" fill="#2B2B2B">ChronoScope: AI-Powered Timeline Builder</text>
+<rect x="380.0" y="712.7" width="292.0" height="88.8" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>Digital Memory Chest: AI-Powered Memorial Tributes (lines 1717–1968)</title></rect>
+<text x="386.0" y="761.6" font-size="12.5" fill="#2B2B2B">Digital Memory Chest: AI-Powered Memori…</text>
+<rect x="380.0" y="801.5" width="292.0" height="72.9" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>Multi-Provider AI Chat (lines 1969–2175)</title></rect>
+<text x="386.0" y="842.5" font-size="12.5" fill="#2B2B2B">Multi-Provider AI Chat</text>
+<rect x="380.0" y="875.8" width="292.0" height="37.4" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>What I Learned Running 58 Questions Through Two LLMs (lines 2180–2285)</title></rect>
+<text x="386.0" y="899.0" font-size="12.5" fill="#2B2B2B">What I Learned Running 58 Questions Thr…</text>
+<rect x="380.0" y="913.2" width="292.0" height="41.2" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>What Happened When I Asked the Same Questions of Two Retrieval Systems (lines 2286–2402)</title></rect>
+<text x="386.0" y="938.3" font-size="12.5" fill="#2B2B2B">What Happened When I Asked the Same Que…</text>
+<rect x="380.0" y="954.4" width="292.0" height="30.7" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>What Looks Like an AI Skills Gap Is Often a Judgment Gap (lines 2403–2489)</title></rect>
+<text x="386.0" y="974.2" font-size="12.5" fill="#2B2B2B">What Looks Like an AI Skills Gap Is Oft…</text>
+<rect x="380.0" y="985.1" width="292.0" height="63.4" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>The Missing Layer Between AI Adoption and AI Value (lines 2490–2669)</title></rect>
+<text x="386.0" y="1021.3" font-size="12.5" fill="#2B2B2B">The Missing Layer Between AI Adoption a…</text>
+<rect x="380.0" y="1048.5" width="292.0" height="38.1" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>A Scoring System for AI Instruction Files (lines 2670–2777)</title></rect>
+<text x="386.0" y="1072.0" font-size="12.5" fill="#2B2B2B">A Scoring System for AI Instruction Fil…</text>
+<rect x="380.0" y="1086.6" width="292.0" height="31.0" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>The Three Readers of Your Web Page (lines 2778–2865)</title></rect>
+<text x="386.0" y="1106.6" font-size="12.5" fill="#2B2B2B">The Three Readers of Your Web Page</text>
+<rect x="380.0" y="1117.6" width="292.0" height="58.1" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>Why Metadata Matters (lines 2866–3030)</title></rect>
+<text x="386.0" y="1151.1" font-size="12.5" fill="#2B2B2B">Why Metadata Matters</text>
+<rect x="380.0" y="1175.7" width="292.0" height="35.9" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>RAG Without the Theater — Evidence‑Linked Retrieval Patterns You Can Defend (lines 3031–3132)</title></rect>
+<text x="386.0" y="1198.2" font-size="12.5" fill="#2B2B2B">RAG Without the Theater — Evidence‑Link…</text>
+<rect x="380.0" y="1211.6" width="292.0" height="33.8" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>Bees, Graphs, and Governance — Turning Unruly Observations into Evidence‑Ready Decisions (lines 3133–3228)</title></rect>
+<text x="386.0" y="1233.1" font-size="12.5" fill="#2B2B2B">Bees, Graphs, and Governance — Turning …</text>
+<rect x="380.0" y="1245.5" width="292.0" height="49.3" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>7+-2 is Everywhere: Chunking is all you need (lines 3229–3368)</title></rect>
+<text x="386.0" y="1274.6" font-size="12.5" fill="#2B2B2B">7+-2 is Everywhere: Chunking is all you…</text>
+<rect x="380.0" y="1296.2" width="292.0" height="93.4" fill="#7FA3BC" stroke="#F4F0E8" stroke-width="0.8"><title>Resources &amp; Guides (lines 3373–3637)</title></rect>
+<text x="386.0" y="1347.4" font-size="12.5" fill="#2B2B2B">Resources &amp; Guides</text>
+<rect x="380.0" y="1389.6" width="292.0" height="12.7" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What Does 'Harness' Mean in AI? (lines 3638–3673)</title></rect>
+<rect x="380.0" y="1402.3" width="292.0" height="15.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Memory Is More Than Storage (lines 3674–3718)</title></rect>
+<text x="386.0" y="1414.7" font-size="12.5" fill="#F4F0E8">Memory Is More Than Storage</text>
+<rect x="380.0" y="1418.1" width="292.0" height="80.0" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Resume Data Schema (lines 3719–3945)</title></rect>
+<text x="386.0" y="1462.6" font-size="12.5" fill="#F4F0E8">Resume Data Schema</text>
+<rect x="380.0" y="1498.1" width="292.0" height="9.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>AI Instruction File Evaluation Worksheet (lines 3946–3973)</title></rect>
+<rect x="676.0" y="116.1" width="292.0" height="1.4" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 24–27)</title></rect>
+<rect x="676.0" y="117.5" width="292.0" height="10.6" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Teaching Semantic Web in public (lines 28–57)</title></rect>
+<rect x="676.0" y="128.1" width="292.0" height="2.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Featured Projects (lines 58–63)</title></rect>
+<rect x="676.0" y="130.2" width="292.0" height="10.6" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Featured Writing (lines 64–93)</title></rect>
+<rect x="676.0" y="140.8" width="292.0" height="9.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Cognitive Principles in Practice (lines 94–119)</title></rect>
+<rect x="676.0" y="149.9" width="292.0" height="4.9" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>At-a-Glance: Education &amp; Big Moves (lines 120–133)</title></rect>
+<rect x="676.0" y="157.3" width="292.0" height="2.1" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 141–146)</title></rect>
+<rect x="676.0" y="159.4" width="292.0" height="31.4" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>A guided tour of how I think, build, and communicate (lines 147–235)</title></rect>
+<text x="682.0" y="179.6" font-size="12.5" fill="#2B2B2B">A guided tour of how I think, build, an…</text>
+<rect x="676.0" y="193.3" width="292.0" height="2.1" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 243–248)</title></rect>
+<rect x="676.0" y="195.4" width="292.0" height="35.9" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>I help teams ship AI systems that humans actually trust. (lines 249–350)</title></rect>
+<text x="682.0" y="217.9" font-size="12.5" fill="#2B2B2B">I help teams ship AI systems that human…</text>
+<rect x="676.0" y="233.8" width="292.0" height="6.3" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 358–375)</title></rect>
+<rect x="676.0" y="240.1" width="292.0" height="6.3" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Lenses I Bring to Every Problem (lines 376–393)</title></rect>
+<rect x="676.0" y="246.5" width="292.0" height="13.4" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The Big Turns (lines 394–431)</title></rect>
+<text x="682.0" y="256.9" font-size="12.5" fill="#2B2B2B">The Big Turns</text>
+<rect x="676.0" y="259.9" width="292.0" height="14.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Beyond the Data (lines 432–471)</title></rect>
+<text x="682.0" y="271.0" font-size="12.5" fill="#2B2B2B">Beyond the Data</text>
+<rect x="676.0" y="274.0" width="292.0" height="2.8" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Now &amp; Next (lines 472–479)</title></rect>
+<rect x="676.0" y="276.8" width="292.0" height="21.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Dive Deeper (lines 480–539)</title></rect>
+<text x="682.0" y="291.9" font-size="12.5" fill="#2B2B2B">Dive Deeper</text>
+<rect x="676.0" y="303.6" width="292.0" height="2.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 556–563)</title></rect>
+<rect x="676.0" y="306.4" width="292.0" height="3.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Why This Matters (lines 564–573)</title></rect>
+<rect x="676.0" y="309.9" width="292.0" height="20.1" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>How It Works (lines 574–630)</title></rect>
+<text x="682.0" y="324.5" font-size="12.5" fill="#F4F0E8">How It Works</text>
+<rect x="676.0" y="330.0" width="292.0" height="16.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Architecture (lines 631–678)</title></rect>
+<text x="682.0" y="343.0" font-size="12.5" fill="#F4F0E8">Architecture</text>
+<rect x="676.0" y="346.9" width="292.0" height="18.0" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Governance &amp; Reliability (lines 679–729)</title></rect>
+<text x="682.0" y="360.4" font-size="12.5" fill="#2B2B2B">Governance &amp; Reliability</text>
+<rect x="676.0" y="364.9" width="292.0" height="7.8" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>What's Shipped vs. In Progress (lines 730–751)</title></rect>
+<rect x="676.0" y="372.6" width="292.0" height="3.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What's Next (lines 752–761)</title></rect>
+<rect x="676.0" y="376.2" width="292.0" height="6.3" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Implementation Notes (lines 762–779)</title></rect>
+<rect x="676.0" y="382.5" width="292.0" height="7.4" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Links (lines 780–800)</title></rect>
+<rect x="676.0" y="394.1" width="292.0" height="9.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 813–840)</title></rect>
+<rect x="676.0" y="404.0" width="292.0" height="10.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The Problem: When a Puppy Breaks Your Data (lines 841–869)</title></rect>
+<rect x="676.0" y="414.2" width="292.0" height="21.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The Solution: Full-Stack Fitness Intelligence (lines 870–929)</title></rect>
+<text x="682.0" y="429.3" font-size="12.5" fill="#2B2B2B">The Solution: Full-Stack Fitness Intell…</text>
+<rect x="676.0" y="435.4" width="292.0" height="30.7" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>How It Works (lines 930–1016)</title></rect>
+<text x="682.0" y="455.2" font-size="12.5" fill="#F4F0E8">How It Works</text>
+<rect x="676.0" y="466.0" width="292.0" height="13.0" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What Shipped (lines 1017–1053)</title></rect>
+<text x="682.0" y="476.1" font-size="12.5" fill="#F4F0E8">What Shipped</text>
+<rect x="676.0" y="479.1" width="292.0" height="13.0" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The Choco Effect: A Data Story (lines 1054–1090)</title></rect>
+<text x="682.0" y="489.1" font-size="12.5" fill="#2B2B2B">The Choco Effect: A Data Story</text>
+<rect x="676.0" y="492.1" width="292.0" height="20.4" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Architecture (lines 1091–1148)</title></rect>
+<text x="682.0" y="506.8" font-size="12.5" fill="#F4F0E8">Architecture</text>
+<rect x="676.0" y="512.5" width="292.0" height="13.7" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Implementation Notes (lines 1149–1187)</title></rect>
+<text x="682.0" y="523.3" font-size="12.5" fill="#F4F0E8">Implementation Notes</text>
+<rect x="676.0" y="526.3" width="292.0" height="5.3" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What's Next (lines 1188–1202)</title></rect>
+<rect x="676.0" y="531.6" width="292.0" height="2.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Links (lines 1203–1210)</title></rect>
+<rect x="676.0" y="534.4" width="292.0" height="3.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Related (lines 1211–1219)</title></rect>
+<rect x="676.0" y="541.8" width="292.0" height="7.4" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 1232–1252)</title></rect>
+<rect x="676.0" y="549.2" width="292.0" height="7.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Problem (lines 1253–1274)</title></rect>
+<rect x="676.0" y="556.9" width="292.0" height="29.2" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>How It Works (lines 1275–1357)</title></rect>
+<text x="682.0" y="576.1" font-size="12.5" fill="#F4F0E8">How It Works</text>
+<rect x="676.0" y="586.2" width="292.0" height="9.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What Shipped (lines 1358–1384)</title></rect>
+<rect x="676.0" y="595.7" width="292.0" height="17.3" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Architecture (lines 1385–1433)</title></rect>
+<text x="682.0" y="608.8" font-size="12.5" fill="#F4F0E8">Architecture</text>
+<rect x="676.0" y="613.0" width="292.0" height="8.1" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Implementation Notes (lines 1434–1456)</title></rect>
+<rect x="676.0" y="621.1" width="292.0" height="5.3" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What's Next (lines 1457–1471)</title></rect>
+<rect x="676.0" y="626.3" width="292.0" height="3.2" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Links (lines 1472–1480)</title></rect>
+<rect x="676.0" y="634.1" width="292.0" height="2.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 1494–1501)</title></rect>
+<rect x="676.0" y="636.9" width="292.0" height="3.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Why This Matters (lines 1502–1511)</title></rect>
+<rect x="676.0" y="640.4" width="292.0" height="14.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>How It Works (lines 1512–1553)</title></rect>
+<text x="682.0" y="652.2" font-size="12.5" fill="#F4F0E8">How It Works</text>
+<rect x="676.0" y="655.2" width="292.0" height="8.1" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What Shipped (lines 1554–1576)</title></rect>
+<rect x="676.0" y="663.3" width="292.0" height="17.3" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Architecture (lines 1577–1625)</title></rect>
+<text x="682.0" y="676.5" font-size="12.5" fill="#F4F0E8">Architecture</text>
+<rect x="676.0" y="680.6" width="292.0" height="13.7" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Implementation Notes (lines 1626–1664)</title></rect>
+<text x="682.0" y="691.4" font-size="12.5" fill="#F4F0E8">Implementation Notes</text>
+<rect x="676.0" y="694.4" width="292.0" height="3.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What's Next (lines 1665–1674)</title></rect>
+<rect x="676.0" y="697.9" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Use Cases (lines 1675–1686)</title></rect>
+<rect x="676.0" y="702.1" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Screens &amp; Artifacts (lines 1687–1698)</title></rect>
+<rect x="676.0" y="706.3" width="292.0" height="6.3" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Links (lines 1699–1716)</title></rect>
+<rect x="676.0" y="717.3" width="292.0" height="2.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 1730–1737)</title></rect>
+<rect x="676.0" y="720.1" width="292.0" height="3.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Why This Matters (lines 1738–1747)</title></rect>
+<rect x="676.0" y="723.6" width="292.0" height="13.7" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>How It Works (lines 1748–1786)</title></rect>
+<text x="682.0" y="734.3" font-size="12.5" fill="#F4F0E8">How It Works</text>
+<rect x="676.0" y="737.3" width="292.0" height="7.4" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What Shipped (lines 1787–1807)</title></rect>
+<rect x="676.0" y="744.7" width="292.0" height="19.4" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Architecture (lines 1808–1862)</title></rect>
+<text x="682.0" y="758.9" font-size="12.5" fill="#F4F0E8">Architecture</text>
+<rect x="676.0" y="764.1" width="292.0" height="11.3" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Privacy &amp; Security (lines 1863–1894)</title></rect>
+<rect x="676.0" y="775.4" width="292.0" height="10.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Implementation Notes (lines 1895–1925)</title></rect>
+<rect x="676.0" y="786.3" width="292.0" height="3.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What's Next (lines 1926–1935)</title></rect>
+<rect x="676.0" y="789.9" width="292.0" height="4.9" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Demo (lines 1936–1949)</title></rect>
+<rect x="676.0" y="794.8" width="292.0" height="6.7" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Links (lines 1950–1968)</title></rect>
+<rect x="676.0" y="805.7" width="292.0" height="8.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 1981–2005)</title></rect>
+<rect x="676.0" y="814.5" width="292.0" height="5.6" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Problem (lines 2006–2021)</title></rect>
+<rect x="676.0" y="820.2" width="292.0" height="18.7" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>How It Works (lines 2022–2074)</title></rect>
+<text x="682.0" y="834.0" font-size="12.5" fill="#F4F0E8">How It Works</text>
+<rect x="676.0" y="838.8" width="292.0" height="9.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What Shipped (lines 2075–2101)</title></rect>
+<rect x="676.0" y="848.3" width="292.0" height="14.4" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Architecture (lines 2102–2142)</title></rect>
+<text x="682.0" y="859.8" font-size="12.5" fill="#F4F0E8">Architecture</text>
+<rect x="676.0" y="862.8" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Supported Models (lines 2143–2154)</title></rect>
+<rect x="676.0" y="867.0" width="292.0" height="4.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What's Next (lines 2155–2168)</title></rect>
+<rect x="676.0" y="872.0" width="292.0" height="2.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Links (lines 2169–2175)</title></rect>
+<rect x="676.0" y="879.7" width="292.0" height="1.4" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 2191–2194)</title></rect>
+<rect x="676.0" y="881.1" width="292.0" height="3.2" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Contents (lines 2195–2203)</title></rect>
+<rect x="676.0" y="884.3" width="292.0" height="4.6" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The setup (lines 2204–2216)</title></rect>
+<rect x="676.0" y="888.9" width="292.0" height="3.5" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The two personalities (lines 2217–2226)</title></rect>
+<rect x="676.0" y="892.4" width="292.0" height="6.7" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The numbers that mattered (lines 2227–2245)</title></rect>
+<rect x="676.0" y="899.1" width="292.0" height="3.5" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>When to use which model (lines 2246–2255)</title></rect>
+<rect x="676.0" y="902.6" width="292.0" height="4.2" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Where I'm being cautious (lines 2256–2267)</title></rect>
+<rect x="676.0" y="906.8" width="292.0" height="6.3" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What I'm doing next (lines 2268–2285)</title></rect>
+<rect x="676.0" y="917.1" width="292.0" height="1.4" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 2297–2300)</title></rect>
+<rect x="676.0" y="918.5" width="292.0" height="3.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Contents (lines 2301–2310)</title></rect>
+<rect x="676.0" y="922.0" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The question that broke the old system (lines 2311–2322)</title></rect>
+<rect x="676.0" y="926.2" width="292.0" height="5.6" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Same questions, two retrieval systems (lines 2323–2338)</title></rect>
+<rect x="676.0" y="931.9" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Three problems, three architectural moves (lines 2339–2350)</title></rect>
+<rect x="676.0" y="936.1" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>What the new system gives up (lines 2351–2362)</title></rect>
+<rect x="676.0" y="940.3" width="292.0" height="2.8" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The reference doc, and why it earns its own paragraph (lines 2363–2370)</title></rect>
+<rect x="676.0" y="943.1" width="292.0" height="4.2" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Where I'm being cautious (lines 2371–2382)</title></rect>
+<rect x="676.0" y="947.4" width="292.0" height="7.0" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What I'm doing next (lines 2383–2402)</title></rect>
+<rect x="676.0" y="958.3" width="292.0" height="5.6" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 2414–2429)</title></rect>
+<rect x="676.0" y="963.9" width="292.0" height="1.4" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Tool fluency is table stakes (lines 2430–2433)</title></rect>
+<rect x="676.0" y="965.3" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Speed magnifies whatever you bring to it (lines 2434–2445)</title></rect>
+<rect x="676.0" y="969.6" width="292.0" height="5.6" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The missing layer (lines 2446–2461)</title></rect>
+<rect x="676.0" y="975.2" width="292.0" height="4.9" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The questions that do the work (lines 2462–2475)</title></rect>
+<rect x="676.0" y="980.1" width="292.0" height="4.9" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The literacy worth building (lines 2476–2489)</title></rect>
+<rect x="676.0" y="988.9" width="292.0" height="13.0" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 2501–2537)</title></rect>
+<text x="682.0" y="999.0" font-size="12.5" fill="#F4F0E8">Summary</text>
+<rect x="676.0" y="1002.0" width="292.0" height="8.5" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Two reports, one operating gap (lines 2538–2561)</title></rect>
+<rect x="676.0" y="1010.4" width="292.0" height="13.4" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Three things the reports reveal together (lines 2562–2599)</title></rect>
+<text x="682.0" y="1020.8" font-size="12.5" fill="#2B2B2B">Three things the reports reveal together</text>
+<rect x="676.0" y="1023.8" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The missing layer is infrastructure (lines 2600–2611)</title></rect>
+<rect x="676.0" y="1028.1" width="292.0" height="16.9" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The integration test (lines 2612–2659)</title></rect>
+<text x="682.0" y="1041.0" font-size="12.5" fill="#2B2B2B">The integration test</text>
+<rect x="676.0" y="1045.0" width="292.0" height="3.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Sources (lines 2660–2669)</title></rect>
+<rect x="676.0" y="1052.4" width="292.0" height="5.6" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 2681–2696)</title></rect>
+<rect x="676.0" y="1058.0" width="292.0" height="2.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Three files, one project (lines 2697–2702)</title></rect>
+<rect x="676.0" y="1060.1" width="292.0" height="2.8" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>What the research says about size (lines 2703–2710)</title></rect>
+<rect x="676.0" y="1062.9" width="292.0" height="8.5" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The framework: six categories, 100 points (lines 2711–2734)</title></rect>
+<rect x="676.0" y="1071.4" width="292.0" height="4.9" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Six things the scoring changed (lines 2735–2748)</title></rect>
+<rect x="676.0" y="1076.3" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Score your own file (lines 2749–2760)</title></rect>
+<rect x="676.0" y="1080.6" width="292.0" height="2.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>What's next (lines 2761–2766)</title></rect>
+<rect x="676.0" y="1082.7" width="292.0" height="3.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Sources (lines 2767–2777)</title></rect>
+<rect x="676.0" y="1090.1" width="292.0" height="4.2" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 2788–2799)</title></rect>
+<rect x="676.0" y="1094.3" width="292.0" height="2.8" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The `&lt;head&gt;` is a room with three readers in it (lines 2800–2807)</title></rect>
+<rect x="676.0" y="1097.1" width="292.0" height="2.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Reader one: the browser (it has to *render* you) (lines 2808–2813)</title></rect>
+<rect x="676.0" y="1099.2" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Reader two: the search engine (it has to *find*, *judge*, and *show* you) (lines 2814–2825)</title></rect>
+<rect x="676.0" y="1103.5" width="292.0" height="2.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Reader three: the social unfurler (it has to *preview* you) (lines 2826–2831)</title></rect>
+<rect x="676.0" y="1105.6" width="292.0" height="3.5" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The misconception that reorganizes everything (lines 2832–2841)</title></rect>
+<rect x="676.0" y="1109.1" width="292.0" height="4.9" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The deeper idea: metadata is a knowledge graph in disguise (lines 2842–2855)</title></rect>
+<rect x="676.0" y="1114.0" width="292.0" height="3.5" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Where this goes next (lines 2856–2865)</title></rect>
+<rect x="676.0" y="1121.4" width="292.0" height="4.2" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 2877–2888)</title></rect>
+<rect x="676.0" y="1125.7" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The Invisible Infrastructure (lines 2889–2900)</title></rect>
+<rect x="676.0" y="1129.9" width="292.0" height="6.0" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>How Metadata Becomes Schema.org (lines 2901–2917)</title></rect>
+<rect x="676.0" y="1135.9" width="292.0" height="8.5" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>What Makes Good Metadata? (lines 2918–2941)</title></rect>
+<rect x="676.0" y="1144.3" width="292.0" height="6.0" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Schema.org: Structured Data in Practice (lines 2942–2958)</title></rect>
+<rect x="676.0" y="1150.3" width="292.0" height="3.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Common Metadata Mistakes (lines 2959–2967)</title></rect>
+<rect x="676.0" y="1153.5" width="292.0" height="8.5" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Keeping Metadata Consistent (lines 2968–2991)</title></rect>
+<rect x="676.0" y="1162.0" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>The Meta-Meta Insight (lines 2992–3003)</title></rect>
+<rect x="676.0" y="1166.2" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Where to Start (lines 3004–3015)</title></rect>
+<rect x="676.0" y="1170.4" width="292.0" height="5.3" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Resources (lines 3016–3030)</title></rect>
+<rect x="676.0" y="1179.6" width="292.0" height="5.3" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 3042–3056)</title></rect>
+<rect x="676.0" y="1184.9" width="292.0" height="1.8" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>1) Anti‑patterns to avoid (lines 3057–3061)</title></rect>
+<rect x="676.0" y="1186.6" width="292.0" height="10.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>2) Three small patterns that carry far (lines 3062–3090)</title></rect>
+<rect x="676.0" y="1196.8" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>3) Guardrails &amp; evaluation you can explain (lines 3091–3102)</title></rect>
+<rect x="676.0" y="1201.1" width="292.0" height="2.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>4) Production notes (lines 3103–3108)</title></rect>
+<rect x="676.0" y="1203.2" width="292.0" height="8.5" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>5) A reference flow (print + pin on a wall) (lines 3109–3132)</title></rect>
+<rect x="676.0" y="1215.9" width="292.0" height="5.3" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 3145–3159)</title></rect>
+<rect x="676.0" y="1221.2" width="292.0" height="4.6" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>1) From “piles of stuff” to a knowledge graph (lines 3160–3172)</title></rect>
+<rect x="676.0" y="1225.7" width="292.0" height="4.9" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>2) Governance you don’t have to remember (lines 3173–3186)</title></rect>
+<rect x="676.0" y="1230.7" width="292.0" height="5.3" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>3) UX for analytics: show joins, not just charts (lines 3187–3201)</title></rect>
+<rect x="676.0" y="1236.0" width="292.0" height="2.5" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>4) Porting the pattern to enterprise analytics (lines 3202–3208)</title></rect>
+<rect x="676.0" y="1238.4" width="292.0" height="7.0" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>5) A tiny start (that scales) (lines 3209–3228)</title></rect>
+<rect x="676.0" y="1249.4" width="292.0" height="2.1" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 3240–3245)</title></rect>
+<rect x="676.0" y="1251.5" width="292.0" height="1.4" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Bigger windows, same bottleneck: sensemaking (lines 3246–3249)</title></rect>
+<rect x="676.0" y="1252.9" width="292.0" height="12.0" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Evidence across three domains (lines 3250–3283)</title></rect>
+<rect x="676.0" y="1264.9" width="292.0" height="1.4" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>What 7±2 actually says (lines 3284–3287)</title></rect>
+<rect x="676.0" y="1266.3" width="292.0" height="2.8" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Designing for the edges (lines 3288–3295)</title></rect>
+<rect x="676.0" y="1269.1" width="292.0" height="6.0" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Three design rules that actually matter (lines 3296–3312)</title></rect>
+<rect x="676.0" y="1275.1" width="292.0" height="2.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Why million-token windows still hit the same wall (lines 3313–3318)</title></rect>
+<rect x="676.0" y="1277.2" width="292.0" height="1.4" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Closing (lines 3319–3322)</title></rect>
+<rect x="676.0" y="1278.6" width="292.0" height="2.8" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Quick stats (lines 3323–3330)</title></rect>
+<rect x="676.0" y="1281.4" width="292.0" height="8.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Figures and captions (lines 3331–3353)</title></rect>
+<rect x="676.0" y="1289.5" width="292.0" height="3.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>References (for the web version) (lines 3354–3362)</title></rect>
+<rect x="676.0" y="1292.7" width="292.0" height="2.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Author note (lines 3363–3368)</title></rect>
+<rect x="676.0" y="1298.7" width="292.0" height="14.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 3380–3421)</title></rect>
+<text x="682.0" y="1310.5" font-size="12.5" fill="#F4F0E8">Summary</text>
+<rect x="676.0" y="1313.5" width="292.0" height="24.3" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Infographics (lines 3422–3490)</title></rect>
+<text x="682.0" y="1330.1" font-size="12.5" fill="#2B2B2B">Infographics</text>
+<rect x="676.0" y="1337.8" width="292.0" height="51.8" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Resource Collection Entries (lines 3491–3637)</title></rect>
+<text x="682.0" y="1368.2" font-size="12.5" fill="#2B2B2B">Resource Collection Entries</text>
+<rect x="676.0" y="1393.5" width="292.0" height="4.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 3649–3662)</title></rect>
+<rect x="676.0" y="1398.4" width="292.0" height="3.9" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>See one in practice (lines 3663–3673)</title></rect>
+<rect x="676.0" y="1406.2" width="292.0" height="4.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 3685–3698)</title></rect>
+<rect x="676.0" y="1411.1" width="292.0" height="7.0" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Further reading (lines 3699–3718)</title></rect>
+<rect x="676.0" y="1422.0" width="292.0" height="1.4" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 3730–3733)</title></rect>
+<rect x="676.0" y="1423.4" width="292.0" height="1.4" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Overview (lines 3734–3737)</title></rect>
+<rect x="676.0" y="1424.8" width="292.0" height="2.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Visual Schema Map (lines 3738–3743)</title></rect>
+<rect x="676.0" y="1427.0" width="292.0" height="2.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Data Flow Architecture (lines 3744–3749)</title></rect>
+<rect x="676.0" y="1429.1" width="292.0" height="4.9" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Why This Architecture? (lines 3750–3763)</title></rect>
+<rect x="676.0" y="1434.0" width="292.0" height="20.1" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Schema Structure (lines 3764–3820)</title></rect>
+<text x="682.0" y="1448.5" font-size="12.5" fill="#2B2B2B">Schema Structure</text>
+<rect x="676.0" y="1454.1" width="292.0" height="13.7" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Usage Examples (lines 3821–3859)</title></rect>
+<text x="682.0" y="1464.8" font-size="12.5" fill="#2B2B2B">Usage Examples</text>
+<rect x="676.0" y="1467.8" width="292.0" height="12.0" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Technical Details (lines 3860–3893)</title></rect>
+<rect x="676.0" y="1479.8" width="292.0" height="3.5" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Files &amp; Locations (lines 3894–3903)</title></rect>
+<rect x="676.0" y="1483.3" width="292.0" height="6.3" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Maintenance Tips (lines 3904–3921)</title></rect>
+<rect x="676.0" y="1489.7" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Future Enhancements (lines 3922–3933)</title></rect>
+<rect x="676.0" y="1493.9" width="292.0" height="4.2" fill="#AEBFC9" stroke="#F4F0E8" stroke-width="0.8"><title>Questions? (lines 3934–3945)</title></rect>
+<rect x="676.0" y="1502.0" width="292.0" height="6.0" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Summary (lines 3957–3973)</title></rect>
+<rect x="972.0" y="123.2" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Find the shared model (lines 44–51)</title></rect>
+<rect x="972.0" y="126.0" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Try my Digital Twin (lines 52–57)</title></rect>
+<rect x="972.0" y="132.3" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[The Beekeeper’s Time Machine](/data-stories/hive-photo-metadata-tracker/) (lines 70–77)</title></rect>
+<rect x="972.0" y="135.1" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[Building a Sustainable Digital Home](/series/website-building/) (lines 78–85)</title></rect>
+<rect x="972.0" y="138.0" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[Making Mermaid Diagrams Work for You](/blog/taming-mermaid-diagrams/) (lines 86–93)</title></rect>
+<rect x="972.0" y="142.2" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Metadata Matters (lines 98–105)</title></rect>
+<rect x="972.0" y="145.0" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Cognitive Offloading (lines 106–113)</title></rect>
+<rect x="972.0" y="147.8" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Grow from Messiness (lines 114–119)</title></rect>
+<rect x="972.0" y="163.0" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[I have a messy AI or knowledge problem](/work-with-me/) (lines 157–162)</title></rect>
+<rect x="972.0" y="165.1" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[I'm a fellow builder or practitioner](/projects/) (lines 163–168)</title></rect>
+<rect x="972.0" y="167.2" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[I'm hiring or evaluating fit](/my-journey/) (lines 169–174)</title></rect>
+<rect x="972.0" y="169.3" width="292.0" height="12.7" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[I'm curious who Barbara is](/my-journey/) (lines 175–210)</title></rect>
+<rect x="972.0" y="182.0" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[Experiments &amp; Musings](/blog/) (lines 211–216)</title></rect>
+<rect x="972.0" y="184.1" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[Essays &amp; Perspectives](/thinking/) (lines 217–222)</title></rect>
+<rect x="972.0" y="186.2" width="292.0" height="4.6" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[Explore by Topic](/topics/) (lines 223–235)</title></rect>
+<rect x="972.0" y="197.5" width="292.0" height="16.9" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Three ways to work together (lines 255–302)</title></rect>
+<text x="978.0" y="210.5" font-size="12.5" fill="#2B2B2B">Three ways to work together</text>
+<rect x="972.0" y="214.4" width="292.0" height="1.4" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Three things I bring that rarely come together (lines 303–306)</title></rect>
+<rect x="972.0" y="215.8" width="292.0" height="1.4" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Cognitive science (lines 307–310)</title></rect>
+<rect x="972.0" y="217.2" width="292.0" height="1.4" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Full-stack execution (lines 311–314)</title></rect>
+<rect x="972.0" y="218.6" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Production AI (lines 315–322)</title></rect>
+<rect x="972.0" y="221.5" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[Ask my Digital Twin](https://twin.barbhs.com) (lines 323–328)</title></rect>
+<rect x="972.0" y="223.6" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[Browse projects](/projects/) (lines 329–334)</title></rect>
+<rect x="972.0" y="225.7" width="292.0" height="5.6" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>[Read the longer story](/my-journey/) (lines 335–350)</title></rect>
+<rect x="972.0" y="247.9" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Learning to See How We See (lines 398–405)</title></rect>
+<rect x="972.0" y="250.7" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>From Lab Theory to Human Impact (lines 406–413)</title></rect>
+<rect x="972.0" y="253.5" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Healthcare Through a Cognitive Lens (lines 414–419)</title></rect>
+<rect x="972.0" y="255.6" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>The Pattern Recognition Years (lines 420–427)</title></rect>
+<rect x="972.0" y="258.5" width="292.0" height="1.4" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Making Metadata Human-Friendly (lines 428–431)</title></rect>
+<rect x="972.0" y="295.1" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Looking for someone who designs data systems that think with people, not against them? (lines 532–539)</title></rect>
+<rect x="972.0" y="317.0" width="292.0" height="13.0" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Two-Tool Architecture (lines 594–630)</title></rect>
+<text x="978.0" y="327.0" font-size="12.5" fill="#2B2B2B">Two-Tool Architecture</text>
+<rect x="972.0" y="330.7" width="292.0" height="13.0" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Five Core Tables (lines 633–669)</title></rect>
+<text x="978.0" y="340.7" font-size="12.5" fill="#2B2B2B">Five Core Tables</text>
+<rect x="972.0" y="343.7" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Design Decisions (lines 670–678)</title></rect>
+<rect x="972.0" y="347.6" width="292.0" height="7.4" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Evaluation Harness (lines 681–701)</title></rect>
+<rect x="972.0" y="355.0" width="292.0" height="3.5" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Audit Logging (lines 702–711)</title></rect>
+<rect x="972.0" y="358.5" width="292.0" height="6.3" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Provenance Tracking (lines 712–729)</title></rect>
+<rect x="972.0" y="365.6" width="292.0" height="3.9" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>✅ Shipped (lines 732–742)</title></rect>
+<rect x="972.0" y="369.5" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>🔧 In Progress (lines 743–751)</title></rect>
+<rect x="972.0" y="410.0" width="292.0" height="4.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>The Deeper Friction (lines 858–869)</title></rect>
+<rect x="972.0" y="436.1" width="292.0" height="14.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Data Pipeline (lines 932–971)</title></rect>
+<text x="978.0" y="447.2" font-size="12.5" fill="#2B2B2B">Data Pipeline</text>
+<rect x="972.0" y="450.2" width="292.0" height="11.3" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>ML Classification System (lines 972–1003)</title></rect>
+<rect x="972.0" y="461.4" width="292.0" height="4.6" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Consistency Scoring (lines 1004–1016)</title></rect>
+<rect x="972.0" y="466.7" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Dashboard Views (lines 1019–1027)</title></rect>
+<rect x="972.0" y="469.9" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>ML/AI Features (lines 1028–1036)</title></rect>
+<rect x="972.0" y="473.1" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Data Infrastructure (lines 1037–1044)</title></rect>
+<rect x="972.0" y="475.9" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Developer Experience (lines 1045–1053)</title></rect>
+<rect x="972.0" y="480.5" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>The Transformation (lines 1058–1066)</title></rect>
+<rect x="972.0" y="483.6" width="292.0" height="8.5" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>What The Data Shows (lines 1067–1090)</title></rect>
+<rect x="972.0" y="513.2" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Performance Benchmarks (lines 1151–1159)</title></rect>
+<rect x="972.0" y="516.4" width="292.0" height="2.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Key Design Decisions (lines 1160–1166)</title></rect>
+<rect x="972.0" y="518.9" width="292.0" height="7.4" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Defensive Programming Patterns (lines 1167–1187)</title></rect>
+<rect x="972.0" y="552.7" width="292.0" height="4.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>The Real Friction (lines 1263–1274)</title></rect>
+<rect x="972.0" y="586.9" width="292.0" height="2.1" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Core Features (lines 1360–1365)</title></rect>
+<rect x="972.0" y="589.0" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Data Extraction (lines 1366–1371)</title></rect>
+<rect x="972.0" y="591.1" width="292.0" height="1.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>API Integration (lines 1372–1376)</title></rect>
+<rect x="972.0" y="592.9" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Infrastructure (lines 1377–1384)</title></rect>
+<rect x="972.0" y="613.7" width="292.0" height="4.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Testing Strategy (lines 1436–1447)</title></rect>
+<rect x="972.0" y="617.9" width="292.0" height="3.2" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Key Design Decisions (lines 1448–1456)</title></rect>
+<rect x="972.0" y="642.6" width="292.0" height="12.7" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Extraction Pipeline (lines 1518–1553)</title></rect>
+<rect x="972.0" y="655.9" width="292.0" height="3.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Core Features (lines 1556–1566)</title></rect>
+<rect x="972.0" y="659.8" width="292.0" height="3.5" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Privacy Architecture (lines 1567–1576)</title></rect>
+<rect x="972.0" y="664.1" width="292.0" height="13.0" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Core Components (lines 1579–1615)</title></rect>
+<text x="978.0" y="674.1" font-size="12.5" fill="#2B2B2B">Core Components</text>
+<rect x="972.0" y="677.1" width="292.0" height="3.5" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Storage Pattern (lines 1616–1625)</title></rect>
+<rect x="972.0" y="681.3" width="292.0" height="13.0" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Streamlit Lessons Learned (lines 1628–1664)</title></rect>
+<text x="978.0" y="691.4" font-size="12.5" fill="#2B2B2B">Streamlit Lessons Learned</text>
+<rect x="972.0" y="725.7" width="292.0" height="11.6" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>The Pipeline (lines 1754–1786)</title></rect>
+<rect x="972.0" y="738.1" width="292.0" height="3.5" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Core Features (lines 1789–1798)</title></rect>
+<rect x="972.0" y="741.6" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Production Readiness (lines 1799–1807)</title></rect>
+<rect x="972.0" y="745.5" width="292.0" height="11.6" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Core Models (lines 1810–1842)</title></rect>
+<rect x="972.0" y="757.1" width="292.0" height="7.0" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Data Flow (lines 1843–1862)</title></rect>
+<rect x="972.0" y="765.5" width="292.0" height="3.5" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Privacy-First Design (lines 1867–1876)</title></rect>
+<rect x="972.0" y="769.1" width="292.0" height="6.3" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Contribution Flow (lines 1877–1894)</title></rect>
+<rect x="972.0" y="820.9" width="292.0" height="8.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Provider Routing (lines 2024–2048)</title></rect>
+<rect x="972.0" y="829.7" width="292.0" height="4.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Model Comparison (lines 2049–2060)</title></rect>
+<rect x="972.0" y="833.9" width="292.0" height="4.9" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Conversation Management (lines 2061–2074)</title></rect>
+<rect x="972.0" y="839.5" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Chat Features (lines 2077–2084)</title></rect>
+<rect x="972.0" y="842.4" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Comparison Features (lines 2085–2093)</title></rect>
+<rect x="972.0" y="845.5" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Data Management (lines 2094–2101)</title></rect>
+<rect x="972.0" y="1011.1" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>1. Adoption metrics can hide operational debt (lines 2564–2571)</title></rect>
+<rect x="972.0" y="1014.0" width="292.0" height="4.9" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>2. AI makes weak work harder to see (lines 2572–2585)</title></rect>
+<rect x="972.0" y="1018.9" width="292.0" height="4.9" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>3. The scarce resource is judgment, not access (lines 2586–2599)</title></rect>
+<rect x="972.0" y="1038.3" width="292.0" height="4.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Downloadable companion (lines 2641–2652)</title></rect>
+<rect x="972.0" y="1042.5" width="292.0" height="2.5" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Visual companion (lines 2653–2659)</title></rect>
+<rect x="972.0" y="1137.3" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Required Fields (All Content) (lines 2922–2930)</title></rect>
+<rect x="972.0" y="1140.5" width="292.0" height="3.9" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Recommended Fields (lines 2931–2941)</title></rect>
+<rect x="972.0" y="1187.3" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>A) **Attribution‑First Compose** (lines 3064–3072)</title></rect>
+<rect x="972.0" y="1190.5" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>B) **Query Routing (Cheap &amp; Cheerful)** (lines 3073–3081)</title></rect>
+<rect x="972.0" y="1193.7" width="292.0" height="3.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>C) **Hybrid Retrieval with “Must‑Include” Filters** (lines 3082–3090)</title></rect>
+<rect x="972.0" y="1197.6" width="292.0" height="1.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Minimal eval set (start here) (lines 3093–3097)</title></rect>
+<rect x="972.0" y="1199.3" width="292.0" height="1.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>CI‑style checks (lines 3098–3102)</title></rect>
+<rect x="972.0" y="1207.8" width="292.0" height="3.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Downloadables (optional) (lines 3122–3132)</title></rect>
+<rect x="972.0" y="1223.6" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Minimal entity set (adapt for any domain) (lines 3167–3172)</title></rect>
+<rect x="972.0" y="1228.2" width="292.0" height="2.5" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Reusable checklist (lines 3180–3186)</title></rect>
+<rect x="972.0" y="1241.6" width="292.0" height="3.9" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Downloadables (optional) (lines 3218–3228)</title></rect>
+<rect x="972.0" y="1253.6" width="292.0" height="3.5" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Fitness tracker, 14 years, 2,593 workouts (lines 3252–3261)</title></rect>
+<rect x="972.0" y="1257.1" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Beehive monitoring, 4 seasons, 400+ photo-inspections (lines 3262–3269)</title></rect>
+<rect x="972.0" y="1259.9" width="292.0" height="4.9" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Convoscope interface, multi-model comparison (lines 3270–3283)</title></rect>
+<rect x="972.0" y="1269.8" width="292.0" height="1.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>1) Chunk by purpose, not number (lines 3298–3302)</title></rect>
+<rect x="972.0" y="1271.6" width="292.0" height="1.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>2) Respect the edges (lines 3303–3307)</title></rect>
+<rect x="972.0" y="1273.3" width="292.0" height="1.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>3) Progressive disclosure (lines 3308–3312)</title></rect>
+<rect x="972.0" y="1314.2" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>What does 'harness' mean in AI? (lines 3424–3429)</title></rect>
+<rect x="972.0" y="1316.3" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Memory is more than storage (lines 3430–3435)</title></rect>
+<rect x="972.0" y="1318.4" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>The missing layer of AI adoption (lines 3436–3441)</title></rect>
+<rect x="972.0" y="1320.5" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>The integration test: five questions for any AI workflow (lines 3442–3447)</title></rect>
+<rect x="972.0" y="1322.6" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>AI literacy is a stack (lines 3448–3453)</title></rect>
+<rect x="972.0" y="1324.8" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>AI doesn't fix the frame (lines 3454–3459)</title></rect>
+<rect x="972.0" y="1326.9" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Different instruments, same system-level gap (lines 3460–3465)</title></rect>
+<rect x="972.0" y="1329.0" width="292.0" height="8.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Polished output can hide weak work (lines 3466–3490)</title></rect>
+<rect x="972.0" y="1338.5" width="292.0" height="2.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>What Does 'Harness' Mean in AI? (lines 3493–3500)</title></rect>
+<rect x="972.0" y="1341.3" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>The Anti-Slop Writing Kit (lines 3501–3508)</title></rect>
+<rect x="972.0" y="1344.1" width="292.0" height="2.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Memory Is More Than Storage (lines 3509–3516)</title></rect>
+<rect x="972.0" y="1347.0" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Is Your Knowledge Ready for AI? (lines 3517–3524)</title></rect>
+<rect x="972.0" y="1349.8" width="292.0" height="2.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>AI Instruction File Evaluation Worksheet (lines 3525–3532)</title></rect>
+<rect x="972.0" y="1352.6" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Git Workflow Cheatsheet (lines 3533–3540)</title></rect>
+<rect x="972.0" y="1355.4" width="292.0" height="2.8" fill="#C04818" stroke="#F4F0E8" stroke-width="0.8"><title>Resume Data Schema (lines 3541–3548)</title></rect>
+<rect x="972.0" y="1358.2" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Understanding Your Schema.org Implementation (lines 3549–3556)</title></rect>
+<rect x="972.0" y="1361.1" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Color &amp; Contrast Accessibility Checklist (lines 3557–3564)</title></rect>
+<rect x="972.0" y="1363.9" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Question-to-Encoding Crib Sheet (lines 3565–3572)</title></rect>
+<rect x="972.0" y="1366.7" width="292.0" height="22.9" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Small Multiples Layout Template (lines 3573–3637)</title></rect>
+<text x="978.0" y="1382.6" font-size="12.5" fill="#2B2B2B">Small Multiples Layout Template</text>
+<rect x="972.0" y="1431.2" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Benefits (lines 3756–3763)</title></rect>
+<rect x="972.0" y="1434.7" width="292.0" height="4.9" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Core Sections (lines 3766–3779)</title></rect>
+<rect x="972.0" y="1439.6" width="292.0" height="14.4" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Experience Section (Most Important) (lines 3780–3820)</title></rect>
+<text x="978.0" y="1451.1" font-size="12.5" fill="#2B2B2B">Experience Section (Most Important)</text>
+<rect x="972.0" y="1454.8" width="292.0" height="2.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Adding a New Role (lines 3823–3830)</title></rect>
+<rect x="972.0" y="1457.6" width="292.0" height="3.9" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Updating Skills (lines 3831–3841)</title></rect>
+<rect x="972.0" y="1461.5" width="292.0" height="6.3" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Customizing Filter Buttons (lines 3842–3859)</title></rect>
+<rect x="972.0" y="1468.5" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Date Format (lines 3862–3867)</title></rect>
+<rect x="972.0" y="1470.6" width="292.0" height="4.9" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Multi-Domain Roles (lines 3868–3881)</title></rect>
+<rect x="972.0" y="1475.6" width="292.0" height="4.2" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Validation (lines 3882–3893)</title></rect>
+<rect x="972.0" y="1484.0" width="292.0" height="1.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Keep It DRY (lines 3906–3910)</title></rect>
+<rect x="972.0" y="1485.8" width="292.0" height="1.8" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Version Control Best Practices (lines 3911–3915)</title></rect>
+<rect x="972.0" y="1487.6" width="292.0" height="2.1" fill="#CFCBBE" stroke="#F4F0E8" stroke-width="0.8"><title>Content Guidelines (lines 3916–3921)</title></rect>
+<rect x="1268.0" y="173.5" width="292.0" height="8.5" fill="#DDD8CC" stroke="#F4F0E8" stroke-width="0.8"><title>Choose your lane (lines 187–210)</title></rect>
+<rect x="1268.0" y="199.6" width="292.0" height="4.9" fill="#DDD8CC" stroke="#F4F0E8" stroke-width="0.8"><title>Knowledge Legibility Audit (lines 261–274)</title></rect>
+<rect x="1268.0" y="204.6" width="292.0" height="4.2" fill="#DDD8CC" stroke="#F4F0E8" stroke-width="0.8"><title>Verified AI System Build (lines 275–286)</title></rect>
+<rect x="1268.0" y="208.8" width="292.0" height="5.6" fill="#DDD8CC" stroke="#F4F0E8" stroke-width="0.8"><title>AI Adoption &amp; Data Readiness Workshop (lines 287–302)</title></rect>
+<rect x="1268.0" y="227.8" width="292.0" height="3.5" fill="#DDD8CC" stroke="#F4F0E8" stroke-width="0.8"><title>Have a fuzzy AI problem and want a real partner? (lines 341–350)</title></rect>
+<rect x="1268.0" y="1441.0" width="292.0" height="4.6" fill="#DDD8CC" stroke="#F4F0E8" stroke-width="0.8"><title>Required Fields (lines 3784–3796)</title></rect>
+<rect x="1268.0" y="1445.6" width="292.0" height="4.9" fill="#DDD8CC" stroke="#F4F0E8" stroke-width="0.8"><title>Optional But Recommended (lines 3797–3810)</title></rect>
+<rect x="1268.0" y="1450.6" width="292.0" height="3.5" fill="#DDD8CC" stroke="#F4F0E8" stroke-width="0.8"><title>How Filtering Works (lines 3811–3820)</title></rect>
+<text x="64.0" y="808.0" font-size="14" fill="#F4F0E8" text-anchor="middle" transform="rotate(-90 64.0 808.0)">Barbara Hidalgo-Sotelo Website Corpus</text>
+<text x="40" y="1538" font-size="13" fill="#6B6B66">Fig. V7 · generated by scripts/gen_fig_v7_index_tree.py from indexes/IDX-D/index.json · height ∝ line span · columns = tree depth</text>
+</svg>

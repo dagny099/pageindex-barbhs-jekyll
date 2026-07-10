@@ -1,0 +1,43 @@
+qid,category,index,retriever,retrieval_score,answer_score,judge,note
+DL3,direct-location,IDX-D,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+DL3,direct-location,IDX-C,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+DL3,direct-location,IDX-O,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+DL4,direct-location,IDX-D,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+DL4,direct-location,IDX-C,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+DL4,direct-location,IDX-O,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+DL5,direct-location,IDX-D,gpt-4o-2024-11-20,4,3,"claude-opus (agent, first pass)",missed tertiary pace fallback
+DL5,direct-location,IDX-C,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",full hierarchy incl tertiary
+DL5,direct-location,IDX-O,gpt-4o-2024-11-20,3,3,"claude-opus (agent, first pass)","narrow fetch, missed tertiary"
+DL9,direct-location,IDX-D,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+DL9,direct-location,IDX-C,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+DL9,direct-location,IDX-O,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+CS2,cross-section-synthesis,IDX-D,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+CS2,cross-section-synthesis,IDX-C,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+CS2,cross-section-synthesis,IDX-O,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+CS6,cross-section-synthesis,IDX-D,gpt-4o-2024-11-20,2,2,"claude-opus (agent, first pass)",found 2 off-target instances
+CS6,cross-section-synthesis,IDX-C,gpt-4o-2024-11-20,2,2,"claude-opus (agent, first pass)",3 instances but wrong targets
+CS6,cross-section-synthesis,IDX-O,gpt-4o-2024-11-20,1,1,"claude-opus (agent, first pass)","found only 1, gave up"
+CS8,cross-section-synthesis,IDX-D,gpt-4o-2024-11-20,2,2,"claude-opus (agent, first pass)",said 3 of 6; GT=5
+CS8,cross-section-synthesis,IDX-C,gpt-4o-2024-11-20,2,2,"claude-opus (agent, first pass)",said 3 of 6; GT=5
+CS8,cross-section-synthesis,IDX-O,gpt-4o-2024-11-20,1,1,"claude-opus (agent, first pass)",said 2 of 6; GT=5
+CN4,consistency,IDX-D,gpt-4o-2024-11-20,4,3,"claude-opus (agent, first pass)","found table, but resolved to 14 vs surfacing discrepancy"
+CN4,consistency,IDX-C,gpt-4o-2024-11-20,4,3,"claude-opus (agent, first pass)","noted 13v14, downplayed, missed table"
+CN4,consistency,IDX-O,gpt-4o-2024-11-20,3,2,"claude-opus (agent, first pass)",concluded false agreement on 14
+CN6,consistency,IDX-D,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",WIDE fetch caught body 11-15 vs header 11-7
+CN6,consistency,IDX-C,gpt-4o-2024-11-20,2,1,"claude-opus (agent, first pass)","NARROW fetch, wrongly said dates agree"
+CN6,consistency,IDX-O,gpt-4o-2024-11-20,2,1,"claude-opus (agent, first pass)","NARROW fetch, wrongly said dates agree"
+EG4,evidence-gap,IDX-D,gpt-4o-2024-11-20,3,3,"claude-opus (agent, first pass)","clean absence, no indirect traces"
+EG4,evidence-gap,IDX-C,gpt-4o-2024-11-20,2,2,"claude-opus (agent, first pass)","muddled, hallucinated associations"
+EG4,evidence-gap,IDX-O,gpt-4o-2024-11-20,3,3,"claude-opus (agent, first pass)",clean absence + found resume-schema trace
+EG5,evidence-gap,IDX-D,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+EG5,evidence-gap,IDX-C,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+EG5,evidence-gap,IDX-O,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",
+EG6,evidence-gap,IDX-D,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",correctly separated real vs placeholder
+EG6,evidence-gap,IDX-C,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",correctly separated
+EG6,evidence-gap,IDX-O,gpt-4o-2024-11-20,4,3,"claude-opus (agent, first pass)",slightly less crisp on placeholders
+RD4,reflective-discovery,IDX-D,gpt-4o-2024-11-20,2,2,"claude-opus (agent, first pass)","fetched wrong sections, missed both My Journey instances"
+RD4,reflective-discovery,IDX-C,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",found both My Journey instances
+RD4,reflective-discovery,IDX-O,gpt-4o-2024-11-20,4,4,"claude-opus (agent, first pass)",found both My Journey instances
+RD6,reflective-discovery,IDX-D,gpt-4o-2024-11-20,3,3,"claude-opus (agent, first pass)",missed the resource's origin acknowledgment
+RD6,reflective-discovery,IDX-C,gpt-4o-2024-11-20,3,3,"claude-opus (agent, first pass)",missed acknowledgment
+RD6,reflective-discovery,IDX-O,gpt-4o-2024-11-20,3,4,"claude-opus (agent, first pass)",noted resource acknowledges origin

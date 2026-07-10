@@ -18,8 +18,13 @@ Payload sizes (structure/content tokens) use one fixed reference encoding so the
 are comparable across retrievers regardless of each model's own tokenizer.
 
 Usage:
-  python3 scripts/run_retrieval.py --index-id IDX-D --retrievers gpt-4o-2024-11-20 --questions DL3 CS2 CN4
-  python3 scripts/run_retrieval.py --retrievers gpt-4o-mini anthropic/claude-sonnet-4-5 --questions DL3
+  # Index comparison ("does a summarized index help?") — hold retriever fixed:
+  python3 scripts/run_retrieval.py --indexes IDX-D IDX-C IDX-O --retrievers gpt-4o-2024-11-20
+  # Retriever comparison ("open-source vs commercial") — hold index fixed:
+  python3 scripts/run_retrieval.py --indexes IDX-C \
+      --retrievers gpt-4o-2024-11-20 anthropic/claude-sonnet-4-5 ollama_chat/qwen2.5-7b-instruct-ctx32k
+  # Subset of questions, one index/retriever:
+  python3 scripts/run_retrieval.py --indexes IDX-D --retrievers gpt-4o-2024-11-20 --questions DL3 CS2 CN4
   python3 scripts/run_retrieval.py                      # IDX-D, gpt-4o, all questions
 """
 from __future__ import annotations
@@ -123,13 +128,13 @@ def git_head(repo: Path) -> str:
         return "unknown"
 
 
-def load_questions(ids: list[str]) -> list[tuple[str, str, str]]:
+def load_questions(ids: list[str]) -> list[dict]:
     rows = {r["id"]: r for r in csv.DictReader((REPO / "evaluations" / "questions.csv").open())}
     ids = ids or list(rows)
     unknown = [q for q in ids if q not in rows]
     if unknown:
         raise SystemExit(f"Unknown question id(s): {unknown}. Valid ids: {sorted(rows)}")
-    return [(qid, rows[qid]["category"], rows[qid]["question"]) for qid in ids]
+    return [rows[qid] for qid in ids]
 
 
 def build_documents(index_path: Path) -> tuple[dict, str]:
@@ -196,17 +201,57 @@ def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: 
     }
 
 
+def write_markdown(run_dir: Path, record: dict, provenance: dict, indexes: list[str], retrievers: list[str]) -> None:
+    lines = [f"# Retrieval run {record['run_id']}", "",
+             f"- Indexes: {', '.join('`'+i+'`' for i in indexes)}",
+             f"- Retrievers: {', '.join('`'+m+'`' for m in retrievers)}",
+             f"- Corpus: `{provenance['corpus_version']}` (`{provenance['corpus_sha256'][:12]}…`)",
+             f"- Repo commit: `{record['repo_commit'][:10]}`  ·  questions: {len(record['questions'])}", "",
+             "## Comparison — means across questions", "",
+             "| Index | Retriever | n | tools | struct_tok | content_tok | total_tok | $ | s |",
+             "|---|---|---|---|---|---|---|---|---|"]
+    for index_id in indexes:
+        for m in retrievers:
+            rs = [r for r in record["results"] if r["index_id"] == index_id and r["retriever"] == m and not r["error"]]
+            if not rs:
+                lines.append(f"| `{index_id}` | `{m}` | 0 | — | — | — | — | — | — |"); continue
+            n = len(rs)
+            avg = lambda k: round(sum(r[k] for r in rs) / n, 1)
+            tt = round(sum(r["usage"].get("total_tokens", 0) for r in rs) / n)
+            cost = round(sum(r["est_cost_usd"] or 0 for r in rs), 4)
+            lines.append(f"| `{index_id}` | `{m}` | {n} | {avg('n_tool_calls')} | {avg('structure_tokens')} | "
+                         f"{avg('content_tokens')} | {tt} | {cost} | {avg('latency_seconds')} |")
+
+    lines += ["", "## Per-question detail (question, expected evidence, ground truth, answer)",
+              "*Everything needed to score each answer is inline below — no cross-referencing.*", ""]
+    for r in record["results"]:
+        lines += [f"### [{r['index_id']} | {r['retriever']}] {r['qid']} — {r['category']}", "",
+                  f"**Q:** {r['question']}", ""]
+        if r.get("expected_evidence"):
+            lines += [f"**Expected evidence:** {r['expected_evidence']}", ""]
+        if r.get("ground_truth"):
+            lines += [f"**Ground truth:** {r['ground_truth']}", ""]
+        if r["error"]:
+            lines += [f"**ERROR:** {r['error']}", "", "---", ""]; continue
+        fetched = ", ".join(f"`{tc['args'].get('pages','')}`" for tc in r["tool_calls"]
+                            if tc["tool"] == "get_page_content") or "— (no content fetched)"
+        lines += [f"metrics: tools={r['n_tool_calls']} · struct_tok={r['structure_tokens']} · "
+                  f"content_tok={r['content_tokens']} · total_tok={r['usage'].get('total_tokens','?')} · "
+                  f"${r['est_cost_usd']} · {r['latency_seconds']}s",
+                  f"fetched line ranges: {fetched}", "",
+                  "**Answer:**", "", r["answer"], "", "---", ""]
+    (run_dir / "run.md").write_text("\n".join(lines))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--index", default=None, help="path to index.json (default derived from --index-id)")
-    ap.add_argument("--index-id", default="IDX-D")
+    ap.add_argument("--indexes", nargs="+", default=["IDX-D"],
+                    help="index ids to run/compare, e.g. IDX-D IDX-C IDX-O")
     ap.add_argument("--retrievers", nargs="+", default=["gpt-4o-2024-11-20"])
     ap.add_argument("--questions", nargs="*", default=[], help="question ids (default: all in the CSV)")
     args = ap.parse_args()
 
     set_tracing_disabled(True)
-    index_path = Path(args.index) if args.index else REPO / "indexes" / args.index_id / "index.json"
-    documents, doc_id = build_documents(index_path)
     provenance = json.loads((REPO / "corpus" / "site-book-v1" / "provenance.json").read_text())
     questions = load_questions(args.questions)
 
@@ -214,59 +259,31 @@ def main() -> int:
     run_dir = REPO / "runs" / ts
     run_dir.mkdir(parents=True, exist_ok=True)
 
-    record = {"run_id": ts, "purpose": "retrieval", "index_id": args.index_id,
-              "retrievers": args.retrievers, "corpus_version": provenance["corpus_version"],
-              "corpus_sha256": provenance["corpus_sha256"], "repo_commit": git_head(REPO), "results": []}
+    record = {"run_id": ts, "purpose": "retrieval", "indexes": args.indexes,
+              "retrievers": args.retrievers, "questions": [q["id"] for q in questions],
+              "corpus_version": provenance["corpus_version"], "corpus_sha256": provenance["corpus_sha256"],
+              "repo_commit": git_head(REPO), "results": []}
 
-    for model_name in args.retrievers:
-        model_obj = resolve_model(model_name)
-        for qid, category, question in questions:
-            print(f"\n{'='*70}\n[{model_name}] {qid} [{category}]\n{question}\n{'='*70}")
-            res = run_one(documents, doc_id, model_name, model_obj, question)
-            res.update({"qid": qid, "category": category, "question": question})
-            record["results"].append(res)
-            if res["error"]:
-                print(f"ERROR: {res['error']}")
-            else:
-                print(f"tools={res['n_tool_calls']}  struct_tok={res['structure_tokens']}  "
-                      f"content_tok={res['content_tokens']}  total_tok={res['usage'].get('total_tokens','?')}  "
-                      f"${res['est_cost_usd']}  {res['latency_seconds']}s")
-                print(f"ANSWER:\n{res['answer']}")
+    for index_id in args.indexes:
+        documents, doc_id = build_documents(REPO / "indexes" / index_id / "index.json")
+        for model_name in args.retrievers:
+            model_obj = resolve_model(model_name)
+            for q in questions:
+                print(f"\n{'='*70}\n[{index_id} | {model_name}] {q['id']} [{q['category']}]\n{q['question']}\n{'='*70}")
+                res = run_one(documents, doc_id, model_name, model_obj, q["question"])
+                res.update({"index_id": index_id, "qid": q["id"], "category": q["category"],
+                            "question": q["question"], "expected_evidence": q.get("expected_evidence", ""),
+                            "ground_truth": q.get("ground_truth", "")})
+                record["results"].append(res)
+                if res["error"]:
+                    print(f"ERROR: {res['error']}")
+                else:
+                    print(f"tools={res['n_tool_calls']} struct_tok={res['structure_tokens']} "
+                          f"content_tok={res['content_tokens']} total_tok={res['usage'].get('total_tokens','?')} "
+                          f"${res['est_cost_usd']} {res['latency_seconds']}s")
 
     (run_dir / "run.json").write_text(json.dumps(record, indent=2, ensure_ascii=False))
-
-    # human-readable summary + per-retriever comparison table
-    lines = [f"# Retrieval run {ts}", "",
-             f"- Index: **{args.index_id}** ({provenance['corpus_version']}, corpus `{provenance['corpus_sha256'][:12]}…`)",
-             f"- Retrievers: {', '.join(f'`{m}`' for m in args.retrievers)}",
-             f"- Repo commit: `{record['repo_commit'][:10]}`", "",
-             "## Comparison (means across questions)", "",
-             "| Retriever | n | tools | struct_tok | content_tok | total_tok | $ | s |",
-             "|---|---|---|---|---|---|---|---|"]
-    for m in args.retrievers:
-        rs = [r for r in record["results"] if r["retriever"] == m and not r["error"]]
-        if not rs:
-            lines.append(f"| `{m}` | 0 | — | — | — | — | — | — | (all errored) |"); continue
-        n = len(rs)
-        avg = lambda k: round(sum(r[k] for r in rs) / n, 1)
-        tt = round(sum(r["usage"].get("total_tokens", 0) for r in rs) / n)
-        cost = sum(r["est_cost_usd"] or 0 for r in rs)
-        lines.append(f"| `{m}` | {n} | {avg('n_tool_calls')} | {avg('structure_tokens')} | "
-                     f"{avg('content_tokens')} | {tt} | {round(cost,4)} | {avg('latency_seconds')} |")
-    lines.append("")
-    for r in record["results"]:
-        head = f"## [{r['retriever']}] {r['qid']} — {r['category']}"
-        lines += [head, "", f"**Q:** {r['question']}", ""]
-        if r["error"]:
-            lines += [f"**ERROR:** {r['error']}", "", "---", ""]; continue
-        lines += [f"tools={r['n_tool_calls']} · struct_tok={r['structure_tokens']} · "
-                  f"content_tok={r['content_tokens']} · total_tok={r['usage'].get('total_tokens','?')} · "
-                  f"${r['est_cost_usd']} · {r['latency_seconds']}s", ""]
-        for tc in r["tool_calls"]:
-            lines.append(f"- `{tc['tool']}({tc['args'].get('pages','')})` → {tc['output_tokens']} tok")
-        lines += ["", "**Answer:**", "", r["answer"], "", "---", ""]
-    (run_dir / "run.md").write_text("\n".join(lines))
-
+    write_markdown(run_dir, record, provenance, args.indexes, args.retrievers)
     print(f"\nSaved: {run_dir}/run.json and run.md")
     return 0
 

@@ -1,0 +1,119 @@
+# Configuration for scripts/build_paper_book.py — the in-repo producer of
+# corpus/paper-book-v1/. Unlike site-book-v1 (produced in the website repo and
+# synced), this corpus is built HERE from the frozen source PDF. All extraction
+# tunables live in this file so the build is reproducible from PDF + config + code.
+
+corpus_version: paper-book-v1
+
+source_pdf:
+  path: sources/paper-2009/EhingerHidalgoTorralbaOliva_VisCog2009.pdf
+  sha256: 3bdc5cad724300bc3bc2b97ffdab9057d803f45c20b3abb5709859dec92e6b12
+  citation: >-
+    Ehinger, K. A., Hidalgo-Sotelo, B., Torralba, A., & Oliva, A. (2009).
+    Modelling search for people in 900 scenes: A combined source model of eye
+    guidance. Visual Cognition, 17(6-7), 945-978.
+  doi: 10.1080/13506280902834720
+  pages: 34
+
+extraction:
+  tool: PyMuPDF
+  # Build fails if the installed PyMuPDF version differs — byte-identical
+  # reproducibility is only guaranteed against this exact version.
+  expected_version: 1.26.4
+
+# The published PDF uses Type-3-style symbol fonts whose glyphs extract as the
+# wrong (or control) characters. Decoded by inspecting print context; every
+# substitution is logged in the QC report.
+glyph_map:
+  AdvBMa1:
+    "\x01": "–"   # en-dash (page ranges: 945–978)
+    "\x02": "×"   # multiplication (1024×768)
+    "\x03": "+"   # plus (+/− eccentricity; Saliency + Target features)
+    "\x04": "−"   # minus (t(404)=−2.346)
+    "\x05": "="   # equals (SEM=18, p=.218)
+    "*": "—"      # em-dash (Visual search—locating…—is)
+  AdvDM5:
+    "B": "<"      # less-than (p<.001)
+  AdvPi1:
+    "8": "°"      # degree sign (5.25°, 23.5°×17.7°)
+  AdvPi3:
+    "#": "©"      # copyright (© 2009 Psychology Press)
+  AdvBM13:
+    "g": "γ"      # gamma (equation 1 exponents)
+  AdvP4C4E51:
+    ";": ","      # comma inside math arguments (M(x, y))
+
+ligature_map:
+  "ﬁ": "fi"
+  "ﬂ": "fl"
+  "ﬀ": "ff"
+  "ﬃ": "ffi"
+  "ﬄ": "ffl"
+
+# Letter + spacing modifier char extracted as two glyphs; recombined.
+diacritic_map:
+  "n˜": "ñ"   # Muñoz
+  "a¨": "ä"   # Einhäuser
+
+# Journal furniture stripped from every page (never reaches the book).
+furniture:
+  watermark_font: Courier            # "Downloaded By: [Oliva, Aude] …"
+  running_head_font: AdvUX
+  running_head_y_max: 130            # page number (10pt) + running head (8pt)
+
+# Font/size → role classification. Sizes rounded to 1 decimal.
+roles:
+  title: {font: AdvTRB, size: 13.9}
+  author: {font: AdvTR, size: 12.0, page: 1}
+  abstract_size: 8.5
+  keywords_size: 9.5
+  heading: {font: AdvUX, size: 11.0}   # ALL CAPS => level 2, mixed => level 3
+  body_size: 10.0
+  small_size: 8.0                      # captions / references / footnotes / front matter
+  table_size: 7.5
+  footnote_marker_size: 5.6
+  inline_superscript_size: 7.0         # digits = footnote refs, letters = subscripts
+
+paragraph:
+  indent_threshold: 6      # x0 more than this beyond page body margin => new paragraph
+  gap_threshold: 18        # same-page vertical gap (pt) => new paragraph
+
+table_1:
+  page: 21
+  caption_font: AdvUX      # 8.0pt block above the table
+  column_anchors: [148, 273, 347, 427]   # label + 3 numeric column x positions
+  numeric_col_names: ["Area under curve", "Performance at 20% threshold", "Performance at 10% threshold"]
+  header_y_max: 200        # rows above this are column headers
+  section_x_max: 152       # label-only rows starting left of this are section rows
+
+# Headings that do NOT exist in print but are required for a well-formed book.
+# Inserted immediately before the main body flow (i.e. after Abstract/Key words,
+# covering the paper's unlabeled opening text). Each is marked with an HTML
+# comment in the output and listed in the QC report.
+synthetic_sections:
+  - title: Introduction
+
+expected:
+  figures: 12
+  tables: 1
+  equations: 1
+  footnotes: 7
+  top_level_sections:      # verbatim print headings, for validation
+    - EXPERIMENTAL METHOD
+    - HUMAN EYE MOVEMENTS RESULT
+    - MODELLING METHODS
+    - MODELLING RESULTS
+    - DISCUSSION
+    - CONCLUDING REMARKS
+    - REFERENCES
+
+# Observed extraction warts kept verbatim (part of the honest PDF
+# representation); surfaced in the QC report for review.
+known_extraction_warts:
+  - "PDF p.10: 'aswell' — missing inter-word space in extraction (print: 'as well'); kept verbatim."
+  - "PDF p.12: 'The Dalal andTriggs (DT) detector' — missing space; kept verbatim."
+  - "Heading extracted as 'HUMAN EYE MOVEMENTS RESULT' (no trailing S) — matches the PDF text layer; verify against print."
+
+output:
+  corpus_dir: corpus/paper-book-v1
+  qc_report: reports/qc-paper-book-v1.md

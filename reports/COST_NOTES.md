@@ -121,16 +121,82 @@ trajectory) as the primary invariant**, answer text as secondary — because any
 divergence would be sampling nondeterminism, not caching, and exact answer text can
 wobble on a rerun for reasons unrelated to the cache.
 
-**Validation status (2026-07-10).** Cost model: self-test ✓ (`python3
-scripts/usage_logging.py`). Instrumentation, phase inference, amplification
-(input climbs `344 → 408 → 9,363 → 14,023` as the tree enters context), cost
-reconciliation: confirmed on a **live** OpenAI baseline ✓. Anthropic
-`cache_control` injection: mechanism proven **offline** ✓. **Blocked:** the live
-Anthropic `cache_read > 0` confirmation and the Anthropic ON-vs-OFF parity check —
-the Anthropic API returned *"credit balance is too low"* (no account credits).
-Resume both once Anthropic billing is topped up:
-`scripts/run_retrieval.py --indexes IDX-D --retrievers anthropic/claude-sonnet-4-5
---questions DL3 DL4 --cache on` (then `--cache off`, and diff `fetched_ranges`).
+**8. LIVE RESULT (2026-07-11): caching works and parity holds — Sonnet 4.5, IDX-D,
+DL3+DL4, temperature 0.** Runs `20260711T192811Z` (cache ON) vs `20260711T192855Z`
+(cache OFF):
+
+- **Cache reads confirmed live.** ON-run rows show `cache_read_tokens` up to ~11K
+  per turn. Prompt-identity proven by arithmetic: per turn, ON's
+  `input + cache_read` equals OFF's `input` **exactly** (e.g. DL4 answer turn:
+  `326 + 11,165 = 11,491`). The model saw byte-identical prompts; only billing split.
+- **Parity ✓.** Tool-call trajectories identical for both questions (same tools,
+  same order, same page ranges: DL3 `801-1219`, DL4 `681-701`). Answer text differed
+  trivially (DL4 by one character's case) — Anthropic temp-0 sampling wobble, exactly
+  why `fetched_ranges` is the invariant, not answer text.
+- **Logged cost: ON $0.1105 vs OFF $0.1738 → −36%.** But see #9: the ON figure is a
+  *lower bound* (write premium missing); true savings ≈ **−24%** for these short runs.
+- **Anthropic's 1,024-token minimum cacheable prefix bites.** Turn-0 prefixes here are
+  ~970 tokens → nothing cached, so turn 1 always reads 0. Caching engages from turn 1 on.
+- **No cross-question reuse.** DL4's turn 0 read nothing despite DL3 finishing seconds
+  earlier (well inside the 5-min TTL): the question text precedes the tree, so
+  consecutive questions share only the ~950-token system prompt — below the minimum.
+  Within-question reuse is the only win in this message layout.
+- **The last turn's cache write is dead weight.** The `index: -1` breakpoint fires on
+  *every* request, including the final answer turn, whose write is never read. With
+  3–4-turn loops that waste plus the one unavoidable full-price tree pass is why
+  savings land near 24%, not the up-to-90% headline (which needs long loops).
+
+**9. The Agents SDK DROPS `cache_creation` — capture usage at the LiteLLM layer.**
+Predicted as a risk pre-run, confirmed live: every ON-run row logged
+`cache_creation_tokens = 0` even though turns demonstrably wrote ~1K–11K tokens to
+cache (each turn's write is visible as the *next* turn's read). Root cause is a
+three-layer usage pipeline where the last hop is lossy:
+
+| layer | input field | cache read | cache write |
+|---|---|---|---|
+| Anthropic raw | `input_tokens` = uncached remainder | `cache_read_input_tokens` | `cache_creation_input_tokens` |
+| LiteLLM | `prompt_tokens` = **TOTAL** (remainder+read+write) | `prompt_tokens_details.cached_tokens` | `prompt_tokens_details.cache_creation_tokens` ✓ kept |
+| Agents SDK `Usage` | `input_tokens` = total | `input_tokens_details.cached_tokens` | **not copied — gone** |
+
+(The drop is in `agents/extensions/models/litellm_model.py`'s `Usage(...)`
+construction; verified in the installed package.) Reading usage from
+`RunResult.raw_responses` therefore *can't* see the 1.25× write premium: those tokens
+land in `input_tokens` priced at 1.0×, under-counting the ON run (~28K creation tokens
+≈ $0.02 missing across the two questions — the gap between −36% logged and −24% true).
+The read side was never wrong: `input = total − cached` in the OpenAI branch is correct
+for LiteLLM's total convention.
+
+**Fix (implemented 2026-07-11):** a LiteLLM success callback
+(`make_litellm_usage_collector` in `run_retrieval.py`) captures each call's usage at
+the LiteLLM layer — *before* the lossy conversion — and
+`usage_logging.from_litellm_usage()` re-derives the canonical split
+(`full-price = prompt_tokens − read − creation`). Rows pair 1:1 with
+`raw_responses` by order (the loop is sequential); litellm fires async callbacks
+fire-and-forget, so `run_one` flushes pending tasks before its event loop closes
+(else the final call's row is lost). Each JSONL row now carries a `source` column:
+`"litellm"` = exact incl. write premium; `"sdk"` = legacy path, cache_write invisible
+(all pre-2026-07-11 rows, and any row where collector/turn counts mismatched).
+This also decouples measurement from the SDK's internal conversion (won't silently
+change on an `agents` upgrade). Native-OpenAI retrievers keep the SDK path — they
+never pass through litellm, and OpenAI has no write premium to miss.
+
+**Validation status.**
+*2026-07-10:* cost-model self-test ✓; live OpenAI baseline (per-call rows, phase
+inference, amplification `344 → 408 → 9,363 → 14,023`, reconciliation) ✓; Anthropic
+`cache_control` injection proven offline ✓.
+*2026-07-11:* live Anthropic cache ON vs OFF ✓ (see #8: reads live, parity holds,
+−36% logged / ≈−24% true); self-test extended with LiteLLM-shape cases (mirroring the
+live DL4 turn-2 numbers) ✓; collector proven end-to-end through the real agentic loop
+via the free local retriever (`ollama_chat/qwen2.5…`, run `20260711T201610Z`: 4 turns
+→ 4 rows, aligned, `source=litellm`, final row not lost) ✓.
+**Still blocked — Anthropic credits (again):** the exact-write rerun
+(`20260711T201344Z` failed with *"credit balance is too low"*; the earlier top-up was
+consumed by the ON/OFF pair). Once topped up, resume with:
+`python3 scripts/run_retrieval.py --indexes IDX-D --retrievers
+anthropic/claude-sonnet-4-5 --questions DL3 DL4 --cache on --temperature 0`
+then confirm in `runs/usage_log.jsonl` / `cost_report.py`: `source == "litellm"`,
+`cache_creation_tokens > 0` on the write turns (~11K on DL3 turn 1), and the exact
+ON cost landing near the ≈$0.132 estimate (write premium now billed at 1.25×).
 
 **Sources (verified 2026-07):** OpenAI automatic prefix caching (50% cached-input
 discount, ≥1024-token prefix, 128-token increments) —

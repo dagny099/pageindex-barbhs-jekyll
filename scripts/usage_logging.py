@@ -110,6 +110,10 @@ class CallUsage:
     cache_creation_tokens: int # written to cache this call (billed at cache_write; ~always the tree, turn 0)
     latency_s: float
     cost_usd: float
+    source: str = "sdk"       # which layer reported the tokens: "sdk" = Agents SDK Usage
+                              # (its LitellmModel conversion DROPS cache_creation, so
+                              # cache_write is invisible -> ON-run cost is a lower bound);
+                              # "litellm" = raw provider counts incl. cache_creation (exact).
 
 
 def _get(u: Any, *names, default=0) -> int:
@@ -137,6 +141,48 @@ def _nested_cached(u: Any) -> int:
     return 0
 
 
+def from_litellm_usage(u: Any) -> dict:
+    """Convert a LiteLLM `Usage` into the canonical dict `record_usage()` accepts.
+
+    WHY THIS LAYER: litellm-backed retrievers (Anthropic, Ollama, ...) reach the
+    harness through TWO conversions, and the second one loses data:
+
+      Anthropic raw   {input=remainder, cache_read_input_tokens, cache_creation_input_tokens}
+        -> LiteLLM    prompt_tokens = TOTAL (remainder + read + creation); the cache
+                      counts survive under prompt_tokens_details
+                      (.cached_tokens = read, .cache_creation_tokens = creation)
+        -> Agents SDK Usage(input_tokens=prompt_tokens, ...cached_tokens only) —
+                      cache_creation is NOT copied (agents/extensions/models/
+                      litellm_model.py) and is unrecoverable from raw_responses.
+
+    So usage read from `RunResult.raw_responses` can never see the cache-WRITE
+    premium (Anthropic bills creation at 1.25x input) and under-counts cached runs.
+    This function is meant to run at a LiteLLM success callback — BEFORE the drop —
+    and re-derives the canonical split from LiteLLM's normalized fields:
+    full-price input = prompt_tokens(total) - cache_read - cache_creation.
+
+    Accepts attr-style objects or dicts; tolerates missing details (returns zeros,
+    which record_usage's OpenAI branch then handles as plain uncached input).
+    """
+    total = _get(u, "prompt_tokens", "input_tokens")
+    out = _get(u, "completion_tokens", "output_tokens")
+    details = getattr(u, "prompt_tokens_details", None)
+    if details is None and isinstance(u, dict):
+        details = u.get("prompt_tokens_details")
+    read = _get(details, "cached_tokens") if details is not None else 0
+    creation = _get(details, "cache_creation_tokens") if details is not None else 0
+    # Older/other litellm paths expose the Anthropic counts top-level or as
+    # private attrs instead of (or as well as) under prompt_tokens_details.
+    read = read or _get(u, "cache_read_input_tokens", "_cache_read_input_tokens")
+    creation = creation or _get(u, "cache_creation_input_tokens", "_cache_creation_input_tokens")
+    return {
+        "input_tokens": max(total - read - creation, 0),  # full-price remainder
+        "output_tokens": out,
+        "cache_read_input_tokens": read,
+        "cache_creation_input_tokens": creation,
+    }
+
+
 def cost_for(retriever: str, input_tokens: int, output_tokens: int,
              cache_read_tokens: int = 0, cache_creation_tokens: int = 0) -> float:
     """Cost from CANONICAL, already-normalized token counts:
@@ -153,7 +199,8 @@ def cost_for(retriever: str, input_tokens: int, output_tokens: int,
 
 def record_usage(response: Any, *, run_id: str, qid: str, index: str,
                  retriever: str, call_idx: int, phase: str,
-                 latency_s: float, log_path: str = LOG_PATH) -> CallUsage:
+                 latency_s: float, log_path: str = LOG_PATH,
+                 source: str = "sdk") -> CallUsage:
     """
     Call this once per LLM response inside the retrieval loop. Accepts either an
     object with a `.usage` attribute, or a bare usage object/dict. Normalizes
@@ -188,6 +235,7 @@ def record_usage(response: Any, *, run_id: str, qid: str, index: str,
         cache_read_tokens=cache_read, cache_creation_tokens=cache_create,
         latency_s=round(latency_s, 3),
         cost_usd=round(cost_for(retriever, input_tokens, out, cache_read, cache_create), 6),
+        source=source,
     )
     os.makedirs(os.path.dirname(log_path) or ".", exist_ok=True)
     with open(log_path, "a") as f:
@@ -260,6 +308,31 @@ def _selftest() -> None:
     assert ant0.cache_creation_tokens == 40000
     # (2000*3.00 + 40000*3.75 + 500*15) / 1e6  -> the write dominates
     assert abs(ant0.cost_usd - 0.163500) < 1e-9, ant0.cost_usd
+
+    # LiteLLM-shape usage (what a litellm success callback sees for Anthropic):
+    # prompt_tokens is the normalized TOTAL; cache read/creation survive under
+    # prompt_tokens_details. Numbers mirror the live 2026-07-11 cache-ON run
+    # (DL4 turn 2: 11,171 total = 6 uncached + 1,103 read + 10,062 written).
+    from types import SimpleNamespace as NS
+    lu = NS(prompt_tokens=11171, completion_tokens=82,
+            prompt_tokens_details=NS(cached_tokens=1103, cache_creation_tokens=10062))
+    d = from_litellm_usage(lu)
+    assert d == {"input_tokens": 6, "output_tokens": 82,
+                 "cache_read_input_tokens": 1103, "cache_creation_input_tokens": 10062}, d
+    ll = record_usage(d, run_id="t", qid="q", index="IDX-D",
+                      retriever="anthropic/claude-sonnet-4-5",
+                      call_idx=2, phase="page_content", latency_s=0.0,
+                      log_path=log, source="litellm")
+    assert ll.cache_creation_tokens == 10062 and ll.source == "litellm"
+    # (6*3.00 + 1103*0.30 + 10062*3.75 + 82*15) / 1e6 — the write premium is priced
+    assert abs(ll.cost_usd - 0.039311) < 1e-9, ll.cost_usd
+
+    # LiteLLM-shape with no cache activity (cache off / native OpenAI never hits this):
+    # degrades to plain uncached input via record_usage's OpenAI branch.
+    d0 = from_litellm_usage(NS(prompt_tokens=100, completion_tokens=10,
+                               prompt_tokens_details=None))
+    assert d0 == {"input_tokens": 100, "output_tokens": 10,
+                  "cache_read_input_tokens": 0, "cache_creation_input_tokens": 0}, d0
 
     # litellm prefix resolves to a PRICES key.
     assert normalize_model("anthropic/claude-sonnet-4-5") == "claude-sonnet-4-5"

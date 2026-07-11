@@ -52,7 +52,7 @@ load_dotenv(REPO / ".env")  # OPENAI_API_KEY / ANTHROPIC_API_KEY
 import tiktoken
 from agents import Agent, Runner, ModelSettings, function_tool, set_tracing_disabled
 import pageindex.retrieve as R
-from usage_logging import cost_for, record_usage
+from usage_logging import cost_for, from_litellm_usage, record_usage
 
 USAGE_LOG = REPO / "runs" / "usage_log.jsonl"  # shared append-only per-call log
 
@@ -154,6 +154,52 @@ def build_model_settings(model_name: str, cache_on: bool, temperature=None):
     return ModelSettings(**kwargs) if kwargs else None
 
 
+def make_litellm_usage_collector():
+    """Register a LiteLLM success callback that captures each call's RAW usage.
+
+    WHY: for litellm-backed retrievers, reading usage from RunResult.raw_responses
+    is lossy — the Agents SDK's LitellmModel copies only total input / output /
+    cached-read tokens into its Usage and DROPS cache_creation_tokens, so the
+    Anthropic cache-WRITE premium (1.25x input) is invisible at that layer and
+    cached-run costs under-count. (Found live 2026-07-11: cache_read logged fine,
+    cache_write was 0 on every row. See reports/COST_NOTES.md #8.)
+
+    This callback sees LiteLLM's own Usage BEFORE that conversion, where the
+    cache counts survive; from_litellm_usage() re-derives the canonical split.
+    Rows append in call order (the agentic loop is sequential), so run_one()
+    can pair them 1:1 with raw_responses by snapshotting len(rows) around
+    Runner.run. Registration is global (litellm.callbacks) and per-process.
+
+    NOTE: litellm fires async success callbacks as fire-and-forget tasks on the
+    running event loop; run_one() must flush pending tasks before its
+    asyncio.run() closes the loop, or the last call's row is lost.
+    """
+    import litellm
+    from litellm.integrations.custom_logger import CustomLogger
+
+    class _Collector(CustomLogger):
+        def __init__(self):
+            super().__init__()
+            self.rows: list[dict] = []
+
+        def _capture(self, response_obj):
+            try:
+                self.rows.append(from_litellm_usage(getattr(response_obj, "usage", None) or {}))
+            except Exception as e:  # never let logging break a run
+                print(f"  [usage-log] litellm capture failed ({type(e).__name__}: {e})")
+                self.rows.append({})
+
+        def log_success_event(self, kwargs, response_obj, start_time, end_time):
+            self._capture(response_obj)
+
+        async def async_log_success_event(self, kwargs, response_obj, start_time, end_time):
+            self._capture(response_obj)
+
+    collector = _Collector()
+    litellm.callbacks.append(collector)
+    return collector
+
+
 def resolve_model(name: str):
     """Bare OpenAI names pass through natively; other providers use LiteLLM."""
     if is_native_openai(name):
@@ -194,7 +240,7 @@ def build_documents(index_path: Path) -> tuple[dict, str]:
 
 def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: str,
             *, run_id: str, qid: str, index_id: str, cache_on: bool = False,
-            temperature=None) -> dict:
+            temperature=None, collector=None) -> dict:
     trace: list[dict] = []
 
     def _log(tool, out, **args):
@@ -224,12 +270,24 @@ def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: 
                   tools=[get_document, get_document_structure, get_page_content],
                   model=model_obj, **agent_kwargs)
 
+    async def _run():
+        result = await Runner.run(agent, question, max_turns=20)
+        if collector is not None:
+            # litellm fires its async success callbacks as fire-and-forget tasks;
+            # give them a bounded window to land before asyncio.run() closes the
+            # loop, or the FINAL call's usage row (incl. its cache write) is lost.
+            pending = [t for t in asyncio.all_tasks() if t is not asyncio.current_task()]
+            if pending:
+                await asyncio.wait(pending, timeout=5)
+        return result
+
     t0 = time.perf_counter()
     error = None
     answer = ""
     usage = {}
+    n_rows_before = len(collector.rows) if collector is not None else 0
     try:
-        result = asyncio.run(Runner.run(agent, question, max_turns=20))
+        result = asyncio.run(_run())
         answer = str(result.final_output)
         try:
             u = result.context_wrapper.usage
@@ -240,13 +298,24 @@ def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: 
         # Per-call token/cost capture: one ModelResponse per LLM turn, each with its
         # own usage. This is the granular record (input_tokens climbing across
         # call_idx = the tree re-send; cache_read_tokens once caching is on).
+        # Token counts come from the litellm collector when available (exact,
+        # includes cache_creation) and fall back to the SDK's per-turn usage
+        # (which drops cache_creation — see make_litellm_usage_collector).
         # Never let logging break a run.
         try:
-            for k, mr in enumerate(getattr(result, "raw_responses", None) or []):
-                record_usage(mr, run_id=run_id, qid=qid, index=index_id,
+            mrs = getattr(result, "raw_responses", None) or []
+            raw_rows = collector.rows[n_rows_before:] if collector is not None else []
+            use_raw = len(raw_rows) == len(mrs) and bool(mrs)
+            if collector is not None and not use_raw and mrs:
+                print(f"  [usage-log] litellm rows ({len(raw_rows)}) != LLM turns "
+                      f"({len(mrs)}); falling back to SDK usage (cache_write not visible)")
+            for k, mr in enumerate(mrs):
+                src = (raw_rows[k] or mr) if use_raw else mr
+                record_usage(src, run_id=run_id, qid=qid, index=index_id,
                              retriever=model_name, call_idx=k, phase=phase_for(mr),
                              latency_s=0.0,  # per-call latency isn't exposed at this layer
-                             log_path=str(USAGE_LOG))
+                             log_path=str(USAGE_LOG),
+                             source="litellm" if use_raw and raw_rows[k] else "sdk")
         except Exception as e:
             print(f"  [usage-log] skipped ({type(e).__name__}: {e})")
     except Exception as e:
@@ -325,6 +394,14 @@ def main() -> int:
     cache_on = args.cache == "on"
 
     set_tracing_disabled(True)
+
+    # Exact per-call usage for litellm-backed retrievers (Anthropic/Ollama/...):
+    # capture at the LiteLLM layer, where cache_creation_tokens still exists.
+    # Native-OpenAI retrievers never pass through litellm; they keep the SDK path.
+    collector = None
+    if any(not is_native_openai(m) for m in args.retrievers):
+        collector = make_litellm_usage_collector()
+
     provenance = json.loads((REPO / "corpus" / "site-book-v1" / "provenance.json").read_text())
     questions = load_questions(args.questions)
 
@@ -346,7 +423,8 @@ def main() -> int:
                 print(f"\n{'='*70}\n[{index_id} | {model_name}] {q['id']} [{q['category']}]\n{q['question']}\n{'='*70}")
                 res = run_one(documents, doc_id, model_name, model_obj, q["question"],
                               run_id=record["run_id"], qid=q["id"], index_id=index_id,
-                              cache_on=cache_on, temperature=args.temperature)
+                              cache_on=cache_on, temperature=args.temperature,
+                              collector=collector if not is_native_openai(model_name) else None)
                 res.update({"index_id": index_id, "qid": q["id"], "category": q["category"],
                             "question": q["question"], "expected_evidence": q.get("expected_evidence", ""),
                             "ground_truth": q.get("ground_truth", "")})

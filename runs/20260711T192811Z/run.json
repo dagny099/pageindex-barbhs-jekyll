@@ -1,0 +1,107 @@
+{
+  "run_id": "20260711T192811Z",
+  "purpose": "retrieval",
+  "indexes": [
+    "IDX-D"
+  ],
+  "retrievers": [
+    "anthropic/claude-sonnet-4-5"
+  ],
+  "cache": "on",
+  "temperature": 0.0,
+  "questions": [
+    "DL3",
+    "DL4"
+  ],
+  "corpus_version": "site-book-v1",
+  "corpus_sha256": "7379cad3da7b017a6c3524376a8ca6a27e11b18da433edc5ac9329c73bc5b43f",
+  "repo_commit": "12bab4185cc33c236baac047df8ab35f7b88034f",
+  "results": [
+    {
+      "retriever": "anthropic/claude-sonnet-4-5",
+      "answer": "Perfect! I found the information. The project is **\"Self-Hosted Workout Intelligence\"** (also referred to as the Fitness Dashboard ML Pipeline).\n\n## Answer\n\nThe project is **\"Self-Hosted Workout Intelligence\"** (Fitness Dashboard ML Pipeline).\n\n### Stack Description:\n\n**Technologies:** Python, Streamlit, MySQL, scikit-learn, Plotly, AWS Lambda, AWS RDS\n\nThe full stack breakdown by layer:\n\n| Layer | Components | Technology |\n|-------|------------|------------|\n| **Data Ingestion** | ETL pipeline, validation | AWS Lambda, S3, SNS |\n| **Storage** | Workout database | AWS RDS (MySQL) |\n| **Intelligence** | Classification, analytics | scikit-learn, scipy |\n| **Visualization** | Interactive charts | Plotly, Streamlit |\n| **UI** | Multi-page dashboard | Streamlit 1.44+ |\n| **Infrastructure** | Deployment, config | Docker, systemd, TOML |\n\nThis is a full-stack fitness analytics platform that transforms 14 years of workout data into actionable intelligence. The AWS-based ETL pipeline ingests MapMyRun exports, ML models (K-means clustering) automatically classify workouts as runs vs. dog walks, and a multi-page Streamlit dashboard surfaces trends, anomalies, and personalized insights—all self-hosted for complete data ownership.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "801-1219"
+          },
+          "output_chars": 19851,
+          "output_tokens": 4632
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 8934,
+      "content_tokens": 4632,
+      "usage": {
+        "input_tokens": 28875,
+        "output_tokens": 494,
+        "total_tokens": 29369
+      },
+      "est_cost_usd": 0.094,
+      "latency_seconds": 15.04,
+      "index_id": "IDX-D",
+      "qid": "DL3",
+      "category": "direct-location",
+      "question": "Which project is a self-hosted ML pipeline for workout/fitness data, and what stack does it describe?",
+      "expected_evidence": "Project: Self-Hosted Workout Intelligence (fitness-dashboard). Stack: Python, Streamlit, MySQL, scikit-learn, Plotly, AWS Lambda/RDS, K-means.",
+      "ground_truth": "Self-Hosted Workout Intelligence; full-stack ETL + K-means classification + Streamlit dashboard."
+    },
+    {
+      "retriever": "anthropic/claude-sonnet-4-5",
+      "answer": "Perfect! I found the information. According to the Poolula Platform page, specifically in the \"Evaluation Harness\" section:\n\n## Five Scoring Dimensions:\n\n1. **Tool Usage** - Did the AI invoke the correct tools?\n2. **Content Relevance** - Does the answer address the actual question?\n3. **Semantic Similarity** - Does the answer match expected content (embedding comparison)?\n4. **Numerical Accuracy** - Do financial figures match expected values?\n5. **Citation Accuracy** - Are sources correct and relevant?\n\n## Composite Target:\n\n**≥90% composite score** must be met before production deployment.\n\nThe platform uses a rigorous testing system with a golden question set, and the evaluation harness outputs detailed reports to track performance across these five dimensions.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 134,
+          "output_tokens": 45
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 26582,
+          "output_tokens": 8934
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "681-701"
+          },
+          "output_chars": 800,
+          "output_tokens": 188
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 8934,
+      "content_tokens": 188,
+      "usage": {
+        "input_tokens": 24747,
+        "output_tokens": 365,
+        "total_tokens": 25112
+      },
+      "est_cost_usd": 0.0797,
+      "latency_seconds": 20.45,
+      "index_id": "IDX-D",
+      "qid": "DL4",
+      "category": "direct-location",
+      "question": "According to the Poolula platform page, what five dimensions does its evaluation harness score, and what composite target must be met before production deployment?",
+      "expected_evidence": "Poolula Platform § Governance & Reliability → Evaluation Harness (node 0068, L681–700; dimensions table L690–699, target L700).",
+      "ground_truth": "Tool Usage, Content Relevance, Semantic Similarity, Numerical Accuracy, Citation Accuracy; target ≥90% composite score before production deployment."
+    }
+  ]
+}

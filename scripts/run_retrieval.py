@@ -50,7 +50,7 @@ from dotenv import load_dotenv
 load_dotenv(REPO / ".env")  # OPENAI_API_KEY / ANTHROPIC_API_KEY
 
 import tiktoken
-from agents import Agent, Runner, function_tool, set_tracing_disabled
+from agents import Agent, Runner, ModelSettings, function_tool, set_tracing_disabled
 import pageindex.retrieve as R
 from usage_logging import cost_for, record_usage
 
@@ -121,9 +121,42 @@ the answer.
 """.strip()
 
 
+def is_native_openai(name: str) -> bool:
+    """Bare OpenAI names run through the native Agents path; everything else via litellm."""
+    return "/" not in name and name.startswith(("gpt-", "o1", "o3", "o4", "chatgpt"))
+
+
+def build_model_settings(model_name: str, cache_on: bool, temperature=None):
+    """Assemble ModelSettings from two orthogonal knobs:
+
+    - `temperature`: applied to both providers when given. Pin it to 0 for the
+      caching parity check so ON vs OFF are byte-for-byte comparable (answers can
+      only differ from sampling noise otherwise). None => provider default (the
+      normal-run behavior; nothing set).
+    - caching: enable prompt caching on the re-sent tree WITHOUT changing what the
+      model sees. litellm injects an Anthropic `cache_control` breakpoint on the
+      latest message each turn (index -1 => one breakpoint, under Anthropic's
+      4-block cap; caches the whole prefix incl. the tree, so it's a cache READ on
+      later turns). cache_control is request metadata, not content. The injection is
+      a litellm-only kwarg; native OpenAI auto-caches and would choke on it, so it's
+      skipped there.
+
+    Returns None when nothing is set, so the Agent keeps its defaults."""
+    kwargs = {}
+    if temperature is not None:
+        kwargs["temperature"] = temperature
+    if cache_on and not is_native_openai(model_name):
+        kwargs["extra_args"] = {
+            "cache_control_injection_points": [
+                {"location": "message", "index": -1, "control": {"type": "ephemeral"}},
+            ],
+        }
+    return ModelSettings(**kwargs) if kwargs else None
+
+
 def resolve_model(name: str):
     """Bare OpenAI names pass through natively; other providers use LiteLLM."""
-    if "/" not in name and name.startswith(("gpt-", "o1", "o3", "o4", "chatgpt")):
+    if is_native_openai(name):
         return name
     from agents.extensions.models.litellm_model import LitellmModel
 
@@ -160,7 +193,8 @@ def build_documents(index_path: Path) -> tuple[dict, str]:
 
 
 def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: str,
-            *, run_id: str, qid: str, index_id: str) -> dict:
+            *, run_id: str, qid: str, index_id: str, cache_on: bool = False,
+            temperature=None) -> dict:
     trace: list[dict] = []
 
     def _log(tool, out, **args):
@@ -182,8 +216,13 @@ def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: 
         """Get text by Markdown line numbers. Tight ranges, e.g. '120-160' or '540,2176'."""
         return _log("get_page_content", R.get_page_content(documents, doc_id, pages), pages=pages)
 
+    agent_kwargs = {}
+    ms = build_model_settings(model_name, cache_on, temperature)
+    if ms is not None:
+        agent_kwargs["model_settings"] = ms
     agent = Agent(name="PageIndex-Retriever", instructions=AGENT_SYSTEM_PROMPT,
-                  tools=[get_document, get_document_structure, get_page_content], model=model_obj)
+                  tools=[get_document, get_document_structure, get_page_content],
+                  model=model_obj, **agent_kwargs)
 
     t0 = time.perf_counter()
     error = None
@@ -276,7 +315,14 @@ def main() -> int:
                     help="index ids to run/compare, e.g. IDX-D IDX-C IDX-O")
     ap.add_argument("--retrievers", nargs="+", default=["gpt-4o-2024-11-20"])
     ap.add_argument("--questions", nargs="*", default=[], help="question ids (default: all in the CSV)")
+    ap.add_argument("--cache", choices=["off", "on"], default="off",
+                    help="prompt-cache the re-sent tree (on = Anthropic cache_control breakpoint; "
+                         "affects cost/latency only, not answers). Default off = baseline.")
+    ap.add_argument("--temperature", type=float, default=None,
+                    help="pin sampling temperature (use 0 for the caching parity check so "
+                         "ON vs OFF are comparable). Default: provider default.")
     args = ap.parse_args()
+    cache_on = args.cache == "on"
 
     set_tracing_disabled(True)
     provenance = json.loads((REPO / "corpus" / "site-book-v1" / "provenance.json").read_text())
@@ -287,7 +333,8 @@ def main() -> int:
     run_dir.mkdir(parents=True, exist_ok=True)
 
     record = {"run_id": ts, "purpose": "retrieval", "indexes": args.indexes,
-              "retrievers": args.retrievers, "questions": [q["id"] for q in questions],
+              "retrievers": args.retrievers, "cache": args.cache, "temperature": args.temperature,
+              "questions": [q["id"] for q in questions],
               "corpus_version": provenance["corpus_version"], "corpus_sha256": provenance["corpus_sha256"],
               "repo_commit": git_head(REPO), "results": []}
 
@@ -298,7 +345,8 @@ def main() -> int:
             for q in questions:
                 print(f"\n{'='*70}\n[{index_id} | {model_name}] {q['id']} [{q['category']}]\n{q['question']}\n{'='*70}")
                 res = run_one(documents, doc_id, model_name, model_obj, q["question"],
-                              run_id=record["run_id"], qid=q["id"], index_id=index_id)
+                              run_id=record["run_id"], qid=q["id"], index_id=index_id,
+                              cache_on=cache_on, temperature=args.temperature)
                 res.update({"index_id": index_id, "qid": q["id"], "category": q["category"],
                             "question": q["question"], "expected_evidence": q.get("expected_evidence", ""),
                             "ground_truth": q.get("ground_truth", "")})

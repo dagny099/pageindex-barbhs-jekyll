@@ -8,10 +8,10 @@
   "extraction_tool_version": "1.26.4",
   "config_path": "config/paper-book-v1.yml",
   "config_sha256": "9d046c0badfe3f890d1741d6ae922ec7e1881c18cedede898c11e897d93af184",
-  "repo_commit": "663b2cb04e1e34f2896a763c487b698d8d2427ce",
+  "repo_commit": "2a06f3f685381d338c74a7303b41b5ba05e76cfe",
   "repo_dirty": true,
   "pageindex_commit": "f413c66fee0bfbb7291c389333f9cc1adac68d57",
   "corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2",
   "manifest_sha256": "041b6233e615f9a30d6a2dc83d2de53c8d532328440d589438ae6102d708442f",
-  "built_at": "2026-07-11T21:07:10Z"
+  "built_at": "2026-07-11T21:23:39Z"
 }

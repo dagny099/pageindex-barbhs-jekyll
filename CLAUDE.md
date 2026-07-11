@@ -70,6 +70,11 @@ cd vendor/PageIndex && python3 run_pageindex.py --md_path ../../corpus/site-book
 # Verify an index/corpus JSON is well-formed
 python3 -c "import json,sys; json.load(open(sys.argv[1])); print('ok')" indexes/IDX-D/index.json
 
+# Regenerate the Index Comparison Explorer + outlines + alignment report
+# (self-contained offline HTML; no LLM calls; refuses to overwrite without the flag)
+python3 scripts/render_index_comparison.py --overwrite
+python3 -m pytest tests/test_render_index_comparison.py
+
 # Verify corpus on disk matches pinned provenance hashes
 python3 -c "import json,hashlib as h; p=json.load(open('corpus/site-book-v1/provenance.json')); \
 print('corpus', p['corpus_sha256']==h.sha256(open('corpus/site-book-v1/site-book-v1.md','rb').read()).hexdigest()); \
@@ -80,5 +85,10 @@ print('manifest', p['normalization_manifest_sha256']==h.sha256(open('corpus/site
 
 - `indexes/` is tracked (committed); `results/`, `logs/`, `workspace(s)/` are gitignored scratch.
 - Don't commit `.venv/`, `.env`, `.DS_Store`, or anything under `vendor/PageIndex/results/`.
-- Scaffolding dirs (`config/`, `evaluations/`, `runs/`, `scripts/`) are currently empty; populate them as the experiment grows rather than scattering files at the root.
+- Keep new tooling in `scripts/` (tests in `tests/`) rather than scattering files at the repo root.
 - Any new corpus or index artifact must carry or reference its provenance (source commit + hash).
+- `reports/V1_INDEX_COMPARISON.html`, `reports/index-outlines/IDX-*.md`, and
+  `reports/V1_INDEX_ALIGNMENT_REPORT.md` are **derived** from the indexes + corpus by
+  `scripts/render_index_comparison.py` — regenerate them (`--overwrite`), never hand-edit.
+  After any index/corpus change these are stale until regenerated. See the README's
+  "Index Comparison Explorer" section for usage, review workflow, and the tool's roadmap.

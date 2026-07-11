@@ -59,6 +59,17 @@ so staleness against the corpus is detectable. Raw runs write to
 Retrieval over an index uses `scripts/run_retrieval.py` (OpenAI Agents SDK; non-OpenAI
 retrievers via LiteLLM, e.g. `ollama_chat/llama3.1-8b-ctx32k` or `anthropic/…`).
 
+### Near-term backlog
+
+- **Run true-summary index variants soon:** current IDX-C / IDX-O were generated with
+  PageIndex's default `--summary-token-threshold 200`, so many `summary` /
+  `prefix_summary` fields are verbatim copied short node text rather than model-generated
+  summaries. To cleanly test "generated summaries over headings," create separate
+  threshold-0 variants (for example `IDX-C0` and, if time allows, `IDX-O0`) with
+  `--summary-token-threshold 0`; add provenance for the new indexes, then regenerate the
+  comparison explorer/outlines/alignment report. See the README "Summary threshold
+  experiments" section and `config/index-conditions.yml` examples for commands.
+
 ## Common commands
 
 ```bash

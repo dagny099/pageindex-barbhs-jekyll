@@ -66,3 +66,27 @@ conditions:
 #     --model gpt-4o-2024-11-20 \
 #     --if-add-node-summary yes --if-add-doc-description yes --if-add-node-text yes
 #   then: cp results/site-book-v1_structure.json ../../indexes/IDX-C/index.json
+#
+# Important summary-threshold note:
+#   PageIndex's Markdown path copies node text verbatim instead of calling the
+#   summarizer when node text is below --summary-token-threshold. The current
+#   IDX-C / IDX-O artifacts used the default threshold of 200, so they test
+#   headings + copied short sections + generated summaries for longer sections.
+#
+# To force generated summaries for every node, create a separate variant with:
+#   cd vendor/PageIndex && python3 run_pageindex.py \
+#     --md_path ../../corpus/site-book-v1/site-book-v1.md \
+#     --model gpt-4o-2024-11-20 \
+#     --if-add-node-summary yes --if-add-doc-description yes --if-add-node-text yes \
+#     --summary-token-threshold 0
+#   then: mkdir -p ../../indexes/IDX-C0
+#   then: cp results/site-book-v1_structure.json ../../indexes/IDX-C0/index.json
+#
+# Ollama equivalent:
+#   cd vendor/PageIndex && python3 run_pageindex.py \
+#     --md_path ../../corpus/site-book-v1/site-book-v1.md \
+#     --model ollama_chat/qwen2.5-7b-instruct-ctx32k \
+#     --if-add-node-summary yes --if-add-doc-description yes --if-add-node-text yes \
+#     --summary-token-threshold 0
+#   then: mkdir -p ../../indexes/IDX-O0
+#   then: cp results/site-book-v1_structure.json ../../indexes/IDX-O0/index.json

@@ -171,6 +171,46 @@ Generation behavior (model, summaries, node IDs, thinning) is controlled by
 model is `gpt-4o-2024-11-20`. Raw runs land in `results/`; curated variants are saved
 to `indexes/IDX-<letter>/index.json`.
 
+### Summary threshold experiments
+
+For Markdown input, PageIndex does **not** call the model for every node by default.
+When `--if-add-node-summary yes` is set, nodes whose text is below
+`--summary-token-threshold` are copied verbatim into `summary` / `prefix_summary`;
+only nodes at or above the threshold get an LLM-generated summary. The current
+IDX-C / IDX-O runs used the default threshold of `200`.
+
+Use `--summary-token-threshold 0` when you want a cleaner "generated summaries over
+headings" condition:
+
+```bash
+# Cloud summarizer: force a generated summary for every node
+cd vendor/PageIndex
+python3 run_pageindex.py --md_path ../../corpus/site-book-v1/site-book-v1.md \
+  --model gpt-4o-2024-11-20 \
+  --if-add-node-summary yes --if-add-doc-description yes --if-add-node-text yes \
+  --summary-token-threshold 0
+
+# Keep this separate from IDX-C unless intentionally replacing it.
+mkdir -p ../../indexes/IDX-C0
+cp results/site-book-v1_structure.json ../../indexes/IDX-C0/index.json
+```
+
+```bash
+# Local Ollama summarizer: same idea, but expect a much slower run
+cd vendor/PageIndex
+python3 run_pageindex.py --md_path ../../corpus/site-book-v1/site-book-v1.md \
+  --model ollama_chat/qwen2.5-7b-instruct-ctx32k \
+  --if-add-node-summary yes --if-add-doc-description yes --if-add-node-text yes \
+  --summary-token-threshold 0
+
+mkdir -p ../../indexes/IDX-O0
+cp results/site-book-v1_structure.json ../../indexes/IDX-O0/index.json
+```
+
+Interpretation rule of thumb: threshold `200` evaluates headings plus copied short
+section text plus generated summaries for longer nodes; threshold `0` evaluates
+headings plus generated summaries for every node.
+
 ## Local models (Ollama) — required setup for IDX-O / RET-OLL
 
 The local conditions (`IDX-O` index, `RET-OLL` retriever) need a running Ollama service

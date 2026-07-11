@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PageIndex V1 — Evidence Review</title>
+<style>
+:root {
+  --bg:#f4f0e8; --paper:#fffdf8; --ink:#20231f; --muted:#667069;
+  --line:#d9d2c5; --green:#24594a; --green-soft:#e5efe9;
+  --gold:#8b612d; --gold-soft:#f5ead8; --red:#873f3f; --red-soft:#f5e5e2;
+  --blue:#355f7a; --blue-soft:#e7eff4; --purple:#624c7c;
+  --shadow:0 16px 38px rgba(36,41,35,.09);
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#f6f2e9,#eee8dc);color:var(--ink);font-family:var(--sans);line-height:1.55}
+main{width:min(1160px,calc(100% - 30px));margin:28px auto 60px}
+.hero,section{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+.hero{padding:40px;background:radial-gradient(circle at 90% 10%,rgba(36,89,74,.15),transparent 36%),var(--paper)}
+.eyebrow{font-size:.76rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:var(--serif);line-height:1.15}
+h1{font-size:clamp(2.45rem,5.5vw,4.8rem);letter-spacing:-.045em;margin:9px 0 13px;max-width:900px}
+h2{font-size:clamp(1.75rem,3vw,2.45rem);margin:0 0 12px}
+h3{font-size:1.23rem;margin:7px 0 10px}
+.lede{font-size:1.1rem;color:#3f4741;max-width:900px}
+.hero-note{margin-top:22px;padding:15px 17px;background:var(--green-soft);border-left:5px solid var(--green);border-radius:10px}
+section{padding:30px;margin-top:22px}
+.section-intro{color:var(--muted);max-width:850px}
+.findings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:18px}
+.finding{padding:20px;border:1px solid var(--line);border-radius:15px;background:#fff}
+.finding blockquote{font-family:var(--serif);font-size:1.1rem;margin:0 0 12px;color:var(--green)}
+.finding p{margin:0;color:#4d554f}
+.claim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:18px}
+.claim{padding:19px;border-radius:15px;border:1px solid var(--line);background:#fff}
+.claim .status{font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.claim.agree{border-top:5px solid var(--green)} .claim.agree .status{color:var(--green)}
+.claim.other{border-top:5px solid var(--gold)} .claim.other .status{color:var(--gold)}
+.claim.disagree{border-top:5px solid var(--red)} .claim.disagree .status{color:var(--red)}
+.correction-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:17px}
+.correction{padding:15px;border-radius:12px;background:var(--gold-soft);border:1px solid #e1c99f}
+.question-card{margin-top:18px;padding:23px;border:1px solid var(--line);border-radius:17px;background:#fff}
+.question-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.qid{font-family:var(--mono);font-weight:900;background:var(--green);color:white;border-radius:999px;padding:4px 9px}
+.category{font-size:.78rem;font-weight:800;color:var(--blue);background:var(--blue-soft);padding:4px 9px;border-radius:999px}
+.question-card h3{font-size:1.35rem;max-width:980px}
+.why{color:#4f5851}
+.table-wrap{overflow-x:auto;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.condition{font-family:var(--mono);font-size:.82rem}
+blockquote{margin:14px 0 0;padding:14px 17px;border-left:5px solid var(--green);background:var(--green-soft);border-radius:9px}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:18px}
+.metric{padding:20px;background:#fff;border:1px solid var(--line);border-radius:15px}
+.metric .big{font-family:var(--serif);font-size:2.2rem;color:var(--green);font-weight:700}
+.metric p{margin:3px 0;color:var(--muted)}
+.next{columns:2;column-gap:40px}
+.next li{break-inside:avoid;margin-bottom:9px}
+.footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:20px}
+code{font-family:var(--mono);font-size:.9em}
+@media(max-width:800px){
+  main{width:min(100% - 18px,1160px);margin-top:9px}
+  .hero,section{border-radius:15px;padding:22px}
+  .findings,.claim-grid,.correction-list,.metrics{grid-template-columns:1fr}
+  .next{columns:1}
+}
+@media print{
+  body{background:#fff} main{width:100%;margin:0}
+  .hero,section{box-shadow:none;break-inside:avoid}
+  .question-card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+  <div class="eyebrow">PageIndex V1 · Evidence review</div>
+  <h1>What the map changed—and what it didn’t</h1>
+  <p class="lede">
+    A synthesis of the run-level cost data, the V1 findings handoff, and the exact diagnostic questions.
+    The emphasis is on claims that survive scrutiny, question-level reversals hidden by averages, and follow-ups worth measuring.
+  </p>
+  <div class="hero-note">
+    <strong>Reading rule:</strong> <code>IDX</code> describes how the map was built; the retriever name describes who navigated it.
+    Scores below are shown on the observed 0–4 scale. The handoff labels the rubric 0–5, so the authoritative rubric should be checked before publication.
+  </div>
+</header>
+
+<section>
+  <h2>The most defensible findings</h2>
+  <p class="section-intro">These statements preserve the strongest parts of both analyses while avoiding claims the current design cannot support.</p>
+  <div class="findings">
+    <article class="finding">
+      <blockquote>On this authored-hierarchy corpus, summary enrichment did not improve average answer quality for the competent cloud navigators.</blockquote>
+      <p>Sonnet tied across all 13 completed D-versus-C pairs. GPT-4o’s IDX-C mean was 0.07 points below IDX-D. This is a null for average quality, not proof that summaries are generally useless.</p>
+    </article>
+    <article class="finding">
+      <blockquote>The navigator mattered more on average—but the average hides large question-specific index effects.</blockquote>
+      <p>For GPT-4o, 10 of 14 D-versus-C answers tied, while four moved sharply: DL5 +1, RD4 +2, EG4 −1, and CN6 −3. Summaries sometimes helped and sometimes redirected retrieval badly.</p>
+    </article>
+    <article class="finding">
+      <blockquote>Sonnet’s advantage concentrated on scattered or conflicting evidence, not direct lookup.</blockquote>
+      <p>Direct-location behavior was essentially tied. The useful contrast appeared when the task required broader exploration or preserving disagreement across sources.</p>
+    </article>
+    <article class="finding">
+      <blockquote>Evidence-gap questions exposed complementary failure modes that a leaderboard would miss.</blockquote>
+      <p>One navigator verified absence through a broad scan; another found an indirect trace. Neither completed both parts of EG4.</p>
+    </article>
+    <article class="finding">
+      <blockquote>A richer map can exceed a smaller navigator’s practical context budget.</blockquote>
+      <p>Qwen fetched no content on all 14 IDX-C runs. Because the measured structure was about 43,730 tokens and the model was labeled ctx32k, context compatibility must be investigated before calling this simply a model-quality failure.</p>
+    </article>
+    <article class="finding">
+      <blockquote>The index tree—not the final answer—is the likely dominant cost term.</blockquote>
+      <p>The logged floor was $1.29; the navigation-inclusive model was $34.83, about 26.9× higher. Exact cross-index dollars remain uncertain because each index’s structure size was not measured separately.</p>
+    </article>
+  </div>
+</section>
+
+<section>
+  <h2>Claim-by-claim review of the alternate handoff</h2>
+  <div class="claim-grid">
+    <article class="claim agree">
+      <div class="status">AGREE, WITH NARROWING</div>
+      <h3>Navigator choice mattered more than summary enrichment on average</h3>
+      <p>Among the competent cloud navigators, adding summaries produced no mean quality gain over the authored hierarchy. But “determined” is too absolute: index effects were strongly question-specific, and the experiment is small.</p>
+    </article>
+    
+    <article class="claim agree">
+      <div class="status">AGREE</div>
+      <h3>Sonnet’s advantage had more than one mechanism</h3>
+      <p>The traces support both deeper exploration on scattered-evidence questions and more faithful synthesis when conflicting evidence was already retrieved. The second mechanism remains lower-confidence because there were only two consistency questions.</p>
+    </article>
+    
+    <article class="claim agree">
+      <div class="status">AGREE AS A CASE STUDY</div>
+      <h3>EG4 exposes a real two-part evidence-gap failure</h3>
+      <p>The absence had to be verified and indirect traces had to be found. On IDX-D, GPT-4o performed the broad scan; Sonnet found one indirect trace; neither completed the full answer. This is illuminating, but it is one question rather than a measured general rate.</p>
+    </article>
+    
+    <article class="claim other">
+      <div class="status">OTHER — IMPORTANT CONFOUND</div>
+      <h3>Qwen entered a collapse regime</h3>
+      <p>15 of 28 local runs fetched no content, including all 14 IDX-C runs. Calling this only a weak-tool-caller result is premature: the measured IDX-C structure was about 43,730 tokens while the model name indicates a 32K context window.</p>
+    </article>
+    
+    <article class="claim disagree">
+      <div class="status">DISAGREE AS WRITTEN</div>
+      <h3>Output length was not generally an inverse quality signal</h3>
+      <p>The negative pattern is driven mainly by the collapsed Qwen runs. Within the cloud-model runs, longer output was not reliably worse. The defensible statement is that verbosity was not evidence of grounding.</p>
+    </article>
+    
+    <article class="claim other">
+      <div class="status">OTHER — STRONG HYPOTHESIS, NOT YET A FINDING</div>
+      <h3>Prompt caching is likely the largest cost lever</h3>
+      <p>The repeated tree prefix makes caching technically promising, but the savings have not yet been measured. Treat cached-versus-uncached cost and latency as a follow-up experiment rather than a V1 result.</p>
+    </article>
+    </div>
+
+  <div class="correction-list">
+    <div class="correction"><strong>Score-scale correction:</strong> the handoff repeatedly says 0–5, while the observed response data contain scores from 0 through 4. Verify the rubric source and use one scale consistently.</div>
+    <div class="correction"><strong>Missing-run correction:</strong> Sonnet was identical on the 13 completed IDX-D/IDX-C pairs—not all 14. The IDX-D × Sonnet run for RD6 has no score.</div>
+    <div class="correction"><strong>Cost correction:</strong> fewer tool calls on IDX-C do not yet prove lower dollars because IDX-C’s structure may be larger than IDX-D’s.</div>
+    <div class="correction"><strong>Causal-language correction:</strong> “navigator determined quality” should become “navigator choice produced the larger average differences under these conditions.”</div>
+  </div>
+</section>
+
+<section>
+  <h2>Two important findings missing from the handoff</h2>
+  <div class="findings">
+    <article class="finding">
+      <blockquote>There is an index–navigator interaction, not merely an index winner.</blockquote>
+      <p>Across 13 completed Sonnet pairs, IDX-C preserved identical answer quality while using 1.31 fewer calls and 2.79 fewer seconds on average. With GPT-4o, IDX-C used the same mean number of calls, was slower on every question, and scored slightly lower.</p>
+    </article>
+    <article class="finding">
+      <blockquote>The near-zero average for IDX-C hides volatility.</blockquote>
+      <p>GPT-4o’s D-to-C changes ranged from −3 to +2. The important follow-up is not only “Did summaries help?” but “Which summary or branch changed the route for CN6, RD4, DL5, and EG4?”</p>
+    </article>
+  </div>
+</section>
+
+<section>
+  <h2>The diagnostic questions that made the findings visible</h2>
+  <p class="section-intro">These are the actual question wordings. Tables show the most relevant condition contrasts, not every run.</p>
+  
+    <article class="question-card" id="CS6">
+      <div class="question-top">
+        <span class="qid">CS6</span>
+        <span class="category">Cross-section synthesis</span>
+      </div>
+      <h3>The idea that “retrieval works through context and association, not brute-force search” recurs across the corpus. Where does it appear, and to what different technical domain does each instance apply it?</h3>
+      <p class="why"><strong>Why this question is diagnostic:</strong> Tests whether a navigator can track one idea across metadata, data governance, structured web representation, and AI-agent memory even though the corpus never gives the idea one canonical name.</p>
+      
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Condition</th><th>Calls</th><th>Fetched tokens</th>
+          <th>Retrieval</th><th>Answer</th><th>Latency</th>
+        </tr></thead>
+        <tbody><tr>
+                <td><span class="condition">IDX-D × GPT-4o</span></td>
+                <td>4</td>
+                <td>1,249</td>
+                <td>2/4</td>
+                <td><strong>2/4</strong></td>
+                <td>5.6s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × GPT-4o</span></td>
+                <td>5</td>
+                <td>1,520</td>
+                <td>2/4</td>
+                <td><strong>2/4</strong></td>
+                <td>8.2s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-O × GPT-4o</span></td>
+                <td>4</td>
+                <td>146</td>
+                <td>1/4</td>
+                <td><strong>1/4</strong></td>
+                <td>6.4s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-D × Sonnet</span></td>
+                <td>11</td>
+                <td>17,467</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>54.4s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × Sonnet</span></td>
+                <td>10</td>
+                <td>3,995</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>50.5s</td>
+            </tr></tbody>
+      </table>
+    </div>
+    
+      <blockquote>The strongest navigator searched substantially deeper and found the distributed evidence. This is the clearest example of navigator capability dominating index enrichment.</blockquote>
+    </article>
+    
+    <article class="question-card" id="CN4">
+      <div class="question-top">
+        <span class="qid">CN4</span>
+        <span class="category">Consistency</span>
+      </div>
+      <h3>How many years of workout/running data does the corpus claim? Compare Start Here, the fitness project page, and the 7±2 essay — do they agree?</h3>
+      <p class="why"><strong>Why this question is diagnostic:</strong> A correct answer must compare several branches and preserve a discrepancy: 13 years, 14 years, and an internal table totaling about 13.5 years.</p>
+      
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Condition</th><th>Calls</th><th>Fetched tokens</th>
+          <th>Retrieval</th><th>Answer</th><th>Latency</th>
+        </tr></thead>
+        <tbody><tr>
+                <td><span class="condition">IDX-D × GPT-4o</span></td>
+                <td>5</td>
+                <td>8,126</td>
+                <td>4/4</td>
+                <td><strong>3/4</strong></td>
+                <td>6.2s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × GPT-4o</span></td>
+                <td>5</td>
+                <td>9,790</td>
+                <td>4/4</td>
+                <td><strong>3/4</strong></td>
+                <td>10.8s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-O × GPT-4o</span></td>
+                <td>5</td>
+                <td>7,939</td>
+                <td>3/4</td>
+                <td><strong>2/4</strong></td>
+                <td>8.0s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-D × Sonnet</span></td>
+                <td>5</td>
+                <td>7,864</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>18.8s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × Sonnet</span></td>
+                <td>3</td>
+                <td>43,605</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>23.8s</td>
+            </tr></tbody>
+      </table>
+    </div>
+    
+      <blockquote>Both cloud navigators could retrieve the relevant regions, but Sonnet preserved the conflict more faithfully. This supports a synthesis-quality mechanism that tool-call counts alone cannot explain.</blockquote>
+    </article>
+    
+    <article class="question-card" id="CN6">
+      <div class="question-top">
+        <span class="qid">CN6</span>
+        <span class="category">Consistency</span>
+      </div>
+      <h3>What publication date does “Why Metadata Matters” carry in its metadata header, and what date does the post’s body claim it was published? Do they agree?</h3>
+      <p class="why"><strong>Why this question is diagnostic:</strong> Tests whether normalized front matter and a deep body section are both reachable and whether the answer preserves a direct contradiction.</p>
+      
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Condition</th><th>Calls</th><th>Fetched tokens</th>
+          <th>Retrieval</th><th>Answer</th><th>Latency</th>
+        </tr></thead>
+        <tbody><tr>
+                <td><span class="condition">IDX-D × GPT-4o</span></td>
+                <td>3</td>
+                <td>2,100</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>4.8s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × GPT-4o</span></td>
+                <td>3</td>
+                <td>558</td>
+                <td>2/4</td>
+                <td><strong>1/4</strong></td>
+                <td>6.3s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-O × GPT-4o</span></td>
+                <td>3</td>
+                <td>409</td>
+                <td>2/4</td>
+                <td><strong>1/4</strong></td>
+                <td>11.3s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-D × Sonnet</span></td>
+                <td>3</td>
+                <td>2,100</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>14.0s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × Sonnet</span></td>
+                <td>3</td>
+                <td>2,263</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>15.9s</td>
+            </tr></tbody>
+      </table>
+    </div>
+    
+      <blockquote>This is a warning against relying on condition averages: GPT-4o scored strongly on IDX-D but poorly on both summarized indexes. Summary enrichment can redirect an individual question in the wrong direction.</blockquote>
+    </article>
+    
+    <article class="question-card" id="EG4">
+      <div class="question-top">
+        <span class="qid">EG4</span>
+        <span class="category">Evidence gap</span>
+      </div>
+      <h3>Work With Me names “Resume Explorer” among “live, deployed systems” to browse. Is there a Resume Explorer project page in the corpus, and where — if anywhere — is that work actually described?</h3>
+      <p class="why"><strong>Why this question is diagnostic:</strong> Requires both proving an absence across the portfolio branch and finding indirect traces elsewhere. A keyword hit is not enough.</p>
+      
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Condition</th><th>Calls</th><th>Fetched tokens</th>
+          <th>Retrieval</th><th>Answer</th><th>Latency</th>
+        </tr></thead>
+        <tbody><tr>
+                <td><span class="condition">IDX-D × GPT-4o</span></td>
+                <td>4</td>
+                <td>14,241</td>
+                <td>3/4</td>
+                <td><strong>3/4</strong></td>
+                <td>5.8s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-D × Sonnet</span></td>
+                <td>6</td>
+                <td>8,586</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>31.8s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × GPT-4o</span></td>
+                <td>4</td>
+                <td>3,969</td>
+                <td>2/4</td>
+                <td><strong>2/4</strong></td>
+                <td>9.8s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × Sonnet</span></td>
+                <td>5</td>
+                <td>17,365</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>25.5s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-O × GPT-4o</span></td>
+                <td>4</td>
+                <td>2,366</td>
+                <td>3/4</td>
+                <td><strong>3/4</strong></td>
+                <td>15.0s</td>
+            </tr></tbody>
+      </table>
+    </div>
+    
+      <blockquote>On IDX-D, GPT-4o bulk-scanned 14,241 content tokens and confirmed the absence but missed both indirect traces. Sonnet used a more targeted search and found one trace. Neither completed both subtasks.</blockquote>
+    </article>
+    
+    <article class="question-card" id="EG5">
+      <div class="question-top">
+        <span class="qid">EG5</span>
+        <span class="category">Evidence gap</span>
+      </div>
+      <h3>Work With Me cites two professional certifications. What are they, and does any other document in the corpus mention or evidence them?</h3>
+      <p class="why"><strong>Why this question is diagnostic:</strong> Tests whether a system distinguishes a claim repeated nowhere else from a claim supported elsewhere in the indexed corpus.</p>
+      
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Condition</th><th>Calls</th><th>Fetched tokens</th>
+          <th>Retrieval</th><th>Answer</th><th>Latency</th>
+        </tr></thead>
+        <tbody><tr>
+                <td><span class="condition">IDX-D × GPT-4o</span></td>
+                <td>4</td>
+                <td>3,426</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>5.2s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × GPT-4o</span></td>
+                <td>4</td>
+                <td>3,183</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>7.7s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-O × GPT-4o</span></td>
+                <td>4</td>
+                <td>1,886</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>12.2s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-D × Sonnet</span></td>
+                <td>10</td>
+                <td>13,716</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>42.4s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × Sonnet</span></td>
+                <td>5</td>
+                <td>6,139</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>23.2s</td>
+            </tr></tbody>
+      </table>
+    </div>
+    
+      <blockquote>All competent cloud conditions answered correctly, but Sonnet used 10 calls on IDX-D and 5 on IDX-C. This is evidence that summaries may improve navigation efficiency even when quality is already at ceiling.</blockquote>
+    </article>
+    
+    <article class="question-card" id="EG6">
+      <div class="question-top">
+        <span class="qid">EG6</span>
+        <span class="category">Evidence gap</span>
+      </div>
+      <h3>The 7±2 essay presents quantitative evidence from three domains. Which of its statistics are actual numbers, and which are unfilled placeholders?</h3>
+      <p class="why"><strong>Why this question is diagnostic:</strong> Tests whether summaries preserve a crucial distinction between real quantitative evidence and literal bracketed placeholders.</p>
+      
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Condition</th><th>Calls</th><th>Fetched tokens</th>
+          <th>Retrieval</th><th>Answer</th><th>Latency</th>
+        </tr></thead>
+        <tbody><tr>
+                <td><span class="condition">IDX-D × GPT-4o</span></td>
+                <td>3</td>
+                <td>513</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>5.2s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × GPT-4o</span></td>
+                <td>3</td>
+                <td>807</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>9.9s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-O × GPT-4o</span></td>
+                <td>3</td>
+                <td>888</td>
+                <td>4/4</td>
+                <td><strong>3/4</strong></td>
+                <td>13.3s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-D × Sonnet</span></td>
+                <td>3</td>
+                <td>1,830</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>16.5s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × Sonnet</span></td>
+                <td>3</td>
+                <td>1,830</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>15.6s</td>
+            </tr></tbody>
+      </table>
+    </div>
+    
+      <blockquote>IDX-D and IDX-C both supported correct cloud answers. IDX-O with GPT-4o slipped by one point, making this a useful future summary-faithfulness probe rather than evidence of a broad index effect.</blockquote>
+    </article>
+    
+    <article class="question-card" id="RD4">
+      <div class="question-top">
+        <span class="qid">RD4</span>
+        <span class="category">Reflective discovery</span>
+      </div>
+      <h3>A recurring character in this corpus is the exhausted human — someone making decisions while tired, stressed, or distracted. Where does this figure appear, and what design principle does it encode?</h3>
+      <p class="why"><strong>Why this question is diagnostic:</strong> The motif is not a heading or exact keyword. The navigator must connect several passages and infer the shared human-centered design principle.</p>
+      
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Condition</th><th>Calls</th><th>Fetched tokens</th>
+          <th>Retrieval</th><th>Answer</th><th>Latency</th>
+        </tr></thead>
+        <tbody><tr>
+                <td><span class="condition">IDX-D × GPT-4o</span></td>
+                <td>4</td>
+                <td>990</td>
+                <td>2/4</td>
+                <td><strong>2/4</strong></td>
+                <td>5.0s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × GPT-4o</span></td>
+                <td>4</td>
+                <td>454</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>7.6s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-O × GPT-4o</span></td>
+                <td>5</td>
+                <td>498</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>16.8s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-D × Sonnet</span></td>
+                <td>10</td>
+                <td>17,742</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>55.1s</td>
+            </tr><tr>
+                <td><span class="condition">IDX-C × Sonnet</span></td>
+                <td>4</td>
+                <td>2,466</td>
+                <td>4/4</td>
+                <td><strong>4/4</strong></td>
+                <td>27.6s</td>
+            </tr></tbody>
+      </table>
+    </div>
+    
+      <blockquote>GPT-4o improved from 2 on IDX-D to 4 on both summarized indexes, while Sonnet scored 4 throughout. This is the clearest question where summary enrichment appears to help a weaker navigator.</blockquote>
+    </article>
+    
+</section>
+
+<section>
+  <h2>The cost story, stated carefully</h2>
+  <div class="metrics">
+    <article class="metric"><div class="big">$1.29</div><p>Logged lower bound across 98 runs</p></article>
+    <article class="metric"><div class="big">$34.83</div><p>Illustrative navigation-inclusive estimate</p></article>
+    <article class="metric"><div class="big">26.9×</div><p>Estimated amplification from repeatedly carrying the tree</p></article>
+  </div>
+  <blockquote>
+    The robust conclusion is directional: navigation context dominates the floor calculation, and cost grows with repeated agent turns.
+    The exact dollars are not yet a valid cross-index comparison because one IDX-C tree-size anchor was applied to all indexes.
+  </blockquote>
+</section>
+
+<section>
+  <h2>Highest-value next measurements</h2>
+  <ol class="next">
+    <li>Measure serialized structure tokens separately for IDX-D, IDX-C, and IDX-O.</li>
+    <li>Resolve the missing Sonnet × IDX-D × RD6 run.</li>
+    <li>Confirm the authoritative score scale.</li>
+    <li>Inspect Qwen logs for context truncation and tool-protocol failure.</li>
+    <li>Trace exactly why CN6 worsened and RD4 improved under summarized indexes.</li>
+    <li>Capture provider-reported input, output, cached-input, and cache-write tokens per turn.</li>
+    <li>Record one-time index-build cost and duration.</li>
+    <li>Run a five-question cached-versus-uncached test.</li>
+    <li>Report cost per grounded or evidence-complete answer, not only cost per query.</li>
+    <li>Repeat the most diagnostic questions before treating the effects as stable.</li>
+  </ol>
+</section>
+
+<p class="footer">Generated 2026-07-10 · PageIndex website experiment · V1 evidence review</p>
+</main>
+</body>
+</html>

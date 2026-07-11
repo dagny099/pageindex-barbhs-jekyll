@@ -17,3 +17,6 @@ requests==2.34.2
 # --- Retrieval harness (scripts/run_retrieval.py) ---
 openai-agents==0.18.0
 litellm==1.84.0          # enables non-OpenAI retrievers (Claude, Ollama) via the Agents SDK
+
+# --- Dev / tests (scripts/render_index_comparison.py itself has no runtime deps) ---
+pytest

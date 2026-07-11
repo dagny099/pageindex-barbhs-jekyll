@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-Guidance for Claude Code when working in this repo. See `README.md` for the human-facing overview.
+Guidance for Codex when working in this repo. See `README.md` for the human-facing overview.
 
 ## What this repo is
 

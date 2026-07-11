@@ -43,14 +43,18 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 VENDOR = REPO / "vendor" / "PageIndex"
 sys.path.insert(0, str(VENDOR))
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # so `import usage_logging` works
 
 from dotenv import load_dotenv
 
 load_dotenv(REPO / ".env")  # OPENAI_API_KEY / ANTHROPIC_API_KEY
 
 import tiktoken
-from agents import Agent, Runner, function_tool, set_tracing_disabled
+from agents import Agent, Runner, ModelSettings, function_tool, set_tracing_disabled
 import pageindex.retrieve as R
+from usage_logging import cost_for, record_usage
+
+USAGE_LOG = REPO / "runs" / "usage_log.jsonl"  # shared append-only per-call log
 
 _ENC = tiktoken.get_encoding("o200k_base")  # reference tokenizer for payload accounting
 
@@ -59,27 +63,37 @@ def ntok(s: str) -> int:
     return len(_ENC.encode(s or ""))
 
 
-# Approximate USD per 1M tokens (input, output). Edit as prices change; unknown -> no cost.
-PRICING = {
-    "gpt-4o-2024-11-20": (2.50, 10.00),
-    "gpt-4o": (2.50, 10.00),
-    "gpt-4o-mini": (0.15, 0.60),
-    "gpt-4.1": (2.00, 8.00),
-    "gpt-4.1-mini": (0.40, 1.60),
-    "anthropic/claude-sonnet-4-5": (3.00, 15.00),
-    "anthropic/claude-3-5-sonnet-latest": (3.00, 15.00),
-}
-
-
+# Prices live in ONE place: scripts/usage_logging.py:PRICES. This is the rough
+# per-question AGGREGATE (no cache split — it treats all input as full-price, the
+# defensible floor); the exact per-call, cache-aware split is in runs/usage_log.jsonl.
 def est_cost(model: str, inp, out):
     if inp is None:
         return None
-    if model.startswith("ollama/"):
+    if model.startswith(("ollama/", "ollama_chat/")):
         return 0.0
-    p = PRICING.get(model)
-    if not p:
-        return None
-    return round(inp / 1e6 * p[0] + out / 1e6 * p[1], 4)
+    try:
+        return round(cost_for(model, inp, out), 4)
+    except KeyError:
+        return None  # unpriced model -> no aggregate estimate (per-call log may still price it)
+
+
+# Phase of one ModelResponse, inferred from the tool call(s) the model emitted that
+# turn. A turn with no tool call is where the model produced the final answer.
+# Heuristic (precedence structure > page_content > metadata > answer); refined
+# against real output-item shapes during the live smoke run.
+def phase_for(model_response) -> str:
+    names = set()
+    for item in getattr(model_response, "output", None) or []:
+        nm = getattr(item, "name", None)
+        if nm:
+            names.add(nm)
+    if "get_document_structure" in names:
+        return "structure"
+    if "get_page_content" in names:
+        return "page_content"
+    if "get_document" in names:
+        return "other"
+    return "answer"
 
 
 # NOTE: this canonical prompt was revised after the RET-OLL (local model) probe — the
@@ -107,9 +121,42 @@ the answer.
 """.strip()
 
 
+def is_native_openai(name: str) -> bool:
+    """Bare OpenAI names run through the native Agents path; everything else via litellm."""
+    return "/" not in name and name.startswith(("gpt-", "o1", "o3", "o4", "chatgpt"))
+
+
+def build_model_settings(model_name: str, cache_on: bool, temperature=None):
+    """Assemble ModelSettings from two orthogonal knobs:
+
+    - `temperature`: applied to both providers when given. Pin it to 0 for the
+      caching parity check so ON vs OFF are byte-for-byte comparable (answers can
+      only differ from sampling noise otherwise). None => provider default (the
+      normal-run behavior; nothing set).
+    - caching: enable prompt caching on the re-sent tree WITHOUT changing what the
+      model sees. litellm injects an Anthropic `cache_control` breakpoint on the
+      latest message each turn (index -1 => one breakpoint, under Anthropic's
+      4-block cap; caches the whole prefix incl. the tree, so it's a cache READ on
+      later turns). cache_control is request metadata, not content. The injection is
+      a litellm-only kwarg; native OpenAI auto-caches and would choke on it, so it's
+      skipped there.
+
+    Returns None when nothing is set, so the Agent keeps its defaults."""
+    kwargs = {}
+    if temperature is not None:
+        kwargs["temperature"] = temperature
+    if cache_on and not is_native_openai(model_name):
+        kwargs["extra_args"] = {
+            "cache_control_injection_points": [
+                {"location": "message", "index": -1, "control": {"type": "ephemeral"}},
+            ],
+        }
+    return ModelSettings(**kwargs) if kwargs else None
+
+
 def resolve_model(name: str):
     """Bare OpenAI names pass through natively; other providers use LiteLLM."""
-    if "/" not in name and name.startswith(("gpt-", "o1", "o3", "o4", "chatgpt")):
+    if is_native_openai(name):
         return name
     from agents.extensions.models.litellm_model import LitellmModel
 
@@ -145,7 +192,9 @@ def build_documents(index_path: Path) -> tuple[dict, str]:
                      "line_count": idx.get("line_count", 0), "structure": idx["structure"]}}, doc_id
 
 
-def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: str) -> dict:
+def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: str,
+            *, run_id: str, qid: str, index_id: str, cache_on: bool = False,
+            temperature=None) -> dict:
     trace: list[dict] = []
 
     def _log(tool, out, **args):
@@ -167,8 +216,13 @@ def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: 
         """Get text by Markdown line numbers. Tight ranges, e.g. '120-160' or '540,2176'."""
         return _log("get_page_content", R.get_page_content(documents, doc_id, pages), pages=pages)
 
+    agent_kwargs = {}
+    ms = build_model_settings(model_name, cache_on, temperature)
+    if ms is not None:
+        agent_kwargs["model_settings"] = ms
     agent = Agent(name="PageIndex-Retriever", instructions=AGENT_SYSTEM_PROMPT,
-                  tools=[get_document, get_document_structure, get_page_content], model=model_obj)
+                  tools=[get_document, get_document_structure, get_page_content],
+                  model=model_obj, **agent_kwargs)
 
     t0 = time.perf_counter()
     error = None
@@ -183,6 +237,18 @@ def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: 
                      "total_tokens": u.total_tokens}
         except Exception:
             pass
+        # Per-call token/cost capture: one ModelResponse per LLM turn, each with its
+        # own usage. This is the granular record (input_tokens climbing across
+        # call_idx = the tree re-send; cache_read_tokens once caching is on).
+        # Never let logging break a run.
+        try:
+            for k, mr in enumerate(getattr(result, "raw_responses", None) or []):
+                record_usage(mr, run_id=run_id, qid=qid, index=index_id,
+                             retriever=model_name, call_idx=k, phase=phase_for(mr),
+                             latency_s=0.0,  # per-call latency isn't exposed at this layer
+                             log_path=str(USAGE_LOG))
+        except Exception as e:
+            print(f"  [usage-log] skipped ({type(e).__name__}: {e})")
     except Exception as e:
         error = f"{type(e).__name__}: {e}"
     elapsed = round(time.perf_counter() - t0, 2)
@@ -249,7 +315,14 @@ def main() -> int:
                     help="index ids to run/compare, e.g. IDX-D IDX-C IDX-O")
     ap.add_argument("--retrievers", nargs="+", default=["gpt-4o-2024-11-20"])
     ap.add_argument("--questions", nargs="*", default=[], help="question ids (default: all in the CSV)")
+    ap.add_argument("--cache", choices=["off", "on"], default="off",
+                    help="prompt-cache the re-sent tree (on = Anthropic cache_control breakpoint; "
+                         "affects cost/latency only, not answers). Default off = baseline.")
+    ap.add_argument("--temperature", type=float, default=None,
+                    help="pin sampling temperature (use 0 for the caching parity check so "
+                         "ON vs OFF are comparable). Default: provider default.")
     args = ap.parse_args()
+    cache_on = args.cache == "on"
 
     set_tracing_disabled(True)
     provenance = json.loads((REPO / "corpus" / "site-book-v1" / "provenance.json").read_text())
@@ -260,7 +333,8 @@ def main() -> int:
     run_dir.mkdir(parents=True, exist_ok=True)
 
     record = {"run_id": ts, "purpose": "retrieval", "indexes": args.indexes,
-              "retrievers": args.retrievers, "questions": [q["id"] for q in questions],
+              "retrievers": args.retrievers, "cache": args.cache, "temperature": args.temperature,
+              "questions": [q["id"] for q in questions],
               "corpus_version": provenance["corpus_version"], "corpus_sha256": provenance["corpus_sha256"],
               "repo_commit": git_head(REPO), "results": []}
 
@@ -270,7 +344,9 @@ def main() -> int:
             model_obj = resolve_model(model_name)
             for q in questions:
                 print(f"\n{'='*70}\n[{index_id} | {model_name}] {q['id']} [{q['category']}]\n{q['question']}\n{'='*70}")
-                res = run_one(documents, doc_id, model_name, model_obj, q["question"])
+                res = run_one(documents, doc_id, model_name, model_obj, q["question"],
+                              run_id=record["run_id"], qid=q["id"], index_id=index_id,
+                              cache_on=cache_on, temperature=args.temperature)
                 res.update({"index_id": index_id, "qid": q["id"], "category": q["category"],
                             "question": q["question"], "expected_evidence": q.get("expected_evidence", ""),
                             "ground_truth": q.get("ground_truth", "")})

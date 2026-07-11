@@ -69,9 +69,79 @@ retrieval harness (`scripts/run_retrieval.py`).
 | `corpus/site-book-v1/` | Frozen input corpus (Markdown book stitched from 26 website documents) + `manifest.json` + `provenance.json`. Consumed, not produced here. |
 | `indexes/IDX-<letter>/index.json` | Curated, evaluated index variants. Currently: `IDX-D` (Deterministic). |
 | `results/` | Raw PageIndex run output (gitignored scratch). |
-| `reports/` | Experimental brief / lab notebook. (Corpus QC & normalization reports live in the website repo.) |
+| `reports/` | Experimental brief / lab notebook, the Index Comparison Explorer (`V1_INDEX_COMPARISON.html`), index outlines, alignment report. (Corpus QC & normalization reports live in the website repo.) |
+| `tests/` | pytest suite for repo tooling (currently the explorer generator). Run with `python -m pytest`. |
 | `vendor/PageIndex/` | The PageIndex tool, pinned as a git submodule. |
 | `config/` `evaluations/` `runs/` `scripts/` | Scaffolding for run configs, eval harnesses, reporting (currently empty). |
+
+## Index Comparison Explorer (V1 inspection tool)
+
+**Open [`reports/V1_INDEX_COMPARISON.html`](reports/V1_INDEX_COMPARISON.html) directly in a
+browser** — no server, no network, no framework; everything (data, corpus text, CSS, JS) is
+embedded in the one file.
+
+**What it is for:** the qualitative half of the V1 question — reading the IDX-C and IDX-O
+summaries beside their Markdown source sections and judging whether generated summaries are
+faithful, specific, and boundary-respecting. It is an *inspection* tool over the frozen
+artifacts, **not** a results dashboard and **not** a retrieval system, and it never calls a
+model — all automatic "review signals" are deterministic heuristics (numbers/entities/status
+terms in a summary that don't appear in the source, near-duplicate or outlier-length
+summaries), surfaced as *prompts for review, never verdicts*.
+
+**How alignment works:** the three indexes were verified at build time to share an identical
+339-node structure (same node IDs, titles, line ranges), so nodes align **exact** by node ID —
+see [`reports/V1_INDEX_ALIGNMENT_REPORT.md`](reports/V1_INDEX_ALIGNMENT_REPORT.md) for the
+evidence. The generator still handles drifted inputs conservatively (heading-path fallback →
+`probable`; title/ID conflicts → `divergent`/`ambiguous`; no counterpart → `unmatched`, shown,
+never silently dropped) so it stays honest if an index is ever regenerated.
+
+**Review flags** (Faithful / Too generic / Misleading / Missing distinction / Boundary
+problem / Needs review) attach per summary — a node's IDX-C and IDX-O summaries are flagged
+independently — plus an optional free-text note per node. Flags live in the browser's
+`localStorage`, keyed to the corpus SHA-256 so stale flags never silently reattach after a
+corpus change. **Export flags → JSON** (header button) before clearing browser data; the
+export identifies nodes by stable `node_id·path-hash` review keys and can be re-imported
+later. Keyboard-driven review loop: `j`/`k` move, `n` = next unreviewed summary, `c`/`o` pick
+a condition card, `1`–`6` toggle flags, `/` search, `?` help. `#node=0081` deep-links a node.
+
+**Suggested first review:**
+
+1. Open the HTML; read the onboarding panel and legend.
+2. Check "Signals only" to see the nodes the heuristics flagged (~30 per condition).
+3. Inspect a few on the **Summary inspection** tab — green marks are terms found in the
+   source section, amber marks are not (verify those against the source).
+4. Search (`/`) for one known project or article and compare IDX-C vs IDX-O against source.
+5. Flag misleading or generic summaries as you go (`1`–`6`); add notes for anything subtle.
+6. **Export flags** before clearing browser storage or switching machines.
+
+**Regenerate after an index or corpus change** (also refreshes the outlines in
+`reports/index-outlines/` and the alignment report):
+
+```bash
+python scripts/render_index_comparison.py --overwrite
+# explicit paths (defaults shown); discovery fails safely if candidates are ambiguous
+python scripts/render_index_comparison.py \
+  --idx-d indexes/IDX-D/index.json --idx-c indexes/IDX-C/index.json \
+  --idx-o indexes/IDX-O/index.json \
+  --corpus corpus/site-book-v1/site-book-v1.md \
+  --output reports/V1_INDEX_COMPARISON.html --overwrite
+python -m pytest tests/test_render_index_comparison.py   # sanity-check the generator
+```
+
+**Explorer roadmap (deferred by design, in likely priority order):**
+
+- **Question overlays** — project the 14 frozen evaluation questions onto the tree: which
+  nodes hold each question's `expected_evidence`, so index quality can be read against the
+  question set.
+- **Retrieval-trace visualization** — overlay actual `runs/<timestamp>/` retrieval paths on
+  the document map to connect summary quality to retrieval behavior (the quantitative half).
+- **Flag aggregation** — a small script summarizing exported review-flag JSON into per-
+  condition faithfulness tables for the lab notebook.
+- **C-vs-O phrase diff** — deliberately dropped from V1: two independently generated
+  paragraphs differ at nearly every word, so a textual diff is noise; targeted term
+  highlighting (implemented) replaced it. Revisit only with a smarter semantic alignment.
+- **LLM-assisted faithfulness checks** — excluded on principle from report generation;
+  if added ever, as a separate, clearly-labeled offline pass, never inline.
 
 ## Running PageIndex
 
@@ -100,6 +170,46 @@ Generation behavior (model, summaries, node IDs, thinning) is controlled by
 `vendor/PageIndex/pageindex/config.yaml` and overridable via CLI flags. The default
 model is `gpt-4o-2024-11-20`. Raw runs land in `results/`; curated variants are saved
 to `indexes/IDX-<letter>/index.json`.
+
+### Summary threshold experiments
+
+For Markdown input, PageIndex does **not** call the model for every node by default.
+When `--if-add-node-summary yes` is set, nodes whose text is below
+`--summary-token-threshold` are copied verbatim into `summary` / `prefix_summary`;
+only nodes at or above the threshold get an LLM-generated summary. The current
+IDX-C / IDX-O runs used the default threshold of `200`.
+
+Use `--summary-token-threshold 0` when you want a cleaner "generated summaries over
+headings" condition:
+
+```bash
+# Cloud summarizer: force a generated summary for every node
+cd vendor/PageIndex
+python3 run_pageindex.py --md_path ../../corpus/site-book-v1/site-book-v1.md \
+  --model gpt-4o-2024-11-20 \
+  --if-add-node-summary yes --if-add-doc-description yes --if-add-node-text yes \
+  --summary-token-threshold 0
+
+# Keep this separate from IDX-C unless intentionally replacing it.
+mkdir -p ../../indexes/IDX-C0
+cp results/site-book-v1_structure.json ../../indexes/IDX-C0/index.json
+```
+
+```bash
+# Local Ollama summarizer: same idea, but expect a much slower run
+cd vendor/PageIndex
+python3 run_pageindex.py --md_path ../../corpus/site-book-v1/site-book-v1.md \
+  --model ollama_chat/qwen2.5-7b-instruct-ctx32k \
+  --if-add-node-summary yes --if-add-doc-description yes --if-add-node-text yes \
+  --summary-token-threshold 0
+
+mkdir -p ../../indexes/IDX-O0
+cp results/site-book-v1_structure.json ../../indexes/IDX-O0/index.json
+```
+
+Interpretation rule of thumb: threshold `200` evaluates headings plus copied short
+section text plus generated summaries for longer nodes; threshold `0` evaluates
+headings plus generated summaries for every node.
 
 ## Local models (Ollama) — required setup for IDX-O / RET-OLL
 

@@ -16,7 +16,24 @@ design lives in `reports/experimental-brief-lab-notebook.html`.
 - Model-based conditions need an LLM API key in the **repo-root `.env`** (auto-loaded by python-dotenv's walk-up when running from `vendor/PageIndex/`; `.env.example` is the committed template). The deterministic **IDX-D** needs no key. Never commit keys — `.env` is gitignored.
 - Generation config lives in `vendor/PageIndex/pageindex/config.yaml` (default model `gpt-4o-2024-11-20`); CLI flags override it.
 
-## The corpus is produced ELSEWHERE — do not hand-edit it
+## Corpora are frozen — never hand-edit anything under `corpus/`
+
+Two corpora with different producers, same discipline (fix the pipeline, rebuild, never
+hand-edit outputs):
+
+- **`corpus/site-book-v1/`** — produced **elsewhere** (website repo, see below).
+- **`corpus/paper-book-v1/`** — produced **in this repo** (deliberate exception; the
+  source is a frozen academic PDF, not website content). Producer:
+  `scripts/build_paper_book.py` + `config/paper-book-v1.yml`; source PDF pinned by
+  SHA-256 at `sources/paper-2009/`. Rebuild is byte-identical against the pinned
+  PyMuPDF version (the build fails on a version mismatch). Rebuild with
+  `.venv/bin/python scripts/build_paper_book.py --overwrite`, then check with
+  `scripts/validate_paper_book.py` and `pytest tests/test_build_paper_book.py`.
+  `reports/qc-paper-book-v1.md` is derived output of the same build — regenerate it,
+  never hand-edit. After committing corpus changes, rerun the build once so
+  `provenance.json` pins the clean commit (the `.md`/manifest bytes don't change).
+
+### site-book-v1 is produced ELSEWHERE
 
 `corpus/site-book-v1/` is a **frozen, consumed snapshot**, not a source. The corpus is
 built by a pipeline in the website repo at `dagny099.github.io/experiments/pageindex/`
@@ -80,6 +97,11 @@ cd vendor/PageIndex && python3 run_pageindex.py --md_path ../../corpus/site-book
 
 # Verify an index/corpus JSON is well-formed
 python3 -c "import json,sys; json.load(open(sys.argv[1])); print('ok')" indexes/IDX-D/index.json
+
+# Rebuild + validate the paper corpus (deterministic; PDF pinned by sha256)
+.venv/bin/python scripts/build_paper_book.py --overwrite
+.venv/bin/python scripts/validate_paper_book.py
+python3 -m pytest tests/test_build_paper_book.py
 
 # Regenerate the Index Comparison Explorer + outlines + alignment report
 # (self-contained offline HTML; no LLM calls; refuses to overwrite without the flag)

@@ -106,34 +106,69 @@ section boundaries, figures that resisted extraction).
 
 ## PROMPT C — Tree-inspection gate (structure QC before any retrieval)
 
-You are validating that PageIndex built a usable structural tree BEFORE any
-retrieval is run. This is a gate, not a run.
+**[REVISED after Prompt B landed — scoped down to reuse existing machinery.]**
 
-Context: On the website corpus the hierarchy was authored; on this PDF-derived corpus
-the structure must be INFERRED (TOC detection, section boundaries, page mapping).
-A bad tree silently poisons retrieval results, so it must be inspected first.
+You are validating that PageIndex built a usable structural tree over the paper
+corpus BEFORE any retrieval is run. This is a gate, not a run.
+
+Context — what already exists (reuse it; do not rebuild):
+- `corpus/paper-book-v1/` is built (Prompt B). Its `paper-book-v1.manifest.json`
+  carries **machine-readable ground truth** for this gate: every section with level,
+  book line, and PDF page; figure/table/equation placeholder lines; footnotes; the
+  references boundary; and a full page→line map. Section-boundary checks should
+  compare tree nodes against the manifest, not against prose in the QC report.
+- `scripts/render_index_comparison.py` already implements ~60–70% of the reporting
+  machinery: tree flattening, cross-condition node alignment, line-span computation,
+  text-boundary checks against a corpus, per-condition outlines, and an alignment
+  report. It is currently hardwired to three conditions (D/C/O) and site-book
+  heuristics (e.g. STATUS_TERMS); generalize or thinly wrap it — do not fork a
+  parallel implementation.
+- On the website corpus the hierarchy was authored; on this corpus it must be
+  INFERRED from a PDF-derived book. A bad tree silently poisons retrieval results,
+  so it must be inspected first.
+
+Blocking dependency: the **Markdown-native control corpus does not exist yet**.
+Barbara must first decide how it is produced (recommended: a curated second output
+of the Prompt B pipeline, e.g. `corpus/paper-book-v1-clean/`, where every cleanup is
+an explicit config rule — no hand edits, same conventions/manifest schema). If that
+decision is still open when you start, do steps 1–3 for the PDF-derived tree alone
+and mark the comparison section of the report as pending the control.
 
 Task:
-1. Using the fixed index config, generate the PageIndex tree for BOTH representations:
-   the PDF-derived `paper-book-v1` and (as the favorable control) a Markdown-native
-   version of the same paper.
-2. For each tree, emit a structure-quality report: node count, max depth,
-   TOC-detection success, % of lines covered and any gaps, empty / duplicate /
-   collapsed / mis-nested nodes, figure/table nodes, and whether section boundaries
-   match `reports/qc-paper-book-v1.md` from Prompt B.
-3. Emit a side-by-side **PDF-tree vs Markdown-tree diff** and a PASS / REVIEW verdict
-   per representation.
+1. Generate PageIndex trees over `corpus/paper-book-v1/paper-book-v1.md` using the
+   same fixed index config as V1 (at minimum the deterministic condition; model
+   conditions per `config/index-conditions.yml`). Curate into `indexes/` with
+   provenance pinning `corpus_sha256`, following the existing IDX-* conventions.
+   Repeat for the Markdown-native control corpus when it exists.
+2. Add a thin structure-QC gate layer on top of the comparison tooling, reporting
+   per tree: node count, max depth, **heading-hierarchy fidelity vs the manifest's
+   section inventory** (every manifest section matched by a node at the right line ±
+   tolerance; extra/missing/mis-nested nodes listed), % of book lines covered by
+   node spans and any gaps, empty / duplicate / collapsed nodes, and whether the
+   figure/table/equation placeholder lines and the references boundary land inside
+   sensible nodes.
+3. Emit a side-by-side PDF-tree vs control-tree diff (via the generalized alignment
+   machinery) and a PASS / REVIEW verdict per representation, where PASS means
+   "no gate check failed", not a quality score.
+4. Optional extension (flag cost before running): a third arm using PageIndex's
+   **native PDF mode** (`--pdf_path` on the source PDF) — the only arm where a
+   TOC-detection metric applies. This tests PageIndex's own extraction against our
+   pipeline's; skip if budget is tight.
 
 Hard constraints:
 - Do NOT run retrieval or answer any questions.
-- Report metrics and flag anomalies; do not invent a quality score. Where judgment is
-  needed, surface it for human review rather than deciding.
+- Report metrics and flag anomalies; do not invent a composite quality score. Where
+  judgment is needed, surface it for human review rather than deciding.
+- Do not modify `corpus/` or the Prompt B pipeline; if the tree exposes a corpus
+  defect, report it as a Prompt B fix request.
 
-Acceptance criteria: a reviewer can decide in under 10 minutes whether the PDF tree is
-fit for retrieval, from the report alone.
+Acceptance criteria: a reviewer can decide in under 10 minutes whether the PDF tree
+is fit for retrieval, from the report alone; every gate check is traceable to
+manifest ground truth.
 
-Report back: the diff, the top structural risks, and an explicit recommendation on
-whether the PDF tree is fit for retrieval or needs a pipeline fix (Prompt B) first.
+Report back: the diff, the top structural risks, gate verdicts with the failing
+checks (if any), and an explicit recommendation — fit for retrieval, or needs a
+pipeline fix (Prompt B) first.
 
 ---
 

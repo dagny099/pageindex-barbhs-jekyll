@@ -1,0 +1,830 @@
+{
+  "corpus_version": "paper-book-v1",
+  "title": "Modelling search for people in 900 scenes: A combined source model of eye guidance",
+  "source_pdf_sha256": "3bdc5cad724300bc3bc2b97ffdab9057d803f45c20b3abb5709859dec92e6b12",
+  "extraction_tool": "PyMuPDF",
+  "extraction_tool_version": "1.26.4",
+  "counts": {
+    "pdf_pages": 34,
+    "lines": 478,
+    "generated_lines": 56,
+    "sections": 26,
+    "figures": 12,
+    "tables": 1,
+    "equations": 1,
+    "footnotes": 7,
+    "references": 89
+  },
+  "sections": [
+    {
+      "level": 2,
+      "title": "Corpus Preface",
+      "line": 3,
+      "page": null,
+      "synthetic": true
+    },
+    {
+      "level": 2,
+      "title": "Front Matter",
+      "line": 16,
+      "page": 1,
+      "synthetic": true
+    },
+    {
+      "level": 2,
+      "title": "Abstract",
+      "line": 44,
+      "page": 1,
+      "synthetic": false
+    },
+    {
+      "level": 2,
+      "title": "Introduction",
+      "line": 52,
+      "page": 2,
+      "synthetic": true
+    },
+    {
+      "level": 2,
+      "title": "EXPERIMENTAL METHOD",
+      "line": 79,
+      "page": 5,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Participants",
+      "line": 81,
+      "page": 5,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Apparatus",
+      "line": 85,
+      "page": 5,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Stimuli",
+      "line": 91,
+      "page": 6,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Procedure",
+      "line": 95,
+      "page": 6,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Eye movement analysis",
+      "line": 99,
+      "page": 6,
+      "synthetic": false
+    },
+    {
+      "level": 2,
+      "title": "HUMAN EYE MOVEMENTS RESULT",
+      "line": 105,
+      "page": 7,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Accuracy and eye movement statistics",
+      "line": 107,
+      "page": 7,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Agreement among observers",
+      "line": 113,
+      "page": 7,
+      "synthetic": false
+    },
+    {
+      "level": 2,
+      "title": "MODELLING METHODS",
+      "line": 131,
+      "page": 10,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Guidance by saliency",
+      "line": 141,
+      "page": 10,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Guidance by target features",
+      "line": 153,
+      "page": 12,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Guidance by scene context features",
+      "line": 177,
+      "page": 15,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Guidance by a combined model of attention",
+      "line": 195,
+      "page": 17,
+      "synthetic": false
+    },
+    {
+      "level": 2,
+      "title": "MODELLING RESULTS",
+      "line": 207,
+      "page": 19,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Saliency and target features models",
+      "line": 211,
+      "page": 19,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Context models",
+      "line": 262,
+      "page": 23,
+      "synthetic": false
+    },
+    {
+      "level": 3,
+      "title": "Combined source models",
+      "line": 272,
+      "page": 24,
+      "synthetic": false
+    },
+    {
+      "level": 2,
+      "title": "DISCUSSION",
+      "line": 290,
+      "page": 26,
+      "synthetic": false
+    },
+    {
+      "level": 2,
+      "title": "CONCLUDING REMARKS",
+      "line": 318,
+      "page": 30,
+      "synthetic": false
+    },
+    {
+      "level": 2,
+      "title": "REFERENCES",
+      "line": 322,
+      "page": 30,
+      "synthetic": false
+    },
+    {
+      "level": 2,
+      "title": "Footnotes",
+      "line": 422,
+      "page": null,
+      "synthetic": true
+    }
+  ],
+  "figures": [
+    {
+      "n": 1,
+      "page": 3,
+      "line": 65,
+      "caption_preview": "Examples of target-absent scenes with (a) high and (b) low inter-observer agreement. Dots represent "
+    },
+    {
+      "n": 2,
+      "page": 9,
+      "line": 127,
+      "caption_preview": "Inter-observer agreement and cross-image control for target-absent (left) and target-present (right)"
+    },
+    {
+      "n": 3,
+      "page": 11,
+      "line": 149,
+      "caption_preview": "Illustration of a target-present image from the dataset, with the computational maps for three sourc"
+    },
+    {
+      "n": 4,
+      "page": 13,
+      "line": 163,
+      "caption_preview": "Saliency maps of the best and worst predictions on the dataset, and one mid-range image, with their "
+    },
+    {
+      "n": 5,
+      "page": 14,
+      "line": 169,
+      "caption_preview": "The ROC curve of the best implementation of the DT pedestrian detector, tested on our stimuli set. T"
+    },
+    {
+      "n": 6,
+      "page": 16,
+      "line": 185,
+      "caption_preview": "Target features maps (thresholded at 20% of the image area). Dots represent human fixations. To view"
+    },
+    {
+      "n": 7,
+      "page": 18,
+      "line": 201,
+      "caption_preview": "Scene context maps (thresholded at 20% of the image area). Dots represent human fixations. To view t"
+    },
+    {
+      "n": 8,
+      "page": 19,
+      "line": 205,
+      "caption_preview": "Comparison between (a) the computationally defined scene context map and (b) the empirically defined"
+    },
+    {
+      "n": 9,
+      "page": 20,
+      "line": 219,
+      "caption_preview": "Combined source maps (thresholded at 20% of the image area). Dots represent human fixations. To view"
+    },
+    {
+      "n": 10,
+      "page": 22,
+      "line": 254,
+      "caption_preview": "ROC curves for models. The ROC curves for human agreement and cross-image control correspond respect"
+    },
+    {
+      "n": 11,
+      "page": 25,
+      "line": 282,
+      "caption_preview": "Target-absent scenes on which the context oracle performed the worst, with their corresponding AUC v"
+    },
+    {
+      "n": 12,
+      "page": 28,
+      "line": 306,
+      "caption_preview": "Illustration of the discrepancy between regions selected by (a) the combined computational model and"
+    }
+  ],
+  "table": {
+    "n": 1,
+    "page": 21,
+    "caption": "Summary of performance of human observers, single source models, and combined source of guidance models",
+    "rows": 22
+  },
+  "equations": [
+    {
+      "n": 1,
+      "page": 10,
+      "text": "M(x, y)=MS(x, y) γ1 MT(x, y) γ2 MC(x, y) γ3"
+    }
+  ],
+  "footnotes": [
+    {
+      "n": 1,
+      "page": 5,
+      "line": 424
+    },
+    {
+      "n": 2,
+      "page": 6,
+      "line": 426
+    },
+    {
+      "n": 3,
+      "page": 10,
+      "line": 428
+    },
+    {
+      "n": 4,
+      "page": 12,
+      "line": 430
+    },
+    {
+      "n": 5,
+      "page": 12,
+      "line": 432
+    },
+    {
+      "n": 6,
+      "page": 14,
+      "line": 434
+    },
+    {
+      "n": 7,
+      "page": 23,
+      "line": 436
+    }
+  ],
+  "references": {
+    "count": 89,
+    "start_line": 324,
+    "end_line": 420,
+    "line": 322
+  },
+  "page_map": [
+    {
+      "page": 1,
+      "ranges": [
+        [
+          1,
+          2
+        ],
+        [
+          14,
+          47
+        ]
+      ]
+    },
+    {
+      "page": 2,
+      "ranges": [
+        [
+          48,
+          52
+        ],
+        [
+          55,
+          62
+        ]
+      ]
+    },
+    {
+      "page": 3,
+      "ranges": [
+        [
+          63,
+          66
+        ]
+      ]
+    },
+    {
+      "page": 4,
+      "ranges": [
+        [
+          67,
+          72
+        ]
+      ]
+    },
+    {
+      "page": 5,
+      "ranges": [
+        [
+          73,
+          88
+        ],
+        [
+          424,
+          425
+        ]
+      ]
+    },
+    {
+      "page": 6,
+      "ranges": [
+        [
+          89,
+          102
+        ],
+        [
+          426,
+          427
+        ]
+      ]
+    },
+    {
+      "page": 7,
+      "ranges": [
+        [
+          103,
+          116
+        ]
+      ]
+    },
+    {
+      "page": 8,
+      "ranges": [
+        [
+          117,
+          124
+        ]
+      ]
+    },
+    {
+      "page": 9,
+      "ranges": [
+        [
+          125,
+          128
+        ]
+      ]
+    },
+    {
+      "page": 10,
+      "ranges": [
+        [
+          129,
+          146
+        ],
+        [
+          428,
+          429
+        ]
+      ]
+    },
+    {
+      "page": 11,
+      "ranges": [
+        [
+          147,
+          150
+        ]
+      ]
+    },
+    {
+      "page": 12,
+      "ranges": [
+        [
+          151,
+          160
+        ],
+        [
+          430,
+          433
+        ]
+      ]
+    },
+    {
+      "page": 13,
+      "ranges": [
+        [
+          161,
+          164
+        ]
+      ]
+    },
+    {
+      "page": 14,
+      "ranges": [
+        [
+          165,
+          170
+        ],
+        [
+          434,
+          435
+        ]
+      ]
+    },
+    {
+      "page": 15,
+      "ranges": [
+        [
+          171,
+          182
+        ]
+      ]
+    },
+    {
+      "page": 16,
+      "ranges": [
+        [
+          183,
+          186
+        ]
+      ]
+    },
+    {
+      "page": 17,
+      "ranges": [
+        [
+          187,
+          198
+        ]
+      ]
+    },
+    {
+      "page": 18,
+      "ranges": [
+        [
+          199,
+          202
+        ]
+      ]
+    },
+    {
+      "page": 19,
+      "ranges": [
+        [
+          203,
+          216
+        ]
+      ]
+    },
+    {
+      "page": 20,
+      "ranges": [
+        [
+          217,
+          220
+        ]
+      ]
+    },
+    {
+      "page": 21,
+      "ranges": [
+        [
+          221,
+          251
+        ]
+      ]
+    },
+    {
+      "page": 22,
+      "ranges": [
+        [
+          252,
+          255
+        ]
+      ]
+    },
+    {
+      "page": 23,
+      "ranges": [
+        [
+          256,
+          265
+        ],
+        [
+          436,
+          437
+        ]
+      ]
+    },
+    {
+      "page": 24,
+      "ranges": [
+        [
+          266,
+          279
+        ]
+      ]
+    },
+    {
+      "page": 25,
+      "ranges": [
+        [
+          280,
+          283
+        ]
+      ]
+    },
+    {
+      "page": 26,
+      "ranges": [
+        [
+          284,
+          295
+        ]
+      ]
+    },
+    {
+      "page": 27,
+      "ranges": [
+        [
+          296,
+          303
+        ]
+      ]
+    },
+    {
+      "page": 28,
+      "ranges": [
+        [
+          304,
+          307
+        ]
+      ]
+    },
+    {
+      "page": 29,
+      "ranges": [
+        [
+          308,
+          315
+        ]
+      ]
+    },
+    {
+      "page": 30,
+      "ranges": [
+        [
+          316,
+          337
+        ]
+      ]
+    },
+    {
+      "page": 31,
+      "ranges": [
+        [
+          338,
+          363
+        ]
+      ]
+    },
+    {
+      "page": 32,
+      "ranges": [
+        [
+          364,
+          389
+        ]
+      ]
+    },
+    {
+      "page": 33,
+      "ranges": [
+        [
+          390,
+          412
+        ]
+      ]
+    },
+    {
+      "page": 34,
+      "ranges": [
+        [
+          413,
+          421
+        ]
+      ]
+    }
+  ],
+  "generated_line_ranges": [
+    [
+      3,
+      13
+    ],
+    [
+      53,
+      54
+    ],
+    [
+      422,
+      423
+    ],
+    [
+      438,
+      478
+    ]
+  ],
+  "straddles": [
+    {
+      "line": 61,
+      "pages": [
+        2,
+        4
+      ]
+    },
+    {
+      "line": 87,
+      "pages": [
+        5,
+        6
+      ]
+    },
+    {
+      "line": 101,
+      "pages": [
+        6,
+        7
+      ]
+    },
+    {
+      "line": 115,
+      "pages": [
+        7,
+        8
+      ]
+    },
+    {
+      "line": 145,
+      "pages": [
+        10,
+        12
+      ]
+    },
+    {
+      "line": 167,
+      "pages": [
+        14,
+        15
+      ]
+    },
+    {
+      "line": 181,
+      "pages": [
+        15,
+        17
+      ]
+    },
+    {
+      "line": 215,
+      "pages": [
+        19,
+        21,
+        23
+      ]
+    },
+    {
+      "line": 278,
+      "pages": [
+        24,
+        26
+      ]
+    },
+    {
+      "line": 294,
+      "pages": [
+        26,
+        27
+      ]
+    },
+    {
+      "line": 302,
+      "pages": [
+        27,
+        28
+      ]
+    },
+    {
+      "line": 314,
+      "pages": [
+        29,
+        30
+      ]
+    }
+  ],
+  "expectation_mismatches": [],
+  "qc": {
+    "glyph_substitutions": {
+      "AdvBMa1": 152,
+      "AdvPi3": 1,
+      "AdvPi1": 12,
+      "AdvDM5": 23,
+      "AdvP4C4E51": 4,
+      "AdvBM13": 9
+    },
+    "ligatures": 45,
+    "diacritics_recombined": 3,
+    "dehyphenations": 5,
+    "dehyphenation_samples": [
+      "performance",
+      "computational",
+      "predictions",
+      "behaviour",
+      "computational"
+    ],
+    "dehyphenations_uncertain": [
+      "unex|pected",
+      "video|based",
+      "(corre|sponding",
+      "web|based"
+    ],
+    "hyphens_kept": 11,
+    "cross_page_joins": 14,
+    "furniture_stripped": {
+      "watermark": 34,
+      "running_heads": 66
+    },
+    "unmapped_symbol_chars": [],
+    "inline_subscripts": [
+      "C",
+      "S",
+      "T"
+    ],
+    "notes": [],
+    "hyphens_kept_samples": [
+      "target-present",
+      "target-present",
+      "cross-image",
+      "target-absent",
+      "target-absent",
+      "target-absent",
+      "target-present",
+      "target-absent",
+      "people-search",
+      "observer-defined"
+    ]
+  },
+  "corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2"
+}

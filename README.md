@@ -27,18 +27,36 @@ website source  →  corpus/site-book-v1.md  →  PageIndex  →  results/  → 
 
 ## Corpus source & authority
 
-**This repo does not produce the corpus — it consumes a frozen snapshot of it.**
+Two frozen corpora, two producers — but the same discipline for both: **never hand-edit
+`corpus/`**; fix the producer pipeline and rebuild.
 
-The corpus is built by a pipeline that lives in the website repo at
-`dagny099.github.io/experiments/pageindex/` (build/validate scripts, selection config,
-normalization tests, and the QC/normalization reports). That repo is the **authoritative
-producer**; the original website source files remain authoritative over the corpus.
-
-This repo pins the exact snapshot it consumes in
+**site-book-v1 (website corpus) is produced elsewhere.** It is built by a pipeline in the
+website repo at `dagny099.github.io/experiments/pageindex/` (build/validate scripts,
+selection config, normalization tests, and the QC/normalization reports). That repo is the
+**authoritative producer**; the original website source files remain authoritative over the
+corpus. This repo pins the exact snapshot it consumes in
 [`corpus/site-book-v1/provenance.json`](corpus/site-book-v1/provenance.json): source repo,
 source path, `website_commit`, `pageindex_commit`, and SHA256s of the corpus and manifest.
-**To change the corpus, fix the pipeline in the website repo, then re-sync here** — never
-hand-edit `corpus/`. See [CLAUDE.md](CLAUDE.md) for the re-sync workflow.
+**To change it, fix the pipeline in the website repo, then re-sync here.** See
+[CLAUDE.md](CLAUDE.md) for the re-sync workflow.
+
+**paper-book-v1 (paper corpus) is produced in this repo** — a deliberate exception, since
+its source is not website content but a frozen academic PDF (Ehinger, Hidalgo-Sotelo,
+Torralba, & Oliva, 2009, *Visual Cognition*, DOI 10.1080/13506280902834720) pinned by
+SHA-256 at `sources/paper-2009/`. The deterministic producer is
+[`scripts/build_paper_book.py`](scripts/build_paper_book.py) with all extraction rules in
+[`config/paper-book-v1.yml`](config/paper-book-v1.yml); rebuilding yields a byte-identical
+book against the pinned PyMuPDF version. Extraction issues and open questions are
+enumerated in [`reports/qc-paper-book-v1.md`](reports/qc-paper-book-v1.md).
+
+```bash
+# Rebuild the paper book (refuses to overwrite without the flag)
+.venv/bin/python scripts/build_paper_book.py --overwrite
+
+# Validate hashes, heading hierarchy, page map, placeholders, furniture
+.venv/bin/python scripts/validate_paper_book.py
+python3 -m pytest tests/test_build_paper_book.py
+```
 
 ## Experimental design
 
@@ -67,6 +85,8 @@ retrieval harness (`scripts/run_retrieval.py`).
 | Path | What it is |
 |------|------------|
 | `corpus/site-book-v1/` | Frozen input corpus (Markdown book stitched from 26 website documents) + `manifest.json` + `provenance.json`. Consumed, not produced here. |
+| `corpus/paper-book-v1/` | Frozen paper corpus (Markdown book derived from the 2009 *Visual Cognition* PDF) + manifest + provenance. Produced **in this repo** by `scripts/build_paper_book.py`. |
+| `sources/paper-2009/` | The frozen source PDF, pinned by SHA-256 in `config/paper-book-v1.yml`. |
 | `indexes/IDX-<letter>/index.json` | Curated, evaluated index variants. Currently: `IDX-D` (Deterministic). |
 | `results/` | Raw PageIndex run output (gitignored scratch). |
 | `reports/` | Experimental brief / lab notebook, the Index Comparison Explorer (`V1_INDEX_COMPARISON.html`), index outlines, alignment report. (Corpus QC & normalization reports live in the website repo.) |
@@ -178,6 +198,13 @@ When `--if-add-node-summary yes` is set, nodes whose text is below
 `--summary-token-threshold` are copied verbatim into `summary` / `prefix_summary`;
 only nodes at or above the threshold get an LLM-generated summary. The current
 IDX-C / IDX-O runs used the default threshold of `200`.
+
+**Measured impact:** at the default threshold, ~80% of summaries end up as verbatim
+copies of node text (273/339 nodes in IDX-C, 272/339 in IDX-O), and because the
+retriever's tree dump keeps `summary` after stripping `text`, the tree re-sent on every
+turn is ~4.9× the heading-only baseline (~43.7K vs ~8.9K tokens). The full mechanism,
+numbers, upstream-vs-ours attribution, and reproduce steps are written up in
+[`reports/findings-summary-threshold.md`](reports/findings-summary-threshold.md).
 
 Use `--summary-token-threshold 0` when you want a cleaner "generated summaries over
 headings" condition:

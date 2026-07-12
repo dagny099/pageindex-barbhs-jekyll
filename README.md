@@ -14,6 +14,9 @@ The full experimental brief, question set, evaluation rubric, and run log live i
 interactive lab notebook: [`reports/experimental-brief-lab-notebook.html`](reports/experimental-brief-lab-notebook.html)
 (open it in a browser; notes save to `localStorage`).
 
+> **Cheat sheet:** [RUNBOOK.md](RUNBOOK.md) — every command for building conditions,
+> running retrieval, and analyzing results, with what each does for you.
+
 ## How it works
 
 The website is flattened into a single derived Markdown "book" (`site-book-v1.md`),

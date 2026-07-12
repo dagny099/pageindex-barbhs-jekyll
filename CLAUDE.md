@@ -22,6 +22,14 @@ Two corpora with different producers, same discipline (fix the pipeline, rebuild
 hand-edit outputs):
 
 - **`corpus/site-book-v1/`** — produced **elsewhere** (website repo, see below).
+- **`corpus/paper-book-v1-clean/`** — the **Markdown-native control** for the
+  PDF-vs-Markdown comparison. Derived deterministically from `paper-book-v1` by
+  `scripts/build_paper_book_clean.py` using **structural transforms only** (strip
+  PDF instrumentation, title-case headings); it never edits words, and a build-time
+  text-parity assertion proves every content line is byte-identical to
+  `paper-book-v1`. So the two arms differ only in *representation*. Rebuild:
+  `.venv/bin/python scripts/build_paper_book_clean.py --overwrite`. QC:
+  `reports/qc-paper-book-v1-clean.md`.
 - **`corpus/paper-book-v1/`** — produced **in this repo** (deliberate exception; the
   source is a frozen academic PDF, not website content). Producer:
   `scripts/build_paper_book.py` + `config/paper-book-v1.yml`; source PDF pinned by

@@ -212,3 +212,69 @@ git -C vendor/PageIndex status --short   # only 'results/' (untracked) is expect
 Build `IDX-C0` (`--summary-token-threshold 0`) to (a) measure the true size of a properly
 generated-summary tree and attribute the bloat precisely, and (b) serve as the confound-free
 Markdown arm for the PDF-vs-Markdown representation comparison.
+
+---
+
+## Addendum (2026-07-12): IDX-C0 built, and a three-way retrieval run
+
+`IDX-C0` is now built (`--summary-token-threshold 0`, gpt-4o) and curated at
+`indexes/IDX-C0/`. Two things fell out — one that revises this note's own hypothesis,
+one that was not anticipated.
+
+### 1. The verbatim bug explains only ~20% of the bloat
+
+This note hypothesized that the verbatim-copy defect was why the summary tree ballooned.
+The counterfactual says that was only partly right. Same serializer (`text` stripped),
+same tiktoken gpt-4o encoding:
+
+| Index | Summaries | Tree dump / turn |
+|---|---|---|
+| IDX-D | none | 11,609 |
+| **IDX-C0** | **real, every node** | **38,311** |
+| IDX-C | 80% verbatim | 47,793 |
+
+Fixing the threshold recovers only ~9K of the ~36K excess. A *properly* summarized tree is
+still **3.3× the headings-only tree** — because on a heading-dense corpus most nodes are
+short, and you cannot summarize a 40-token section into much less than 40 tokens (plus every
+parent carries a `prefix_summary`). **Honest revision: the ~3–4× per-turn cost of "add
+summaries" is largely inherent to summarizing a heading-dense document, not an artifact of
+the verbatim bug.** The bug added the last ~20%; it was not the whole story.
+
+### 2. Real summaries buy accuracy — verbatim ones don't, and hurt evidence-gap
+
+A three-way retrieval run (IDX-D / IDX-C / IDX-C0, gpt-4o retriever, all 14 questions,
+`--cache on`, run `runs/20260712T180445Z/`) scored as follows. **Scoring caveat: n=1 per
+cell, a single agent judge (claude-fable-5), subjective 0–5; directional, not statistical.
+Per-cell scores + notes in `runs/20260712T180445Z/scores.csv`.**
+
+| Category | IDX-D | IDX-C | IDX-C0 |
+|---|---|---|---|
+| direct-location | 4.75 | 4.88 | 5.00 |
+| evidence-gap | 4.33 | **3.67** | 4.50 |
+| cross-section-synthesis | 2.33 | 3.33 | 3.83 |
+| reflective-discovery | 2.75 | 4.75 | 5.00 |
+| **mean (0–5)** | **3.82** | **4.11** | **4.54** |
+| **cost (14 Q)** | **$0.80** | **$3.29** | **$2.69** |
+
+- **IDX-C0 strictly dominates IDX-C**: higher quality *and* 18% cheaper. The shipped-default
+  verbatim summaries were the worst value — 4× IDX-D's cost for a 0.29-point gain.
+- **Summaries help where navigation is hard.** The gains concentrate in cross-section-synthesis
+  and reflective-discovery (the questions requiring the agent to find the right sections across
+  the corpus). On direct-location, headings alone already suffice — all three tie near 5.
+- **Verbatim summaries *hurt* evidence-gap** (IDX-C 3.67, below headings-only). Verified against
+  full answer text: on EG6, IDX-C wrote *"these statistics are actual numbers… not
+  placeholders,"* laundering three bracketed placeholders — the exact failure that category
+  exists to detect. IDX-C0 and IDX-D both caught it. The verbatim defect didn't only waste
+  tokens; it degraded the most discriminating category.
+
+**Takeaway for the public write-up:** "add summaries" carries a real, mostly-inherent ~3× tree
+cost — but done properly (threshold 0) it earns that cost back in navigation accuracy, while the
+shipped default earns nothing and regresses on gap-detection. The lesson generalizes: an
+enrichment step's *default configuration* can invert its own value proposition.
+
+### Still open
+
+- A repeatable LLM-judge (`scripts/score_run.py`) to replace the single-agent scoring, and
+  repetition (n>1) for a real distribution, before any strong quantitative claim is published.
+- `IDX-O0` (local Ollama, threshold 0) — is the summary benefit reachable without the API bill?
+  Deferred behind this result, which establishes that the benefit exists at all.

@@ -1,0 +1,240 @@
+{
+  "corpus_version": "paper-book-v1-clean",
+  "role": "markdown-native structural control (PDF-vs-Markdown comparison)",
+  "derived_from": "paper-book-v1",
+  "derived_from_corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2",
+  "source_pdf_sha256": "3bdc5cad724300bc3bc2b97ffdab9057d803f45c20b3abb5709859dec92e6b12",
+  "counts": {
+    "lines": 361,
+    "content_lines": 207,
+    "sections": 28,
+    "figures": 12,
+    "tables": 1,
+    "footnotes": 7
+  },
+  "sections": [
+    {
+      "level": 1,
+      "title": "Modelling search for people in 900 scenes: A combined source model of eye guidance",
+      "line": 1
+    },
+    {
+      "level": 2,
+      "title": "Front Matter",
+      "line": 3
+    },
+    {
+      "level": 3,
+      "title": "Authors and Affiliations",
+      "line": 5
+    },
+    {
+      "level": 3,
+      "title": "Publication Note",
+      "line": 19
+    },
+    {
+      "level": 2,
+      "title": "Abstract",
+      "line": 31
+    },
+    {
+      "level": 2,
+      "title": "Introduction",
+      "line": 37
+    },
+    {
+      "level": 2,
+      "title": "Experimental Method",
+      "line": 57
+    },
+    {
+      "level": 3,
+      "title": "Participants",
+      "line": 59
+    },
+    {
+      "level": 3,
+      "title": "Apparatus",
+      "line": 63
+    },
+    {
+      "level": 3,
+      "title": "Stimuli",
+      "line": 67
+    },
+    {
+      "level": 3,
+      "title": "Procedure",
+      "line": 71
+    },
+    {
+      "level": 3,
+      "title": "Eye movement analysis",
+      "line": 75
+    },
+    {
+      "level": 2,
+      "title": "Human Eye Movements Result",
+      "line": 79
+    },
+    {
+      "level": 3,
+      "title": "Accuracy and eye movement statistics",
+      "line": 81
+    },
+    {
+      "level": 3,
+      "title": "Agreement among observers",
+      "line": 87
+    },
+    {
+      "level": 2,
+      "title": "Modelling Methods",
+      "line": 99
+    },
+    {
+      "level": 3,
+      "title": "Guidance by saliency",
+      "line": 109
+    },
+    {
+      "level": 3,
+      "title": "Guidance by target features",
+      "line": 117
+    },
+    {
+      "level": 3,
+      "title": "Guidance by scene context features",
+      "line": 135
+    },
+    {
+      "level": 3,
+      "title": "Guidance by a combined model of attention",
+      "line": 149
+    },
+    {
+      "level": 2,
+      "title": "Modelling Results",
+      "line": 157
+    },
+    {
+      "level": 3,
+      "title": "Saliency and target features models",
+      "line": 161
+    },
+    {
+      "level": 3,
+      "title": "Context models",
+      "line": 204
+    },
+    {
+      "level": 3,
+      "title": "Combined source models",
+      "line": 212
+    },
+    {
+      "level": 2,
+      "title": "Discussion",
+      "line": 226
+    },
+    {
+      "level": 2,
+      "title": "Concluding Remarks",
+      "line": 246
+    },
+    {
+      "level": 2,
+      "title": "References",
+      "line": 250
+    },
+    {
+      "level": 2,
+      "title": "Footnotes",
+      "line": 346
+    }
+  ],
+  "figures": [
+    {
+      "n": 1,
+      "line": 47
+    },
+    {
+      "n": 2,
+      "line": 97
+    },
+    {
+      "n": 3,
+      "line": 115
+    },
+    {
+      "n": 4,
+      "line": 125
+    },
+    {
+      "n": 5,
+      "line": 129
+    },
+    {
+      "n": 6,
+      "line": 141
+    },
+    {
+      "n": 7,
+      "line": 153
+    },
+    {
+      "n": 8,
+      "line": 155
+    },
+    {
+      "n": 9,
+      "line": 167
+    },
+    {
+      "n": 10,
+      "line": 198
+    },
+    {
+      "n": 11,
+      "line": 220
+    },
+    {
+      "n": 12,
+      "line": 238
+    }
+  ],
+  "table_line": 169,
+  "footnotes": [
+    {
+      "n": 1,
+      "line": 348
+    },
+    {
+      "n": 2,
+      "line": 350
+    },
+    {
+      "n": 3,
+      "line": 352
+    },
+    {
+      "n": 4,
+      "line": 354
+    },
+    {
+      "n": 5,
+      "line": 356
+    },
+    {
+      "n": 6,
+      "line": 358
+    },
+    {
+      "n": 7,
+      "line": 360
+    }
+  ],
+  "text_parity_verified": true,
+  "corpus_sha256": "8a919300df3acef9030f48bc665247a19730be88ba0844eb471484b510e107b3"
+}

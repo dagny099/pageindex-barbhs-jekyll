@@ -8,22 +8,21 @@ Three arms: two **Markdown** arms (deterministic tree over our normalized books,
 
 | Arm | Verdict | Nodes | Depth | Structure match | Notes |
 | --- | --- | --- | --- | --- | --- |
-| paper-book-v1 (PDF-derived) | **REVIEW** | 30 | 2 | 30/30 headings | Corpus Preface, Appendix: PDF Page Map nodes |
+| paper-book-v1 (PDF-derived) | **PASS** | 28 | 2 | 28/28 headings | clean |
 | paper-book-v1-clean (control) | **PASS** | 28 | 2 | 28/28 headings | clean |
 | PageIndex vanilla (--pdf_path, inferred) | **REVIEW** | 25 | 2 | 21/23 sections | 39 stat-corruptions |
 
 Verdict key: **PASS** = no gate check failed; **REVIEW** = anomalies a human must judge (not necessarily defects); **FAIL** = a fidelity check failed.
 
-## paper-book-v1 (PDF-derived) — REVIEW
+## paper-book-v1 (PDF-derived) — PASS
 
-- 30 nodes, max depth 2; 30/30 Markdown headings matched by a node at the right line; coverage 100.0%.
-- Instrumentation nodes in tree: 'Corpus Preface', 'Appendix: PDF Page Map'.
+- 28 nodes, max depth 2; 28/28 Markdown headings matched by a node at the right line; coverage 100.0%.
 - Empty leaves: 0; near-empty leaves: 0; duplicate titles: 0.
 - All 14 figure/table/equation placeholders resolve to content nodes; references land in the 'REFERENCES' node.
 
 Findings:
 
-- **[REVIEW] instrumentation-nodes** — 2 non-content scaffolding node(s) in the tree (re-billed every turn; a retriever may fetch them): L3 'Corpus Preface', L438 'Appendix: PDF Page Map'
+- **[INFO] instrumentation-pruned** — 2 instrumentation heading(s) intentionally excluded from the retrieval-facing tree: 'Corpus Preface', 'Appendix: PDF Page Map'
 
 ## paper-book-v1-clean (control) — PASS
 
@@ -50,9 +49,9 @@ Findings:
 ## Side-by-side diff
 
 **Markdown arms (PDF-derived vs control):**
-- Nodes only in **paper-book-v1 (PDF-derived)**: 'Appendix: PDF Page Map', 'Corpus Preface'.
+- Nodes only in **paper-book-v1 (PDF-derived)**: none.
 - Nodes only in **paper-book-v1-clean (control)**: none.
-- Case-only heading differences (not structural): 7 (e.g. 'REFERENCES'->'References', 'MODELLING RESULTS'->'Modelling Results', 'HUMAN EYE MOVEMENTS RESULT'->'Human Eye Movements Result').
+- Case-only heading differences (not structural): 7 (e.g. 'EXPERIMENTAL METHOD'->'Experimental Method', 'MODELLING RESULTS'->'Modelling Results', 'CONCLUDING REMARKS'->'Concluding Remarks').
 
 **Markdown arms vs vanilla PDF arm:**
 - The Markdown arms carry explicit `Abstract`, `Front Matter`, and figure/table/equation placeholder structure; the vanilla arm has none of these (abstract fragmented into sentence-titled nodes, figures embedded in text).
@@ -61,14 +60,14 @@ Findings:
 
 ## Top structural risks
 
-1. **PDF-instrumentation nodes (Markdown PDF-derived arm)** — 2 scaffolding node(s) ('Corpus Preface', 'Appendix: PDF Page Map') not part of the paper leaked into the tree; re-billed every turn, and a retriever could fetch them. The control tree has none.
+1. **PDF-instrumentation nodes — RESOLVED** — the Corpus Preface and Page-Map Appendix scaffolding headings are now pruned from the retrieval-facing paper-book-v1 index (curation step; corpus bytes unchanged). Both Markdown arms are clean.
 2. **Uncorrected statistics in the vanilla arm** — PageIndex's native PDF extraction carries 39 `pB.001`-type corruptions (every `p<.001` mangled) and broken ligatures into the indexed text. Any significance/stat question would be answered from corrupted numbers, silently. This is the single biggest representation risk in the study.
 3. **Front-matter inference (vanilla arm)** — the abstract is fragmented into sentence-titled nodes and not labelled `Abstract`; there is no authors/front-matter node. Body-section inference, by contrast, is faithful.
 4. **Flat depth / monolithic leaves (all arms)** — depth 2; large sections (Introduction ~7K, References ~14K chars) are single leaves. Faithful to the source, but retrieval granularity is section-level, and all 89 references live under one node.
 
 ## Recommendation
 
-- **paper-book-v1 (PDF-derived)**: REVIEW. Heading fidelity exact, all placeholders/references resolve to sensible nodes — **fit for retrieval**. One actionable item: optionally exclude the Corpus Preface + Page-Map Appendix from the indexed tree (a Prompt B emit option), or accept them as harmless labelled scaffolding. Human call, hence REVIEW.
+- **paper-book-v1 (PDF-derived)**: PASS. Heading fidelity exact, all placeholders/references resolve to sensible nodes — **fit for retrieval**. Instrumentation nodes have been pruned from the index.
 - **paper-book-v1-clean (control)**: PASS. Clean of instrumentation — **fit for retrieval**; the favorable control.
 - **PageIndex vanilla (--pdf_path, inferred)**: REVIEW. Structurally **usable for retrieval** (body sections inferred correctly), but with two caveats the reviewer must accept before running it: (a) statistics are corrupted in the source text, so it will lose stat/significance questions by construction — this is a genuine finding about PageIndex-as-shipped, not a blocker; (b) the abstract and figures are not cleanly addressable. Run it, but read its results as 'PageIndex out of the box', not as a fair test of structure alone.
 

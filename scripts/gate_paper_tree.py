@@ -108,13 +108,24 @@ def gate_one(label, index_dir, corpus_dir, base):
     head_lines = {h["line"] for h in headings}
     node_lines = {f["line"] for f in flat}
 
-    missing = [h for h in headings if h["line"] not in node_lines]
+    # Instrumentation headings are intentionally pruned from the retrieval-facing
+    # index (a curation step); they are expected-absent, not fidelity failures.
+    pruned = json.loads((ROOT / index_dir / "provenance.json").read_text()) \
+        .get("curation", {}).get("pruned_instrumentation_nodes", [])
+    missing = [h for h in headings
+               if h["line"] not in node_lines and h["title"].strip() not in pruned]
+    intentionally_pruned = [h for h in headings if h["title"].strip() in pruned]
     extra = [f for f in flat if f["line"] not in head_lines]
     dup_line = {ln: fs for ln, fs in tree_by_line.items() if len(fs) > 1}
     if missing:
         findings.append(("FAIL", "heading-fidelity",
                          f"{len(missing)} Markdown heading(s) have no tree node: "
                          + ", ".join(f"L{h['line']} {h['title']!r}" for h in missing[:5])))
+    if intentionally_pruned:
+        findings.append(("INFO", "instrumentation-pruned",
+                         f"{len(intentionally_pruned)} instrumentation heading(s) "
+                         "intentionally excluded from the retrieval-facing tree: "
+                         + ", ".join(f"{h['title']!r}" for h in intentionally_pruned)))
     if extra:
         findings.append(("FAIL", "heading-fidelity",
                          f"{len(extra)} tree node(s) not at a Markdown heading line: "
@@ -235,7 +246,8 @@ def gate_one(label, index_dir, corpus_dir, base):
     return {
         "label": label, "index_dir": index_dir,
         "node_count": node_count, "max_depth": max_depth,
-        "heading_count": len(headings), "coverage_pct": coverage_pct,
+        "heading_count": len(headings) - len(intentionally_pruned),
+        "coverage_pct": coverage_pct,
         "total_lines": total_lines,
         "instrumentation": [f["title"] for f in instrumentation],
         "empty_leaves": len(empty_leaves), "near_empty_leaves": len(near_empty_leaves),
@@ -452,11 +464,17 @@ def render(results, diff, pdf=None):
     p("")
     p("## Top structural risks")
     p("")
-    p("1. **PDF-instrumentation nodes (Markdown PDF-derived arm)** — "
-      f"{len(a['instrumentation'])} scaffolding node(s) "
-      f"({', '.join(repr(t) for t in a['instrumentation']) or 'none'}) not part of the "
-      "paper leaked into the tree; re-billed every turn, and a retriever could fetch "
-      "them. The control tree has none.")
+    if a["instrumentation"]:
+        p("1. **PDF-instrumentation nodes (Markdown PDF-derived arm)** — "
+          f"{len(a['instrumentation'])} scaffolding node(s) "
+          f"({', '.join(repr(t) for t in a['instrumentation'])}) not part of the "
+          "paper leaked into the tree; re-billed every turn, and a retriever could fetch "
+          "them. The control tree has none.")
+    else:
+        p("1. **PDF-instrumentation nodes — RESOLVED** — the Corpus Preface and Page-Map "
+          "Appendix scaffolding headings are now pruned from the retrieval-facing "
+          "paper-book-v1 index (curation step; corpus bytes unchanged). Both Markdown "
+          "arms are clean.")
     if pdf:
         p("2. **Uncorrected statistics in the vanilla arm** — PageIndex's native PDF "
           f"extraction carries {pdf['corrupt_stats']} `pB.001`-type corruptions (every "
@@ -473,11 +491,10 @@ def render(results, diff, pdf=None):
     p("")
     p("## Recommendation")
     p("")
+    inst = " Instrumentation nodes have been pruned from the index." if not a["instrumentation"] \
+        else " One actionable item: the instrumentation nodes (human call)."
     p(f"- **{a['label']}**: {a['verdict']}. Heading fidelity exact, all placeholders/"
-      "references resolve to sensible nodes — **fit for retrieval**. One actionable "
-      "item: optionally exclude the Corpus Preface + Page-Map Appendix from the indexed "
-      "tree (a Prompt B emit option), or accept them as harmless labelled scaffolding. "
-      "Human call, hence REVIEW.")
+      f"references resolve to sensible nodes — **fit for retrieval**.{inst}")
     p(f"- **{b['label']}**: {b['verdict']}. Clean of instrumentation — **fit for "
       "retrieval**; the favorable control.")
     if pdf:

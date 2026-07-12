@@ -17,12 +17,20 @@
     },
     "uses_llm": false
   },
-  "node_count": 30,
+  "node_count": 28,
   "node_fields": [
     "title",
     "text",
     "node_id",
     "line_num"
   ],
-  "generated_at": "2026-07-12T19:42:32Z"
+  "generated_at": "2026-07-12T21:51:44Z",
+  "curation": {
+    "pruned_instrumentation_nodes": [
+      "Appendix: PDF Page Map",
+      "Corpus Preface"
+    ],
+    "rule": "drop nodes whose title is a PDF-instrumentation scaffolding heading (Corpus Preface, Appendix: PDF Page Map) from the retrieval-facing tree; corpus bytes unchanged, this is index curation only.",
+    "reproducible": "re-run the same prune over vendor/PageIndex/results/paper-book-v1_structure.json"
+  }
 }

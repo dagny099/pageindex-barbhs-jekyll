@@ -9,12 +9,6 @@
    "text": "# Modelling search for people in 900 scenes: A combined source model of eye guidance",
    "nodes": [
     {
-     "title": "Corpus Preface",
-     "node_id": "0002",
-     "line_num": 3,
-     "text": "## Corpus Preface\n\nPurpose: Derived experimental Markdown corpus (PDF-extracted representation) for PageIndex hierarchy and retrieval experiments.\nSource: Ehinger, K. A., Hidalgo-Sotelo, B., Torralba, A., & Oliva, A. (2009). Modelling search for people in 900 scenes: A combined source model of eye guidance. Visual Cognition, 17(6-7), 945-978.\nDOI: 10.1080/13506280902834720\nSource PDF SHA-256: `3bdc5cad724300bc3bc2b97ffdab9057d803f45c20b3abb5709859dec92e6b12`\nProducer: `scripts/build_paper_book.py` with `config/paper-book-v1.yml` (this repo).\n\nConventions: `<!-- PDF PAGE n -->` comments mark physical page boundaries; figures, tables, and equations appear as labeled placeholders (`[FIGURE n: caption]`, `[TABLE n: caption]` with extracted rows, `[EQUATION n: text]`); `[fnN]` marks in-text footnote references, with footnote text collected in the Footnotes section; the Appendix maps every PDF page to book line ranges.\nThis document is generated — never hand-edit; fix the pipeline and rebuild.\n\n<!-- PDF PAGE 1 -->"
-    },
-    {
      "title": "Front Matter",
      "node_id": "0003",
      "line_num": 16,
@@ -185,12 +179,6 @@
      "node_id": "0029",
      "line_num": 422,
      "text": "## Footnotes\n\n**Footnote 1** (PDF page 5): The complete dataset and analysis tools will be made available at the authors’ website.\n\n**Footnote 2** (PDF page 6): See additional figures on authors’ website for distribution of targets and fixations across all images in the database.\n\n**Footnote 3** (PDF page 10): In our validation set, the best exponent for the saliency map was .025, which is within the optimal range of .01–.3 found by Torralba et al. (2006).\n\n**Footnote 4** (PDF page 12): See people detector code at http://pascal.inrialpes.fr/soft/olt/\n\n**Footnote 5** (PDF page 12): See the authors’ website for details and results from the other implementations.\n\n**Footnote 6** (PDF page 14): See the authors’ website for the detection curves of the other model implementations.\n\n**Footnote 7** (PDF page 23): See the authors’ website for a comparison of the ROC curves of the target features model and the target oracle."
-    },
-    {
-     "title": "Appendix: PDF Page Map",
-     "node_id": "0030",
-     "line_num": 438,
-     "text": "## Appendix: PDF Page Map\n\nEvery book line maps to a physical PDF page below; lines outside these ranges are generated scaffolding (preface, section markers, this appendix).\n\n| PDF page | Book lines |\n| --- | --- |\n| 1 | L1–L2, L14–L47 |\n| 2 | L48–L52, L55–L62 |\n| 3 | L63–L66 |\n| 4 | L67–L72 |\n| 5 | L73–L88, L424–L425 |\n| 6 | L89–L102, L426–L427 |\n| 7 | L103–L116 |\n| 8 | L117–L124 |\n| 9 | L125–L128 |\n| 10 | L129–L146, L428–L429 |\n| 11 | L147–L150 |\n| 12 | L151–L160, L430–L433 |\n| 13 | L161–L164 |\n| 14 | L165–L170, L434–L435 |\n| 15 | L171–L182 |\n| 16 | L183–L186 |\n| 17 | L187–L198 |\n| 18 | L199–L202 |\n| 19 | L203–L216 |\n| 20 | L217–L220 |\n| 21 | L221–L251 |\n| 22 | L252–L255 |\n| 23 | L256–L265, L436–L437 |\n| 24 | L266–L279 |\n| 25 | L280–L283 |\n| 26 | L284–L295 |\n| 27 | L296–L303 |\n| 28 | L304–L307 |\n| 29 | L308–L315 |\n| 30 | L316–L337 |\n| 31 | L338–L363 |\n| 32 | L364–L389 |\n| 33 | L390–L412 |\n| 34 | L413–L421 |"
     }
    ]
   }

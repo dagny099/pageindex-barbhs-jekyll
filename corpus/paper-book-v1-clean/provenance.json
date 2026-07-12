@@ -1,0 +1,13 @@
+{
+  "corpus_version": "paper-book-v1-clean",
+  "producer": "in-repo (scripts/build_paper_book_clean.py) — structural transform of paper-book-v1; the Markdown-native control arm",
+  "derived_from": "corpus/paper-book-v1/paper-book-v1.md",
+  "derived_from_corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2",
+  "source_pdf_sha256": "3bdc5cad724300bc3bc2b97ffdab9057d803f45c20b3abb5709859dec92e6b12",
+  "transform": "structural-only (strip PDF instrumentation, title-case headings); text parity asserted at build",
+  "repo_commit": "578671dc7795650838c0b9f88125f53ef3361aca",
+  "repo_dirty": true,
+  "corpus_sha256": "8a919300df3acef9030f48bc665247a19730be88ba0844eb471484b510e107b3",
+  "manifest_sha256": "daad56b89e98d6e84e1de4099cbf81e08c8a8ed85c98e5ac1328c5b6fec64c0b",
+  "built_at": "2026-07-12T18:55:34Z"
+}

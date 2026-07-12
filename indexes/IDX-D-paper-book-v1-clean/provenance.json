@@ -1,0 +1,28 @@
+{
+  "index_id": "IDX-D-paper-book-v1-clean",
+  "condition": "deterministic",
+  "description": "Deterministic Markdown-heading tree over paper-book-v1-clean; no model, no summaries. Built for the Prompt C structure-QC gate (not retrieval).",
+  "corpus_version": "paper-book-v1-clean",
+  "corpus_sha256": "8a919300df3acef9030f48bc665247a19730be88ba0844eb471484b510e107b3",
+  "pageindex_commit": "f413c66fee0bfbb7291c389333f9cc1adac68d57",
+  "generation": {
+    "tool": "run_pageindex.py",
+    "mode": "markdown",
+    "flags": {
+      "if_add_node_summary": "no",
+      "if_add_doc_description": "no",
+      "if_add_node_text": "yes",
+      "if_add_node_id": "yes",
+      "if_thinning": "no"
+    },
+    "uses_llm": false
+  },
+  "node_count": 28,
+  "node_fields": [
+    "title",
+    "text",
+    "node_id",
+    "line_num"
+  ],
+  "generated_at": "2026-07-12T19:42:32Z"
+}

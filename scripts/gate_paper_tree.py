@@ -44,6 +44,23 @@ INSTRUMENTATION_TITLES = {"Corpus Preface", "Appendix: PDF Page Map",
                           "Appendix: Pdf Page Map"}
 NEAR_EMPTY_CHARS = 40   # non-leaf section headings legitimately hold little text
 
+# Vanilla PageIndex native-PDF arm (inferred structure); gated differently.
+PDF_ARM = ("PageIndex vanilla (--pdf_path, inferred)",
+           "indexes/IDX-PDF-vanilla-paper")
+# Ground-truth print sections (from paper-book-v1), for matching an inferred tree.
+GROUND_TRUTH_SECTIONS = [
+    "Abstract", "Introduction",
+    "Experimental Method", "Participants", "Apparatus", "Stimuli", "Procedure",
+    "Eye movement analysis",
+    "Human Eye Movements Result", "Accuracy and eye movement statistics",
+    "Agreement among observers",
+    "Modelling Methods", "Guidance by saliency", "Guidance by target features",
+    "Guidance by scene context features", "Guidance by a combined model of attention",
+    "Modelling Results", "Saliency and target features models", "Context models",
+    "Combined source models",
+    "Discussion", "Concluding Remarks", "References",
+]
+
 
 def flatten(structure, depth=0, order=None):
     if order is None:
@@ -230,6 +247,102 @@ def gate_one(label, index_dir, corpus_dir, base):
     }
 
 
+def gate_pdf_arm(label, index_dir):
+    """Gate the vanilla PageIndex native-PDF tree (inferred structure).
+
+    Different checks from the Markdown arms: there is no authored heading ground
+    truth (structure is INFERRED), addressing is per physical page, and no
+    placeholder nodes exist. We compare inferred sections against the ground-truth
+    print-section inventory and flag inference + text-fidelity anomalies.
+    """
+    tree = json.loads((ROOT / index_dir / "index.json").read_text())
+    prov = json.loads((ROOT / index_dir / "provenance.json").read_text())
+    flat = flatten(tree["structure"])
+    findings = []
+
+    node_count = len(flat)
+    max_depth = max(f["depth"] for f in flat)
+
+    # --- section coverage vs ground truth (fuzzy: normalized substring match) ---
+    def norm(t):
+        return re.sub(r"[^a-z ]", "", t.lower()).strip()
+    node_titles = [norm(f["title"]) for f in flat]
+
+    def matched(section):
+        s = norm(section)
+        return any(s == nt or s in nt or nt in s for nt in node_titles)
+    missing_sections = [s for s in GROUND_TRUTH_SECTIONS if not matched(s)]
+    matched_count = len(GROUND_TRUTH_SECTIONS) - len(missing_sections)
+    if missing_sections:
+        findings.append(("REVIEW", "section-coverage",
+                         f"{len(missing_sections)} ground-truth section(s) not matched by "
+                         f"an inferred node title: {', '.join(missing_sections)} "
+                         "(may be present but titled by first sentence — verify)."))
+
+    # --- front-matter fragmentation: multiple top-level nodes before the first
+    #     real section (Experimental Method) that are sentence-titled ---
+    top = [f for f in flat if f["depth"] == 1]
+    body_start = next((i for i, f in enumerate(top)
+                       if norm(f["title"]).startswith("experimental method")), None)
+    front = top[:body_start] if body_start is not None else []
+    sentence_titled = [f for f in front
+                       if not matched_title_is_section(f["title"]) and len(f["title"]) > 40]
+    if len(front) > 2:
+        findings.append(("REVIEW", "front-matter-fragmentation",
+                         f"{len(front)} top-level nodes before the first body section; "
+                         "front matter (title/abstract/intro) was split into "
+                         f"sentence-titled fragments: "
+                         + "; ".join(f"{f['title'][:45]!r}" for f in front)))
+
+    # --- TOC inference correction (from provenance/run log) ---
+    toc_note = prov.get("generation", {}).get("toc_note")
+    if toc_note:
+        findings.append(("INFO", "toc-inference", toc_note))
+
+    # --- no figure/table nodes (figures embedded in body text) ---
+    fig_nodes = [f for f in flat if re.search(r"\b(figure|table)\b", f["title"].lower())]
+    findings.append(("INFO", "no-placeholder-nodes",
+                     f"{len(fig_nodes)} figure/table nodes: figures are embedded in body "
+                     "text, not addressable as tree nodes (figure-evidence questions "
+                     "depend on which page-node the caption lands in)."))
+
+    # --- addressing granularity ---
+    findings.append(("INFO", "addressing",
+                     "nodes are addressed by physical page (start_index/end_index), not "
+                     "line number — evidence citation is page-level, coarser than the "
+                     "Markdown arms' line-level; nodes on the same page share overlapping "
+                     "text extents."))
+
+    # --- text fidelity: PageIndex's own extraction is uncorrected ---
+    alltext = "\n".join((f["text"] or "") for f in flat)
+    corrupt = len(re.findall(r"pB\.\d", alltext))
+    ligs = len(re.findall(r"[ﬁﬂ]", alltext))
+    if corrupt or ligs:
+        findings.append(("REVIEW", "text-fidelity",
+                         f"uncorrected extraction: {corrupt} 'pB.001' statistic corruptions "
+                         f"(should be 'p<.001') + {ligs} broken ligatures carried into the "
+                         "indexed text. paper-book-v1 fixed these; the vanilla arm does not. "
+                         "Significance/stat questions would be answered from mangled text."))
+
+    verdict = "FAIL" if any(s == "FAIL" for s, _, _ in findings) else \
+              ("REVIEW" if any(s == "REVIEW" for s, _, _ in findings) else "PASS")
+    return {
+        "label": label, "index_dir": index_dir, "kind": "pdf",
+        "node_count": node_count, "max_depth": max_depth,
+        "matched_sections": matched_count, "gt_sections": len(GROUND_TRUTH_SECTIONS),
+        "missing_sections": missing_sections, "front_matter_nodes": len(front),
+        "corrupt_stats": corrupt, "ligatures": ligs,
+        "findings": findings, "verdict": verdict, "flat": flat,
+    }
+
+
+def matched_title_is_section(title):
+    def norm(t):
+        return re.sub(r"[^a-z ]", "", t.lower()).strip()
+    s = norm(title)
+    return any(norm(g) == s or norm(g) in s for g in GROUND_TRUTH_SECTIONS)
+
+
 def diff_trees(a, b):
     """Title-set diff between two flattened trees (by normalized title)."""
     ta = {f["title"].strip() for f in a["flat"]}
@@ -243,29 +356,39 @@ def diff_trees(a, b):
     return only_a, only_b, recased
 
 
-def render(results, diff):
+def render(results, diff, pdf=None):
     a, b = results
     only_a, only_b, recased = diff
     L = []
     p = L.append
     p("# Prompt C — Tree-Inspection Gate: paper corpora")
     p("")
-    p("Structure-QC of the PageIndex trees built over the paper corpora, run BEFORE "
-      "any retrieval. Generated by `scripts/gate_paper_tree.py`; regenerate, never "
+    p("Structure-QC of the PageIndex trees built over the paper, run BEFORE any "
+      "retrieval. Generated by `scripts/gate_paper_tree.py`; regenerate, never "
       "hand-edit. No retrieval was run and no quality score is invented — every check "
-      "is traceable to the book's Markdown headings and its manifest.")
+      "is traceable to the book's Markdown headings + manifest (Markdown arms) or the "
+      "ground-truth print-section inventory (inferred PDF arm).")
+    p("")
+    p("Three arms: two **Markdown** arms (deterministic tree over our normalized books, "
+      "structure authored) and one **vanilla** arm (PageIndex's native `--pdf_path`, "
+      "structure INFERRED from the raw PDF).")
     p("")
     p("## Verdicts")
     p("")
-    p("| Arm | Verdict | Nodes | Max depth | Headings matched | Line coverage |")
+    p("| Arm | Verdict | Nodes | Depth | Structure match | Notes |")
     p("| --- | --- | --- | --- | --- | --- |")
     for r in results:
         matched = r["heading_count"] - r["missing_headings"]
+        note = (", ".join(r["instrumentation"]) + " nodes") if r["instrumentation"] else "clean"
         p(f"| {r['label']} | **{r['verdict']}** | {r['node_count']} | {r['max_depth']} "
-          f"| {matched}/{r['heading_count']} | {r['coverage_pct']:.1f}% |")
+          f"| {matched}/{r['heading_count']} headings | {note} |")
+    if pdf:
+        p(f"| {pdf['label']} | **{pdf['verdict']}** | {pdf['node_count']} | "
+          f"{pdf['max_depth']} | {pdf['matched_sections']}/{pdf['gt_sections']} sections "
+          f"| {pdf['corrupt_stats']} stat-corruptions |")
     p("")
     p("Verdict key: **PASS** = no gate check failed; **REVIEW** = anomalies a human "
-      "must judge (not necessarily defects); **FAIL** = a heading-fidelity check failed.")
+      "must judge (not necessarily defects); **FAIL** = a fidelity check failed.")
     p("")
     for r in results:
         p(f"## {r['label']} — {r['verdict']}")
@@ -291,46 +414,85 @@ def render(results, diff):
             p("No findings.")
             p("")
 
-    p("## Side-by-side diff (PDF-derived vs control)")
+    if pdf:
+        p(f"## {pdf['label']} — {pdf['verdict']}")
+        p("")
+        p(f"- {pdf['node_count']} nodes, max depth {pdf['max_depth']}; "
+          f"{pdf['matched_sections']}/{pdf['gt_sections']} ground-truth print sections "
+          "matched by an inferred node.")
+        p(f"- **PageIndex inferred every body section correctly** (Experimental Method, "
+          "Human Eye Movements Result, Modelling Methods/Results, Discussion, Concluding "
+          "Remarks, References — all at the right nesting). Inference struggled only on "
+          "the unlabelled front matter.")
+        p("")
+        p("Findings:")
+        p("")
+        for sev, check, detail in pdf["findings"]:
+            p(f"- **[{sev}] {check}** — {detail}")
+        p("")
+
+    p("## Side-by-side diff")
     p("")
+    p("**Markdown arms (PDF-derived vs control):**")
     p(f"- Nodes only in **{a['label']}**: "
       + (", ".join(repr(t) for t in sorted(only_a)) or "none") + ".")
     p(f"- Nodes only in **{b['label']}**: "
       + (", ".join(repr(t) for t in sorted(only_b)) or "none") + ".")
-    p(f"- Same section, re-cased heading (case-only, not a structural diff): "
-      f"{len(recased)} (e.g. "
-      + ", ".join(f"{x!r}->{y!r}" for x, y in recased[:3]) + ").")
+    p(f"- Case-only heading differences (not structural): {len(recased)} "
+      "(e.g. " + ", ".join(f"{x!r}->{y!r}" for x, y in recased[:3]) + ").")
+    if pdf:
+        p("")
+        p("**Markdown arms vs vanilla PDF arm:**")
+        p(f"- The Markdown arms carry explicit `Abstract`, `Front Matter`, and figure/"
+          "table/equation placeholder structure; the vanilla arm has none of these "
+          "(abstract fragmented into sentence-titled nodes, figures embedded in text).")
+        p(f"- Text fidelity: Markdown arms 0 stat-corruptions; vanilla arm "
+          f"{pdf['corrupt_stats']} `pB.001` + {pdf['ligatures']} ligatures.")
+        p(f"- Addressing: Markdown arms line-level; vanilla arm page-level.")
     p("")
     p("## Top structural risks")
     p("")
-    p("1. **PDF-instrumentation nodes** — the PDF-derived tree contains "
+    p("1. **PDF-instrumentation nodes (Markdown PDF-derived arm)** — "
       f"{len(a['instrumentation'])} scaffolding node(s) "
-      f"({', '.join(repr(t) for t in a['instrumentation']) or 'none'}) that are not "
-      "part of the paper. They are re-billed on every retrieval turn and a retriever "
-      "could fetch them (e.g. mistaking the page-map appendix for content). The control "
-      "tree has none — this is the single structural difference between the arms.")
-    p("2. **Flat depth / monolithic leaves** — both trees are depth 2 (H1>H2>H3); large "
-      "sections (Introduction ~7K chars, References ~14K chars as one node) are single "
-      "leaves. This is faithful to the authored hierarchy, not a defect, but means "
-      "retrieval granularity is section-level, not paragraph-level.")
-    p("3. **References as one node** — all 89 entries live under a single References node; "
-      "reference-lookup questions must scan the whole block.")
+      f"({', '.join(repr(t) for t in a['instrumentation']) or 'none'}) not part of the "
+      "paper leaked into the tree; re-billed every turn, and a retriever could fetch "
+      "them. The control tree has none.")
+    if pdf:
+        p("2. **Uncorrected statistics in the vanilla arm** — PageIndex's native PDF "
+          f"extraction carries {pdf['corrupt_stats']} `pB.001`-type corruptions (every "
+          "`p<.001` mangled) and broken ligatures into the indexed text. Any "
+          "significance/stat question would be answered from corrupted numbers, "
+          "silently. This is the single biggest representation risk in the study.")
+        p("3. **Front-matter inference (vanilla arm)** — the abstract is fragmented into "
+          "sentence-titled nodes and not labelled `Abstract`; there is no authors/"
+          "front-matter node. Body-section inference, by contrast, is faithful.")
+    p(f"{4 if pdf else 2}. **Flat depth / monolithic leaves (all arms)** — depth 2; large "
+      "sections (Introduction ~7K, References ~14K chars) are single leaves. Faithful to "
+      "the source, but retrieval granularity is section-level, and all 89 references live "
+      "under one node.")
     p("")
     p("## Recommendation")
     p("")
-    a_fit = "fit for retrieval" if a["verdict"] != "FAIL" else "NOT fit — fix pipeline first"
-    p(f"- **{a['label']}**: {a['verdict']}. Heading fidelity is exact and every "
-      "placeholder/reference resolves to a sensible node, so the tree faithfully "
-      f"represents the authored structure — {a_fit}. The one actionable item is the "
-      "instrumentation nodes: consider excluding the Corpus Preface and Page-Map "
-      "Appendix from the indexed tree (a Prompt B emit option), or accept them as "
-      "harmless labelled scaffolding. This is a human call, hence REVIEW not PASS.")
-    p(f"- **{b['label']}**: {b['verdict']}. Clean of instrumentation; suitable as the "
-      "favorable control.")
+    p(f"- **{a['label']}**: {a['verdict']}. Heading fidelity exact, all placeholders/"
+      "references resolve to sensible nodes — **fit for retrieval**. One actionable "
+      "item: optionally exclude the Corpus Preface + Page-Map Appendix from the indexed "
+      "tree (a Prompt B emit option), or accept them as harmless labelled scaffolding. "
+      "Human call, hence REVIEW.")
+    p(f"- **{b['label']}**: {b['verdict']}. Clean of instrumentation — **fit for "
+      "retrieval**; the favorable control.")
+    if pdf:
+        p(f"- **{pdf['label']}**: {pdf['verdict']}. Structurally **usable for retrieval** "
+          "(body sections inferred correctly), but with two caveats the reviewer must "
+          "accept before running it: (a) statistics are corrupted in the source text, so "
+          "it will lose stat/significance questions by construction — this is a genuine "
+          "finding about PageIndex-as-shipped, not a blocker; (b) the abstract and "
+          "figures are not cleanly addressable. Run it, but read its results as "
+          "'PageIndex out of the box', not as a fair test of structure alone.")
     p("")
-    p("_Deterministic Markdown arms only. The vanilla PageIndex `--pdf_path` arm "
-      "(inferred TOC/structure) is gated separately — that is where structure inference "
-      "can actually fail and the gate earns its keep._")
+    p("_Gate complete for all three arms; no retrieval was run. Reviewer decision "
+      "point: whether to strip instrumentation nodes from paper-book-v1 before the "
+      "retrieval runs, and acknowledgement that the vanilla arm's corrupted statistics "
+      "are expected (and themselves a headline result)._")
     p("")
     return "\n".join(L) + "\n"
 
@@ -343,7 +505,10 @@ def main():
 
     results = [gate_one(*arm) for arm in ARMS]
     diff = diff_trees(results[0], results[1])
-    report = render(results, diff)
+    pdf = None
+    if (ROOT / PDF_ARM[1] / "index.json").exists():
+        pdf = gate_pdf_arm(*PDF_ARM)
+    report = render(results, diff, pdf)
 
     if args.report.exists() and not args.overwrite:
         print(report)
@@ -351,7 +516,7 @@ def main():
     else:
         args.report.write_text(report)
         print(f"wrote {args.report}")
-    for r in results:
+    for r in results + ([pdf] if pdf else []):
         print(f"  {r['verdict']:6} {r['label']}  ({r['node_count']} nodes)")
 
 

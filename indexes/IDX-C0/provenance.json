@@ -1,0 +1,45 @@
+{
+ "index_id": "IDX-C0",
+ "condition": "cloud-threshold0",
+ "description": "Same deterministic Markdown tree as IDX-D, with a REAL gpt-4o-generated summary for every node (--summary-token-threshold 0 disables the verbatim-copy branch that affected IDX-C/IDX-O; see reports/findings-summary-threshold.md).",
+ "corpus_version": "site-book-v1",
+ "corpus_sha256": "7379cad3da7b017a6c3524376a8ca6a27e11b18da433edc5ac9329c73bc5b43f",
+ "pageindex_commit": "f413c66fee0bfbb7291c389333f9cc1adac68d57",
+ "generation": {
+  "tool": "run_pageindex.py",
+  "mode": "markdown",
+  "model": "gpt-4o-2024-11-20",
+  "model_passed_explicitly": true,
+  "model_note": "--model MUST be passed explicitly: run_pageindex.py forwards model=None into ConfigLoader.load, whose dict merge lets None override the config.yaml default (vendor/PageIndex/pageindex/utils.py ConfigLoader.load). Discovered when threshold 0 sent every node to the LLM.",
+  "provider": "openai",
+  "flags": {
+   "if_add_node_summary": "yes",
+   "if_add_doc_description": "yes",
+   "if_add_node_text": "yes",
+   "if_add_node_id": "yes",
+   "if_thinning": "no"
+  },
+  "summary_token_threshold": 0,
+  "uses_llm": true
+ },
+ "node_count": 339,
+ "node_fields": [
+  "title",
+  "text",
+  "node_id",
+  "line_num",
+  "summary",
+  "prefix_summary"
+ ],
+ "summary_stats": {
+  "generated_summaries": 258,
+  "prefix_summaries": 81,
+  "verbatim_summaries": 0,
+  "verbatim_share": "0/339 (0.0%) — vs 273/339 (80.5%) in IDX-C; summary==text check per reports/findings-summary-threshold.md"
+ },
+ "structure_tokens_no_text": {
+  "value": 38311,
+  "method": "tiktoken gpt-4o encoding of json.dumps(indent=2) with 'text' stripped (the field upstream retrieve.py removes); same method gives IDX-D 11,609 / IDX-C 47,793 / IDX-O 47,311"
+ },
+ "generated_at": "2026-07-12T17:10:29Z"
+}

@@ -199,6 +199,13 @@ When `--if-add-node-summary yes` is set, nodes whose text is below
 only nodes at or above the threshold get an LLM-generated summary. The current
 IDX-C / IDX-O runs used the default threshold of `200`.
 
+**Measured impact:** at the default threshold, ~80% of summaries end up as verbatim
+copies of node text (273/339 nodes in IDX-C, 272/339 in IDX-O), and because the
+retriever's tree dump keeps `summary` after stripping `text`, the tree re-sent on every
+turn is ~4.9× the heading-only baseline (~43.7K vs ~8.9K tokens). The full mechanism,
+numbers, upstream-vs-ours attribution, and reproduce steps are written up in
+[`reports/findings-summary-threshold.md`](reports/findings-summary-threshold.md).
+
 Use `--summary-token-threshold 0` when you want a cleaner "generated summaries over
 headings" condition:
 

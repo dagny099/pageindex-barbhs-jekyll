@@ -1,0 +1,82 @@
+# Configuration for the (future) in-repo producer of corpus/rfc9110-book-v1/.
+# SCAFFOLD (2026-07-13): source files are pinned and validated below; the build
+# script and extraction tunables are TBD — see
+# reports/project-brief-2026-07-13-long-doc-corpora.md for the study design.
+#
+# Unlike paper-book-v1 (PDF is the only source), RFC 9110 is published by the
+# RFC Editor as a canonical PDF + HTML + plain-text TRIPLET of the same content.
+# The plan is a representation study where the Markdown arm derives from the
+# canonical .txt/.html (NOT from PDF extraction), so the two arms share a
+# source of truth without one being a lossy transform of the other.
+# RFCs are immutable once published — these files will never change upstream.
+
+corpus_version: rfc9110-book-v1
+
+source_pdf:
+  path: sources/rfc9110/rfc9110.pdf
+  url: https://www.rfc-editor.org/rfc/rfc9110.pdf
+  sha256: 60b30efa1048900833d1758440247fe8ac85a3134f2327388dcb24e07d814c89
+  pages: 194
+  # Embedded outline: 311 entries, max depth 5 (verified with PyMuPDF 2026-07-13).
+
+source_twins:
+  txt:
+    path: sources/rfc9110/rfc9110.txt
+    url: https://www.rfc-editor.org/rfc/rfc9110.txt
+    sha256: 21c1cdce6ab0e5509b04d84a28000836c7a087cf786efe6f04877ebfff47232a
+  html:
+    path: sources/rfc9110/rfc9110.html
+    url: https://www.rfc-editor.org/rfc/rfc9110.html
+    sha256: d431760660ea44e130f6e919dab216df2d0b3a490567a98089267523368fe1e5
+
+citation: >-
+  Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke, Ed., "HTTP
+  Semantics", STD 97, RFC 9110, DOI 10.17487/RFC9110, June 2022,
+  <https://www.rfc-editor.org/info/rfc9110>.
+doi: 10.17487/RFC9110
+
+extraction:
+  tool: PyMuPDF
+  expected_version: 1.26.4   # match paper-book-v1; build must fail on mismatch
+  # Tunables (glyph/ligature maps, role classification, furniture stripping)
+  # TBD after a first extraction QC pass. Expect far fewer warts than the 2009
+  # paper: this is a born-digital single-column document with standard fonts.
+
+# Verbatim level-2 outline titles from the PDF (numbered body sections only),
+# for build-time validation à la paper-book-v1 `expected.top_level_sections`.
+expected:
+  top_level_sections:
+    - "1. Introduction"
+    - "2. Conformance"
+    - "3. Terminology and Core Concepts"
+    - "4. Identifiers in HTTP"
+    - "5. Fields"
+    - "6. Message Abstraction"
+    - "7. Routing HTTP Messages"
+    - "8. Representation Data and Metadata"
+    - "9. Methods"
+    - "10. Message Context"
+    - "11. HTTP Authentication"
+    - "12. Content Negotiation"
+    - "13. Conditional Requests"
+    - "14. Range Requests"
+    - "15. Status Codes"
+    - "16. Extending HTTP"
+    - "17. Security Considerations"
+    - "18. IANA Considerations"
+    - "19. References"
+  front_matter:              # outline entries before section 1
+    - Abstract
+    - "Status of This Memo"
+    - Copyright Notice
+    - "Table of Contents"
+  back_matter:               # outline entries after section 19
+    - "Appendix A. Collected ABNF"
+    - "Appendix B. Changes from Previous RFCs"
+    - Acknowledgements
+    - Index
+    - "Authors' Addresses"
+
+output:
+  corpus_dir: corpus/rfc9110-book-v1
+  qc_report: reports/qc-rfc9110-book-v1.md

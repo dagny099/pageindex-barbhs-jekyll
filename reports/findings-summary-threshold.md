@@ -108,8 +108,11 @@ structure_no_text = remove_fields(structure, fields=['text'])   # "saves tokens"
 ```
 
 But when `summary == text`, removing `text` changes nothing — the same content is still in
-`summary`. So the optimization is largely undone. Measured tree-dump sizes from the recorded
-runs (`runs/*/run.json`, `structure_tokens`, one fixed reference encoding):
+`summary`. So the optimization is largely undone. Tree-dump sizes below are the harness's
+measured `structure_tokens` — the tokens the agent actually re-sent each turn (from
+`runs/*/run.json`), and what the cost figures are computed from. This is the convention used
+throughout this note; it is **not** an independent tiktoken re-count of the index files
+(that depends on serialization and runs larger — kept only as an internal cross-check):
 
 | Index | Summaries? | Tree dump re-sent each turn |
 |---|---|---|
@@ -124,7 +127,7 @@ The "summary" tree is **~4.9× larger** than the heading-only tree, and that ent
 re-billed as input on **every** agentic turn — the re-send amplification our cost-tracking work
 (V3A) was built to measure.
 
-**Honest scoping of the 4.8×:** this compares *summaries-as-built* (IDX-C) against
+**Honest scoping of the 4.9×:** this compares *summaries-as-built* (IDX-C) against
 *no summaries* (IDX-D) — not verbatim-vs-generated. The verbatim defect is why the summary tree
 lands so close to a full-text dump rather than shrinking. The true size of a *properly*
 generated-summary tree is a counterfactual we have not yet measured; it needs a
@@ -221,24 +224,34 @@ Markdown arm for the PDF-vs-Markdown representation comparison.
 `indexes/IDX-C0/`. Two things fell out — one that revises this note's own hypothesis,
 one that was not anticipated.
 
-### 1. The verbatim bug explains only ~20% of the bloat
+### 1. The verbatim bug explains only about a quarter of the bloat
 
 This note hypothesized that the verbatim-copy defect was why the summary tree ballooned.
-The counterfactual says that was only partly right. Same serializer (`text` stripped),
-same tiktoken gpt-4o encoding:
+The counterfactual says that was only partly right. Tree-dump sizes are the harness's
+measured `structure_tokens` (the tokens re-sent each turn) — the same convention as the
+table above, so these reconcile directly:
 
-| Index | Summaries | Tree dump / turn |
+| Index | Summaries | Tree dump / turn (`structure_tokens`) |
 |---|---|---|
-| IDX-D | none | 11,609 |
-| **IDX-C0** | **real, every node** | **38,311** |
-| IDX-C | 80% verbatim | 47,793 |
+| IDX-D | none | 8,934 |
+| **IDX-C0** | **real, every node** | **35,516** |
+| IDX-C | 80% verbatim | 43,730 |
 
-Fixing the threshold recovers only ~9K of the ~36K excess. A *properly* summarized tree is
-still **3.3× the headings-only tree** — because on a heading-dense corpus most nodes are
-short, and you cannot summarize a 40-token section into much less than 40 tokens (plus every
-parent carries a `prefix_summary`). **Honest revision: the ~3–4× per-turn cost of "add
-summaries" is largely inherent to summarizing a heading-dense document, not an artifact of
-the verbatim bug.** The bug added the last ~20%; it was not the whole story.
+Fixing the threshold (IDX-C → IDX-C0) recovers only ~8K of the ~35K excess over headings.
+A *properly* summarized tree is still **~4.0× the headings-only tree** — because on a
+heading-dense corpus most nodes are short, and you cannot summarize a 40-token section into
+much less than 40 tokens (plus every parent carries a `prefix_summary`). **Honest revision:
+the ~4× per-turn cost of "add summaries" is largely inherent to summarizing a heading-dense
+document, not an artifact of the verbatim bug.** The verbatim bug added only the last ~24%
+(the gap between IDX-C and IDX-C0); it was not the whole story.
+
+> **Token convention (used throughout this note).** All tree-size figures are the harness's
+> measured `structure_tokens` — what the agent actually re-sent per turn, and what the cost
+> column is computed from, so tokens and dollars reconcile. An independent tiktoken re-count
+> of the index files gives larger numbers (it depends on JSON serialization/indentation) and
+> is retained only as an internal sanity check, never published. Rule: report one convention,
+> and translate it into $/turn (≈$0.09 for the IDX-C0 tree vs ≈$0.02 for headings, at gpt-4o
+> input rates) so the number means something.
 
 ### 2. Real summaries buy accuracy — verbatim ones don't, and hurt evidence-gap
 

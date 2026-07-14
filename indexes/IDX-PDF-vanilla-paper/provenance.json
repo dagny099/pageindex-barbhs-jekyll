@@ -1,0 +1,32 @@
+{
+  "index_id": "IDX-PDF-vanilla-paper",
+  "condition": "vanilla-pdf (PageIndex native --pdf_path; inferred structure)",
+  "description": "PageIndex as shipped: native PDF ingestion with inferred TOC/section structure and always-generated summaries. The 'inferred structure' arm for the Prompt C gate and the representation comparison. Text fidelity is PageIndex's own extraction (uncorrected).",
+  "source": "sources/paper-2009/EhingerHidalgoTorralbaOliva_VisCog2009.pdf",
+  "source_pdf_sha256": "3bdc5cad724300bc3bc2b97ffdab9057d803f45c20b3abb5709859dec92e6b12",
+  "pageindex_commit": "f413c66fee0bfbb7291c389333f9cc1adac68d57",
+  "generation": {
+    "tool": "run_pageindex.py",
+    "mode": "pdf",
+    "model": "gpt-4o-2024-11-20",
+    "flags": {
+      "if_add_node_summary": "yes",
+      "if_add_doc_description": "yes",
+      "if_add_node_text": "yes"
+    },
+    "uses_llm": true,
+    "toc_note": "run logged 'fix_incorrect_toc with 1 incorrect results' — 1 inferred TOC entry required auto-correction"
+  },
+  "node_count": 25,
+  "node_fields": [
+    "end_index",
+    "node_id",
+    "start_index",
+    "summary",
+    "text",
+    "title"
+  ],
+  "addressing": "physical page (start_index/end_index), NOT line numbers",
+  "text_fidelity": "uncorrected PageIndex extraction: 39 'pB.001' glyph corruptions + 57 ligatures present (vs 0 in paper-book-v1)",
+  "generated_at": "2026-07-12T21:39:18Z"
+}

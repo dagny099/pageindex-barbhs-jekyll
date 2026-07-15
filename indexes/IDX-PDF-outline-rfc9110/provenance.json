@@ -1,0 +1,26 @@
+{
+  "index_id": "IDX-PDF-outline-rfc9110",
+  "condition": "deterministic-pdf-outline (embedded bookmarks; no LLM)",
+  "description": "Deterministic PageIndex-shaped index derived from the PDF's embedded outline (fitz.get_toc()); per-node text sliced from the PDF text layer at heading boundaries. The honest 'PDF representation' arm: same section structure as the Markdown twin, differing only in addressing (physical page vs line) and text fidelity (PDF extraction vs HTML-derived).",
+  "source": "sources/rfc9110/rfc9110.pdf",
+  "source_pdf_sha256": "60b30efa1048900833d1758440247fe8ac85a3134f2327388dcb24e07d814c89",
+  "generation": {
+    "tool": "scripts/build_pdf_outline_index.py",
+    "mode": "pdf-outline",
+    "uses_llm": false,
+    "pymupdf_version": "1.26.4",
+    "cost_usd": 0.0
+  },
+  "node_count": 311,
+  "node_fields": [
+    "title",
+    "node_id",
+    "start_index",
+    "end_index",
+    "text"
+  ],
+  "addressing": "physical page (start_index/end_index), NOT line numbers",
+  "markdown_twin": "IDX-D-rfc9110",
+  "twin_note": "Structure is intended to be identical to IDX-D-rfc9110 (its Markdown IDX-D twin); the pair isolates representation. Verified at build time.",
+  "generated_at": "2026-07-15T07:05:44Z"
+}

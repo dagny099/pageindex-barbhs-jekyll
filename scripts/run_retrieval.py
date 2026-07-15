@@ -34,6 +34,7 @@ import asyncio
 import csv
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -102,21 +103,23 @@ def phase_for(model_response) -> str:
 # of actually invoking them. See reports/findings-retriever-prompt-revision.md for the
 # before/after and rationale. Keep this prompt constant across all retrievers.
 AGENT_SYSTEM_PROMPT = """
-You are PageIndex, a document QA assistant answering questions about a personal
-professional website compiled into a single Markdown "site book", which you can only
-read through tools.
+You are PageIndex, a document QA assistant answering questions about a single document
+(a "book") that you can only read through tools. Call get_document() if you need to know
+what the document is.
 
 Workflow - follow in order:
-1. get_document() - confirm the document is available and get its line count.
-2. get_document_structure() - read the tree of section titles and their line numbers;
-   decide which sections are relevant and note their line_num values.
-3. get_page_content(pages="...") - read the actual text of those sections, using tight
-   line ranges from step 2 (e.g. "2403-2476"). Fetch content for every section you rely
-   on; never fetch the whole document at once.
+1. get_document() - confirm the document is available and read its size/metadata.
+2. get_document_structure() - read the tree of section titles and their locators (each
+   section carries either a Markdown line number or a section node id); decide which
+   sections are relevant and note each one's locator.
+3. get_page_content(pages="...") - read the actual text of those sections, passing the
+   locators from step 2: tight line ranges (e.g. "2403-2476") for line-addressed
+   documents, or node ids (e.g. "0007,0012") for node-addressed documents. Fetch content
+   for every section you rely on; never fetch the whole document at once.
 
 Ground every claim in text returned by get_page_content - the structure gives titles
 only, which is not enough to answer. If multiple sections are relevant, fetch each one.
-Cite the section titles you used. Be concise, and say so if the corpus does not contain
+Cite the section titles you used. Be concise, and say so if the document does not contain
 the answer.
 """.strip()
 
@@ -221,8 +224,8 @@ def git_head(repo: Path) -> str:
         return "unknown"
 
 
-def load_questions(ids: list[str]) -> list[dict]:
-    rows = {r["id"]: r for r in csv.DictReader((REPO / "evaluations" / "questions.csv").open())}
+def load_questions(ids: list[str], path: str | Path) -> list[dict]:
+    rows = {r["id"]: r for r in csv.DictReader(Path(path).open())}
     ids = ids or list(rows)
     unknown = [q for q in ids if q not in rows]
     if unknown:
@@ -230,12 +233,97 @@ def load_questions(ids: list[str]) -> list[dict]:
     return [rows[qid] for qid in ids]
 
 
+def index_provenance(index_id: str) -> dict:
+    """Read indexes/<id>/provenance.json so a run can stamp its true corpus (not a
+    hard-wired one). Missing/unreadable provenance degrades to an empty dict."""
+    try:
+        return json.loads((REPO / "indexes" / index_id / "provenance.json").read_text())
+    except Exception:
+        return {}
+
+
+# ── Addressing modes ───────────────────────────────────────────────────────────
+# The harness supports two kinds of index, detected from the node schema:
+#   "line"  Markdown-heading trees (line_num on each node); content fetched by line
+#           range via PageIndex's own retrieve.py. The original, unchanged path.
+#   "node"  PDF-derived trees (start_index/end_index physical pages, body text inline
+#           per node, no line_count). The vanilla-PDF arm and every metered long-doc
+#           build land here. retrieve.py can't drive these (its PDF path needs the
+#           source PDF; its Markdown path needs line_num), so we address by node_id
+#           against the inline text right here.
+
+def _iter_nodes(structure):
+    """Pre-order walk over a PageIndex tree (list of nodes, each optionally 'nodes')."""
+    stack = list(structure if isinstance(structure, list) else [structure])
+    while stack:
+        node = stack.pop(0)
+        yield node
+        stack[:0] = node.get("nodes", []) or []
+
+
+def detect_addressing(structure) -> str:
+    first = (structure[0] if isinstance(structure, list) and structure
+             else structure if isinstance(structure, dict) else {})
+    if "line_num" in first:
+        return "line"
+    if "start_index" in first or "end_index" in first:
+        return "node"
+    return "line"  # back-compat default
+
+
+def node_get_document(doc_info: dict) -> str:
+    nodes = list(_iter_nodes(doc_info.get("structure", [])))
+    starts = [n["start_index"] for n in nodes if isinstance(n.get("start_index"), int)]
+    ends = [n["end_index"] for n in nodes if isinstance(n.get("end_index"), int)]
+    result = {"doc_id": doc_info["id"], "doc_name": doc_info.get("doc_name", ""),
+              "doc_description": doc_info.get("doc_description", ""), "type": "pdf",
+              "status": "completed", "node_count": len(nodes)}
+    if starts and ends:
+        result["page_span"] = [min(starts), max(ends)]
+    return json.dumps(result)
+
+
+def line_get_document_structure(doc_info: dict) -> str:
+    """Titles + line_num + summary, no body text and no node_id — so the line number is
+    the ONE locator for line-addressed docs. (Nodes carry both line_num and node_id;
+    exposing both invites the model to address get_page_content by node_id, which the
+    line-mode content tool reads as a bogus line number and silently returns nothing.)"""
+    stripped = R.remove_fields(doc_info.get("structure", []), fields=["text", "node_id"])
+    return json.dumps(stripped, ensure_ascii=False)
+
+
+def node_get_document_structure(doc_info: dict) -> str:
+    """Titles + node_id + summary, no body text and no page indices — so node_id is the
+    unambiguous locator the model must pass back to get_page_content."""
+    stripped = R.remove_fields(doc_info.get("structure", []),
+                               fields=["text", "start_index", "end_index"])
+    return json.dumps(stripped, ensure_ascii=False)
+
+
+def node_get_page_content(doc_info: dict, node_ids: str) -> str:
+    wanted = [s for s in re.split(r"[,\s]+", (node_ids or "").strip()) if s]
+    by_id = {n.get("node_id"): n for n in _iter_nodes(doc_info.get("structure", []))}
+    out = []
+    for nid in wanted:
+        node = by_id.get(nid)
+        if node is None:
+            out.append({"node_id": nid, "error": "no such node_id"})
+        else:
+            out.append({"node_id": nid, "title": node.get("title", ""),
+                        "pages": [node.get("start_index"), node.get("end_index")],
+                        "content": node.get("text", "")})
+    return json.dumps(out, ensure_ascii=False)
+
+
 def build_documents(index_path: Path) -> tuple[dict, str]:
     idx = json.loads(index_path.read_text())
     doc_id = idx["doc_name"]
-    return {doc_id: {"id": doc_id, "type": "md", "doc_name": idx["doc_name"],
+    structure = idx["structure"]
+    addressing = detect_addressing(structure)
+    return {doc_id: {"id": doc_id, "type": "pdf" if addressing == "node" else "md",
+                     "doc_name": idx["doc_name"], "addressing": addressing,
                      "doc_description": idx.get("doc_description", ""),
-                     "line_count": idx.get("line_count", 0), "structure": idx["structure"]}}, doc_id
+                     "line_count": idx.get("line_count", 0), "structure": structure}}, doc_id
 
 
 def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: str,
@@ -247,20 +335,35 @@ def run_one(documents: dict, doc_id: str, model_name: str, model_obj, question: 
         trace.append({"tool": tool, "args": args, "output_chars": len(out), "output_tokens": ntok(out)})
         return out
 
+    doc_info = documents[doc_id]
+    addressing = doc_info.get("addressing", "line")
+
     @function_tool
     def get_document() -> str:
-        """Get document metadata: doc_name, line_count, status."""
-        return _log("get_document", R.get_document(documents, doc_id))
+        """Get document metadata: doc_name, size (line_count or node_count), status."""
+        out = (node_get_document(doc_info) if addressing == "node"
+               else R.get_document(documents, doc_id))
+        return _log("get_document", out)
 
     @function_tool
     def get_document_structure() -> str:
-        """Get the tree structure (titles + summaries + line numbers, no body text)."""
-        return _log("get_document_structure", R.get_document_structure(documents, doc_id))
+        """Get the tree structure (section titles + locators + summaries, no body text)."""
+        out = (node_get_document_structure(doc_info) if addressing == "node"
+               else line_get_document_structure(doc_info))
+        return _log("get_document_structure", out)
 
     @function_tool
     def get_page_content(pages: str) -> str:
-        """Get text by Markdown line numbers. Tight ranges, e.g. '120-160' or '540,2176'."""
-        return _log("get_page_content", R.get_page_content(documents, doc_id, pages), pages=pages)
+        """Get the text of sections, by the locators shown in get_document_structure.
+
+        Pass either Markdown line ranges (e.g. '120-160' or '540,2176') for
+        line-addressed documents, or section node ids (e.g. '0007' or '0007,0012')
+        for node-addressed documents. Use tight selections; never fetch the whole
+        document at once.
+        """
+        out = (node_get_page_content(doc_info, pages) if addressing == "node"
+               else R.get_page_content(documents, doc_id, pages))
+        return _log("get_page_content", out, pages=pages)
 
     agent_kwargs = {}
     ms = build_model_settings(model_name, cache_on, temperature)
@@ -340,7 +443,7 @@ def write_markdown(run_dir: Path, record: dict, provenance: dict, indexes: list[
     lines = [f"# Retrieval run {record['run_id']}", "",
              f"- Indexes: {', '.join('`'+i+'`' for i in indexes)}",
              f"- Retrievers: {', '.join('`'+m+'`' for m in retrievers)}",
-             f"- Corpus: `{provenance['corpus_version']}` (`{provenance['corpus_sha256'][:12]}…`)",
+             f"- Corpus: `{provenance['corpus_version']}` (`{(provenance['corpus_sha256'] or 'unknown')[:12]}…`)",
              f"- Repo commit: `{record['repo_commit'][:10]}`  ·  questions: {len(record['questions'])}", "",
              "## Comparison — means across questions", "",
              "| Index | Retriever | n | tools | struct_tok | content_tok | total_tok | $ | s |",
@@ -384,6 +487,9 @@ def main() -> int:
                     help="index ids to run/compare, e.g. IDX-D IDX-C IDX-O")
     ap.add_argument("--retrievers", nargs="+", default=["gpt-4o-2024-11-20"])
     ap.add_argument("--questions", nargs="*", default=[], help="question ids (default: all in the CSV)")
+    ap.add_argument("--questions-file", default=str(REPO / "evaluations" / "questions.csv"),
+                    help="CSV of questions to load (default: evaluations/questions.csv). Use a "
+                         "per-corpus file, e.g. evaluations/questions-paper-book-v1.csv.")
     ap.add_argument("--cache", choices=["off", "on"], default="off",
                     help="prompt-cache the re-sent tree (on = Anthropic cache_control breakpoint; "
                          "affects cost/latency only, not answers). Default off = baseline.")
@@ -402,8 +508,22 @@ def main() -> int:
     if any(not is_native_openai(m) for m in args.retrievers):
         collector = make_litellm_usage_collector()
 
-    provenance = json.loads((REPO / "corpus" / "site-book-v1" / "provenance.json").read_text())
-    questions = load_questions(args.questions)
+    # Corpus is derived from each index's own provenance (no hard-wired corpus). The
+    # run is stamped with the first index's corpus; a warning fires if indexes span
+    # corpora, and every result carries its own index's corpus_version/sha.
+    provs = {i: index_provenance(i) for i in args.indexes}
+    corpora = {p.get("corpus_version") for p in provs.values() if p.get("corpus_version")}
+    if len(corpora) > 1:
+        print(f"WARNING: indexes span multiple corpora {sorted(corpora)}; the header is "
+              f"stamped with one, but each result carries its own index's corpus.")
+    # Header stamp: first index that actually declares a corpus (PDF-native arms like
+    # IDX-PDF-vanilla-paper pin source_pdf_sha256, not corpus_version).
+    first_prov = next((provs[i] for i in args.indexes if provs[i].get("corpus_version")),
+                      provs.get(args.indexes[0], {}))
+    corpus_version = first_prov.get("corpus_version", "unknown")
+    corpus_sha256 = first_prov.get("corpus_sha256", "")
+    provenance = {"corpus_version": corpus_version, "corpus_sha256": corpus_sha256}
+    questions = load_questions(args.questions, args.questions_file)
 
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     run_dir = REPO / "runs" / ts
@@ -411,8 +531,8 @@ def main() -> int:
 
     record = {"run_id": ts, "purpose": "retrieval", "indexes": args.indexes,
               "retrievers": args.retrievers, "cache": args.cache, "temperature": args.temperature,
-              "questions": [q["id"] for q in questions],
-              "corpus_version": provenance["corpus_version"], "corpus_sha256": provenance["corpus_sha256"],
+              "questions": [q["id"] for q in questions], "questions_file": args.questions_file,
+              "corpus_version": corpus_version, "corpus_sha256": corpus_sha256,
               "repo_commit": git_head(REPO), "results": []}
 
     for index_id in args.indexes:
@@ -427,7 +547,9 @@ def main() -> int:
                               collector=collector if not is_native_openai(model_name) else None)
                 res.update({"index_id": index_id, "qid": q["id"], "category": q["category"],
                             "question": q["question"], "expected_evidence": q.get("expected_evidence", ""),
-                            "ground_truth": q.get("ground_truth", "")})
+                            "ground_truth": q.get("ground_truth", ""),
+                            "corpus_version": provs.get(index_id, {}).get("corpus_version", ""),
+                            "corpus_sha256": provs.get(index_id, {}).get("corpus_sha256", "")})
                 record["results"].append(res)
                 if res["error"]:
                     print(f"ERROR: {res['error']}")
@@ -442,5 +564,56 @@ def main() -> int:
     return 0
 
 
+def _self_test() -> int:
+    """Offline checks for addressing detection + node-mode tools + build_documents.
+    No API keys, no network. Exercised by tests/test_run_retrieval.py."""
+    import tempfile
+
+    line_struct = [{"title": "A", "node_id": "0000", "line_num": 1, "text": "alpha",
+                    "nodes": [{"title": "B", "node_id": "0001", "line_num": 5, "text": "beta"}]}]
+    node_struct = [{"title": "Root", "node_id": "0000", "start_index": 1, "end_index": 2,
+                    "summary": "s0", "text": "gamma",
+                    "nodes": [{"title": "Child", "node_id": "0007", "start_index": 3,
+                               "end_index": 4, "summary": "s1", "text": "delta"}]}]
+
+    assert detect_addressing(line_struct) == "line"
+    assert detect_addressing(node_struct) == "node"
+
+    doc = {"id": "d", "doc_name": "d", "structure": node_struct, "addressing": "node"}
+    gd = json.loads(node_get_document(doc))
+    assert gd["node_count"] == 2 and gd["page_span"] == [1, 4], gd
+
+    st = json.dumps(json.loads(node_get_document_structure(doc)))
+    assert "gamma" not in st and "delta" not in st, "body text must be stripped"
+    assert "start_index" not in st and "end_index" not in st, "page indices must be stripped"
+    assert "0007" in st, "node_id must remain as the locator"
+
+    # Line-mode structure must expose line_num as the ONLY locator: node_id stripped so
+    # the model can't address the line-mode content tool by node_id (silently empty).
+    line_doc = {"id": "l", "doc_name": "l", "structure": line_struct, "addressing": "line"}
+    lst = json.dumps(json.loads(line_get_document_structure(line_doc)))
+    assert "alpha" not in lst and "beta" not in lst, "body text must be stripped"
+    assert '"line_num"' in lst, "line_num must remain as the locator"
+    assert '"node_id"' not in lst, "node_id must be stripped in line mode"
+
+    pc = json.loads(node_get_page_content(doc, "0000,0007"))
+    assert [x["content"] for x in pc] == ["gamma", "delta"], pc
+    assert json.loads(node_get_page_content(doc, "9999"))[0].get("error"), "bad id must error"
+
+    with tempfile.TemporaryDirectory() as td:
+        p = Path(td) / "index.json"
+        p.write_text(json.dumps({"doc_name": "nd", "structure": node_struct}))
+        docs, did = build_documents(p)
+        assert docs[did]["addressing"] == "node" and docs[did]["type"] == "pdf"
+        p.write_text(json.dumps({"doc_name": "ld", "line_count": 10, "structure": line_struct}))
+        docs, did = build_documents(p)
+        assert docs[did]["addressing"] == "line" and docs[did]["type"] == "md"
+
+    print("self-test OK")
+    return 0
+
+
 if __name__ == "__main__":
+    if "--self-test" in sys.argv:
+        raise SystemExit(_self_test())
     raise SystemExit(main())

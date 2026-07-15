@@ -82,5 +82,28 @@ confidence — directly quoted or read from Table 1 with no interpretation.
   possible; the representation-sensitive items intentionally pick evidence that
   survives cleanly in Markdown but not in the vanilla PDF extraction.
 - The harness only loads from `questions.csv`; this candidate file is not wired in.
-  After Barbara selects the winners, promote them into `questions.csv`
+  After Barbara selects the winners, promote them into a questions CSV
   (set `status=validated`) before the paper retrieval runs.
+
+## Promoted winners (2026-07-14)
+
+Barbara selected **8** of the 16. They are promoted verbatim (full 11-column schema,
+`status=validated`) into **`evaluations/questions-paper-book-v1.csv`** — a paper-specific
+file kept separate from the site-book `questions.csv`. The harness now loads it via
+`run_retrieval.py --questions-file evaluations/questions-paper-book-v1.csv`.
+
+| ID | Category | representation_sensitivity |
+|---|---|---|
+| PDL1 | direct-location | low |
+| PMP1 | methods-procedural | **high** |
+| PFT1 | figure-or-table-evidence | **high** |
+| PFT3 | figure-or-table-evidence | **high** |
+| PEG2 | evidence-gap | low |
+| PCS1 | cross-section-synthesis | low |
+| PCS2 | cross-section-synthesis | low |
+| PRD1 | reflective-discovery | low |
+
+Three high-sensitivity items (PMP1, PFT1, PFT3) drive the vanilla-vs-Markdown contrast;
+the rest are low-sensitivity controls. `PCS2` is the only `confidence=medium` ground
+truth in the set — confirm the "computational model matches the oracle" reading before
+scoring.

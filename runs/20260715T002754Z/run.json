@@ -1,0 +1,1334 @@
+{
+  "run_id": "20260715T002754Z",
+  "purpose": "retrieval",
+  "indexes": [
+    "IDX-PDF-vanilla-paper",
+    "IDX-D-paper-book-v1",
+    "IDX-D-paper-book-v1-clean"
+  ],
+  "retrievers": [
+    "gpt-4o-2024-11-20"
+  ],
+  "cache": "off",
+  "temperature": null,
+  "questions": [
+    "PDL1",
+    "PMP1",
+    "PFT1",
+    "PFT3",
+    "PEG2",
+    "PCS1",
+    "PCS2",
+    "PRD1"
+  ],
+  "questions_file": "evaluations/questions-paper-book-v1.csv",
+  "corpus_version": "paper-book-v1",
+  "corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2",
+  "repo_commit": "1cffdcafd21ace0f99406881a1dcf6d250c68ea6",
+  "results": [
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The main eye-tracking search experiment involved 14 observers and utilized 912 scenes of urban environments, with half of the images containing a pedestrian. The search target for the experiment was a person (pedestrian), typically located in the periphery of the images. Each participant completed all 912 trials. \n\nThis information is based on details from the following sections:\n- **Experimental Method**\n- **Participants**\n- **Stimuli**.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 520,
+          "output_tokens": 131
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 24970,
+          "output_tokens": 4515
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0004,0005,0007"
+          },
+          "output_chars": 7475,
+          "output_tokens": 1680
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 4515,
+      "content_tokens": 1680,
+      "usage": {
+        "input_tokens": 13114,
+        "output_tokens": 135,
+        "total_tokens": 13249
+      },
+      "est_cost_usd": 0.0341,
+      "latency_seconds": 6.11,
+      "index_id": "IDX-PDF-vanilla-paper",
+      "qid": "PDL1",
+      "category": "direct-location",
+      "question": "How many observers and how many scenes were used in the main eye-tracking search experiment, and what was the search target?",
+      "expected_evidence": "Abstract L46; Introduction L77; Participants L83 ('Fourteen observers'); Stimuli L93 ('912 colour pictures').",
+      "ground_truth": "14 observers searched 912 outdoor urban scenes (half target-present, half target-absent) for a person/pedestrian.",
+      "corpus_version": "",
+      "corpus_sha256": ""
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "In the Dalal-Triggs target-features detector, the scanning window size was set to **32 × 64 pixels**, and it was trained on **2000 upright, unoccluded pedestrians**, along with their left-right reflections. Pedestrians were cropped from images in the LabelMe database and adjusted to fit specific criteria for training. \n\nCited section: \"Guidance by target features\" under \"MODELLING METHODS\".",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 520,
+          "output_tokens": 131
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 24970,
+          "output_tokens": 4515
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0014,0015"
+          },
+          "output_chars": 13265,
+          "output_tokens": 3164
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 4515,
+      "content_tokens": 3164,
+      "usage": {
+        "input_tokens": 14607,
+        "output_tokens": 131,
+        "total_tokens": 14738
+      },
+      "est_cost_usd": 0.0378,
+      "latency_seconds": 7.75,
+      "index_id": "IDX-PDF-vanilla-paper",
+      "qid": "PMP1",
+      "category": "methods-procedural",
+      "question": "In the Dalal-Triggs target-features detector, what scanning-window size was used and how many pedestrians was the reported implementation trained on?",
+      "expected_evidence": "Guidance by target features, L159 ('scanning window of 32×64 pixels and was trained on 2000 upright, unoccluded pedestrians').",
+      "ground_truth": "A 32x64-pixel scanning window; trained on 2000 upright, unoccluded pedestrians (plus their left-right reflections).",
+      "corpus_version": "",
+      "corpus_sha256": ""
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "According to Table 1:\n\n- The **scene-context model** achieves an **Area-Under-Curve (AUC)** of **0.845** in **target-absent scenes**.\n- In the same condition, the **saliency model** has an AUC of **0.773**.\n\nThus, the scene-context model outperforms the saliency model by **0.072 points** in AUC, demonstrating better accuracy in predicting fixation regions for target-absent scenes.\n\n(Referenced Section: \"MODELLING RESULTS\")",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 520,
+          "output_tokens": 131
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 24970,
+          "output_tokens": 4515
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0018"
+          },
+          "output_chars": 4021,
+          "output_tokens": 1042
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 4515,
+      "content_tokens": 1042,
+      "usage": {
+        "input_tokens": 12546,
+        "output_tokens": 153,
+        "total_tokens": 12699
+      },
+      "est_cost_usd": 0.0329,
+      "latency_seconds": 4.56,
+      "index_id": "IDX-PDF-vanilla-paper",
+      "qid": "PFT1",
+      "category": "figure-or-table-evidence",
+      "question": "According to Table 1, what is the scene-context model's Area-Under-Curve (AUC) in target-absent scenes, and how does it compare with the saliency model in the same condition?",
+      "expected_evidence": "Table 1, target-absent block, L217 (Scene context .845) and L215 (Saliency .773).",
+      "ground_truth": "Scene context AUC = .845 vs saliency AUC = .773 in target-absent scenes; scene context is higher by .072.",
+      "corpus_version": "",
+      "corpus_sha256": ""
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Figure 8 compares two maps that predict human fixation locations during visual search:\n\n1. **Panel (a): Computationally Defined Scene Context Map** - A computational model predicting the locations where observers are likely to fixate, based on scene context.\n   \n2. **Panel (b): Empirically Defined Context Oracle Map** - A data-driven \"oracle\" map developed using human-labeled plausible pedestrian locations, designed to capture empirically-based predictions.\n\nBoth maps are shown thresholded at 20% of the image area, with dots representing human fixations. The comparison demonstrates differences between computational predictions and empirically guided context understanding regarding their ability to predict human behavior. \n\nCited Sections:\n- \"MODELLING RESULTS\"\n- \"Context models\"",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 520,
+          "output_tokens": 131
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 24970,
+          "output_tokens": 4515
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0018,0020"
+          },
+          "output_chars": 9749,
+          "output_tokens": 2363
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 4515,
+      "content_tokens": 2363,
+      "usage": {
+        "input_tokens": 13754,
+        "output_tokens": 195,
+        "total_tokens": 13949
+      },
+      "est_cost_usd": 0.0363,
+      "latency_seconds": 4.87,
+      "index_id": "IDX-PDF-vanilla-paper",
+      "qid": "PFT3",
+      "category": "figure-or-table-evidence",
+      "question": "What does Figure 8 compare, and how are the two panels defined?",
+      "expected_evidence": "Figure 8 caption, L205 ('Comparison between (a) the computationally defined scene context map and (b) the empirically defined context oracle map for a single image').",
+      "ground_truth": "Figure 8 compares, for a single image, (a) the computationally-defined scene-context map vs (b) the empirically-defined context-oracle map (both thresholded at 20% of image area, with human-fixation dots).",
+      "corpus_version": "",
+      "corpus_sha256": ""
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Yes, the paper reports human behavioral performance metrics for the search task. Specifically, it provides:\n\n1. **Accuracy**: Participants achieved an 87% correct response rate (hits) in target-present scenes, with a 3% false alarm rate in target-absent scenes.\n2. **Reaction Time**: The mean reaction time was 1050 ms for target-present scenes and 1517 ms for target-absent scenes.\n3. **Fixation Analysis**:\n   - Average fixations: 3.5 in target-present scenes and 5.1 in target-absent scenes.\n   - Fixation durations: 147 ms on target-present trials and 225 ms on target-absent trials.\n   - Observers spent 428 ms on average fixating the target-person before responding.\n\nThese metrics complement the computational model evaluations. (Cited sections: \"Procedure\" and \"Accuracy and eye movement statistics\").",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 520,
+          "output_tokens": 131
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 24970,
+          "output_tokens": 4515
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0008,0009"
+          },
+          "output_chars": 7472,
+          "output_tokens": 1751
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 4515,
+      "content_tokens": 1751,
+      "usage": {
+        "input_tokens": 13186,
+        "output_tokens": 234,
+        "total_tokens": 13420
+      },
+      "est_cost_usd": 0.0353,
+      "latency_seconds": 5.69,
+      "index_id": "IDX-PDF-vanilla-paper",
+      "qid": "PEG2",
+      "category": "evidence-gap",
+      "question": "Does the paper report human behavioural performance (accuracy, reaction time) for the search task, or only computational model AUCs?",
+      "expected_evidence": "Accuracy and eye movement statistics, L109 ('hits was 87%. The false alarm rate (fa)... was 3%... mean reaction time was 1050 ms... 1517 ms').",
+      "ground_truth": "It reports both: human behavioural stats appear in 'Accuracy and eye movement statistics' - hits 87%, false-alarm rate 3%, mean RT 1050 ms (target-present) / 1517 ms (target-absent), ~3.5 vs 5.1 fixations. So the answer is 'yes, behavioural measures are reported', not only AUCs.",
+      "corpus_version": "",
+      "corpus_sha256": ""
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "### Sources of Guidance and Their Definition\nThe document defines three sources of visual guidance used to construct the combined attentional map:\n\n1. **Image Saliency** (M_S): Derived from the statistical saliency model, it predicts regions with rare or locally distinct features such as color and orientation that stand out (Section: *Guidance by saliency*).\n\n2. **Target Features** (M_T): Based on a sliding-window detector trained to identify specific target attributes (e.g., pedestrians), using Histograms of Oriented Gradients (HOG) (Section: *Guidance by target features*).\n\n3. **Scene Context** (M_C): Uses global image features to infer the likely locations of targets based on scene layout (e.g., sidewalks for pedestrians) (Section: *Guidance by scene context features*).\n\nThese contributions are mathematically integrated using Equation 1, where weights balance their relative importance (Section: *MODELLING METHODS*).\n\n---\n\n### Performance of Combined Models\nPerformance of the combined attentional map integrating saliency, target features, and scene context is detailed in the section:\n\n- **Combined Source Models**: Reports that the combined model achieved **94% agreement with human fixation patterns**, outperforming individual sources. Most explanatory power came from the **scene context component**, with predictive accuracies in both target-present and target-absent scenarios (Section: *Combined source models*).\n\nThe combined model's performance is enhanced but exhibits room for improvement when integrating oracle-like context guidance.\n\n### Relevant Sections\nCited sections include:\n- *MODELLING METHODS* (Defining saliency, target features, and scene context)\n- *Combined source models* (Performance details of the combined model).",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 520,
+          "output_tokens": 131
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 24970,
+          "output_tokens": 4515
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0021"
+          },
+          "output_chars": 6287,
+          "output_tokens": 1500
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0013,0014,0015,0016"
+          },
+          "output_chars": 22119,
+          "output_tokens": 5233
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 4515,
+      "content_tokens": 6733,
+      "usage": {
+        "input_tokens": 18178,
+        "output_tokens": 431,
+        "total_tokens": 18609
+      },
+      "est_cost_usd": 0.0498,
+      "latency_seconds": 6.26,
+      "index_id": "IDX-PDF-vanilla-paper",
+      "qid": "PCS1",
+      "category": "cross-section-synthesis",
+      "question": "The model combines three sources of guidance. Where is each source defined, and which section reports their combined performance?",
+      "expected_evidence": "Guidance by saliency L141; Guidance by target features L153; Guidance by scene context features L177; combined L195; Modelling Results / Table 1 L207+.",
+      "ground_truth": "Saliency (§Guidance by saliency, L141), target features (§Guidance by target features, L153), scene context (§Guidance by scene context features, L177); combined in §Guidance by a combined model of attention (L195), with combined performance in §Modelling Results / Table 1 (L207+).",
+      "corpus_version": "",
+      "corpus_sha256": ""
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "### Role of the Context Oracle\nThe \"context oracle\" plays a key role as an upper-bound benchmark for evaluating the scene context model. It provides a theoretical approximation of \"ground truth\" scene context by asking human participants to identify plausible locations for a pedestrian in each scene. The participants' collective responses are aggregated into the \"context oracle,\" achieving near-perfect performance, as it distills human judgment into an idealized predictor. Its purpose is to highlight where computational scene-context models fail due to incorrect regional identification or lack of correspondence with human fixations. Notably, the oracle significantly outperforms the computational scene context model, with AUC scores of 0.88 and 0.89 for target-absent and target-present scenes, respectively (from *Guidance by scene context features* and *Combined source models*).\n\n### Purely Computational Combined Model Performance\nThe purely computational combined model integrates saliency, target features, and scene context as weighted components. It demonstrates remarkable predictive power with AUC scores of 0.88 for target-absent scenes and 0.90 for target-present scenes. Notably, this model closely approximates the performance of the context oracle, with no significant difference in target-absent scenes and only a minor difference in target-present scenes. However, the combined model's success correlates strongly with the contributions of the scene context component, as the largest performance drop occurs when this component is removed. Substituting the context oracle for the scene context component further boosts the model's performance, demonstrating how the oracle sets an aspirational benchmark (*Combined source models*).\n\n### Summary\n- The context oracle acts as a performance ceiling for computational models grounded solely in scene context.\n- The combined model incorporating computational scene context approximates the oracle's performance but is not entirely equivalent. Integrating oracle-level scene context would further refine its accuracy.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 520,
+          "output_tokens": 131
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 24970,
+          "output_tokens": 4515
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0017"
+          },
+          "output_chars": 3168,
+          "output_tokens": 724
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0016"
+          },
+          "output_chars": 6025,
+          "output_tokens": 1397
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0021"
+          },
+          "output_chars": 6287,
+          "output_tokens": 1500
+        }
+      ],
+      "n_tool_calls": 5,
+      "structure_tokens": 4515,
+      "content_tokens": 3621,
+      "usage": {
+        "input_tokens": 15088,
+        "output_tokens": 466,
+        "total_tokens": 15554
+      },
+      "est_cost_usd": 0.0424,
+      "latency_seconds": 8.79,
+      "index_id": "IDX-PDF-vanilla-paper",
+      "qid": "PCS2",
+      "category": "cross-section-synthesis",
+      "question": "What role does the 'context oracle' play across the paper, and does the purely computational combined model ever match it?",
+      "expected_evidence": "Upper-bound rationale L189; construction L193; comparison L286 ('not significant in target-absent, t(405)=−1.233, p=.218'); oracle-substituted 96% L209.",
+      "ground_truth": "DRAFT: The context oracle is an empirical UPPER BOUND on context-only guidance (L189), built from 7 participants' markings (L193). The computational combined model matches it in target-absent scenes - the difference is not significant (t(405)=−1.233, p=.218, L286) - though substituting the oracle for the computational context model still lifts performance to ~96% of human agreement (L209).",
+      "corpus_version": "",
+      "corpus_sha256": ""
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The paper identifies the core limitation preventing models from achieving human-level fixation prediction as their inability to fully capture the selectivity of human attentional maps. Specifically, computer models fail to replicate the tight clustering of human fixations and struggle with complex scenes involving multiple surfaces or semantic variations.\n\nFor future directions, it proposes:\n1. Developing flexible weighting mechanisms in combined models to account for varying guidance factors (scene context, saliency, target features) depending on task constraints.\n2. Improving representations of target features, saliency, and scene context to better approximate human search behavior.\n3. Exploring semantic influences and contextual associations (e.g., the presence of a person being more linked to doorways than other objects) to refine models further.\n\nThese insights are drawn from the \"Discussion\" and \"Concluding Remarks\" sections.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 520,
+          "output_tokens": 131
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 24970,
+          "output_tokens": 4515
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0022,0023"
+          },
+          "output_chars": 20858,
+          "output_tokens": 5270
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 4515,
+      "content_tokens": 5270,
+      "usage": {
+        "input_tokens": 16709,
+        "output_tokens": 207,
+        "total_tokens": 16916
+      },
+      "est_cost_usd": 0.0438,
+      "latency_seconds": 5.1,
+      "index_id": "IDX-PDF-vanilla-paper",
+      "qid": "PRD1",
+      "category": "reflective-discovery",
+      "question": "What does the paper identify as the core limitation preventing any model from reaching human-level fixation prediction, and what future direction does it propose?",
+      "expected_evidence": "Abstract L46; Discussion L294 ('map selectivity... region size of roughly 40%... tightly clustered'); Concluding Remarks L320.",
+      "ground_truth": "The core limitation is selectivity/precision: human fixations cluster tightly in small regions while models select much broader regions - all models' accuracy falls off sharply as the selected region shrinks (a ~40% region is needed for the combined model to match human detection rate; L294). Proposed direction: future models that capture the mechanisms underlying the tight clustering of human search fixations (L320).",
+      "corpus_version": "",
+      "corpus_sha256": ""
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The sections reviewed so far do not provide information about the number of observers, scenes used, or the search target in the eye-tracking experiment. Either this data is absent in the document, or I need clarification on where to investigate further. Would you like me to pursue other sections or refine the inquiry?",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 135,
+          "output_tokens": 44
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2073,
+          "output_tokens": 698
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0009"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0011"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0008"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0012"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0013"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0015"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        }
+      ],
+      "n_tool_calls": 8,
+      "structure_tokens": 698,
+      "content_tokens": 6,
+      "usage": {
+        "input_tokens": 6395,
+        "output_tokens": 294,
+        "total_tokens": 6689
+      },
+      "est_cost_usd": 0.0189,
+      "latency_seconds": 7.19,
+      "index_id": "IDX-D-paper-book-v1",
+      "qid": "PDL1",
+      "category": "direct-location",
+      "question": "How many observers and how many scenes were used in the main eye-tracking search experiment, and what was the search target?",
+      "expected_evidence": "Abstract L46; Introduction L77; Participants L83 ('Fourteen observers'); Stimuli L93 ('912 colour pictures').",
+      "ground_truth": "14 observers searched 912 outdoor urban scenes (half target-present, half target-absent) for a person/pedestrian.",
+      "corpus_version": "paper-book-v1",
+      "corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The relevant section, \"Guidance by target features,\" appears to be inaccessible in the document. Consequently, I cannot provide the specific scanning-window size used in the Dalal-Triggs target-features detector or the number of pedestrians the implementation was trained on.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 135,
+          "output_tokens": 44
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2073,
+          "output_tokens": 698
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0019"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 698,
+      "content_tokens": 1,
+      "usage": {
+        "input_tokens": 3546,
+        "output_tokens": 93,
+        "total_tokens": 3639
+      },
+      "est_cost_usd": 0.0098,
+      "latency_seconds": 3.75,
+      "index_id": "IDX-D-paper-book-v1",
+      "qid": "PMP1",
+      "category": "methods-procedural",
+      "question": "In the Dalal-Triggs target-features detector, what scanning-window size was used and how many pedestrians was the reported implementation trained on?",
+      "expected_evidence": "Guidance by target features, L159 ('scanning window of 32×64 pixels and was trained on 2000 upright, unoccluded pedestrians').",
+      "ground_truth": "A 32x64-pixel scanning window; trained on 2000 upright, unoccluded pedestrians (plus their left-right reflections).",
+      "corpus_version": "paper-book-v1",
+      "corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "According to Table 1, in **target-absent scenes**, the **scene-context model** achieves an **Area-Under-Curve (AUC)** of **0.845**, while the **saliency model** has an AUC of **0.773**. This shows that the scene-context model outperforms the saliency model by a margin of **0.072** in this condition.\n\nThis result highlights the superior ability of the scene-context model to predict fixation locations in target-absent scenes compared to the saliency model, which relies solely on visual salience.\n\n**Cited Section: Modelling Results > Saliency and Target Features Models**.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 135,
+          "output_tokens": 44
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2073,
+          "output_tokens": 698
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "207-318"
+          },
+          "output_chars": 20969,
+          "output_tokens": 4552
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 698,
+      "content_tokens": 4552,
+      "usage": {
+        "input_tokens": 8162,
+        "output_tokens": 179,
+        "total_tokens": 8341
+      },
+      "est_cost_usd": 0.0222,
+      "latency_seconds": 5.14,
+      "index_id": "IDX-D-paper-book-v1",
+      "qid": "PFT1",
+      "category": "figure-or-table-evidence",
+      "question": "According to Table 1, what is the scene-context model's Area-Under-Curve (AUC) in target-absent scenes, and how does it compare with the saliency model in the same condition?",
+      "expected_evidence": "Table 1, target-absent block, L217 (Scene context .845) and L215 (Saliency .773).",
+      "ground_truth": "Scene context AUC = .845 vs saliency AUC = .773 in target-absent scenes; scene context is higher by .072.",
+      "corpus_version": "paper-book-v1",
+      "corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Figure 8 compares two scene context maps for a single image: \n1. **(a)** The *computationally defined scene context map*, which is generated by a model predicting locations based on scene features.\n2. **(b)** The *empirically defined context oracle map*, generated by human observers who marked regions they believed most likely to contain the target. \n\nIn both cases, the maps are thresholded to 20% of the image area and overlaid with dots representing human fixations ([“Guidance by a combined model of attention”](#195)).",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 135,
+          "output_tokens": 44
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2073,
+          "output_tokens": 698
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "1-479"
+          },
+          "output_chars": 68739,
+          "output_tokens": 16433
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "18-26"
+          },
+          "output_chars": 542,
+          "output_tokens": 120
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "11"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "195-207"
+          },
+          "output_chars": 1887,
+          "output_tokens": 439
+        }
+      ],
+      "n_tool_calls": 6,
+      "structure_tokens": 698,
+      "content_tokens": 16993,
+      "usage": {
+        "input_tokens": 73992,
+        "output_tokens": 212,
+        "total_tokens": 74204
+      },
+      "est_cost_usd": 0.1871,
+      "latency_seconds": 9.74,
+      "index_id": "IDX-D-paper-book-v1",
+      "qid": "PFT3",
+      "category": "figure-or-table-evidence",
+      "question": "What does Figure 8 compare, and how are the two panels defined?",
+      "expected_evidence": "Figure 8 caption, L205 ('Comparison between (a) the computationally defined scene context map and (b) the empirically defined context oracle map for a single image').",
+      "ground_truth": "Figure 8 compares, for a single image, (a) the computationally-defined scene-context map vs (b) the empirically-defined context-oracle map (both thresholded at 20% of image area, with human-fixation dots).",
+      "corpus_version": "paper-book-v1",
+      "corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The sections I consulted do not provide text, so I'm unable to verify whether the paper reports human behavioral performance (such as accuracy or reaction time) alongside computational model AUCs. Let me know if I should examine additional sections for this information.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 135,
+          "output_tokens": 44
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2073,
+          "output_tokens": 698
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0015"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0022"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 698,
+      "content_tokens": 2,
+      "usage": {
+        "input_tokens": 3559,
+        "output_tokens": 123,
+        "total_tokens": 3682
+      },
+      "est_cost_usd": 0.0101,
+      "latency_seconds": 4.39,
+      "index_id": "IDX-D-paper-book-v1",
+      "qid": "PEG2",
+      "category": "evidence-gap",
+      "question": "Does the paper report human behavioural performance (accuracy, reaction time) for the search task, or only computational model AUCs?",
+      "expected_evidence": "Accuracy and eye movement statistics, L109 ('hits was 87%. The false alarm rate (fa)... was 3%... mean reaction time was 1050 ms... 1517 ms').",
+      "ground_truth": "It reports both: human behavioural stats appear in 'Accuracy and eye movement statistics' - hits 87%, false-alarm rate 3%, mean RT 1050 ms (target-present) / 1517 ms (target-absent), ~3.5 vs 5.1 fixations. So the answer is 'yes, behavioural measures are reported', not only AUCs.",
+      "corpus_version": "paper-book-v1",
+      "corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The document defines the three sources of guidance and reports the combined performance as follows:\n\n1. **Sources of Guidance**:\n   - **Guidance by Saliency**: Found in the section \"Guidance by saliency.\"\n   - **Guidance by Target Features**: Found in the section \"Guidance by target features.\"\n   - **Guidance by Scene Context Features**: Found in the section \"Guidance by scene context features.\"\n\n2. **Combined Performance**:\n   - The section \"Combined source models\" reports the combined performance of these sources.\n\nLet me know if you'd like specific details extracted for any of these sections!",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 135,
+          "output_tokens": 44
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2073,
+          "output_tokens": 698
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0025"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0018,0019,0020"
+          },
+          "output_chars": 542,
+          "output_tokens": 120
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 698,
+      "content_tokens": 121,
+      "usage": {
+        "input_tokens": 3668,
+        "output_tokens": 208,
+        "total_tokens": 3876
+      },
+      "est_cost_usd": 0.0112,
+      "latency_seconds": 4.3,
+      "index_id": "IDX-D-paper-book-v1",
+      "qid": "PCS1",
+      "category": "cross-section-synthesis",
+      "question": "The model combines three sources of guidance. Where is each source defined, and which section reports their combined performance?",
+      "expected_evidence": "Guidance by saliency L141; Guidance by target features L153; Guidance by scene context features L177; combined L195; Modelling Results / Table 1 L207+.",
+      "ground_truth": "Saliency (§Guidance by saliency, L141), target features (§Guidance by target features, L153), scene context (§Guidance by scene context features, L177); combined in §Guidance by a combined model of attention (L195), with combined performance in §Modelling Results / Table 1 (L207+).",
+      "corpus_version": "paper-book-v1",
+      "corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The content related to the roles of the \"context oracle\" and how the combined computational model compares to it appears to be missing or unavailable in the document. If you have access to another source or specific details to guide a more focused search, let me know!",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 135,
+          "output_tokens": 44
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2073,
+          "output_tokens": 698
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0020"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0025"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 698,
+      "content_tokens": 2,
+      "usage": {
+        "input_tokens": 3551,
+        "output_tokens": 126,
+        "total_tokens": 3677
+      },
+      "est_cost_usd": 0.0101,
+      "latency_seconds": 5.04,
+      "index_id": "IDX-D-paper-book-v1",
+      "qid": "PCS2",
+      "category": "cross-section-synthesis",
+      "question": "What role does the 'context oracle' play across the paper, and does the purely computational combined model ever match it?",
+      "expected_evidence": "Upper-bound rationale L189; construction L193; comparison L286 ('not significant in target-absent, t(405)=−1.233, p=.218'); oracle-substituted 96% L209.",
+      "ground_truth": "DRAFT: The context oracle is an empirical UPPER BOUND on context-only guidance (L189), built from 7 participants' markings (L193). The computational combined model matches it in target-absent scenes - the difference is not significant (t(405)=−1.233, p=.218, L286) - though substituting the oracle for the computational context model still lifts performance to ~96% of human agreement (L209).",
+      "corpus_version": "paper-book-v1",
+      "corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The sections \"DISCUSSION\" and \"CONCLUDING REMARKS\" in the document did not contain any text. I could not locate the core limitation or the proposed future direction regarding models achieving human-level fixation prediction. Would you like me to explore another specific aspect or section of the document?",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 135,
+          "output_tokens": 44
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2073,
+          "output_tokens": 698
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0026"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0027"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 698,
+      "content_tokens": 2,
+      "usage": {
+        "input_tokens": 3563,
+        "output_tokens": 132,
+        "total_tokens": 3695
+      },
+      "est_cost_usd": 0.0102,
+      "latency_seconds": 3.85,
+      "index_id": "IDX-D-paper-book-v1",
+      "qid": "PRD1",
+      "category": "reflective-discovery",
+      "question": "What does the paper identify as the core limitation preventing any model from reaching human-level fixation prediction, and what future direction does it propose?",
+      "expected_evidence": "Abstract L46; Discussion L294 ('map selectivity... region size of roughly 40%... tightly clustered'); Concluding Remarks L320.",
+      "ground_truth": "The core limitation is selectivity/precision: human fixations cluster tightly in small regions while models select much broader regions - all models' accuracy falls off sharply as the selected region shrinks (a ~40% region is needed for the combined model to match human detection rate; L294). Proposed direction: future models that capture the mechanisms underlying the tight clustering of human search fixations (L320).",
+      "corpus_version": "paper-book-v1",
+      "corpus_sha256": "5d712efb8471c0699f1ed68d8c2bc14369dfe97b8964659345a887387aa958b2"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The document contains sections on \"Participants,\" \"Stimuli,\" and \"Procedure,\" but relevant details about the number of observers, scenes, or the search target were not extracted from those sections. Could you clarify your query or allow further exploration?",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 147,
+          "output_tokens": 46
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2067,
+          "output_tokens": 686
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0008"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0010"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0011"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        }
+      ],
+      "n_tool_calls": 5,
+      "structure_tokens": 686,
+      "content_tokens": 3,
+      "usage": {
+        "input_tokens": 3561,
+        "output_tokens": 138,
+        "total_tokens": 3699
+      },
+      "est_cost_usd": 0.0103,
+      "latency_seconds": 4.59,
+      "index_id": "IDX-D-paper-book-v1-clean",
+      "qid": "PDL1",
+      "category": "direct-location",
+      "question": "How many observers and how many scenes were used in the main eye-tracking search experiment, and what was the search target?",
+      "expected_evidence": "Abstract L46; Introduction L77; Participants L83 ('Fourteen observers'); Stimuli L93 ('912 colour pictures').",
+      "ground_truth": "14 observers searched 912 outdoor urban scenes (half target-present, half target-absent) for a person/pedestrian.",
+      "corpus_version": "paper-book-v1-clean",
+      "corpus_sha256": "8a919300df3acef9030f48bc665247a19730be88ba0844eb471484b510e107b3"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The document does not contain details about the Dalal-Triggs detector, its scanning-window size, or the number of pedestrians the implementation was trained on. If you have another question or need clarification on a different topic, let me know!",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 147,
+          "output_tokens": 46
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2067,
+          "output_tokens": 686
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0018"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 686,
+      "content_tokens": 1,
+      "usage": {
+        "input_tokens": 3528,
+        "output_tokens": 89,
+        "total_tokens": 3617
+      },
+      "est_cost_usd": 0.0097,
+      "latency_seconds": 3.79,
+      "index_id": "IDX-D-paper-book-v1-clean",
+      "qid": "PMP1",
+      "category": "methods-procedural",
+      "question": "In the Dalal-Triggs target-features detector, what scanning-window size was used and how many pedestrians was the reported implementation trained on?",
+      "expected_evidence": "Guidance by target features, L159 ('scanning window of 32×64 pixels and was trained on 2000 upright, unoccluded pedestrians').",
+      "ground_truth": "A 32x64-pixel scanning window; trained on 2000 upright, unoccluded pedestrians (plus their left-right reflections).",
+      "corpus_version": "paper-book-v1-clean",
+      "corpus_sha256": "8a919300df3acef9030f48bc665247a19730be88ba0844eb471484b510e107b3"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The document does not contain the necessary information in the accessed sections, and I couldn't find the values from Table 1 for the AUC comparison between the scene-context model and the saliency model in target-absent scenes. Let me know if you want me to search further or assist with another question.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 147,
+          "output_tokens": 46
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2067,
+          "output_tokens": 686
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0021"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0023,0024"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 686,
+      "content_tokens": 2,
+      "usage": {
+        "input_tokens": 4910,
+        "output_tokens": 123,
+        "total_tokens": 5033
+      },
+      "est_cost_usd": 0.0135,
+      "latency_seconds": 4.91,
+      "index_id": "IDX-D-paper-book-v1-clean",
+      "qid": "PFT1",
+      "category": "figure-or-table-evidence",
+      "question": "According to Table 1, what is the scene-context model's Area-Under-Curve (AUC) in target-absent scenes, and how does it compare with the saliency model in the same condition?",
+      "expected_evidence": "Table 1, target-absent block, L217 (Scene context .845) and L215 (Saliency .773).",
+      "ground_truth": "Scene context AUC = .845 vs saliency AUC = .773 in target-absent scenes; scene context is higher by .072.",
+      "corpus_version": "paper-book-v1-clean",
+      "corpus_sha256": "8a919300df3acef9030f48bc665247a19730be88ba0844eb471484b510e107b3"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Figure 8 compares two types of scene context maps for the task of predicting human fixations during a visual search: \n\n1. **The computationally defined scene context map**: This is based on the computational model of scene guidance, which selects \"relevant\" image regions based on global scene features and associations with probable pedestrian locations.\n\n2. **The empirically defined context oracle map**: This is based on observer-marked regions indicating the most plausible places for pedestrians, using cues like horizon lines, heights of doorways, cars, and signs.\n\nThe comparison highlights differences in predictive accuracy and alignment with human search patterns. Both maps are thresholded at 20% of the image area, with human fixations depicted as dots. \n\nCited from: \"Guidance by a combined model of attention\".",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 147,
+          "output_tokens": 46
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2067,
+          "output_tokens": 686
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "157-226"
+          },
+          "output_chars": 20033,
+          "output_tokens": 4321
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "79-157"
+          },
+          "output_chars": 18998,
+          "output_tokens": 4141
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 686,
+      "content_tokens": 8462,
+      "usage": {
+        "input_tokens": 11959,
+        "output_tokens": 238,
+        "total_tokens": 12197
+      },
+      "est_cost_usd": 0.0323,
+      "latency_seconds": 7.02,
+      "index_id": "IDX-D-paper-book-v1-clean",
+      "qid": "PFT3",
+      "category": "figure-or-table-evidence",
+      "question": "What does Figure 8 compare, and how are the two panels defined?",
+      "expected_evidence": "Figure 8 caption, L205 ('Comparison between (a) the computationally defined scene context map and (b) the empirically defined context oracle map for a single image').",
+      "ground_truth": "Figure 8 compares, for a single image, (a) the computationally-defined scene-context map vs (b) the empirically-defined context-oracle map (both thresholded at 20% of image area, with human-fixation dots).",
+      "corpus_version": "paper-book-v1-clean",
+      "corpus_sha256": "8a919300df3acef9030f48bc665247a19730be88ba0844eb471484b510e107b3"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The sections potentially discussing human behavioral performance, such as \"Human Eye Movements Result\" and \"Accuracy and eye movement statistics,\" returned no content. Thus, I cannot determine from the document whether it reports human behavioral performance metrics (like accuracy or reaction time) or only the computational model AUCs.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 147,
+          "output_tokens": 46
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2067,
+          "output_tokens": 686
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0013,0014"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0014"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0013"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        }
+      ],
+      "n_tool_calls": 5,
+      "structure_tokens": 686,
+      "content_tokens": 3,
+      "usage": {
+        "input_tokens": 6150,
+        "output_tokens": 139,
+        "total_tokens": 6289
+      },
+      "est_cost_usd": 0.0168,
+      "latency_seconds": 6.19,
+      "index_id": "IDX-D-paper-book-v1-clean",
+      "qid": "PEG2",
+      "category": "evidence-gap",
+      "question": "Does the paper report human behavioural performance (accuracy, reaction time) for the search task, or only computational model AUCs?",
+      "expected_evidence": "Accuracy and eye movement statistics, L109 ('hits was 87%. The false alarm rate (fa)... was 3%... mean reaction time was 1050 ms... 1517 ms').",
+      "ground_truth": "It reports both: human behavioural stats appear in 'Accuracy and eye movement statistics' - hits 87%, false-alarm rate 3%, mean RT 1050 ms (target-present) / 1517 ms (target-absent), ~3.5 vs 5.1 fixations. So the answer is 'yes, behavioural measures are reported', not only AUCs.",
+      "corpus_version": "paper-book-v1-clean",
+      "corpus_sha256": "8a919300df3acef9030f48bc665247a19730be88ba0844eb471484b510e107b3"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The sources of guidance (saliency, target features, and scene context features) and their definitions are discussed under the following subsections within \"Modelling Methods\":\n\n1. **Guidance by saliency** - defines how saliency drives attention.\n2. **Guidance by target features** - describes the role of target-specific attributes.\n3. **Guidance by scene context features** - explains features derived from the scene's semantics.\n\nThe combined performance of these models is reported in the subsection **\"Combined source models\"** within the \"Modelling Results\" section. However, attempts to fetch their descriptions and the combined performance specifics were unsuccessful. Let me know if you'd like a retry for content retrieval or tailored queries.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 147,
+          "output_tokens": 46
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2067,
+          "output_tokens": 686
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0024"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0017,0018,0019"
+          },
+          "output_chars": 1116,
+          "output_tokens": 272
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0020"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0016"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        }
+      ],
+      "n_tool_calls": 6,
+      "structure_tokens": 686,
+      "content_tokens": 275,
+      "usage": {
+        "input_tokens": 5414,
+        "output_tokens": 273,
+        "total_tokens": 5687
+      },
+      "est_cost_usd": 0.0163,
+      "latency_seconds": 6.69,
+      "index_id": "IDX-D-paper-book-v1-clean",
+      "qid": "PCS1",
+      "category": "cross-section-synthesis",
+      "question": "The model combines three sources of guidance. Where is each source defined, and which section reports their combined performance?",
+      "expected_evidence": "Guidance by saliency L141; Guidance by target features L153; Guidance by scene context features L177; combined L195; Modelling Results / Table 1 L207+.",
+      "ground_truth": "Saliency (§Guidance by saliency, L141), target features (§Guidance by target features, L153), scene context (§Guidance by scene context features, L177); combined in §Guidance by a combined model of attention (L195), with combined performance in §Modelling Results / Table 1 (L207+).",
+      "corpus_version": "paper-book-v1-clean",
+      "corpus_sha256": "8a919300df3acef9030f48bc665247a19730be88ba0844eb471484b510e107b3"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The sections related to the role of the 'context oracle' and its comparison to any purely computational combined model lack content or are inaccessible from the document. I cannot provide the requested information. Let me know if you'd like to explore other sections or clarify further.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 147,
+          "output_tokens": 46
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2067,
+          "output_tokens": 686
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0023"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0024"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0020"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0019"
+          },
+          "output_chars": 1116,
+          "output_tokens": 272
+        }
+      ],
+      "n_tool_calls": 6,
+      "structure_tokens": 686,
+      "content_tokens": 275,
+      "usage": {
+        "input_tokens": 3852,
+        "output_tokens": 157,
+        "total_tokens": 4009
+      },
+      "est_cost_usd": 0.0112,
+      "latency_seconds": 4.17,
+      "index_id": "IDX-D-paper-book-v1-clean",
+      "qid": "PCS2",
+      "category": "cross-section-synthesis",
+      "question": "What role does the 'context oracle' play across the paper, and does the purely computational combined model ever match it?",
+      "expected_evidence": "Upper-bound rationale L189; construction L193; comparison L286 ('not significant in target-absent, t(405)=−1.233, p=.218'); oracle-substituted 96% L209.",
+      "ground_truth": "DRAFT: The context oracle is an empirical UPPER BOUND on context-only guidance (L189), built from 7 participants' markings (L193). The computational combined model matches it in target-absent scenes - the difference is not significant (t(405)=−1.233, p=.218, L286) - though substituting the oracle for the computational context model still lifts performance to ~96% of human agreement (L209).",
+      "corpus_version": "paper-book-v1-clean",
+      "corpus_sha256": "8a919300df3acef9030f48bc665247a19730be88ba0844eb471484b510e107b3"
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The document does not provide detailed information in the \"Discussion\" or \"Concluding Remarks\" sections regarding the core limitation preventing a model from achieving human-level fixation prediction or the proposed future direction. Let me know if you'd like me to investigate other sections of the document.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 147,
+          "output_tokens": 46
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 2067,
+          "output_tokens": 686
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0025"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0026"
+          },
+          "output_chars": 2,
+          "output_tokens": 1
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 686,
+      "content_tokens": 2,
+      "usage": {
+        "input_tokens": 3545,
+        "output_tokens": 127,
+        "total_tokens": 3672
+      },
+      "est_cost_usd": 0.0101,
+      "latency_seconds": 5.14,
+      "index_id": "IDX-D-paper-book-v1-clean",
+      "qid": "PRD1",
+      "category": "reflective-discovery",
+      "question": "What does the paper identify as the core limitation preventing any model from reaching human-level fixation prediction, and what future direction does it propose?",
+      "expected_evidence": "Abstract L46; Discussion L294 ('map selectivity... region size of roughly 40%... tightly clustered'); Concluding Remarks L320.",
+      "ground_truth": "The core limitation is selectivity/precision: human fixations cluster tightly in small regions while models select much broader regions - all models' accuracy falls off sharply as the selected region shrinks (a ~40% region is needed for the combined model to match human detection rate; L294). Proposed direction: future models that capture the mechanisms underlying the tight clustering of human search fixations (L320).",
+      "corpus_version": "paper-book-v1-clean",
+      "corpus_sha256": "8a919300df3acef9030f48bc665247a19730be88ba0844eb471484b510e107b3"
+    }
+  ]
+}

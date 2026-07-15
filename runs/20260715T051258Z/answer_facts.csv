@@ -1,0 +1,49 @@
+qid,index,fact_score,hits,total,missing,fuzzy
+RA1,IDX-D-rfc9110,1.0,2,2,,
+RA2,IDX-D-rfc9110,1.0,3,3,,the definition of idempotent
+RB1,IDX-D-rfc9110,1.0,5,5,,correct evaluation ORDER of the 5 fields
+RB2,IDX-D-rfc9110,1.0,3,3,,that the intersection (both) is exactly GET+HEAD
+RB3,IDX-D-rfc9110,1.0,4,4,,if-range match->206 vs no-match->200 logic
+RC1,IDX-D-rfc9110,0.5,1,2,disregard,
+RD1,IDX-D-rfc9110,,0,0,no-facts-encoded,
+RE1,IDX-D-rfc9110,1.0,3,3,,
+RA3,IDX-D-rfc9110,1.0,3,3,,
+RA4,IDX-D-rfc9110,1.0,2,2,,
+RB4,IDX-D-rfc9110,1.0,3,3,,
+RB5,IDX-D-rfc9110,1.0,3,3,,
+RB6,IDX-D-rfc9110,1.0,4,4,,302/303 method-change contrast
+RC2,IDX-D-rfc9110,0.75,3,4,method+status,
+RC3,IDX-D-rfc9110,1.0,3,3,,
+RC4,IDX-D-rfc9110,1.0,4,4,,
+RC5,IDX-D-rfc9110,1.0,3,3,,
+RD2,IDX-D-rfc9110,1.0,5,5,,
+RD3,IDX-D-rfc9110,1.0,3,3,,
+RD4,IDX-D-rfc9110,1.0,7,7,,exactly these 7 (no over/under-enumeration)
+RD5,IDX-D-rfc9110,1.0,5,5,,
+RE2,IDX-D-rfc9110,1.0,2,2,,
+RE3,IDX-D-rfc9110,1.0,2,2,,
+RE4,IDX-D-rfc9110,0.5,1,2,absent,
+RA1,IDX-C0-rfc9110,1.0,2,2,,
+RA2,IDX-C0-rfc9110,1.0,3,3,,the definition of idempotent
+RB1,IDX-C0-rfc9110,1.0,5,5,,correct evaluation ORDER of the 5 fields
+RB2,IDX-C0-rfc9110,1.0,3,3,,that the intersection (both) is exactly GET+HEAD
+RB3,IDX-C0-rfc9110,1.0,4,4,,if-range match->206 vs no-match->200 logic
+RC1,IDX-C0-rfc9110,1.0,2,2,,
+RD1,IDX-C0-rfc9110,,0,0,no-facts-encoded,
+RE1,IDX-C0-rfc9110,1.0,3,3,,
+RA3,IDX-C0-rfc9110,1.0,3,3,,
+RA4,IDX-C0-rfc9110,1.0,2,2,,
+RB4,IDX-C0-rfc9110,1.0,3,3,,
+RB5,IDX-C0-rfc9110,1.0,3,3,,
+RB6,IDX-C0-rfc9110,1.0,4,4,,302/303 method-change contrast
+RC2,IDX-C0-rfc9110,0.5,2,4,301;method+status,
+RC3,IDX-C0-rfc9110,1.0,3,3,,
+RC4,IDX-C0-rfc9110,1.0,4,4,,
+RC5,IDX-C0-rfc9110,1.0,3,3,,
+RD2,IDX-C0-rfc9110,0.8,4,5,Vary,
+RD3,IDX-C0-rfc9110,1.0,3,3,,
+RD4,IDX-C0-rfc9110,1.0,7,7,,exactly these 7 (no over/under-enumeration)
+RD5,IDX-C0-rfc9110,1.0,5,5,,
+RE2,IDX-C0-rfc9110,0.5,1,2,absent from 9110,
+RE3,IDX-C0-rfc9110,1.0,2,2,,
+RE4,IDX-C0-rfc9110,1.0,2,2,,

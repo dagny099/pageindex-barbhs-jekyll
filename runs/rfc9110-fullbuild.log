@@ -1,0 +1,2578 @@
+run_id: 20260715T022226Z
+source: sources/rfc9110/rfc9110.pdf  (111,550 tokens)
+model:  gpt-4o-2024-11-20   summaries: yes   doc-description: no
+estimate (2-4x rule of thumb): 223,100-446,200 input / 22,310-89,240 output tokens
+estimated cost: $0.78 - $2.01
+abort bound: $15.00  (bounds NEW spend this run; replayed calls are free)
+cache:  /Users/bhs/PROJECTS/pageindex-website-experiment/runs/llm-cache/rfc9110  (replay+record; 276 recorded responses)
+Proceed with the paid build? [y/N] [92m21:24:32 - LiteLLM:ERROR[0m: logging_worker.py:103 - LoggingWorker error: 
+Traceback (most recent call last):
+  File "/Users/bhs/.pyenv/versions/3.12.2/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/bhs/PROJECTS/pageindex-website-experiment/.venv/lib/python3.12/site-packages/litellm/litellm_core_utils/logging_worker.py", line 98, in _process_log_task
+    await asyncio.wait_for(
+  File "/Users/bhs/.pyenv/versions/3.12.2/lib/python3.12/asyncio/tasks.py", line 519, in wait_for
+    async with timeouts.timeout(timeout):
+  File "/Users/bhs/.pyenv/versions/3.12.2/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 366. Please try again in 27ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 464. Please try again in 34ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 464. Please try again in 34ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 511. Please try again in 38ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 645. Please try again in 48ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 603. Please try again in 45ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 645. Please try again in 48ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 645. Please try again in 48ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 732. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 732. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 732. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 827. Please try again in 62ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 603. Please try again in 45ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 723. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 668. Please try again in 50ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 697. Please try again in 52ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 723. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 803. Please try again in 60ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 645. Please try again in 48ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 697. Please try again in 52ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 776. Please try again in 58ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 732. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 69. Please try again in 5ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 668. Please try again in 50ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 752. Please try again in 56ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 668. Please try again in 50ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 872. Please try again in 65ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 872. Please try again in 65ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+Parsing PDF...
+start find_toc_pages
+toc found
+start detect_page_index
+index found
+process_toc_with_page_numbers
+start_index: 1
+start toc_transformer
+start toc_index_extractor
+start verify_toc
+process_toc_no_page_numbers
+start_index: 1
+start toc_transformer
+divide page_list to groups 7
+Document validation: 194 pages, max allowed index: 194
+start verify_toc
+check all items
+accuracy: 94.92%
+start fix_incorrect_toc
+Fixing 3 incorrect results
+start fix_incorrect_toc with 3 incorrect results
+Fixing 1 incorrect results
+start fix_incorrect_toc with 1 incorrect results
+Fixing 1 incorrect results
+start fix_incorrect_toc with 1 incorrect results
+large node: Conditional Requests start_index: 106 end_index: 155 token_num: 31198
+process_no_toc
+start_index: 106
+divide page_list to groups 2
+start generate_toc_init
+start generate_toc_continue
+Document validation: 50 pages, max allowed index: 155
+start verify_toc
+check all items
+large node: 17.10. Application Handling of Field Names start_index: 156 end_index: 194 token_num: 22928
+process_no_toc
+start_index: 156
+divide page_list to groups 2
+start generate_toc_init
+start generate_toc_continue
+Document validation: 39 pages, max allowed index: 194
+start verify_toc
+check all items
+large node: IP-ID Reference Identity start_index: 30 end_index: 184 token_num: 95312
+process_no_toc
+start_index: 30
+divide page_list to groups 6
+start generate_toc_init
+start generate_toc_continue
+start generate_toc_continue
+start generate_toc_continue
+start generate_toc_continue
+start generate_toc_continue
+Document validation: 155 pages, max allowed index: 184
+start verify_toc
+check all items
+accuracy: 97.44%
+start fix_incorrect_toc
+Fixing 1 incorrect results
+start fix_incorrect_toc with 1 incorrect results
+Fixing 1 incorrect results
+start fix_incorrect_toc with 1 incorrect results
+Fixing 1 incorrect results
+start fix_incorrect_toc with 1 incorrect results
+accuracy: 96.23%
+start fix_incorrect_toc
+Fixing 4 incorrect results
+start fix_incorrect_toc with 4 incorrect results
+Fixing 2 incorrect results
+start fix_incorrect_toc with 2 incorrect results
+Fixing 2 incorrect results
+start fix_incorrect_toc with 2 incorrect results
+accuracy: 87.04%
+start fix_incorrect_toc
+Fixing 35 incorrect results
+start fix_incorrect_toc with 35 incorrect results
+Fixing 6 incorrect results
+start fix_incorrect_toc with 6 incorrect results
+Fixing 5 incorrect results
+start fix_incorrect_toc with 5 incorrect results
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 776. Please try again in 58ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 872. Please try again in 65ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 854. Please try again in 64ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 843. Please try again in 63ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 883. Please try again in 66ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 464. Please try again in 34ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 730. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 511. Please try again in 38ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 752. Please try again in 56ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 668. Please try again in 50ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 846. Please try again in 63ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 752. Please try again in 56ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 730. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 730. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 730. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 730. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 952. Please try again in 71ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 883. Please try again in 66ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 897. Please try again in 67ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1504. Please try again in 112ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 883. Please try again in 66ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1419. Please try again in 106ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1325. Please try again in 99ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 854. Please try again in 64ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 906. Please try again in 67ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1379. Please try again in 103ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1767. Please try again in 132ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 910. Please try again in 68ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1674. Please try again in 125ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1430. Please try again in 107ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 603. Please try again in 45ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 730. Please try again in 54ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1455. Please try again in 109ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1439. Please try again in 107ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 926. Please try again in 69ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1358. Please try again in 101ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 926. Please try again in 69ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1430. Please try again in 107ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1696. Please try again in 127ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1389. Please try again in 104ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1740. Please try again in 130ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1482. Please try again in 111ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1620. Please try again in 121ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 854. Please try again in 64ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1331. Please try again in 99ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1774. Please try again in 133ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1461. Please try again in 109ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1700. Please try again in 127ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1486. Please try again in 111ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 2507. Please try again in 188ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 3894. Please try again in 292ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 4605. Please try again in 345ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 366. Please try again in 27ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 827. Please try again in 62ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 843. Please try again in 63ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1419. Please try again in 106ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1379. Please try again in 103ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1620. Please try again in 121ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1774. Please try again in 133ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 366. Please try again in 27ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 2507. Please try again in 188ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 843. Please try again in 63ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 3894. Please try again in 292ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 4605. Please try again in 345ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1620. Please try again in 121ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 366. Please try again in 27ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1774. Please try again in 133ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 3894. Please try again in 292ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 4605. Please try again in 345ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 366. Please try again in 27ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1774. Please try again in 133ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 366. Please try again in 27ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 3894. Please try again in 292ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1774. Please try again in 133ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 4605. Please try again in 345ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 366. Please try again in 27ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1774. Please try again in 133ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 3894. Please try again in 292ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 4605. Please try again in 345ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 366. Please try again in 27ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1774. Please try again in 133ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 366. Please try again in 27ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 3894. Please try again in 292ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 4605. Please try again in 345ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1774. Please try again in 133ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 366. Please try again in 27ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Max retries reached for prompt: You are given a part of a document, your task is to generate a description of the partial document about what are main points covered in the partial document.
+
+    Partial Document Text: transparent proxy
+tunnel
+unsatisﬁable range
+Upgrade header ﬁeld
+upstream
+URI
+origin
+URI reference
+URI scheme
+http
+https
+user agent
+User-Agent header ﬁeld
+validator
+strong
+weak
+Vary header ﬁeld
+Via header ﬁeld
+WWW-Authenticate header ﬁeld
+x-compress (content coding)
+x-gzip (content coding)Section 3.7, Paragraph 10
+Section 3.7, Paragraph 8
+Section 14.1.1
+Section 7.8
+Section 3.7, Paragraph 4
+Section 4
+Section 4.3.1
+Section 4.1
+ 
+Section 4.2.1
+Section 4.2.2
+Section 3.5
+Section 10.1.5
+Section 8.8
+Section 8.8.1
+Section 8.8.1
+Section 12.5.5
+Section 7.6.3
+Section 11.6.1
+Section 8.4.1
+Section 8.4.1U
+V
+W
+X
+Authors' Addresses 
+Roy T. Fielding ( )editor
+Adobe
+345 Park Ave
+San Jose, CA 95110
+United States of America
+ ﬁelding@gbiv.com  Email:
+ https://roy.gbiv.com/  URI:RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 193Mark Nottingham ( )editor
+Fastly
+Prahran
+Australia
+ mnot@mnot.net  Email:
+ https://www.mnot.net/  URI:
+Julian Reschke ( )editor
+greenbytes GmbH
+Hafenweg 16
+48155 Münster
+Germany
+ julian.reschke@greenbytes.de  Email:
+ https://greenbytes.de/tech/webdav/  URI:RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 194
+    
+    Directly return the description, do not include any other text.
+    
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 3894. Please try again in 292ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 4605. Please try again in 345ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1774. Please try again in 133ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 3894. Please try again in 292ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 1774. Please try again in 133ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Max retries reached for prompt: You are given a part of a document, your task is to generate a description of the partial document about what are main points covered in the partial document.
+
+    Partial Document Text: [CACHING]19. References 
+19.1. Normative References 
+, , and , , , 
+, , June 2022, 
+. Range Unit
+NameDescription Section
+bytes a range of octets 14.1.2  
+none reserved as keyword to indicate range requests are not
+supported14.3 
+Table 11
+18.8. Media Type Registration 
+IANA has updated the "Media Types" registry at 
+with the registration information in Section 14.6  for the media type "multipart/byteranges".
+IANA has updated the registry note about "q" parameters with a link to Section 12.5.1  of this
+document.<https://www.iana.org/assignments/media-types >
+18.9. Port Registration 
+IANA has updated the "Service Name and Transport Protocol Port Number Registry" at 
+ for the services on ports 80 and 443
+that use UDP or TCP to:
+use this document as "Reference", and 
+when currently unspeciﬁed, set "Assignee" to "IESG" and "Contact" to "IETF_Chair". <https://
+www.iana.org/assignments/service-names-port-numbers/ >
+1. 
+2. 18.10. Upgrade Token Registration 
+IANA has updated the "Hypertext Transfer Protocol (HTTP) Upgrade Token Registry" at 
+ with the registration procedure described in 
+Section 16.7  and the upgrade token names summarized in the following table.
+Name Description Expected Version Tokens Section
+HTTP Hypertext Transfer Protocol any DIGIT.DIGIT (e.g., "2.0") 2.5 
+Table 12<https://
+www.iana.org/assignments/http-upgrade-tokens >
+Fielding, R., Ed. Nottingham, M., Ed. J. Reschke, Ed. "HTTP Caching" STD 98
+RFC 9111 DOI 10.17487/RFC9111 < https://www.rfc-editor.org/info/
+rfc9111 >RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 167[RFC1950]
+[RFC1951]
+[RFC1952]
+[RFC2046]
+[RFC2119]
+[RFC4647]
+[RFC4648]
+[RFC5234]
+[RFC5280]
+[RFC5322]
+[RFC5646]
+[RFC6125]
+[RFC6365] and , 
+, , , May 1996, 
+. 
+, , 
+, , May 1996, . 
+, , , 
+, May 1996, . 
+ and , 
+, , , November 1996, 
+. 
+, , , 
+, , March 1997, 
+. 
+ and , , , , 
+, September 2006, .
+, , , 
+, October 2006, . 
+ and , , 
+, , , January 2008, 
+. 
+, , , , , and , 
+, , , May 2008, 
+. 
+, , , , 
+October 2008, . 
+ and , , , 
+, , September 2009, 
+. 
+ and , 
+, 
+, , March 2011, 
+. 
+ and , 
+, , , , September 2011, 
+. Deutsch, P . J-L. Gailly "ZLIB Compressed Data Format Speciﬁcation version
+3.3" RFC 1950 DOI 10.17487/RFC1950 < https://www.rfc-editor.org/info/
+rfc1950 >
+Deutsch, P . "DEFLATE Compressed Data Format Speciﬁcation version 1.3" RFC
+1951 DOI 10.17487/RFC1951 < https://www.rfc-editor.org/info/rfc1951 >
+Deutsch, P . "GZIP ﬁle format speciﬁcation version 4.3" RFC 1952 DOI 10.17487/
+RFC1952 < https://www.rfc-editor.org/info/rfc1952 >
+Freed, N. N. Borenstein "Multipurpose Internet Mail Extensions (MIME) Part
+Two: Media Types" RFC 2046 DOI 10.17487/RFC2046 < https://
+www.rfc-editor.org/info/rfc2046 >
+Bradner, S. "Key words for use in RFCs to Indicate Requirement Levels" BCP 14
+RFC 2119 DOI 10.17487/RFC2119 < https://www.rfc-editor.org/info/
+rfc2119 >
+Phillips, A., Ed. M. Davis, Ed. "Matching of Language Tags" BCP 47 RFC 4647
+DOI 10.17487/RFC4647 < https://www.rfc-editor.org/info/rfc4647 >
+Josefsson, S. "The Base16, Base32, and Base64 Data Encodings" RFC 4648 DOI
+10.17487/RFC4648 < https://www.rfc-editor.org/info/rfc4648 >
+Crocker, D., Ed. P . Overell "Augmented BNF for Syntax Speciﬁcations: ABNF"
+STD 68 RFC 5234 DOI 10.17487/RFC5234 < https://www.rfc-
+editor.org/info/rfc5234 >
+Cooper, D. Santesson, S. Farrell, S. Boeyen, S. Housley, R. W. Polk "Internet
+X.509 Public Key Infrastructure Certiﬁcate and Certiﬁcate Revocation List (CRL)
+Proﬁle" RFC 5280 DOI 10.17487/RFC5280 < https://www.rfc-editor.org/
+info/rfc5280 >
+Resnick, P ., Ed. "Internet Message Format" RFC 5322 DOI 10.17487/RFC5322
+<https://www.rfc-editor.org/info/rfc5322 >
+Phillips, A., Ed. M. Davis, Ed. "Tags for Identifying Languages" BCP 47 RFC
+5646 DOI 10.17487/RFC5646 < https://www.rfc-editor.org/info/
+rfc5646 >
+Saint-Andre, P . J. Hodges "Representation and Veriﬁcation of Domain-Based
+Application Service Identity within Internet Public Key Infrastructure Using X.
+509 (PKIX) Certiﬁcates in the Context of Transport Layer Security (TLS)" RFC
+6125 DOI 10.17487/RFC6125 < https://www.rfc-editor.org/info/
+rfc6125 >
+Hoﬀman, P . J. Klensin "Terminology Used in Internationalization in the
+IETF" BCP 166 RFC 6365 DOI 10.17487/RFC6365 < https://
+www.rfc-editor.org/info/rfc6365 >RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 168[RFC7405]
+[RFC8174]
+[TCP]
+[TLS13]
+[URI]
+[USASCII]
+[Welch]
+[ALTSVC]
+[BCP13]
+[BCP178]
+[BCP35]
+[BREACH], , , 
+, December 2014, . 
+, , , 
+, , May 2017, 
+. 
+, , , , , 
+September 1981, . 
+, , , 
+, August 2018, . 
+, , and , 
+, , , , January 2005, 
+. 
+, 
+, , 1986. 
+, , 
+, , June 1984, 
+. 
+19.2. Informative References 
+, , and , , 
+, , April 2016, . 
+ 
+ 
+ 
+, , and , , July
+2013, 
+. Kyzivat, P . "Case-Sensitive String Support in ABNF" RFC 7405 DOI 10.17487/
+RFC7405 < https://www.rfc-editor.org/info/rfc7405 >
+Leiba, B. "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words" BCP 14
+RFC 8174 DOI 10.17487/RFC8174 < https://www.rfc-editor.org/info/
+rfc8174 >
+Postel, J. "Transmission Control Protocol" STD 7 RFC 793 DOI 10.17487/RFC0793
+<https://www.rfc-editor.org/info/rfc793 >
+Rescorla, E. "The Transport Layer Security (TLS) Protocol Version 1.3" RFC 8446
+DOI 10.17487/RFC8446 < https://www.rfc-editor.org/info/rfc8446 >
+Berners-Lee, T. Fielding, R. L. Masinter "Uniform Resource Identiﬁer (URI):
+Generic Syntax" STD 66 RFC 3986 DOI 10.17487/RFC3986 < https://
+www.rfc-editor.org/info/rfc3986 >
+American National Standards Institute "Coded Character Set -- 7-bit American
+Standard Code for Information Interchange" ANSI X3.4
+Welch, T. "A Technique for High-Performance Data Compression" IEEE Computer
+17(6) DOI 10.1109/MC.1984.1659158 < https://ieeexplore.ieee.org/
+document/1659158/ >
+Nottingham, M. McManus, P . J. Reschke "HTTP Alternative Services" RFC
+7838 DOI 10.17487/RFC7838 < https://www.rfc-editor.org/info/rfc7838 >
+ and , 
+, , , December 2005. Freed, N. J. Klensin "Multipurpose Internet Mail Extensions (MIME) Part
+Four: Registration Procedures" BCP 13 RFC 4289
+, , and , 
+, , , January 2013. Freed, N. Klensin, J. T. Hansen "Media Type Speciﬁcations and Registration
+Procedures" BCP 13 RFC 6838
+<https://www.rfc-editor.org/info/bcp13 >
+, , and , 
+, , , June 2012. Saint-Andre, P . Crocker, D. M. Nottingham "Deprecating the "X-" Preﬁx and
+Similar Constructs in Application Protocols" BCP 178 RFC 6648
+<https://www.rfc-editor.org/info/bcp178 >
+, , and , 
+, , , June 2015. Thaler, D., Ed. Hansen, T. T. Hardie "Guidelines and Registration Procedures
+for URI Schemes" BCP 35 RFC 7595
+<https://www.rfc-editor.org/info/bcp35 >
+Gluck, Y. Harris, N. A. Prado "BREACH: Reviving the CRIME Attack"
+<http://breachattack.com/resources/BREACH%20-%20SSL,
+%20gone%20in%2030%20seconds.pdf >RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 169
+    
+    Directly return the description, do not include any other text.
+    
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 4605. Please try again in 345ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 3894. Please try again in 292ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 4605. Please try again in 345ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 3894. Please try again in 292ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Max retries reached for prompt: You are given a part of a document, your task is to generate a description of the partial document about what are main points covered in the partial document.
+
+    Partial Document Text: [RFC7405]
+[RFC8174]
+[TCP]
+[TLS13]
+[URI]
+[USASCII]
+[Welch]
+[ALTSVC]
+[BCP13]
+[BCP178]
+[BCP35]
+[BREACH], , , 
+, December 2014, . 
+, , , 
+, , May 2017, 
+. 
+, , , , , 
+September 1981, . 
+, , , 
+, August 2018, . 
+, , and , 
+, , , , January 2005, 
+. 
+, 
+, , 1986. 
+, , 
+, , June 1984, 
+. 
+19.2. Informative References 
+, , and , , 
+, , April 2016, . 
+ 
+ 
+ 
+, , and , , July
+2013, 
+. Kyzivat, P . "Case-Sensitive String Support in ABNF" RFC 7405 DOI 10.17487/
+RFC7405 < https://www.rfc-editor.org/info/rfc7405 >
+Leiba, B. "Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words" BCP 14
+RFC 8174 DOI 10.17487/RFC8174 < https://www.rfc-editor.org/info/
+rfc8174 >
+Postel, J. "Transmission Control Protocol" STD 7 RFC 793 DOI 10.17487/RFC0793
+<https://www.rfc-editor.org/info/rfc793 >
+Rescorla, E. "The Transport Layer Security (TLS) Protocol Version 1.3" RFC 8446
+DOI 10.17487/RFC8446 < https://www.rfc-editor.org/info/rfc8446 >
+Berners-Lee, T. Fielding, R. L. Masinter "Uniform Resource Identiﬁer (URI):
+Generic Syntax" STD 66 RFC 3986 DOI 10.17487/RFC3986 < https://
+www.rfc-editor.org/info/rfc3986 >
+American National Standards Institute "Coded Character Set -- 7-bit American
+Standard Code for Information Interchange" ANSI X3.4
+Welch, T. "A Technique for High-Performance Data Compression" IEEE Computer
+17(6) DOI 10.1109/MC.1984.1659158 < https://ieeexplore.ieee.org/
+document/1659158/ >
+Nottingham, M. McManus, P . J. Reschke "HTTP Alternative Services" RFC
+7838 DOI 10.17487/RFC7838 < https://www.rfc-editor.org/info/rfc7838 >
+ and , 
+, , , December 2005. Freed, N. J. Klensin "Multipurpose Internet Mail Extensions (MIME) Part
+Four: Registration Procedures" BCP 13 RFC 4289
+, , and , 
+, , , January 2013. Freed, N. Klensin, J. T. Hansen "Media Type Speciﬁcations and Registration
+Procedures" BCP 13 RFC 6838
+<https://www.rfc-editor.org/info/bcp13 >
+, , and , 
+, , , June 2012. Saint-Andre, P . Crocker, D. M. Nottingham "Deprecating the "X-" Preﬁx and
+Similar Constructs in Application Protocols" BCP 178 RFC 6648
+<https://www.rfc-editor.org/info/bcp178 >
+, , and , 
+, , , June 2015. Thaler, D., Ed. Hansen, T. T. Hardie "Guidelines and Registration Procedures
+for URI Schemes" BCP 35 RFC 7595
+<https://www.rfc-editor.org/info/bcp35 >
+Gluck, Y. Harris, N. A. Prado "BREACH: Reviving the CRIME Attack"
+<http://breachattack.com/resources/BREACH%20-%20SSL,
+%20gone%20in%2030%20seconds.pdf >RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 169[Bujlow]
+[COOKIE]
+[Err1912]
+[Err5433]
+[Georgiev]
+[HPACK]
+[HTTP/1.0]
+[HTTP/1.1]
+[HTTP/2]
+[HTTP/3]
+[ISO-8859-1]
+[Kri2001]
+[OWASP]
+[REST]
+[RFC1919], , , and , 
+, 
+, , August 2017, 
+. 
+, , , 
+, April 2011, . 
+, , , 
+. 
+, , , 
+. 
+, , , , , and , 
+, 
+, , 
+October 2012, . 
+ and , , , 
+, May 2015, . 
+, , and , 
+, , , May 1996, 
+. 
+, , and , , , 
+, , June 2022, . 
+ and , , , , 
+June 2022, . 
+, , , , June 2022, 
+. 
+, 
+, 
+, 1998. 
+, , 
+, November 2001, . 
+, . 
+, 
+, , September
+2000, . 
+, , , 
+, March 1996, . Bujlow, T. Carela-Español, V. Solé-Pareta, J. P . Barlet-Ros "A Survey on Web
+Tracking: Mechanisms, Implications, and Defenses" In Proceedings of the IEEE
+105(8) DOI 10.1109/JPROC.2016.2637878 < https://doi.org/10.1109/
+JPROC.2016.2637878 >
+Barth, A. "HTTP State Management Mechanism" RFC 6265 DOI 10.17487/
+RFC6265 < https://www.rfc-editor.org/info/rfc6265 >
+RFC Errata Erratum ID 1912 RFC 2978 < https://www.rfc-editor.org/errata/
+eid1912 >
+RFC Errata Erratum ID 5433 RFC 2978 < https://www.rfc-editor.org/errata/
+eid5433 >
+Georgiev, M. Iyengar, S. Jana, S. Anubhai, R. Boneh, D. V. Shmatikov "The
+Most Dangerous Code in the World: Validating SSL Certiﬁcates in Non-Browser
+Software" In Proceedings of the 2012 ACM Conference on Computer and
+Communications Security (CCS '12), pp. 38-49 DOI 10.1145/2382196.2382204
+<https://doi.org/10.1145/2382196.2382204 >
+Peon, R. H. Ruellan "HPACK: Header Compression for HTTP/2" RFC 7541 DOI
+10.17487/RFC7541 < https://www.rfc-editor.org/info/rfc7541 >
+Berners-Lee, T. Fielding, R. H. Frystyk "Hypertext Transfer Protocol -- HTTP/
+1.0" RFC 1945 DOI 10.17487/RFC1945 < https://www.rfc-editor.org/info/
+rfc1945 >
+Fielding, R., Ed. Nottingham, M., Ed. J. Reschke, Ed. "HTTP/1.1" STD 99 RFC
+9112 DOI 10.17487/RFC9112 < https://www.rfc-editor.org/info/rfc9112 >
+Thomson, M., Ed. C. Benﬁeld, Ed. "HTTP/2" RFC 9113 DOI 10.17487/RFC9113
+<https://www.rfc-editor.org/info/rfc9113 >
+Bishop, M., Ed. "HTTP/3" RFC 9114 DOI 10.17487/RFC9114 < https://
+www.rfc-editor.org/info/rfc9114 >
+International Organization for Standardization "Information technology -- 8-bit
+single-byte coded graphic character sets -- Part 1: Latin alphabet No. 1" ISO/IEC
+8859-1:1998
+Kristol, D. "HTTP Cookies: Standards, Privacy, and Politics" ACM Transactions on
+Internet Technology 1(2) < http://arxiv.org/abs/cs.SE/0105018 >
+The Open Web Application Security Project < https://www.owasp.org/ >
+Fielding, R.T. "Architectural Styles and the Design of Network-based Software
+Architectures" Doctoral Dissertation, University of California, Irvine
+<https://roy.gbiv.com/pubs/dissertation/top.htm >
+Chatel, M. "Classical versus Transparent IP Proxies" RFC 1919 DOI 10.17487/
+RFC1919 < https://www.rfc-editor.org/info/rfc1919 >RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 170[RFC2047]
+[RFC2068]
+[RFC2145]
+[RFC2295]
+[RFC2324]
+[RFC2557]
+[RFC2616]
+[RFC2617]
+[RFC2774]
+[RFC2818]
+[RFC2978]
+[RFC3040]
+[RFC3864]
+[RFC3875], 
+, , , 
+November 1996, . 
+, , , , and , 
+, , , January 1997, 
+. 
+, , , and , 
+, , , May 1997, 
+. 
+ and , , , 
+, March 1998, . 
+, , , 
+, 1 April 1998, . 
+, , and , 
+, , , March
+1999, . 
+, , , , , , and 
+, , , , 
+June 1999, . 
+, , , , , , and
+, , 
+, , June 1999, . 
+, , and , , 
+, , February 2000, 
+. 
+, , , , May 2000, 
+. 
+ and , , , , 
+, October 2000, . 
+, , and , 
+, , , January 2001, 
+. 
+, , and , 
+, , , , September 2004, 
+. 
+ and , , 
+, , October 2004, 
+. Moore, K. "MIME (Multipurpose Internet Mail Extensions) Part Three: Message
+Header Extensions for Non-ASCII Text" RFC 2047 DOI 10.17487/RFC2047
+<https://www.rfc-editor.org/info/rfc2047 >
+Fielding, R. Gettys, J. Mogul, J. Frystyk, H. T. Berners-Lee "Hypertext
+Transfer Protocol -- HTTP/1.1" RFC 2068 DOI 10.17487/RFC2068
+<https://www.rfc-editor.org/info/rfc2068 >
+Mogul, J. C. Fielding, R. Gettys, J. H. Frystyk "Use and Interpretation of
+HTTP Version Numbers" RFC 2145 DOI 10.17487/RFC2145 < https://
+www.rfc-editor.org/info/rfc2145 >
+Holtman, K. A. Mutz "Transparent Content Negotiation in HTTP" RFC 2295
+DOI 10.17487/RFC2295 < https://www.rfc-editor.org/info/rfc2295 >
+Masinter, L. "Hyper Text Coﬀee Pot Control Protocol (HTCPCP/1.0)" RFC 2324
+DOI 10.17487/RFC2324 < https://www.rfc-editor.org/info/rfc2324 >
+Palme, J. Hopmann, A. N. Shelness "MIME Encapsulation of Aggregate
+Documents, such as HTML (MHTML)" RFC 2557 DOI 10.17487/RFC2557
+<https://www.rfc-editor.org/info/rfc2557 >
+Fielding, R. Gettys, J. Mogul, J. Frystyk, H. Masinter, L. Leach, P . T. Berners-
+Lee "Hypertext Transfer Protocol -- HTTP/1.1" RFC 2616 DOI 10.17487/RFC2616
+<https://www.rfc-editor.org/info/rfc2616 >
+Franks, J. Hallam-Baker, P . Hostetler, J. Lawrence, S. Leach, P . Luotonen, A.
+L. Stewart "HTTP Authentication: Basic and Digest Access Authentication" RFC
+2617 DOI 10.17487/RFC2617 < https://www.rfc-editor.org/info/rfc2617 >
+Nielsen, H. Leach, P . S. Lawrence "An HTTP Extension Framework" RFC
+2774 DOI 10.17487/RFC2774 < https://www.rfc-editor.org/info/
+rfc2774 >
+Rescorla, E. "HTTP Over TLS" RFC 2818 DOI 10.17487/RFC2818 < https://
+www.rfc-editor.org/info/rfc2818 >
+Freed, N. J. Postel "IANA Charset Registration Procedures" BCP 19 RFC 2978
+DOI 10.17487/RFC2978 < https://www.rfc-editor.org/info/rfc2978 >
+Cooper, I. Melve, I. G. Tomlinson "Internet Web Replication and Caching
+Taxonomy" RFC 3040 DOI 10.17487/RFC3040 < https://www.rfc-
+editor.org/info/rfc3040 >
+Klyne, G. Nottingham, M. J. Mogul "Registration Procedures for Message
+Header Fields" BCP 90 RFC 3864 DOI 10.17487/RFC3864 < https://
+www.rfc-editor.org/info/rfc3864 >
+Robinson, D. K. Coar "The Common Gateway Interface (CGI) Version 1.1"
+RFC 3875 DOI 10.17487/RFC3875 < https://www.rfc-editor.org/info/
+rfc3875 >RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 171[RFC4033]
+[RFC4559]
+[RFC5789]
+[RFC5905]
+[RFC6454]
+[RFC6585]
+[RFC7230]
+[RFC7231]
+[RFC7232]
+[RFC7233]
+[RFC7234]
+[RFC7235]
+[RFC7538], , , , and , 
+, , , March 2005, 
+. 
+, , and , 
+, , , June
+2006, . 
+ and , , , 
+, March 2010, . 
+, , , and , 
+, , 
+, June 2010, . 
+, , , , December
+2011, . 
+ and , , , 
+, April 2012, . 
+ and , 
+, , , June 2014, 
+. 
+ and , 
+, , , June 2014, 
+. 
+ and , 
+, , , June 2014, 
+. 
+, , and , 
+, , , June 2014, 
+. 
+, , and , 
+, , , June 2014, 
+. 
+ and , 
+, , , June 2014, 
+. 
+, 
+, , , April 2015, 
+. Arends, R. Austein, R. Larson, M. Massey, D. S. Rose "DNS Security
+Introduction and Requirements" RFC 4033 DOI 10.17487/RFC4033
+<https://www.rfc-editor.org/info/rfc4033 >
+Jaganathan, K. Zhu, L. J. Brezak "SPNEGO-based Kerberos and NTLM HTTP
+Authentication in Microsoft Windows" RFC 4559 DOI 10.17487/RFC4559
+<https://www.rfc-editor.org/info/rfc4559 >
+Dusseault, L. J. Snell "PATCH Method for HTTP" RFC 5789 DOI 10.17487/
+RFC5789 < https://www.rfc-editor.org/info/rfc5789 >
+Mills, D. Martin, J., Ed. Burbank, J. W. Kasch "Network Time Protocol
+Version 4: Protocol and Algorithms Speciﬁcation" RFC 5905 DOI 10.17487/
+RFC5905 < https://www.rfc-editor.org/info/rfc5905 >
+Barth, A. "The Web Origin Concept" RFC 6454 DOI 10.17487/RFC6454
+<https://www.rfc-editor.org/info/rfc6454 >
+Nottingham, M. R. Fielding "Additional HTTP Status Codes" RFC 6585 DOI
+10.17487/RFC6585 < https://www.rfc-editor.org/info/rfc6585 >
+Fielding, R., Ed. J. Reschke, Ed. "Hypertext Transfer Protocol (HTTP/1.1):
+Message Syntax and Routing" RFC 7230 DOI 10.17487/RFC7230
+<https://www.rfc-editor.org/info/rfc7230 >
+Fielding, R., Ed. J. Reschke, Ed. "Hypertext Transfer Protocol (HTTP/1.1):
+Semantics and Content" RFC 7231 DOI 10.17487/RFC7231 < https://
+www.rfc-editor.org/info/rfc7231 >
+Fielding, R., Ed. J. Reschke, Ed. "Hypertext Transfer Protocol (HTTP/1.1):
+Conditional Requests" RFC 7232 DOI 10.17487/RFC7232 < https://
+www.rfc-editor.org/info/rfc7232 >
+Fielding, R., Ed. Lafon, Y., Ed. J. Reschke, Ed. "Hypertext Transfer Protocol
+(HTTP/1.1): Range Requests" RFC 7233 DOI 10.17487/RFC7233 < https://
+www.rfc-editor.org/info/rfc7233 >
+Fielding, R., Ed. Nottingham, M., Ed. J. Reschke, Ed. "Hypertext Transfer
+Protocol (HTTP/1.1): Caching" RFC 7234 DOI 10.17487/RFC7234
+<https://www.rfc-editor.org/info/rfc7234 >
+Fielding, R., Ed. J. Reschke, Ed. "Hypertext Transfer Protocol (HTTP/1.1):
+Authentication" RFC 7235 DOI 10.17487/RFC7235 < https://www.rfc-
+editor.org/info/rfc7235 >
+Reschke, J. "The Hypertext Transfer Protocol Status Code 308 (Permanent
+Redirect)" RFC 7538 DOI 10.17487/RFC7538 < https://www.rfc-
+editor.org/info/rfc7538 >RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 172[RFC7540]
+[RFC7578]
+[RFC7615]
+[RFC7616]
+[RFC7617]
+[RFC7694]
+[RFC8126]
+[RFC8187]
+[RFC8246]
+[RFC8288]
+[RFC8336]
+[RFC8615]
+[RFC8941]
+[Sniﬃng]
+[WEBDAV], , and , 
+, , , May 2015, 
+. 
+, , , 
+, July 2015, . 
+, 
+, , , September 2015, 
+. 
+, , and , 
+, , , September 2015, 
+. 
+, , , 
+, September 2015, . 
+, 
+, , , November 2015, 
+. 
+, , and , 
+, , , , June
+2017, . 
+, 
+, , , September 2017, 
+. 
+, , , , 
+September 2017, . 
+, , , , October 2017, 
+. 
+ and , , , 
+, March 2018, . 
+, , , 
+, May 2019, . 
+ and , , , 
+, February 2021, . 
+, , . 
+, 
+, , , June 2007, 
+. Belshe, M. Peon, R. M. Thomson, Ed. "Hypertext Transfer Protocol Version 2
+(HTTP/2)" RFC 7540 DOI 10.17487/RFC7540 < https://www.rfc-
+editor.org/info/rfc7540 >
+Masinter, L. "Returning Values from Forms: multipart/form-data" RFC 7578 DOI
+10.17487/RFC7578 < https://www.rfc-editor.org/info/rfc7578 >
+Reschke, J. "HTTP Authentication-Info and Proxy-Authentication-Info Response
+Header Fields" RFC 7615 DOI 10.17487/RFC7615 < https://
+www.rfc-editor.org/info/rfc7615 >
+Shekh-Yusef, R., Ed. Ahrens, D. S. Bremer "HTTP Digest Access
+Authentication" RFC 7616 DOI 10.17487/RFC7616 < https://
+www.rfc-editor.org/info/rfc7616 >
+Reschke, J. "The 'Basic' HTTP Authentication Scheme" RFC 7617 DOI 10.17487/
+RFC7617 < https://www.rfc-editor.org/info/rfc7617 >
+Reschke, J. "Hypertext Transfer Protocol (HTTP) Client-Initiated Content-
+Encoding" RFC 7694 DOI 10.17487/RFC7694 < https://www.rfc-
+editor.org/info/rfc7694 >
+Cotton, M. Leiba, B. T. Narten "Guidelines for Writing an IANA
+Considerations Section in RFCs" BCP 26 RFC 8126 DOI 10.17487/RFC8126
+<https://www.rfc-editor.org/info/rfc8126 >
+Reschke, J. "Indicating Character Encoding and Language for HTTP Header Field
+Parameters" RFC 8187 DOI 10.17487/RFC8187 < https://www.rfc-
+editor.org/info/rfc8187 >
+McManus, P . "HTTP Immutable Responses" RFC 8246 DOI 10.17487/RFC8246
+<https://www.rfc-editor.org/info/rfc8246 >
+Nottingham, M. "Web Linking" RFC 8288 DOI 10.17487/RFC8288
+<https://www.rfc-editor.org/info/rfc8288 >
+Nottingham, M. E. Nygren "The ORIGIN HTTP/2 Frame" RFC 8336 DOI
+10.17487/RFC8336 < https://www.rfc-editor.org/info/rfc8336 >
+Nottingham, M. "Well-Known Uniform Resource Identiﬁers (URIs)" RFC 8615
+DOI 10.17487/RFC8615 < https://www.rfc-editor.org/info/rfc8615 >
+Nottingham, M. P-H. Kamp "Structured Field Values for HTTP" RFC 8941 DOI
+10.17487/RFC8941 < https://www.rfc-editor.org/info/rfc8941 >
+WHATWG "MIME Sniﬃng" < https://mimesniﬀ.spec.whatwg.org >
+Dusseault, L., Ed. "HTTP Extensions for Web Distributed Authoring and
+Versioning (WebDAV)" RFC 4918 DOI 10.17487/RFC4918 < https://
+www.rfc-editor.org/info/rfc4918 >RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 173Appendix A. Collected ABNF 
+In the collected ABNF below, list rules are expanded per Section 5.6.1 .Accept = [ ( media-range [ weight ] ) *( OWS "," OWS ( media-range [
+ weight ] ) ) ]
+Accept-Charset = [ ( ( token / "*" ) [ weight ] ) *( OWS "," OWS ( (
+ token / "*" ) [ weight ] ) ) ]
+Accept-Encoding = [ ( codings [ weight ] ) *( OWS "," OWS ( codings [
+ weight ] ) ) ]
+Accept-Language = [ ( language-range [ weight ] ) *( OWS "," OWS (
+ language-range [ weight ] ) ) ]
+Accept-Ranges = acceptable-ranges
+Allow = [ method *( OWS "," OWS method ) ]
+Authentication-Info = [ auth-param *( OWS "," OWS auth-param ) ]
+Authorization = credentials
+BWS = OWS
+Connection = [ connection-option *( OWS "," OWS connection-option )
+ ]
+Content-Encoding = [ content-coding *( OWS "," OWS content-coding )
+ ]
+Content-Language = [ language-tag *( OWS "," OWS language-tag ) ]
+Content-Length = 1*DIGIT
+Content-Location = absolute-URI / partial-URI
+Content-Range = range-unit SP ( range-resp / unsatisfied-range )
+Content-Type = media-type
+Date = HTTP-date
+ETag = entity-tag
+Expect = [ expectation *( OWS "," OWS expectation ) ]
+From = mailbox
+GMT = %x47.4D.54 ; GMT
+HTTP-date = IMF-fixdate / obs-date
+Host = uri-host [ ":" port ]
+IMF-fixdate = day-name "," SP date1 SP time-of-day SP GMT
+If-Match = "*" / [ entity-tag *( OWS "," OWS entity-tag ) ]
+If-Modified-Since = HTTP-date
+If-None-Match = "*" / [ entity-tag *( OWS "," OWS entity-tag ) ]
+If-Range = entity-tag / HTTP-date
+If-Unmodified-Since = HTTP-date
+Last-Modified = HTTP-date
+Location = URI-reference
+Max-Forwards = 1*DIGIT
+OWS = *( SP / HTAB )RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 174
+    
+    Directly return the description, do not include any other text.
+    
+ERROR:root:Error: litellm.RateLimitError: RateLimitError: OpenAIException - Rate limit reached for gpt-4o-2024-11-20 (for limit gpt-4o) in organization org-uHlxYZoJvccuxEzSbEyGBFBK on tokens per min (TPM): Limit 800000, Used 800000, Requested 4605. Please try again in 345ms. Visit https://platform.openai.com/account/rate-limits to learn more.
+ERROR:root:Max retries reached for prompt: You are given a part of a document, your task is to generate a description of the partial document about what are main points covered in the partial document.
+
+    Partial Document Text: B.6. Changes from RFC 7235 
+None.
+B.7. Changes from RFC 7538 
+None.
+B.8. Changes from RFC 7615 
+None.
+B.9. Changes from RFC 7694 
+This speciﬁcation includes the extension deﬁned in  but leaves out examples and
+deployment considerations.[RFC7694 ]
+Acknowledgements 
+Aside from the current editors, the following individuals deserve special recognition for their
+contributions to early aspects of HTTP and its core speciﬁcations: , 
+, , , , , , ,
+, , , , , 
+, , , , , , , 
+, , , , , , 
+, , , and .
+This document builds on the many contributions that went into past speciﬁcations of HTTP ,
+including , , , , , , , ,
+, , , and . The acknowledgements within those documents
+still apply.
+Since 2014, the following contributors have helped improve this speciﬁcation by reporting bugs,
+asking smart questions, drafting or reviewing text, and evaluating issues:
+, , , , , 
+, , , , , , 
+, , , , , , 
+, , , , , , 
+, , , , , , 
+, , , , , 
+, , , , , , , 
+, , , , , , 
+, , , , , ,
+, , , , , 
+, , , , , , , Marc Andreessen Tim Berners-
+Lee Robert Cailliau Daniel W. Connolly Bob Denny John Franks Jim Gettys Jean-François Groﬀ
+Phillip M. Hallam-Baker Koen Holtman Jeﬀery L. Hostetler Shel Kaphan Dave Kristol Yves
+Lafon Scott D. Lawrence Paul J. Leach Håkon W. Lie Ari Luotonen Larry Masinter Rob McCool
+Jeﬀrey C. Mogul Lou Montulli David Morris Henrik Frystyk Nielsen Dave Raggett Eric Rescorla
+Tony Sanders Lawrence C. Stewart Marc VanHeyningen Steve Zilles
+[HTTP/1.0 ] [RFC2068 ] [RFC2145 ] [RFC2616 ] [RFC2617 ] [RFC2818 ] [RFC7230 ] [RFC7231 ]
+[RFC7232 ] [RFC7233 ] [RFC7234 ] [ RFC7235 ]
+Alan Egerton Alex Rousskov Amichai Rothman Amos Jeﬀries Anders Kaseorg Andreas
+Gebhardt Anne van Kesteren Armin Abfalterer Aron Duby Asanka Herath Asbjørn Ulsberg
+Asta Olofsson Attila Gulyas Austin Wright Barry Pollard Ben Burkert Benjamin Kaduk Björn
+Höhrmann Brad Fitzpatrick Chris Pacejo Colin Bendell Cory Benﬁeld Cory Nelson Daisuke
+Miyakawa Dale Worley Daniel Stenberg Danil Suits David Benjamin David Matson David
+Schinazi  ( ) Дилян ПалаузовDilyan Palauzov Eric Anderson Eric Rescorla Éric Vyncke Erik
+Kline Erwin Pe Etan Kissling Evert Pot Evgeny Vrublevsky Florian Best Francesca Palombini
+Igor Lubashev James Callahan James Peach Jeﬀrey Yasskin Kalin Gyokov Kannan Goundan奥
+ ( )一穂Kazuho Oku Ken Murchison Krzysztof Maczyński Lars Eggert Lucas Pardue Martin Duke
+Martin Dürst Martin Thomson Martynas Jusevičius Matt Menke Matthias Pigulla Mattias
+Grenfeldt Michael Osipov Mike Bishop Mike Pennisi Mike Taylor Mike West Mohit SethiRFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 181100 Continue (status code)
+100-continue (expect value)
+101 Switching Protocols (status code)
+1xx Informational (status code class)
+200 OK (status code)
+201 Created (status code)
+202 Accepted (status code)
+203 Non-Authoritative Information (status code)
+204 No Content (status code)
+205 Reset Content (status code)
+206 Partial Content (status code)
+2xx Successful (status code class)
+300 Multiple Choices (status code)
+301 Moved Permanently (status code)
+302 Found (status code)
+303 See Other (status code)
+304 Not Modiﬁed (status code)
+305 Use Proxy (status code)
+306 (Unused) (status code)
+307 Temporary Redirect (status code)
+308 Permanent Redirect (status code)
+3xx Redirection (status code class)
+400 Bad Request (status code)
+401 Unauthorized (status code)
+402 Payment Required (status code)
+403 Forbidden (status code)Index 
+Section 15.2.1
+Section 10.1.1
+Section 15.2.2
+Section 15.2
+Section 15.3.1
+Section 15.3.2
+Section 15.3.3
+Section 15.3.4
+Section 15.3.5
+Section 15.3.6
+Section 15.3.7
+Section 15.3
+Section 15.4.1
+Section 15.4.2
+Section 15.4.3
+Section 15.4.4
+Section 15.4.5
+Section 15.4.6
+Section 15.4.7
+Section 15.4.8
+Section 15.4.9
+Section 15.4
+Section 15.5.1
+Section 15.5.2
+Section 15.5.3
+Section 15.5.4, , , , , 
+, , , , , , 
+, , , , , ,
+, , , , , , 
+, , , and .Murray Kucherawy Nathaniel J. Smith Nicholas Hurley Nikita Prokhorov Patrick McManus
+Piotr Sikora Poul-Henning Kamp Rick van Rein Robert Wilton Roberto Polli Roman Danyliw
+Samuel Williams Semyon Kholodnov Simon Pieters Simon Schüppel Stefan Eissing Taylor Hunt
+Todd Greer Tommy Pauly Vasiliy Faronov Vladimir Lashchev Wenbo Zhu William A. Rowe Jr.
+Willy Tarreau Xingwei Liu Yishuai Li Zaheduzzaman Sarker
+1 2 3 4 5 A B C D E F G H I L M N O P R S T U V W X
+1
+2
+3
+4RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 182404 Not Found (status code)
+405 Method Not Allowed (status code)
+406 Not Acceptable (status code)
+407 Proxy Authentication Required (status code)
+408 Request Timeout (status code)
+409 Conﬂict (status code)
+410 Gone (status code)
+411 Length Required (status code)
+412 Precondition Failed (status code)
+413 Content Too Large (status code)
+414 URI Too Long (status code)
+415 Unsupported Media Type (status code)
+416 Range Not Satisﬁable (status code)
+417 Expectation Failed (status code)
+418 (Unused) (status code)
+421 Misdirected Request (status code)
+422 Unprocessable Content (status code)
+426 Upgrade Required (status code)
+4xx Client Error (status code class)
+500 Internal Server Error (status code)
+501 Not Implemented (status code)
+502 Bad Gateway (status code)
+503 Service Unavailable (status code)
+504 Gateway Timeout (status code)
+505 HTTP Version Not Supported (status code)
+5xx Server Error (status code class)
+accelerator
+Accept header ﬁeld
+Accept-Charset header ﬁeld
+Accept-Encoding header ﬁeld
+Accept-Language header ﬁeld
+Accept-Ranges header ﬁeld
+Allow header ﬁeld
+Authentication-Info header ﬁeld
+authoritative response
+Authorization header ﬁeld
+browserSection 15.5.5
+Section 15.5.6
+Section 15.5.7
+Section 15.5.8
+Section 15.5.9
+Section 15.5.10
+Section 15.5.11
+Section 15.5.12
+Section 15.5.13
+Section 15.5.14
+Section 15.5.15
+Section 15.5.16
+Section 15.5.17
+Section 15.5.18
+Section 15.5.19
+Section 15.5.20
+Section 15.5.21
+Section 15.5.22
+Section 15.5
+Section 15.6.1
+Section 15.6.2
+Section 15.6.3
+Section 15.6.4
+Section 15.6.5
+Section 15.6.6
+Section 15.6
+Section 3.7, Paragraph 6
+Section 12.5.1
+Section 12.5.2
+Section 12.5.3
+Section 12.5.4
+Section 14.3
+Section 10.2.1
+Section 11.6.3
+Section 17.1
+Section 11.6.2
+Section 3.55
+A
+BRFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 183cache
+cacheable
+client
+clock
+complete
+compress (Coding Format)
+compress (content coding)
+conditional request
+CONNECT method
+connection
+Connection header ﬁeld
+content
+content coding
+content negotiation
+Content-Encoding header ﬁeld
+Content-Language header ﬁeld
+Content-Length header ﬁeld
+Content-Location header ﬁeld
+Content-MD5 header ﬁeld
+Content-Range header ﬁeld
+Content-Type header ﬁeld
+control data
+Date header ﬁeld
+deﬂate (Coding Format)
+deﬂate (content coding)
+DELETE method
+Delimiters
+downstream
+eﬀective request URI
+ETag ﬁeld
+Expect header ﬁeld
+ﬁeld
+ﬁeld line
+ﬁeld line value
+ﬁeld name
+ﬁeld valueSection 3.8
+Section 3.8, Paragraph 4
+Section 3.3
+Section 5.6.7
+Section 6.1
+Section 8.4.1.1
+Section 8.4.1
+Section 13
+Section 9.3.6
+Section 3.3
+Section 7.6.1
+Section 6.4
+Section 8.4.1
+Section 1.3, Paragraph 4
+Section 8.4
+Section 8.5
+Section 8.6
+Section 8.7
+Section 18.4, Paragraph 10
+Section 14.4 ; Section 14.5
+Section 8.3
+Section 6.2
+Section 6.6.1
+Section 8.4.1.2
+Section 8.4.1
+Section 9.3.5
+Section 5.6.2, Paragraph 3
+Section 3.7, Paragraph 4
+Section 7.1, Paragraph 8.1
+Section 8.8.3
+Section 10.1.1
+Section 5 ; Section 6.3
+Section 5.2, Paragraph 1
+Section 5.2, Paragraph 1
+Section 5.2, Paragraph 1
+Section 5.2, Paragraph 2C
+D
+E
+FRFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 184Fields
+*
+Accept
+Accept-Charset
+Accept-Encoding
+Accept-Language
+Accept-Ranges
+Allow
+Authentication-Info
+Authorization
+Connection
+Content-Encoding
+Content-Language
+Content-Length
+Content-Location
+Content-MD5
+Content-Range
+Content-Type
+Date
+ETag
+Expect
+From
+Host
+If-Match
+If-Modiﬁed-Since
+If-None-Match
+If-Range
+If-Unmodiﬁed-Since
+Last-Modiﬁed
+Location
+Max-Forwards
+Proxy-Authenticate
+Proxy-Authentication-Info
+Proxy-Authorization
+Range
+Referer
+Retry-After
+Server
+TE
+Trailer
+Upgrade
+User-Agent
+Vary
+Via
+WWW-Authenticate 
+Section 18.4, Paragraph 9
+Section 12.5.1
+Section 12.5.2
+Section 12.5.3
+Section 12.5.4
+Section 14.3
+Section 10.2.1
+Section 11.6.3
+Section 11.6.2
+Section 7.6.1
+Section 8.4
+Section 8.5
+Section 8.6
+Section 8.7
+Section 18.4, Paragraph 10
+Section 14.4 ; Section 14.5
+Section 8.3
+Section 6.6.1
+Section 8.8.3
+Section 10.1.1
+Section 10.1.2
+Section 7.2
+Section 13.1.1
+Section 13.1.3
+Section 13.1.2
+Section 13.1.5
+Section 13.1.4
+Section 8.8.2
+Section 10.2.2
+Section 7.6.2
+Section 11.7.1
+Section 11.7.3
+Section 11.7.2
+Section 14.2
+Section 10.1.3
+Section 10.2.3
+Section 10.2.4
+Section 10.1.4
+Section 6.6.2
+Section 7.8
+Section 10.1.5
+Section 12.5.5
+Section 7.6.3
+Section 11.6.1RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 185Fragment Identiﬁers
+From header ﬁeld
+gateway
+GET method
+Grammar
+ALPHA
+Accept
+Accept-Charset
+Accept-Encoding
+Accept-Language
+Accept-Ranges
+Allow
+Authentication-Info
+Authorization
+BWS
+CR
+CRLF
+CTL
+Connection
+Content-Encoding
+Content-Language
+Content-Length
+Content-Location
+Content-Range
+Content-Type
+DIGIT
+DQUOTE
+Date
+ETag
+Expect
+From
+GMT
+HEXDIG
+HTAB
+HTTP-date
+Host
+IMF-ﬁxdate
+If-Match
+If-Modiﬁed-Since
+If-None-Match
+If-Range
+If-Unmodiﬁed-Since
+LFSection 4.2.5
+Section 10.1.2
+Section 3.7, Paragraph 6
+Section 9.3.1
+ 
+Section 2.1
+Section 12.5.1
+Section 12.5.2
+Section 12.5.3
+Section 12.5.4
+Section 14.3
+Section 10.2.1
+Section 11.6.3
+Section 11.6.2
+Section 5.6.3
+Section 2.1
+Section 2.1
+Section 2.1
+Section 7.6.1
+Section 8.4
+Section 8.5
+Section 8.6
+Section 8.7
+Section 14.4
+Section 8.3
+Section 2.1
+Section 2.1
+Section 6.6.1
+Section 8.8.3
+Section 10.1.1
+Section 10.1.2
+Section 5.6.7
+Section 2.1
+Section 2.1
+Section 5.6.7
+Section 7.2
+Section 5.6.7
+Section 13.1.1
+Section 13.1.3
+Section 13.1.2
+Section 13.1.5
+Section 13.1.4
+Section 2.1GRFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 186Last-Modiﬁed
+Location
+Max-Forwards
+OCTET
+OWS
+Proxy-Authenticate
+Proxy-Authentication-Info
+Proxy-Authorization
+RWS
+Range
+Referer
+Retry-After
+SP
+Server
+TE
+Trailer
+URI-reference
+Upgrade
+User-Agent
+VCHAR
+Vary
+Via
+WWW-Authenticate
+absolute-URI
+absolute-path
+acceptable-ranges
+asctime-date
+auth-param
+auth-scheme
+authority
+challenge
+codings
+comment
+complete-length
+connection-option
+content-coding
+credentials
+ctext
+date1
+day
+day-name
+day-name-l
+delay-seconds
+entity-tag
+etagcSection 8.8.2
+Section 10.2.2
+Section 7.6.2
+Section 2.1
+Section 5.6.3
+Section 11.7.1
+Section 11.7.3
+Section 11.7.2
+Section 5.6.3
+Section 14.2
+Section 10.1.3
+Section 10.2.3
+Section 2.1
+Section 10.2.4
+Section 10.1.4
+Section 6.6.2
+Section 4.1
+Section 7.8
+Section 10.1.5
+Section 2.1
+Section 12.5.5
+Section 7.6.3
+Section 11.6.1
+Section 4.1
+Section 4.1
+Section 14.3
+Section 5.6.7
+Section 11.2
+Section 11.1
+Section 4.1
+Section 11.3
+Section 12.5.3
+Section 5.6.5
+Section 14.4
+Section 7.6.1
+Section 8.4.1
+Section 11.4
+Section 5.6.5
+Section 5.6.7
+Section 5.6.7
+Section 5.6.7
+Section 5.6.7
+Section 10.2.3
+Section 8.8.3
+Section 8.8.3RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 187ﬁeld-content
+ﬁeld-name
+ﬁeld-value
+ﬁeld-vchar
+ﬁrst-pos
+hour
+http-URI
+https-URI
+incl-range
+int-range
+language-range
+language-tag
+last-pos
+media-range
+media-type
+method
+minute
+month
+obs-date
+obs-text
+opaque-tag
+other-range
+parameter
+parameter-name
+parameter-value
+parameters
+partial-URI
+port
+product
+product-version
+protocol-name
+protocol-version
+pseudonym
+qdtext
+query
+quoted-pair
+quoted-string
+qvalue
+range-resp
+range-set
+range-spec
+range-unit
+ranges-speciﬁer
+received-by
+received-protocolSection 5.5
+Section 5.1 ; Section 6.6.2
+Section 5.5
+Section 5.5
+Section 14.1.1 ; Section 14.4
+Section 5.6.7
+Section 4.2.1
+Section 4.2.2
+Section 14.4
+Section 14.1.1
+Section 12.5.4
+Section 8.5.1
+Section 14.1.1 ; Section 14.4
+Section 12.5.1
+Section 8.3.1
+Section 9.1
+Section 5.6.7
+Section 5.6.7
+Section 5.6.7
+Section 5.5
+Section 8.8.3
+Section 14.1.1
+Section 5.6.6
+Section 5.6.6
+Section 5.6.6
+Section 5.6.6
+Section 4.1
+Section 4.1
+Section 10.1.5
+Section 10.1.5
+Section 7.6.3
+Section 7.6.3
+Section 7.6.3
+Section 5.6.4
+Section 4.1
+Section 5.6.4
+Section 5.6.4
+Section 12.4.2
+Section 14.4
+Section 14.1.1
+Section 14.1.1
+Section 14.1
+Section 14.1.1
+Section 7.6.3
+Section 7.6.3RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 188rfc850-date
+second
+segment
+subtype
+suﬃx-length
+suﬃx-range
+t-codings
+tchar
+time-of-day
+token
+token68
+transfer-coding
+transfer-parameter
+type
+unsatisﬁed-range
+uri-host
+weak
+weight
+year
+gzip (Coding Format)
+gzip (content coding)
+HEAD method
+Header Fields
+Accept
+Accept-Charset
+Accept-Encoding
+Accept-Language
+Accept-Ranges
+Allow
+Authentication-Info
+Authorization
+Connection
+Content-Encoding
+Content-Language
+Content-Length
+Content-Location
+Content-MD5
+Content-Range
+Content-Type
+Date
+ETag
+Expect
+FromSection 5.6.7
+Section 5.6.7
+Section 4.1
+Section 8.3.1
+Section 14.1.1
+Section 14.1.1
+Section 10.1.4
+Section 5.6.2
+Section 5.6.7
+Section 5.6.2
+Section 11.2
+Section 10.1.4
+Section 10.1.4
+Section 8.3.1
+Section 14.4
+Section 4.1
+Section 8.8.3
+Section 12.4.2
+Section 5.6.7
+Section 8.4.1.3
+Section 8.4.1
+Section 9.3.2
+ 
+Section 12.5.1
+Section 12.5.2
+Section 12.5.3
+Section 12.5.4
+Section 14.3
+Section 10.2.1
+Section 11.6.3
+Section 11.6.2
+Section 7.6.1
+Section 8.4
+Section 8.5
+Section 8.6
+Section 8.7
+Section 18.4, Paragraph 10
+Section 14.4 ; Section 14.5
+Section 8.3
+Section 6.6.1
+Section 8.8.3
+Section 10.1.1
+Section 10.1.2HRFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 189Host
+If-Match
+If-Modiﬁed-Since
+If-None-Match
+If-Range
+If-Unmodiﬁed-Since
+Last-Modiﬁed
+Location
+Max-Forwards
+Proxy-Authenticate
+Proxy-Authentication-Info
+Proxy-Authorization
+Range
+Referer
+Retry-After
+Server
+TE
+Trailer
+Upgrade
+User-Agent
+Vary
+Via
+WWW-Authenticate
+header section
+Host header ﬁeld
+http URI scheme
+https URI scheme
+idempotent
+If-Match header ﬁeld
+If-Modiﬁed-Since header ﬁeld
+If-None-Match header ﬁeld
+If-Range header ﬁeld
+If-Unmodiﬁed-Since header ﬁeld
+inbound
+incomplete
+interception proxy
+intermediary
+Last-Modiﬁed header ﬁeld
+list-based ﬁeld
+Location header ﬁeldSection 7.2
+Section 13.1.1
+Section 13.1.3
+Section 13.1.2
+Section 13.1.5
+Section 13.1.4
+Section 8.8.2
+Section 10.2.2
+Section 7.6.2
+Section 11.7.1
+Section 11.7.3
+Section 11.7.2
+Section 14.2
+Section 10.1.3
+Section 10.2.3
+Section 10.2.4
+Section 10.1.4
+Section 6.6.2
+Section 7.8
+Section 10.1.5
+Section 12.5.5
+Section 7.6.3
+Section 11.6.1
+Section 6.3
+Section 7.2
+Section 4.2.1
+Section 4.2.2
+Section 9.2.2
+Section 13.1.1
+Section 13.1.3
+Section 13.1.2
+Section 13.1.5
+Section 13.1.4
+Section 3.7, Paragraph 4
+Section 6.1
+Section 3.7, Paragraph 10
+Section 3.7
+Section 8.8.2
+Section 5.5, Paragraph 7
+Section 10.2.2I
+LRFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 190Max-Forwards header ﬁeld
+Media Type
+multipart/byteranges
+multipart/x-byteranges
+message
+message abstraction
+messages
+metadata
+Method
+*
+CONNECT
+DELETE
+GET
+HEAD
+OPTIONS
+POST
+PUT
+TRACE
+multipart/byteranges Media Type
+multipart/x-byteranges Media Type
+non-transforming proxy
+OPTIONS method
+origin
+origin server
+outbound
+phishing
+POST method
+Protection Space
+proxy
+Proxy-Authenticate header ﬁeld
+Proxy-Authentication-Info header ﬁeld
+Proxy-Authorization header ﬁeld
+PUT method
+Range header ﬁeldSection 7.6.2
+ 
+Section 14.6
+Section 14.6, Paragraph 4, Item 3
+Section 3.4 ; Section 6
+Section 6
+Section 3.4
+Section 8.8
+ 
+Section 18.2, Paragraph 3
+Section 9.3.6
+Section 9.3.5
+Section 9.3.1
+Section 9.3.2
+Section 9.3.7
+Section 9.3.3
+Section 9.3.4
+Section 9.3.8
+Section 14.6
+Section 14.6, Paragraph 4, Item 3
+Section 7.7
+Section 9.3.7
+Section 4.3.1 ; Section 11.5
+Section 3.6
+Section 3.7, Paragraph 4
+Section 17.1
+Section 9.3.3
+Section 11.5
+Section 3.7, Paragraph 5
+Section 11.7.1
+Section 11.7.3
+Section 11.7.2
+Section 9.3.4
+Section 14.2M
+N
+O
+P
+RRFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 191Realm
+recipient
+Referer header ﬁeld
+representation
+request
+request target
+resource
+response
+Retry-After header ﬁeld
+reverse proxy
+safe
+satisﬁable range
+secured
+selected representation
+self-descriptive
+sender
+server
+Server header ﬁeld
+singleton ﬁeld
+spider
+Status Code
+Status Codes
+Final
+Informational
+Interim
+Status Codes Classes
+1xx Informational
+2xx Successful
+3xx Redirection
+4xx Client Error
+5xx Server Error
+target resource
+target URI
+TE header ﬁeld
+TRACE method
+Trailer Fields
+ETag
+Trailer header ﬁeld
+trailer section
+trailers
+transforming proxySection 11.5
+Section 3.4
+Section 10.1.3
+Section 3.2
+Section 3.4
+Section 7.1
+Section 3.1 ; Section 4
+Section 3.4
+Section 10.2.3
+Section 3.7, Paragraph 6
+Section 9.2.1
+Section 14.1.1
+Section 4.2.2
+Section 3.2, Paragraph 4 ; Section 8.8 ; Section 13.1
+Section 6
+Section 3.4
+Section 3.3
+Section 10.2.4
+Section 5.5, Paragraph 6
+Section 3.5
+Section 15
+ 
+Section 15, Paragraph 7
+Section 15, Paragraph 7
+Section 15, Paragraph 7
+ 
+Section 15.2
+Section 15.3
+Section 15.4
+Section 15.5
+Section 15.6
+Section 7.1
+Section 7.1
+Section 10.1.4
+Section 9.3.8
+Section 6.5
+Section 8.8.3
+Section 6.6.2
+Section 6.5
+Section 6.5
+Section 7.7S
+TRFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 192transparent proxy
+tunnel
+unsatisﬁable range
+Upgrade header ﬁeld
+upstream
+URI
+origin
+URI reference
+URI scheme
+http
+https
+user agent
+User-Agent header ﬁeld
+validator
+strong
+weak
+Vary header ﬁeld
+Via header ﬁeld
+WWW-Authenticate header ﬁeld
+x-compress (content coding)
+x-gzip (content coding)Section 3.7, Paragraph 10
+Section 3.7, Paragraph 8
+Section 14.1.1
+Section 7.8
+Section 3.7, Paragraph 4
+Section 4
+Section 4.3.1
+Section 4.1
+ 
+Section 4.2.1
+Section 4.2.2
+Section 3.5
+Section 10.1.5
+Section 8.8
+Section 8.8.1
+Section 8.8.1
+Section 12.5.5
+Section 7.6.3
+Section 11.6.1
+Section 8.4.1
+Section 8.4.1U
+V
+W
+X
+Authors' Addresses 
+Roy T. Fielding ( )editor
+Adobe
+345 Park Ave
+San Jose, CA 95110
+United States of America
+ ﬁelding@gbiv.com  Email:
+ https://roy.gbiv.com/  URI:RFC 9110 HTTP Semantics June 2022
+Fielding, et al. Standards Track Page 193
+    
+    Directly return the description, do not include any other text.
+    
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+************* Retrying *************
+
+tree written to: results/rfc9110-pdf_structure.json
+build time: 253.1s   LLM calls: 1884 (613 replayed free / 1271 live)
+resume: 613 calls served from cache at $0; paid for 1271 new calls this run
+tokens: 1,694,194 in / 165,376 out / 41,600 cache-read
+metered cost: $5.9412  (new spend this run; replayed calls excluded)
+realized/estimated(high): 2.96 (brief §4.2 step 5: scale up only if <= ~1.5; record this ratio)
+rows appended to /Users/bhs/PROJECTS/pageindex-website-experiment/runs/usage_log.jsonl — verify with: python3 scripts/cost_report.py --run 20260715T022226Z

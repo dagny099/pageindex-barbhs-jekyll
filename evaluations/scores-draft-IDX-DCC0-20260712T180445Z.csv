@@ -1,0 +1,43 @@
+qid,category,index,retriever,retrieval_score,answer_score,judge,note
+DL3,direct-location,IDX-D,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+DL3,direct-location,IDX-C,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+DL3,direct-location,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+DL4,direct-location,IDX-D,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+DL4,direct-location,IDX-C,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+DL4,direct-location,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+DL5,direct-location,IDX-D,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+DL5,direct-location,IDX-C,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+DL5,direct-location,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),confirm June-1-2018 boundary stated in full answer
+DL9,direct-location,IDX-D,gpt-4o-2024-11-20,3,4,claude-opus DRAFT (first pass),correct but broader fetch 2670-2767
+DL9,direct-location,IDX-C,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),exact node
+DL9,direct-location,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+CS2,cross-section-synthesis,IDX-D,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+CS2,cross-section-synthesis,IDX-C,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+CS2,cross-section-synthesis,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+CS6,cross-section-synthesis,IDX-D,gpt-4o-2024-11-20,1,2,claude-opus DRAFT (first pass),PIVOTAL: concept right but WRONG instances; missed homepage/MyJourney/ThreeReaders
+CS6,cross-section-synthesis,IDX-C,gpt-4o-2024-11-20,3,3,claude-opus DRAFT (first pass),homepage OK; 2nd instance (judgment-gap) is wrong
+CS6,cross-section-synthesis,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),PIVOTAL: hit exact expected evidence L98/L428/L2843 for 3 instances
+CS8,cross-section-synthesis,IDX-D,gpt-4o-2024-11-20,1,1,claude-opus DRAFT (first pass),found only ChronoScope; missed 4 of 5; no Poolula exception
+CS8,cross-section-synthesis,IDX-C,gpt-4o-2024-11-20,2,2,claude-opus DRAFT (first pass),found 3 of 5; incomplete
+CS8,cross-section-synthesis,IDX-C0,gpt-4o-2024-11-20,2,2,claude-opus DRAFT (first pass),found 2 of 5 but nailed the trade-off verbatim
+CN4,consistency,IDX-D,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),surfaced discrepancy
+CN4,consistency,IDX-C,gpt-4o-2024-11-20,4,3,claude-opus DRAFT (first pass),laundered toward 'all agree on 14'
+CN4,consistency,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),surfaced discrepancy
+CN6,consistency,IDX-D,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+CN6,consistency,IDX-C,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+CN6,consistency,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+EG4,evidence-gap,IDX-D,gpt-4o-2024-11-20,3,3,claude-opus DRAFT (first pass),states absence; 1 trace
+EG4,evidence-gap,IDX-C,gpt-4o-2024-11-20,3,3,claude-opus DRAFT (first pass),states absence; 1 trace
+EG4,evidence-gap,IDX-C0,gpt-4o-2024-11-20,3,3,claude-opus DRAFT (first pass),states absence; no indirect trace cited
+EG5,evidence-gap,IDX-D,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+EG5,evidence-gap,IDX-C,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+EG5,evidence-gap,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),
+EG6,evidence-gap,IDX-D,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),preserved [X%]/[Y%]/[Z%] placeholders
+EG6,evidence-gap,IDX-C,gpt-4o-2024-11-20,3,1,claude-opus DRAFT (first pass),PIVOTAL: LAUNDERED placeholders into claimed results (predicted summarization failure)
+EG6,evidence-gap,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),preserved placeholders; +weather vars
+RD4,reflective-discovery,IDX-D,gpt-4o-2024-11-20,1,2,claude-opus DRAFT (first pass),PIVOTAL: wrong loci; missed both My-Journey instances
+RD4,reflective-discovery,IDX-C,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),both My-Journey instances
+RD4,reflective-discovery,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),both instances + principle
+RD6,reflective-discovery,IDX-D,gpt-4o-2024-11-20,2,2,claude-opus DRAFT (first pass),PIVOTAL: wrongly concluded resource does NOT acknowledge origin
+RD6,reflective-discovery,IDX-C,gpt-4o-2024-11-20,3,4,claude-opus DRAFT (first pass),origin acknowledged
+RD6,reflective-discovery,IDX-C0,gpt-4o-2024-11-20,4,4,claude-opus DRAFT (first pass),meaning #1 + origin; cleanest

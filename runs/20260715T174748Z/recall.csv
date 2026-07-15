@@ -1,0 +1,49 @@
+qid,index,category,recall,absence,n_fetch,content_tok,unmappable,note
+RA1,IDX-D-rfc9110,single-hop-lookup,1.0,False,2,25868,0,2/2 gold hit
+RA2,IDX-D-rfc9110,single-hop-lookup,1.0,False,3,5716,0,1/1 gold hit
+RB1,IDX-D-rfc9110,multi-hop-synthesis,0.2857142857142857,False,2,980,0,2/7 gold hit
+RB2,IDX-D-rfc9110,multi-hop-synthesis,1.0,False,2,631,0,2/2 gold hit
+RB3,IDX-D-rfc9110,multi-hop-synthesis,0.75,False,3,8312,0,3/4 gold hit
+RC1,IDX-D-rfc9110,cross-reference-resolution,0.5,False,2,319,0,1/2 gold hit
+RD1,IDX-D-rfc9110,scattered-enumeration,1.0,False,2,6633,0,5/5 gold hit
+RE1,IDX-D-rfc9110,boundary-absence,1.0,True,2,480,0,1/1 gold hit
+RA3,IDX-D-rfc9110,single-hop-lookup,1.0,False,1,160,0,1/1 gold hit
+RA4,IDX-D-rfc9110,single-hop-lookup,1.0,False,1,787,0,1/1 gold hit
+RB4,IDX-D-rfc9110,multi-hop-synthesis,1.0,False,3,2303,0,3/3 gold hit
+RB5,IDX-D-rfc9110,multi-hop-synthesis,1.0,False,2,1462,0,2/2 gold hit
+RB6,IDX-D-rfc9110,multi-hop-synthesis,1.0,False,5,2353,0,4/4 gold hit
+RC2,IDX-D-rfc9110,cross-reference-resolution,1.0,False,3,1695,0,3/3 gold hit
+RC3,IDX-D-rfc9110,cross-reference-resolution,1.0,False,3,2005,0,3/3 gold hit
+RC4,IDX-D-rfc9110,cross-reference-resolution,0.5,False,3,979,0,2/4 gold hit
+RC5,IDX-D-rfc9110,cross-reference-resolution,1.0,False,3,1907,0,3/3 gold hit
+RD2,IDX-D-rfc9110,scattered-enumeration,1.0,False,2,4972,0,5/5 gold hit
+RD3,IDX-D-rfc9110,scattered-enumeration,1.0,False,3,1914,0,3/3 gold hit
+RD4,IDX-D-rfc9110,scattered-enumeration,1.0,False,1,4037,0,7/7 gold hit
+RD5,IDX-D-rfc9110,scattered-enumeration,1.0,False,1,4951,0,5/5 gold hit
+RE2,IDX-D-rfc9110,boundary-absence,,True,3,936,0,absence: fetched 3 span(s)
+RE3,IDX-D-rfc9110,boundary-absence,,True,0,0,0,absence: fetched 0 span(s)
+RE4,IDX-D-rfc9110,boundary-absence,,True,2,4034,0,absence: fetched 2 span(s)
+RA1,IDX-PDF-outline-rfc9110,single-hop-lookup,0.5,False,1,375,0,1/2 gold hit
+RA2,IDX-PDF-outline-rfc9110,single-hop-lookup,1.0,False,2,585,0,1/1 gold hit
+RB1,IDX-PDF-outline-rfc9110,multi-hop-synthesis,0.2857142857142857,False,4,1343,0,2/7 gold hit
+RB2,IDX-PDF-outline-rfc9110,multi-hop-synthesis,1.0,False,2,732,0,2/2 gold hit
+RB3,IDX-PDF-outline-rfc9110,multi-hop-synthesis,0.25,False,4,1523,0,1/4 gold hit
+RC1,IDX-PDF-outline-rfc9110,cross-reference-resolution,0.5,False,2,629,0,1/2 gold hit
+RD1,IDX-PDF-outline-rfc9110,scattered-enumeration,0.4,False,4,774,0,2/5 gold hit
+RE1,IDX-PDF-outline-rfc9110,boundary-absence,1.0,True,2,584,0,1/1 gold hit
+RA3,IDX-PDF-outline-rfc9110,single-hop-lookup,1.0,False,1,185,0,1/1 gold hit
+RA4,IDX-PDF-outline-rfc9110,single-hop-lookup,1.0,False,1,507,0,1/1 gold hit
+RB4,IDX-PDF-outline-rfc9110,multi-hop-synthesis,1.0,False,3,2620,0,3/3 gold hit
+RB5,IDX-PDF-outline-rfc9110,multi-hop-synthesis,1.0,False,5,2815,0,2/2 gold hit
+RB6,IDX-PDF-outline-rfc9110,multi-hop-synthesis,1.0,False,4,1160,0,4/4 gold hit
+RC2,IDX-PDF-outline-rfc9110,cross-reference-resolution,1.0,False,3,1240,0,3/3 gold hit
+RC3,IDX-PDF-outline-rfc9110,cross-reference-resolution,1.0,False,3,1777,0,3/3 gold hit
+RC4,IDX-PDF-outline-rfc9110,cross-reference-resolution,0.5,False,3,1161,0,2/4 gold hit
+RC5,IDX-PDF-outline-rfc9110,cross-reference-resolution,1.0,False,4,939,0,3/3 gold hit
+RD2,IDX-PDF-outline-rfc9110,scattered-enumeration,0.8,False,7,4036,0,4/5 gold hit
+RD3,IDX-PDF-outline-rfc9110,scattered-enumeration,1.0,False,6,3177,0,3/3 gold hit
+RD4,IDX-PDF-outline-rfc9110,scattered-enumeration,1.0,False,8,2306,0,7/7 gold hit
+RD5,IDX-PDF-outline-rfc9110,scattered-enumeration,1.0,False,7,3605,0,5/5 gold hit
+RE2,IDX-PDF-outline-rfc9110,boundary-absence,,True,2,807,0,absence: fetched 2 span(s)
+RE3,IDX-PDF-outline-rfc9110,boundary-absence,,True,0,0,0,absence: fetched 0 span(s)
+RE4,IDX-PDF-outline-rfc9110,boundary-absence,,True,5,729,0,absence: fetched 5 span(s)

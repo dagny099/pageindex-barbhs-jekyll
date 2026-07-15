@@ -1,0 +1,74 @@
+{
+  "run_id": "20260715T002644Z",
+  "purpose": "retrieval",
+  "indexes": [
+    "IDX-PDF-vanilla-paper"
+  ],
+  "retrievers": [
+    "gpt-4o-2024-11-20"
+  ],
+  "cache": "off",
+  "temperature": null,
+  "questions": [
+    "PDL1"
+  ],
+  "questions_file": "evaluations/questions-paper-book-v1.csv",
+  "corpus_version": "unknown",
+  "corpus_sha256": "",
+  "repo_commit": "1cffdcafd21ace0f99406881a1dcf6d250c68ea6",
+  "results": [
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The main eye-tracking search experiment involved **14 observers** searching through **912 urban scenes**. Half of these scenes (456) contained the search target—a **person (pedestrian)**—while the other half were target-absent. The targets in the target-present images were generally positioned in the periphery of the scenes. \n\nSources:\n- \"Participants\" section.\n- \"Stimuli\" section.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 520,
+          "output_tokens": 131
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 24970,
+          "output_tokens": 4515
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0007"
+          },
+          "output_chars": 2390,
+          "output_tokens": 560
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0005"
+          },
+          "output_chars": 2539,
+          "output_tokens": 560
+        }
+      ],
+      "n_tool_calls": 4,
+      "structure_tokens": 4515,
+      "content_tokens": 1120,
+      "usage": {
+        "input_tokens": 12568,
+        "output_tokens": 157,
+        "total_tokens": 12725
+      },
+      "est_cost_usd": 0.033,
+      "latency_seconds": 13.02,
+      "index_id": "IDX-PDF-vanilla-paper",
+      "qid": "PDL1",
+      "category": "direct-location",
+      "question": "How many observers and how many scenes were used in the main eye-tracking search experiment, and what was the search target?",
+      "expected_evidence": "Abstract L46; Introduction L77; Participants L83 ('Fourteen observers'); Stimuli L93 ('912 colour pictures').",
+      "ground_truth": "14 observers searched 912 outdoor urban scenes (half target-present, half target-absent) for a person/pedestrian.",
+      "corpus_version": "",
+      "corpus_sha256": ""
+    }
+  ]
+}

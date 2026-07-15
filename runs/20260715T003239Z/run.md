@@ -1,0 +1,547 @@
+# Retrieval run 20260715T003239Z
+
+- Indexes: `IDX-PDF-vanilla-paper`, `IDX-D-paper-book-v1`, `IDX-D-paper-book-v1-clean`
+- Retrievers: `gpt-4o-2024-11-20`
+- Corpus: `paper-book-v1` (`5d712efb8471…`)
+- Repo commit: `1cffdcafd2`  ·  questions: 8
+
+## Comparison — means across questions
+
+| Index | Retriever | n | tools | struct_tok | content_tok | total_tok | $ | s |
+|---|---|---|---|---|---|---|---|---|
+| `IDX-PDF-vanilla-paper` | `gpt-4o-2024-11-20` | 8 | 3.5 | 4515.0 | 3225.2 | 14895 | 0.3112 | 6.5 |
+| `IDX-D-paper-book-v1` | `gpt-4o-2024-11-20` | 8 | 3.4 | 474.0 | 2679.1 | 5993 | 0.1327 | 5.4 |
+| `IDX-D-paper-book-v1-clean` | `gpt-4o-2024-11-20` | 8 | 3.9 | 519.8 | 4117.4 | 9682 | 0.2075 | 6.1 |
+
+## Per-question detail (question, expected evidence, ground truth, answer)
+*Everything needed to score each answer is inline below — no cross-referencing.*
+
+### [IDX-PDF-vanilla-paper | gpt-4o-2024-11-20] PDL1 — direct-location
+
+**Q:** How many observers and how many scenes were used in the main eye-tracking search experiment, and what was the search target?
+
+**Expected evidence:** Abstract L46; Introduction L77; Participants L83 ('Fourteen observers'); Stimuli L93 ('912 colour pictures').
+
+**Ground truth:** 14 observers searched 912 outdoor urban scenes (half target-present, half target-absent) for a person/pedestrian.
+
+metrics: tools=4 · struct_tok=4515 · content_tok=1120 · total_tok=12711 · $0.0328 · 5.32s
+fetched line ranges: `0007`, `0005`
+
+**Answer:**
+
+In the main eye-tracking search experiment:
+
+- **Observers**: 14 participants were involved.
+- **Scenes**: A total of 912 color images of urban environments were used.
+- **Search Target**: The target was a person (a pedestrian).
+
+This information is referenced from the sections titled "Participants" and "Stimuli."
+
+---
+
+### [IDX-PDF-vanilla-paper | gpt-4o-2024-11-20] PMP1 — methods-procedural
+
+**Q:** In the Dalal-Triggs target-features detector, what scanning-window size was used and how many pedestrians was the reported implementation trained on?
+
+**Expected evidence:** Guidance by target features, L159 ('scanning window of 32×64 pixels and was trained on 2000 upright, unoccluded pedestrians').
+
+**Ground truth:** A 32x64-pixel scanning window; trained on 2000 upright, unoccluded pedestrians (plus their left-right reflections).
+
+metrics: tools=3 · struct_tok=4515 · content_tok=3164 · total_tok=14722 · $0.0377 · 7.63s
+fetched line ranges: `0014,0015`
+
+**Answer:**
+
+The Dalal-Triggs (DT) person detector used a scanning window size of **32×64 pixels**. The implementation was trained on **2,000 upright, unoccluded pedestrians**, including their left/right reflections. These pedestrians were cropped from images in the LabelMe database.
+
+Cited source: *Guidance by target features* section.
+
+---
+
+### [IDX-PDF-vanilla-paper | gpt-4o-2024-11-20] PFT1 — figure-or-table-evidence
+
+**Q:** According to Table 1, what is the scene-context model's Area-Under-Curve (AUC) in target-absent scenes, and how does it compare with the saliency model in the same condition?
+
+**Expected evidence:** Table 1, target-absent block, L217 (Scene context .845) and L215 (Saliency .773).
+
+**Ground truth:** Scene context AUC = .845 vs saliency AUC = .773 in target-absent scenes; scene context is higher by .072.
+
+metrics: tools=3 · struct_tok=4515 · content_tok=1042 · total_tok=12690 · $0.0328 · 5.26s
+fetched line ranges: `0018`
+
+**Answer:**
+
+The scene-context model's Area-Under-Curve (AUC) in target-absent scenes is **0.845**. In comparison, the saliency model achieves a lower AUC of **0.773** in the same condition. This indicates that the scene-context model outperforms the saliency model in predicting fixated regions in target-absent scenes.
+
+This information comes from the section titled **"MODELLING RESULTS"** and Table 1, which summarizes the performance metrics.
+
+---
+
+### [IDX-PDF-vanilla-paper | gpt-4o-2024-11-20] PFT3 — figure-or-table-evidence
+
+**Q:** What does Figure 8 compare, and how are the two panels defined?
+
+**Expected evidence:** Figure 8 caption, L205 ('Comparison between (a) the computationally defined scene context map and (b) the empirically defined context oracle map for a single image').
+
+**Ground truth:** Figure 8 compares, for a single image, (a) the computationally-defined scene-context map vs (b) the empirically-defined context-oracle map (both thresholded at 20% of image area, with human-fixation dots).
+
+metrics: tools=3 · struct_tok=4515 · content_tok=1672 · total_tok=13242 · $0.0344 · 11.11s
+fetched line ranges: `0000,0018`
+
+**Answer:**
+
+Figure 8 compares two types of maps for a single image: **(a)** a computationally defined scene context map and **(b)** an empirically defined context oracle map. These maps are thresholded at 20% of the image area, with human fixation points represented as dots. 
+
+The computationally defined scene context map is based on predictions generated by the model, while the empirically defined context oracle map uses human observers' inputs to locate the most plausible regions for target presence. The two panels illustrate differences in how the computational model and human observers prioritize areas within the scene.
+
+This information is sourced from the **"MODELLING RESULTS"** section.
+
+---
+
+### [IDX-PDF-vanilla-paper | gpt-4o-2024-11-20] PEG2 — evidence-gap
+
+**Q:** Does the paper report human behavioural performance (accuracy, reaction time) for the search task, or only computational model AUCs?
+
+**Expected evidence:** Accuracy and eye movement statistics, L109 ('hits was 87%. The false alarm rate (fa)... was 3%... mean reaction time was 1050 ms... 1517 ms').
+
+**Ground truth:** It reports both: human behavioural stats appear in 'Accuracy and eye movement statistics' - hits 87%, false-alarm rate 3%, mean RT 1050 ms (target-present) / 1517 ms (target-absent), ~3.5 vs 5.1 fixations. So the answer is 'yes, behavioural measures are reported', not only AUCs.
+
+metrics: tools=4 · struct_tok=4515 · content_tok=1861 · total_tok=13583 · $0.036 · 5.42s
+fetched line ranges: `0011`, `0009`
+
+**Answer:**
+
+The paper reports both human behavioral performance metrics and computational model results for the visual search task. Specifically:
+
+1. **Human Performance Metrics**:
+   - Accuracy: Observers correctly identified the target with 87% accuracy in target-present scenes, and had a false alarm rate of 3% in target-absent scenes.
+   - Reaction Time: Mean reaction times were 1050 ms for target-present trials and 1517 ms for target-absent trials.
+   - Fixation Metrics: Observers made an average of 3.5 fixations in target-present scenes and 5.1 in target-absent scenes, with exploratory fixation durations averaging 147 ms and 225 ms, respectively.
+
+2. **Computational Models**:
+   - The paper evaluates the predictive performance of computational models in terms of their ability to replicate fixation patterns and guide attention.
+
+These findings are detailed under the "Eye movement analysis" and "Accuracy and eye movement statistics" sections.
+
+---
+
+### [IDX-PDF-vanilla-paper | gpt-4o-2024-11-20] PCS1 — cross-section-synthesis
+
+**Q:** The model combines three sources of guidance. Where is each source defined, and which section reports their combined performance?
+
+**Expected evidence:** Guidance by saliency L141; Guidance by target features L153; Guidance by scene context features L177; combined L195; Modelling Results / Table 1 L207+.
+
+**Ground truth:** Saliency (§Guidance by saliency, L141), target features (§Guidance by target features, L153), scene context (§Guidance by scene context features, L177); combined in §Guidance by a combined model of attention (L195), with combined performance in §Modelling Results / Table 1 (L207+).
+
+metrics: tools=4 · struct_tok=4515 · content_tok=6733 · total_tok=18481 · $0.0485 · 5.47s
+fetched line ranges: `0021`, `0013,0014,0015,0016`
+
+**Answer:**
+
+The "Modelling Methods" section defines the three sources of guidance individually:
+
+1. **Saliency (Mₛ)** focuses on image regions that stand out due to local feature variations (e.g., color, orientation) ([Guidance by Saliency](#0014)).
+2. **Target Features (Mₜ)** use object recognition techniques, such as the Dalal and Triggs person detector, to highlight locations likely containing the target object ([Guidance by Target Features](#0015)).
+3. **Scene Context (Mₐ)** leverages holistic visual scene attributes to predict areas where the target is likely based on spatial arrangements and learned patterns ([Guidance by Scene Context Features](#0016)).
+
+The combined performance of these sources is evaluated in the "Combined Source Models" section. The combined model achieved an Area Under the Curve (AUC) of 0.88 for target-absent scenes and 0.90 for target-present scenes, demonstrating superior performance compared to individual sources, with context playing the most influential role ([Combined Source Models](#0021)).
+
+---
+
+### [IDX-PDF-vanilla-paper | gpt-4o-2024-11-20] PCS2 — cross-section-synthesis
+
+**Q:** What role does the 'context oracle' play across the paper, and does the purely computational combined model ever match it?
+
+**Expected evidence:** Upper-bound rationale L189; construction L193; comparison L286 ('not significant in target-absent, t(405)=−1.233, p=.218'); oracle-substituted 96% L209.
+
+**Ground truth:** DRAFT: The context oracle is an empirical UPPER BOUND on context-only guidance (L189), built from 7 participants' markings (L193). The computational combined model matches it in target-absent scenes - the difference is not significant (t(405)=−1.233, p=.218, L286) - though substituting the oracle for the computational context model still lifts performance to ~96% of human agreement (L209).
+
+metrics: tools=4 · struct_tok=4515 · content_tok=4940 · total_tok=16734 · $0.0444 · 6.36s
+fetched line ranges: `0016,0017`, `0020,0021`
+
+**Answer:**
+
+The 'context oracle' is an empirically derived model where human observers identify the most plausible pedestrian locations in an image. This oracle establishes an upper performance bound for models relying solely on scene context by providing ground truth about where pedestrians are most likely to be found, based on knowledge like skyline height or visual cues from objects such as cars and doorways. The maps generated by this oracle are created by pooling individual responses and applying Gaussian blur for smoother distribution ([Guidance by scene context features](#0016)).
+
+The purely computational combined model, which integrates saliency, target features, and scene context, achieved a high degree of accuracy and closely approached the context oracle's performance. There was no statistically significant difference between the combined model and the context oracle's performance in target-absent scenes, and only a minor difference in target-present scenes. When the context oracle replaced the computational scene context component, the combined model's performance further improved, but the results revealed its dependency on the context oracle, as indicated by the high correlation with it (r = 0.97 in target-absent scenes) ([Context models](#0020), [Combined source models](#0021)).
+
+Thus, while the combined model nearly matches the context oracle, it benefits significantly from incorporating the empirically derived oracle into its framework.
+
+---
+
+### [IDX-PDF-vanilla-paper | gpt-4o-2024-11-20] PRD1 — reflective-discovery
+
+**Q:** What does the paper identify as the core limitation preventing any model from reaching human-level fixation prediction, and what future direction does it propose?
+
+**Expected evidence:** Abstract L46; Discussion L294 ('map selectivity... region size of roughly 40%... tightly clustered'); Concluding Remarks L320.
+
+**Ground truth:** The core limitation is selectivity/precision: human fixations cluster tightly in small regions while models select much broader regions - all models' accuracy falls off sharply as the selected region shrinks (a ~40% region is needed for the combined model to match human detection rate; L294). Proposed direction: future models that capture the mechanisms underlying the tight clustering of human search fixations (L320).
+
+metrics: tools=3 · struct_tok=4515 · content_tok=5270 · total_tok=16994 · $0.0446 · 5.61s
+fetched line ranges: `0022,0023`
+
+**Answer:**
+
+The paper identifies the models' inability to fully capture the **selectivity of human attentional maps** as the core limitation preventing computational models from reaching human-level fixation prediction. This limitation arises from the discrepancy between the tightly clustered regions of human fixations and the broader regions predicted by the combined model. Key reasons for this limitation include inadequacies in representing complex scene contexts, such as multiple surfaces at different heights, and an insufficiently nuanced incorporation of semantic influences (e.g., expectations that a person might more likely be associated with a doorway than a garbage can).
+
+For future directions, the study proposes several improvements:
+1. Incorporating **flexible weights** to adjust the contributions of saliency, target features, and scene context dynamically based on situational constraints.
+2. Enhancing the representation of **scene context** to account for expectations associated with multiple scene regions and more specific semantic associations.
+3. Exploring **semantic influences** in greater depth, considering how relationships between scene elements guide fixation.
+4. Conducting research on a wider range of natural search tasks to generalize the findings and refine models accordingly.
+
+These points are drawn from the "Discussion" and "Concluding Remarks" sections of the study.
+
+---
+
+### [IDX-D-paper-book-v1 | gpt-4o-2024-11-20] PDL1 — direct-location
+
+**Q:** How many observers and how many scenes were used in the main eye-tracking search experiment, and what was the search target?
+
+**Expected evidence:** Abstract L46; Introduction L77; Participants L83 ('Fourteen observers'); Stimuli L93 ('912 colour pictures').
+
+**Ground truth:** 14 observers searched 912 outdoor urban scenes (half target-present, half target-absent) for a person/pedestrian.
+
+metrics: tools=3 · struct_tok=474 · content_tok=480 · total_tok=3716 · $0.0104 · 5.44s
+fetched line ranges: `81,91`
+
+**Answer:**
+
+The main eye-tracking search experiment involved:
+
+- **Participants:** 14 observers (aged 18–40, with normal visual acuity).
+- **Scenes:** 912 color images of urban environments, half of which contained a pedestrian (the search target) and half did not.
+- **Search Target:** Pedestrians in the images, subtending an average of 0.9×1.8° of visual angle, with target locations distributed in the image periphery.
+
+Cited sections: "Participants", "Stimuli".
+
+---
+
+### [IDX-D-paper-book-v1 | gpt-4o-2024-11-20] PMP1 — methods-procedural
+
+**Q:** In the Dalal-Triggs target-features detector, what scanning-window size was used and how many pedestrians was the reported implementation trained on?
+
+**Expected evidence:** Guidance by target features, L159 ('scanning window of 32×64 pixels and was trained on 2000 upright, unoccluded pedestrians').
+
+**Ground truth:** A 32x64-pixel scanning window; trained on 2000 upright, unoccluded pedestrians (plus their left-right reflections).
+
+metrics: tools=3 · struct_tok=474 · content_tok=1934 · total_tok=5144 · $0.0137 · 4.29s
+fetched line ranges: `153-177`
+
+**Answer:**
+
+In the Dalal-Triggs (DT) target-features detector:
+
+1. The scanning window size used was **32×64 pixels**.
+2. The implementation was trained on **2000 upright, unoccluded pedestrians**, which included their left–right reflections. 
+
+This information is from the "Guidance by Target Features" section.
+
+---
+
+### [IDX-D-paper-book-v1 | gpt-4o-2024-11-20] PFT1 — figure-or-table-evidence
+
+**Q:** According to Table 1, what is the scene-context model's Area-Under-Curve (AUC) in target-absent scenes, and how does it compare with the saliency model in the same condition?
+
+**Expected evidence:** Table 1, target-absent block, L217 (Scene context .845) and L215 (Saliency .773).
+
+**Ground truth:** Scene context AUC = .845 vs saliency AUC = .773 in target-absent scenes; scene context is higher by .072.
+
+metrics: tools=3 · struct_tok=474 · content_tok=4422 · total_tok=7731 · $0.0204 · 4.72s
+fetched line ranges: `207-290`
+
+**Answer:**
+
+According to Table 1, the Area-Under-Curve (AUC) of the scene context model in target-absent scenes is **0.845**. In the same condition, the AUC of the saliency model is **0.773**. Thus, the scene context model outperforms the saliency model by **0.072** in predicting fixated regions in target-absent scenes.
+
+(Referenced sections: "MODELLING RESULTS" and "Saliency and target features models")
+
+---
+
+### [IDX-D-paper-book-v1 | gpt-4o-2024-11-20] PFT3 — figure-or-table-evidence
+
+**Q:** What does Figure 8 compare, and how are the two panels defined?
+
+**Expected evidence:** Figure 8 caption, L205 ('Comparison between (a) the computationally defined scene context map and (b) the empirically defined context oracle map for a single image').
+
+**Ground truth:** Figure 8 compares, for a single image, (a) the computationally-defined scene-context map vs (b) the empirically-defined context-oracle map (both thresholded at 20% of image area, with human-fixation dots).
+
+metrics: tools=3 · struct_tok=474 · content_tok=2486 · total_tok=5652 · $0.015 · 5.83s
+fetched line ranges: `272-290`
+
+**Answer:**
+
+The document does not mention or describe "Figure 8," so it is unclear what this figure compares or how its panels are defined. The closest references to figures are "Figure 11" and "Figure 12," both of which pertain to specific analyses and model comparisons, but neither matches the requested figure number. Let me know if you'd like details on these other figures instead.
+
+---
+
+### [IDX-D-paper-book-v1 | gpt-4o-2024-11-20] PEG2 — evidence-gap
+
+**Q:** Does the paper report human behavioural performance (accuracy, reaction time) for the search task, or only computational model AUCs?
+
+**Expected evidence:** Accuracy and eye movement statistics, L109 ('hits was 87%. The false alarm rate (fa)... was 3%... mean reaction time was 1050 ms... 1517 ms').
+
+**Ground truth:** It reports both: human behavioural stats appear in 'Accuracy and eye movement statistics' - hits 87%, false-alarm rate 3%, mean RT 1050 ms (target-present) / 1517 ms (target-absent), ~3.5 vs 5.1 fixations. So the answer is 'yes, behavioural measures are reported', not only AUCs.
+
+metrics: tools=3 · struct_tok=474 · content_tok=1139 · total_tok=4431 · $0.0126 · 4.9s
+fetched line ranges: `107-113`
+
+**Answer:**
+
+The paper reports both human behavioral performance and computational model AUCs. Human performance is detailed in terms of accuracy and reaction times:
+
+- **Accuracy**: 87% for target-present scenes (hits) and a 3% false alarm rate in target-absent scenes.
+- **Reaction Times**: 1050 ms (SEM = 18) for target-present and 1517 ms (SEM = 14) for target-absent trials.
+
+Additionally, human fixations and eye movement statistics, such as the number of fixations, fixation durations, and inter-observer agreement, are analyzed. Computational model performance is discussed using AUCs as a measure of predictive accuracy. 
+
+This information is covered in sections "Accuracy and eye movement statistics" and "Agreement among observers."
+
+---
+
+### [IDX-D-paper-book-v1 | gpt-4o-2024-11-20] PCS1 — cross-section-synthesis
+
+**Q:** The model combines three sources of guidance. Where is each source defined, and which section reports their combined performance?
+
+**Expected evidence:** Guidance by saliency L141; Guidance by target features L153; Guidance by scene context features L177; combined L195; Modelling Results / Table 1 L207+.
+
+**Ground truth:** Saliency (§Guidance by saliency, L141), target features (§Guidance by target features, L153), scene context (§Guidance by scene context features, L177); combined in §Guidance by a combined model of attention (L195), with combined performance in §Modelling Results / Table 1 (L207+).
+
+metrics: tools=4 · struct_tok=474 · content_tok=5037 · total_tok=8420 · $0.0232 · 5.74s
+fetched line ranges: `272-290`, `141-195`
+
+**Answer:**
+
+The three sources of guidance—saliency, target features, and scene context—are defined in separate sections under "MODELLING METHODS" as follows:
+
+1. **Saliency**: Described in "Guidance by saliency" (lines 141–153).
+2. **Target Features**: Explained in "Guidance by target features" (lines 153–177).
+3. **Scene Context**: Discussed in "Guidance by scene context features" (lines 177–195).
+
+The combined performance of these sources is reported in "Combined source models," a section under "MODELLING RESULTS" (lines 272–290). This section states that the integration of these guidance sources into a single combined model outperformed the individual models, achieving an AUC of 0.88 in target-absent scenes and 0.90 in target-present scenes.
+
+Cited Sections:
+- "Guidance by saliency," "Guidance by target features," "Guidance by scene context features," and "Combined source models."
+
+---
+
+### [IDX-D-paper-book-v1 | gpt-4o-2024-11-20] PCS2 — cross-section-synthesis
+
+**Q:** What role does the 'context oracle' play across the paper, and does the purely computational combined model ever match it?
+
+**Expected evidence:** Upper-bound rationale L189; construction L193; comparison L286 ('not significant in target-absent, t(405)=−1.233, p=.218'); oracle-substituted 96% L209.
+
+**Ground truth:** DRAFT: The context oracle is an empirical UPPER BOUND on context-only guidance (L189), built from 7 participants' markings (L193). The computational combined model matches it in target-absent scenes - the difference is not significant (t(405)=−1.233, p=.218, L286) - though substituting the oracle for the computational context model still lifts performance to ~96% of human agreement (L209).
+
+metrics: tools=4 · struct_tok=474 · content_tok=4065 · total_tok=7608 · $0.0223 · 7.35s
+fetched line ranges: `177-195`, `262-290`
+
+**Answer:**
+
+### Role of the Context Oracle
+The "context oracle" serves as a benchmark or upper-bound model for evaluating the predictive power of scene context in guiding visual search. It integrates human input to identify the most contextually relevant regions for potential target locations in a scene. For example, in a search task involving pedestrians, observers marked probable target regions based on scene cues like the horizon or object heights. This pooled empirical data allowed the context oracle to map regions most likely to contain targets, offering a form of "contextual ground truth." This oracle outperformed computational scene context models, achieving higher accuracy in predicting where people would fixate in both target-absent and target-present scenes, with Area Under the Curve (AUC) scores of 0.88–0.89 (from "Guidance by scene context features" and "MODELING RESULTS: Context models").
+
+### Performance of the Combined Model vs. the Context Oracle
+The combined computational model, which integrated saliency, target features, and scene context, achieved nearly equivalent performance to the context oracle. In terms of AUC, the combined model scored 0.88 in target-absent and 0.90 in target-present scenes, matching or slightly exceeding the context oracle in some cases. Notably, the two models' performances were statistically very similar, as the differences were not significant in target-absent scenes (p = .218) and only modestly different in target-present scenes (p = .019). This demonstrates that the computationally combined model can approximate the oracle's guidance without relying on human annotations (from "MODELING RESULTS: Combined source models" and "DISCUSSION").
+
+In summary, the context oracle serves as an empirical upper-bound aid for evaluating guidance models, and the best computational combined model closely matches its performance across tasks.
+
+---
+
+### [IDX-D-paper-book-v1 | gpt-4o-2024-11-20] PRD1 — reflective-discovery
+
+**Q:** What does the paper identify as the core limitation preventing any model from reaching human-level fixation prediction, and what future direction does it propose?
+
+**Expected evidence:** Abstract L46; Discussion L294 ('map selectivity... region size of roughly 40%... tightly clustered'); Concluding Remarks L320.
+
+**Ground truth:** The core limitation is selectivity/precision: human fixations cluster tightly in small regions while models select much broader regions - all models' accuracy falls off sharply as the selected region shrinks (a ~40% region is needed for the combined model to match human detection rate; L294). Proposed direction: future models that capture the mechanisms underlying the tight clustering of human search fixations (L320).
+
+metrics: tools=4 · struct_tok=474 · content_tok=1870 · total_tok=5243 · $0.0151 · 5.23s
+fetched line ranges: `318`, `290`
+
+**Answer:**
+
+The paper identifies that the core limitation preventing any model from reaching human-level fixation prediction is the inability to fully capture the tight clustering of search fixations observed in humans. The combined model of saliency, target features, and scene context achieves 94% agreement with human search patterns; however, it still fails to match the selectivity and specificity of human attention, particularly in situations involving complex scenes or multiple regions of interest (e.g., balconies, ramps, stairs) where simplified models fall short.
+
+As a future direction, the paper suggests exploring more sophisticated and flexible representations of search guidance, such as improved modeling of scene context with multiple-level associations and enhanced target-feature modeling. Developing models with adaptive weights that dynamically adjust depending on the search scenario is also proposed. Additionally, examining various natural scene tasks and integrating semantic influences and prior expectations may improve predictions of human fixation patterns.
+
+Cited sections:
+- "DISCUSSION"
+- "CONCLUDING REMARKS"
+
+---
+
+### [IDX-D-paper-book-v1-clean | gpt-4o-2024-11-20] PDL1 — direct-location
+
+**Q:** How many observers and how many scenes were used in the main eye-tracking search experiment, and what was the search target?
+
+**Expected evidence:** Abstract L46; Introduction L77; Participants L83 ('Fourteen observers'); Stimuli L93 ('912 colour pictures').
+
+**Ground truth:** 14 observers searched 912 outdoor urban scenes (half target-present, half target-absent) for a person/pedestrian.
+
+metrics: tools=3 · struct_tok=462 · content_tok=832 · total_tok=4025 · $0.011 · 5.01s
+fetched line ranges: `57-79`
+
+**Answer:**
+
+The main eye-tracking search experiment involved 14 observers (aged 18–40, with normal acuity). They viewed 912 scenes, which were color pictures of urban environments. Half of the scenes contained a pedestrian, and the other half did not. The search target was a pedestrian within the images.
+
+This information is sourced from the **Participants** and **Stimuli** sections of "Experimental Method."
+
+---
+
+### [IDX-D-paper-book-v1-clean | gpt-4o-2024-11-20] PMP1 — methods-procedural
+
+**Q:** In the Dalal-Triggs target-features detector, what scanning-window size was used and how many pedestrians was the reported implementation trained on?
+
+**Expected evidence:** Guidance by target features, L159 ('scanning window of 32×64 pixels and was trained on 2000 upright, unoccluded pedestrians').
+
+**Ground truth:** A 32x64-pixel scanning window; trained on 2000 upright, unoccluded pedestrians (plus their left-right reflections).
+
+metrics: tools=3 · struct_tok=462 · content_tok=1889 · total_tok=5117 · $0.0139 · 4.26s
+fetched line ranges: `117-135`
+
+**Answer:**
+
+In the Dalal-Triggs (DT) pedestrian detector implementation discussed, the scanning window size used was **32×64 pixels**, and the detector was trained on datasets containing **2000 upright, unoccluded pedestrians** along with their left-right reflections. The pedestrians were cropped from the LabelMe database and resized to fit three-quarters of the window height. Negative training examples included 30 random patches from 2000 outdoor images without people.
+
+This information is from the section titled **"Guidance by target features."**
+
+---
+
+### [IDX-D-paper-book-v1-clean | gpt-4o-2024-11-20] PFT1 — figure-or-table-evidence
+
+**Q:** According to Table 1, what is the scene-context model's Area-Under-Curve (AUC) in target-absent scenes, and how does it compare with the saliency model in the same condition?
+
+**Expected evidence:** Table 1, target-absent block, L217 (Scene context .845) and L215 (Saliency .773).
+
+**Ground truth:** Scene context AUC = .845 vs saliency AUC = .773 in target-absent scenes; scene context is higher by .072.
+
+metrics: tools=3 · struct_tok=462 · content_tok=4321 · total_tok=7589 · $0.0199 · 5.28s
+fetched line ranges: `157-226`
+
+**Answer:**
+
+According to Table 1, the **scene-context model's Area-Under-Curve (AUC) in target-absent scenes is 0.845**. In comparison, the **saliency model's AUC in the same condition is 0.773**, which is lower than the scene-context model's performance.
+
+These details are from the section titled "Saliency and target features models."
+
+---
+
+### [IDX-D-paper-book-v1-clean | gpt-4o-2024-11-20] PFT3 — figure-or-table-evidence
+
+**Q:** What does Figure 8 compare, and how are the two panels defined?
+
+**Expected evidence:** Figure 8 caption, L205 ('Comparison between (a) the computationally defined scene context map and (b) the empirically defined context oracle map for a single image').
+
+**Ground truth:** Figure 8 compares, for a single image, (a) the computationally-defined scene-context map vs (b) the empirically-defined context-oracle map (both thresholded at 20% of image area, with human-fixation dots).
+
+metrics: tools=7 · struct_tok=924 · content_tok=9768 · total_tok=31033 · $0.0792 · 9.5s
+fetched line ranges: `1-36`, `157-226`, `204-226`, `157-204`
+
+**Answer:**
+
+Figure 8 analyzes failures of the "context model" in approximating search fixations in certain scenes. The two panels are defined as:
+
+1. **Scenes where the model fails to identify the correct relationship between scene layout and probable target location.**
+2. **Scenes where human fixations fall largely outside the model-identified "context region."**
+
+These panels help highlight the distinctions between specific model inaccuracies and discrepancies arising from human search patterns versus computational predictions (see **Context Models** section).
+
+---
+
+### [IDX-D-paper-book-v1-clean | gpt-4o-2024-11-20] PEG2 — evidence-gap
+
+**Q:** Does the paper report human behavioural performance (accuracy, reaction time) for the search task, or only computational model AUCs?
+
+**Expected evidence:** Accuracy and eye movement statistics, L109 ('hits was 87%. The false alarm rate (fa)... was 3%... mean reaction time was 1050 ms... 1517 ms').
+
+**Ground truth:** It reports both: human behavioural stats appear in 'Accuracy and eye movement statistics' - hits 87%, false-alarm rate 3%, mean RT 1050 ms (target-present) / 1517 ms (target-absent), ~3.5 vs 5.1 fixations. So the answer is 'yes, behavioural measures are reported', not only AUCs.
+
+metrics: tools=4 · struct_tok=462 · content_tok=5433 · total_tok=8842 · $0.0245 · 5.55s
+fetched line ranges: `81-87`, `157-226`
+
+**Answer:**
+
+The paper reports both human behavioral performance (accuracy and reaction time) and computational model AUCs for the search task:
+
+1. **Human behavioral performance**:
+   - Average accuracy for target-present scenes was 87%, with a false alarm rate of 3% in target-absent scenes.
+   - Mean reaction times were 1050 ms (±18 SEM) for target-present and 1517 ms (±14 SEM) for target-absent trials.
+   - Search involved an average of 3.5 fixations in target-present and 5.1 fixations in target-absent scenes.
+   (Source: "Accuracy and eye movement statistics")
+
+2. **Computational model AUCs**:
+   - The combined source model (integrating saliency, target features, and scene context) achieved AUCs of 0.88 in target-absent scenes and 0.90 in target-present scenes, closely approximating 94% of the AUC for human agreement.
+   (Source: "Combined source models" under "Modelling Results")
+
+Thus, both human behavioral metrics and model-based metrics (e.g., AUC) are reported.
+
+---
+
+### [IDX-D-paper-book-v1-clean | gpt-4o-2024-11-20] PCS1 — cross-section-synthesis
+
+**Q:** The model combines three sources of guidance. Where is each source defined, and which section reports their combined performance?
+
+**Expected evidence:** Guidance by saliency L141; Guidance by target features L153; Guidance by scene context features L177; combined L195; Modelling Results / Table 1 L207+.
+
+**Ground truth:** Saliency (§Guidance by saliency, L141), target features (§Guidance by target features, L153), scene context (§Guidance by scene context features, L177); combined in §Guidance by a combined model of attention (L195), with combined performance in §Modelling Results / Table 1 (L207+).
+
+metrics: tools=4 · struct_tok=462 · content_tok=4901 · total_tok=8293 · $0.0231 · 6.73s
+fetched line ranges: `212-226`, `109-149`
+
+**Answer:**
+
+### Definitions of the Sources of Guidance
+1. **Saliency**: Defined as visual regions that stand out due to local contrasts in image features like color and orientation (lines 109–117, section "Guidance by saliency").
+2. **Target Features**: Based on specific attributes of the object being searched for, modeled using a person detection algorithm (lines 117–135, section "Guidance by target features").
+3. **Scene Context Features**: Explains how global spatial and orientation properties in an image guide attention to likely areas where targets may appear (lines 135–149, section "Guidance by scene context features").
+
+Each source and their integration is explained under the "Modelling Methods" section.
+
+---
+
+### Evaluation of Combined Performance
+The performance of the combined model, integrating saliency, target features, and scene context, is reported in the "Combined source models" section under "Modelling Results" (lines 212–226). It outperformed individual models with high Area Under the Curve (AUC) scores, achieving .90 for target-present and .88 for target-absent scenes. The results indicate strong dependence on the scene context component.
+
+---
+
+### [IDX-D-paper-book-v1-clean | gpt-4o-2024-11-20] PCS2 — cross-section-synthesis
+
+**Q:** What role does the 'context oracle' play across the paper, and does the purely computational combined model ever match it?
+
+**Expected evidence:** Upper-bound rationale L189; construction L193; comparison L286 ('not significant in target-absent, t(405)=−1.233, p=.218'); oracle-substituted 96% L209.
+
+**Ground truth:** DRAFT: The context oracle is an empirical UPPER BOUND on context-only guidance (L189), built from 7 participants' markings (L193). The computational combined model matches it in target-absent scenes - the difference is not significant (t(405)=−1.233, p=.218, L286) - though substituting the oracle for the computational context model still lifts performance to ~96% of human agreement (L209).
+
+metrics: tools=4 · struct_tok=462 · content_tok=3965 · total_tok=7426 · $0.0214 · 6.14s
+fetched line ranges: `135-149`, `204-226`
+
+**Answer:**
+
+The "context oracle" serves as an empirical benchmark for evaluating search models in the paper. It represents an idealized identification of the most contextually relevant regions in a scene, as determined by humans marking probable target locations for pedestrians based on contextual cues. By pooling these human responses, the oracle provides an upper bound for how well a model based solely on scene context might perform. It consistently outperforms the computational context model, highlighting its role as a "ground truth" comparator. For example, the oracle achieved AUCs of 0.88 and 0.89 in target-absent and target-present scenes, respectively, surpassing the computational scene context model’s AUC performance of 0.85 and 0.84 ([“Guidance by scene context features”](135-149) and [“Context models”](204-226)).
+
+The purely computational *combined model* (integrating saliency, target features, and scene context) performed almost as well as the empirical context oracle. For target-absent images, the difference in performance between them was not significant (t(405) = -1.233, p = .218), and for target-present images, the difference was marginally significant but small (t(404) = 2.346, p = .019). This suggests that a properly weighted computational model can approach—but not fully match—the idealized performance represented by the context oracle ([“Combined source models”](204-226)).
+
+---
+
+### [IDX-D-paper-book-v1-clean | gpt-4o-2024-11-20] PRD1 — reflective-discovery
+
+**Q:** What does the paper identify as the core limitation preventing any model from reaching human-level fixation prediction, and what future direction does it propose?
+
+**Expected evidence:** Abstract L46; Discussion L294 ('map selectivity... region size of roughly 40%... tightly clustered'); Concluding Remarks L320.
+
+**Ground truth:** The core limitation is selectivity/precision: human fixations cluster tightly in small regions while models select much broader regions - all models' accuracy falls off sharply as the selected region shrinks (a ~40% region is needed for the combined model to match human detection rate; L294). Proposed direction: future models that capture the mechanisms underlying the tight clustering of human search fixations (L320).
+
+metrics: tools=3 · struct_tok=462 · content_tok=1830 · total_tok=5131 · $0.0145 · 5.94s
+fetched line ranges: `226-246`
+
+**Answer:**
+
+The paper identifies the core limitation preventing any model from reaching human-level fixation prediction as the inability to fully emulate the selectivity and specificity of human fixations. Computational models, including the combined model (integrating saliency, target features, and scene context), fail to match the precise clustering of observer-defined attentional maps, especially in scenes where complex contexts or unexpected target locations exist. This limitation arises partly from the rigid representations of context and other guidance components, which do not account for the flexibility and dynamic nature of human attention.
+
+As a future direction, the paper proposes improving the representation of search guidance by incorporating more flexible weights for individual guidance sources, adapting to context-specific demands. It also emphasizes exploring diverse natural scene search tasks and refining underlying features of saliency, target attributes, and context to advance model performance closer to human-level accuracy.
+
+*(Cited sections: "Discussion" and "Concluding Remarks.")*
+
+---

@@ -130,9 +130,10 @@ Full claim-by-claim treatment with confidence ratings: `evaluations/V1_FINDINGS_
 ### 2.2 The summary-threshold discovery (mechanism finding)
 
 Inspecting IDX-C/IDX-O revealed that PageIndex's Markdown path only generates a real
-summary when a node's text exceeds `--summary-token-threshold` (default **200 tokens**,
-undocumented); below that it **copies the node text verbatim** into `summary`. The PDF path
-always generates real summaries and silently ignores the flag. On this heading-dense corpus:
+summary when a node's text exceeds `--summary-token-threshold` (default **200 tokens**;
+the CLI `--help` marks the flag "markdown only", but the verbatim-copy behavior itself is
+documented nowhere); below that it **copies the node text verbatim** into `summary`. The
+PDF path always generates real summaries and ignores the flag. On this heading-dense corpus:
 
 | | IDX-C | IDX-O |
 |---|---|---|
@@ -316,8 +317,9 @@ Defensible claims, at the narrowest level the evidence supports:
 1. On a corpus with authored structure, **retrieval quality was governed by the navigator,
    not the index** (moderate confidence; n=14, single-run cells).
 2. **PageIndex's default "add summaries" on Markdown is largely a no-op that costs 4×**:
-   ~80% verbatim copies, undocumented threshold, Markdown-only behavior inconsistent with
-   the PDF path (high confidence; mechanism verified in upstream code, unmodified submodule).
+   ~80% verbatim copies, the verbatim semantics undocumented, and behavior inconsistent
+   with the PDF path (high confidence; mechanism verified in upstream code, and confirmed
+   unchanged on upstream `main` — which equals our pinned `f413c66` — on 2026-07-15).
 3. **Properly generated summaries are a corpus-dependent trade, not an upgrade**: +0.7 mean
    rubric score on the discursive website corpus; **−0.23 objective recall at 4.6× cost** on
    the deep technical spec, with answers propped up by the summaries themselves
@@ -386,5 +388,6 @@ Every run folder carries `run.json` (full tool traces, per-question telemetry) a
 - **IDX-O0** (local threshold-0 summaries) and the P3 weak-navigator prediction.
 - Repeatable multi-judge scoring (`scripts/score_run.py`) and n>1 for the subjective grid.
 - Live capture of the prompt-cache write premium.
-- Possible upstream issue: the Markdown/PDF summary-path inconsistency and the silent
-  `--summary-token-threshold` no-op on PDFs.
+- Upstream issue **drafted** (`reports/upstream-issue-draft.md`): the verbatim-copy
+  summary semantics and the Markdown/PDF path divergence. Verified unchanged on upstream
+  `main` (= `f413c66`) on 2026-07-15; no existing upstream report. Awaiting review + filing.

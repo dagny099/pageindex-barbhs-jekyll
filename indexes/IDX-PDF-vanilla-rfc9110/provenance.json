@@ -1,0 +1,39 @@
+{
+  "index_id": "IDX-PDF-vanilla-rfc9110",
+  "condition": "vanilla-pdf (PageIndex native --pdf_path; inferred structure)",
+  "description": "PageIndex as shipped: native PDF ingestion of RFC 9110 with inferred TOC/section structure and generated node summaries. The PDF (Set C) arm of the RFC 9110 long-document corpus, for the Markdown-vs-PDF representation comparison. Text fidelity is PageIndex's own extraction (uncorrected).",
+  "source": "sources/rfc9110/rfc9110.pdf",
+  "source_pdf_sha256": "60b30efa1048900833d1758440247fe8ac85a3134f2327388dcb24e07d814c89",
+  "pageindex_commit": "f413c66fee0bfbb7291c389333f9cc1adac68d57",
+  "generation": {
+    "tool": "scripts/build_index_metered.py",
+    "mode": "pdf",
+    "model": "gpt-4o-2024-11-20",
+    "provider": "openai",
+    "flags": {
+      "if_add_node_summary": "yes",
+      "if_add_doc_description": "no",
+      "if_add_node_text": "no",
+      "if_add_node_id": "yes"
+    },
+    "uses_llm": true,
+    "toc_note": "PageIndex found no clean page-numbered TOC (page-number path 50% accuracy); it generated a TOC from scratch (~91.7% accuracy) then ran repeated fix_incorrect_toc passes. This TOC-repair loop is the dominant cost on this spec.",
+    "build_note": "Built via the metered wrapper with the persistent response cache: recorded across a $0.50 record spike + a --resume completion pass (run_id 20260715T022226Z). Realized cost ~$6.44 total; the full pass metered $5.94 of NEW spend (1271 live calls) while replaying 613 calls for $0 (276 from the spike + ~337 intra-run duplicate requests deduped by the content-addressed cache).",
+    "cost_calibration": "realized ~2.96x the estimate_pdf high estimate ($2.01) — the 2-4x input rule-of-thumb under-predicts TOC-repair-heavy specs (~1 LLM call per structural item)."
+  },
+  "node_count": 474,
+  "node_fields": [
+    "end_index",
+    "node_id",
+    "start_index",
+    "summary",
+    "title"
+  ],
+  "addressing": "physical page (start_index/end_index), NOT line numbers",
+  "summary_stats": {
+    "nodes_with_generated_summary": 470,
+    "nodes_total": 474
+  },
+  "text_fidelity": "uncorrected PageIndex PDF extraction (if_add_node_text=no, so node body text is not stored in this index; structure + summaries only).",
+  "generated_at": "2026-07-15T02:26:39Z"
+}

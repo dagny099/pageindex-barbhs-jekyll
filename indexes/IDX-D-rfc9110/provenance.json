@@ -1,0 +1,34 @@
+{
+  "index_id": "IDX-D-rfc9110",
+  "condition": "deterministic-markdown",
+  "description": "Deterministic heading tree over RFC 9110 (Markdown converted from the official HTML). No LLM, no summaries. The control twin for the summary test (see reports/design-rfc-summary-test.md).",
+  "corpus_version": "rfc9110-book-v1",
+  "corpus_sha256": "d034ec44e13ccd27ffe2289020471a671a87e0174057120285bce77e22d5cfa9",
+  "source": {
+    "html": "sources/rfc9110/rfc9110.html",
+    "html_sha256": "d431760660ea44e130f6e919dab216df2d0b3a490567a98089267523368fe1e5",
+    "markdown": "workspace/rfc9110.md",
+    "markdown_sha256": "d034ec44e13ccd27ffe2289020471a671a87e0174057120285bce77e22d5cfa9",
+    "conversion": "stdlib html.parser HTML->Markdown (h1-6 -> heading depth; <nav> ToC skipped). TODO: formalize into scripts/."
+  },
+  "generation": {
+    "tool": "build_index_metered.py --md_path",
+    "uses_llm": false,
+    "flags": {
+      "if_add_node_summary": "no",
+      "if_add_doc_description": "no",
+      "if_add_node_text": "yes"
+    }
+  },
+  "node_count": 311,
+  "node_fields": [
+    "title",
+    "text",
+    "node_id",
+    "line_num"
+  ],
+  "addressing": "line",
+  "build_cost_usd": 0.0,
+  "repo_commit": "1633599945deb1bd4c8eb16b988913babfb50128",
+  "generated_at": "2026-07-15T04:39:14Z"
+}

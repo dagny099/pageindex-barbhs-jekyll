@@ -228,12 +228,14 @@ functions or shell out to the scripts). They need the analysis extras — `panda
 .venv/bin/python -m ipykernel install --user --name pageindex   # register .venv as a kernel
 ```
 
-| Notebook | What it answers |
-|---|---|
-| `notebooks/analyze_retrieval_recall.ipynb` | one run: recall + per-question pivot + drill-down (Steps 1–4) |
-| `notebooks/cost_dashboard.ipynb` | `usage_log.jsonl`: spend by phase/run/source, cache-replay, token amplification |
-| `notebooks/compare_conditions.ipynb` | many runs at once: recall heatmap, efficiency frontier, biggest gaps |
-| `notebooks/validate_gold.ipynb` | **before spending:** do a corpus's gold sections resolve to nodes in an index? |
+Numbered by the **experiment lifecycle** (see [`notebooks/README.md`](../notebooks/README.md)):
+
+| # | Notebook | When / what it answers |
+|---|----------|------------------------|
+| 1 | `notebooks/1_validate_gold.ipynb` | **before spending:** do a corpus's gold sections resolve to nodes in an index? |
+| 2 | `notebooks/2_analyze_one_run.ipynb` | after one run: recall + per-question pivot + drill-down (Steps 1–4) |
+| 3 | `notebooks/3_compare_conditions.ipynb` | after several runs: recall heatmap, efficiency frontier, biggest gaps |
+| 4 | `notebooks/4_cost_dashboard.ipynb` | anytime (cross-cutting): spend by phase/run/source, cache-replay, amplification |
 
 Convention: commit notebooks with **outputs cleared** (tools, not results); if a chart becomes a
 finding worth keeping, export it to `reports/` as static HTML/SVG.

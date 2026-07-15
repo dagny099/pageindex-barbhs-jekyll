@@ -20,3 +20,10 @@ litellm==1.84.0          # enables non-OpenAI retrievers (Claude, Ollama) via th
 
 # --- Dev / tests (scripts/render_index_comparison.py itself has no runtime deps) ---
 pytest
+
+# --- Notebooks / analysis (read-only exploration over runs/, indexes/, evaluations/) ---
+# Powers notebooks/*.ipynb (cost dashboard, cross-condition explorer, gold validator).
+# Not needed to run the scripts; install to use the notebooks.
+pandas==3.0.3
+altair==6.2.2            # declarative Vega-Lite charts; themed via scripts/viz_theme.py
+ipykernel==7.3.0         # register .venv as a Jupyter kernel: python -m ipykernel install --user --name pageindex

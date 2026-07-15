@@ -213,3 +213,27 @@ The payoff — the tooling is general. For a new bookmarked PDF `sources/<doc>/<
 **The one rule that makes replication work:** gold is expressed as **section/heading
 identifiers that appear in node titles**. Everything else — addressing, page vs line, which
 representation — the tools handle automatically.
+
+---
+
+## 8. Analyzing results — notebooks (read-only)
+
+Notebooks are the **read-only analysis layer**: they consume `runs/`, `indexes/`, and
+`evaluations/` outputs and never re-implement build/score/spend logic (they import the tested
+functions or shell out to the scripts). They need the analysis extras — `pandas`, `altair`,
+`ipykernel` — from `requirements.txt`; charts use the brand palette via `scripts/viz_theme.py`.
+
+```bash
+.venv/bin/pip install -r requirements.txt            # once: pandas + altair + ipykernel
+.venv/bin/python -m ipykernel install --user --name pageindex   # register .venv as a kernel
+```
+
+| Notebook | What it answers |
+|---|---|
+| `notebooks/analyze_retrieval_recall.ipynb` | one run: recall + per-question pivot + drill-down (Steps 1–4) |
+| `notebooks/cost_dashboard.ipynb` | `usage_log.jsonl`: spend by phase/run/source, cache-replay, token amplification |
+| `notebooks/compare_conditions.ipynb` | many runs at once: recall heatmap, efficiency frontier, biggest gaps |
+| `notebooks/validate_gold.ipynb` | **before spending:** do a corpus's gold sections resolve to nodes in an index? |
+
+Convention: commit notebooks with **outputs cleared** (tools, not results); if a chart becomes a
+finding worth keeping, export it to `reports/` as static HTML/SVG.

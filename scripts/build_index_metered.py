@@ -37,6 +37,17 @@ USAGE (from the repo root, so dotenv finds .env)
       --if-add-node-summary yes --summary-token-threshold 0 --index-label IDX-C0-paper
   .venv/bin/python scripts/build_index_metered.py --self-test    # offline, no API calls
 
+RESUMING AN ABORTED BUILD
+-------------------------
+Every paid response is recorded to a persistent cache (runs/llm-cache/<stem>/,
+keyed by request content) — always, no flag needed. If a build aborts at the
+cost bound, re-run the SAME command with --resume: recorded calls replay for
+free and only NEW calls hit the API, so the abort bound becomes a resumable
+down-payment. Ratchet a stubborn build to completion by raising --abort-over
+each pass (e.g. 4, then 8); each pass replays the prior work at $0.
+  .venv/bin/python scripts/build_index_metered.py --pdf_path sources/rfc9110/rfc9110.pdf \
+      --resume --abort-over 8
+
 Output tree goes to results/<stem>_structure.json (gitignored scratch) unless
 --out is given; curate keepers into indexes/IDX-*/ by hand as usual. Afterwards:
   python3 scripts/cost_report.py --run <run_id>
@@ -46,6 +57,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import hashlib
 import json
 import os
 import sys
@@ -80,6 +92,7 @@ class Meter:
         self.abort_usd = abort_usd
         self.rows = []
         self.total_usd = 0.0
+        self.replays = 0                # cache-replay rows (cost $0, not billed this run)
         self._lock = threading.Lock()  # sync calls may arrive from worker threads
 
     def capture(self, response, model: str | None, latency_s: float) -> None:
@@ -107,10 +120,28 @@ class Meter:
                   f"Partial usage rows are in {self.log_path} (run_id {self.run_id}).")
             raise KeyboardInterrupt("cost abort bound exceeded")
 
+    def record_replay(self, model: str | None) -> None:
+        """Log a zero-cost row for a call served from the response cache. The
+        tokens were billed on the original run, so this row carries zero tokens
+        (cost $0) and source="cache-replay" — it keeps the per-call ledger
+        complete without re-counting spend or moving toward the abort bound."""
+        with self._lock:
+            rec = record_usage(
+                {"prompt_tokens": 0, "completion_tokens": 0},
+                run_id=self.run_id, qid=self.qid, index=self.index,
+                retriever=model or self.fallback_model, call_idx=len(self.rows),
+                phase="index_build", latency_s=0.0,
+                log_path=self.log_path, source="cache-replay",
+            )
+            self.rows.append(rec)
+            self.replays += 1
+
     def summary(self) -> dict:
         f = lambda name: sum(getattr(r, name) for r in self.rows)
         return {
             "calls": len(self.rows),
+            "live_calls": len(self.rows) - self.replays,  # actually billed this run
+            "replays": self.replays,                      # served from cache at $0
             "input_tokens": f("input_tokens"),
             "output_tokens": f("output_tokens"),
             "cache_read_tokens": f("cache_read_tokens"),
@@ -119,20 +150,113 @@ class Meter:
         }
 
 
-def install_meter(litellm_module, meter: Meter) -> None:
+# --------------------------------------------------------------------------
+# Persistent response cache: turn an aborted build into a resumable
+# down-payment. WRITE is always on (persist every paid response); READ/replay
+# is opt-in (`resume`). Keyed by request CONTENT, not call order — index-build
+# fans calls out concurrently (asyncio.gather), so ordering is nondeterministic,
+# but the request surface PageIndex sends is exactly {model, messages,
+# temperature} (vendor utils.py:40-44,70-74), which is stable across runs.
+# --------------------------------------------------------------------------
+
+class ResponseCache:
+    def __init__(self, cache_dir: str | os.PathLike, *, resume: bool, strict: bool):
+        self.dir = Path(cache_dir)
+        self.dir.mkdir(parents=True, exist_ok=True)
+        self.resume = resume
+        self.strict = strict
+        self.hits = 0
+        self.writes = 0
+        self._lock = threading.Lock()
+
+    @staticmethod
+    def _key(kwargs: dict) -> str:
+        payload = {
+            "model": normalize_model(kwargs.get("model") or ""),
+            "messages": kwargs.get("messages"),
+            "temperature": kwargs.get("temperature", 0),
+        }
+        blob = json.dumps(payload, sort_keys=True, ensure_ascii=False, default=str)
+        return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+    def _path(self, key: str) -> Path:
+        return self.dir / f"{key}.json"
+
+    def get(self, kwargs: dict):
+        """On a resume run, return a rehydrated ModelResponse for a previously
+        recorded request; else None (a miss falls through to a live call)."""
+        if not self.resume:
+            return None
+        p = self._path(self._key(kwargs))
+        if not p.is_file():
+            return None
+        import litellm
+        data = json.loads(p.read_text(encoding="utf-8"))
+        with self._lock:
+            self.hits += 1
+        return litellm.ModelResponse(**data["response"])
+
+    def put(self, kwargs: dict, response) -> None:
+        """Persist a real response (always-on). Idempotent per content key; a
+        unique temp name + os.replace keeps concurrent writers safe."""
+        key = self._key(kwargs)
+        p = self._path(key)
+        if p.exists():
+            return
+        try:
+            payload = {"response": response.model_dump()}
+        except Exception as e:  # never let caching break a build
+            print(f"  [cache] skip write ({type(e).__name__}: {e})")
+            return
+        tmp = p.with_name(f"{key}.{os.getpid()}.{threading.get_ident()}.tmp")
+        tmp.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+        os.replace(tmp, p)
+        with self._lock:
+            self.writes += 1
+
+
+def install_meter(litellm_module, meter: Meter, cache: ResponseCache | None = None) -> None:
     orig_sync = litellm_module.completion
     orig_async = litellm_module.acompletion
 
+    def _replay_or_none(kwargs):
+        """Cache read + strict-resume guard, shared by sync and async paths.
+        Returns a rehydrated response on a hit, else None (caller does the live
+        call). Under --strict-resume, a miss on a resume run halts the build —
+        after a partial cache that halt lands exactly at the recorded prefix's
+        edge, proving the whole prefix replayed with zero divergence."""
+        if cache is None:
+            return None
+        hit = cache.get(kwargs)
+        if hit is not None:
+            meter.record_replay(kwargs.get("model"))
+            return hit
+        if cache.resume and cache.strict:
+            print(f"\n!! STRICT-RESUME: cache miss after {cache.hits} replays "
+                  f"(recorded prefix exhausted or request sequence diverged).")
+            raise KeyboardInterrupt("strict-resume: cache miss")
+        return None
+
     def completion(*args, **kwargs):
+        hit = _replay_or_none(kwargs)
+        if hit is not None:
+            return hit
         t0 = time.perf_counter()
         resp = orig_sync(*args, **kwargs)
         meter.capture(resp, kwargs.get("model"), time.perf_counter() - t0)
+        if cache is not None:
+            cache.put(kwargs, resp)
         return resp
 
     async def acompletion(*args, **kwargs):
+        hit = _replay_or_none(kwargs)
+        if hit is not None:
+            return hit
         t0 = time.perf_counter()
         resp = await orig_async(*args, **kwargs)
         meter.capture(resp, kwargs.get("model"), time.perf_counter() - t0)
+        if cache is not None:
+            cache.put(kwargs, resp)
         return resp
 
     litellm_module.completion = completion
@@ -262,7 +386,19 @@ def run_build(args) -> None:
         abort_usd = round(2 * hi, 2) if hi else None
     else:
         abort_usd = args.abort_over or None
-    print(f"abort bound: {'$%.2f' % abort_usd if abort_usd else 'DISABLED'}")
+    print(f"abort bound: {'$%.2f' % abort_usd if abort_usd else 'DISABLED'}"
+          + ("  (bounds NEW spend this run; replayed calls are free)" if args.resume else ""))
+
+    # ---- response cache (always-on write; opt-in replay) ----
+    cache = None
+    if not args.no_cache:
+        cache = ResponseCache(Path(args.cache_dir) / src.stem,
+                              resume=args.resume, strict=args.strict_resume)
+        mode = "replay+record" if args.resume else "record-only"
+        recorded = len(list(cache.dir.glob("*.json")))
+        print(f"cache:  {cache.dir}  ({mode}; {recorded} recorded responses)")
+        if args.resume and recorded == 0:
+            print("        note: --resume with an empty cache — nothing to replay yet.")
 
     if not args.yes:
         if input("Proceed with the paid build? [y/N] ").strip().lower() != "y":
@@ -272,7 +408,7 @@ def run_build(args) -> None:
     meter = Meter(run_id=run_id, qid=src.stem, index=args.index_label,
                   fallback_model=model, log_path=str(args.log),
                   abort_usd=abort_usd)
-    install_meter(litellm, meter)
+    install_meter(litellm, meter, cache)
 
     t0 = time.perf_counter()
     if args.pdf_path:
@@ -298,11 +434,16 @@ def run_build(args) -> None:
     # ---- reconcile against the estimate ----
     s = meter.summary()
     print(f"\ntree written to: {out_path}")
-    print(f"build time: {elapsed:.1f}s   LLM calls: {s['calls']}")
+    print(f"build time: {elapsed:.1f}s   LLM calls: {s['calls']}"
+          + (f" ({s['replays']} replayed free / {s['live_calls']} live)" if s["replays"] else ""))
+    if cache is not None and s["replays"]:
+        print(f"resume: {s['replays']} calls served from cache at $0; "
+              f"paid for {s['live_calls']} new calls this run")
     print(f"tokens: {s['input_tokens']:,} in / {s['output_tokens']:,} out"
           + (f" / {s['cache_read_tokens']:,} cache-read" if s["cache_read_tokens"] else "")
           + (f" / {s['cache_creation_tokens']:,} cache-write" if s["cache_creation_tokens"] else ""))
-    print(f"metered cost: ${s['cost_usd']:.4f}")
+    print(f"metered cost: ${s['cost_usd']:.4f}"
+          + ("  (new spend this run; replayed calls excluded)" if s["replays"] else ""))
     if hi and hi > 0:
         print(f"realized/estimated(high): {s['cost_usd'] / hi:.2f} "
               f"(brief §4.2 step 5: scale up only if <= ~1.5; record this ratio)")
@@ -372,6 +513,89 @@ def self_test() -> None:
     est_off = estimate_md(md, threshold=200, model="gpt-4o-2024-11-20", summaries=False)
     check("md estimator summaries-off", est_off["calls"], 0)
 
+    # 5. ResponseCache: content-addressed key + write/replay roundtrip.
+    import litellm
+    kw = {"model": "gpt-4o-2024-11-20",
+          "messages": [{"role": "user", "content": "hello"}], "temperature": 0}
+    kw_same = {"messages": [{"role": "user", "content": "hello"}],  # different kwarg order
+               "model": "gpt-4o-2024-11-20", "temperature": 0}
+    kw_diff = {"model": "gpt-4o-2024-11-20",
+               "messages": [{"role": "user", "content": "goodbye"}], "temperature": 0}
+    check("key stable across kwarg order",
+          ResponseCache._key(kw) == ResponseCache._key(kw_same), True)
+    check("key sensitive to messages",
+          ResponseCache._key(kw) != ResponseCache._key(kw_diff), True)
+    check("key normalizes provider prefix",
+          ResponseCache._key({**kw, "model": "openai/gpt-4o-2024-11-20"})
+          == ResponseCache._key(kw), True)
+    with tempfile.TemporaryDirectory() as td:
+        resp = litellm.ModelResponse(choices=[{"index": 0, "finish_reason": "stop",
+                "message": {"role": "assistant", "content": "CACHED"}}],
+                usage={"prompt_tokens": 5, "completion_tokens": 2})
+        c = ResponseCache(td, resume=False, strict=False)
+        c.put(kw, resp)
+        check("record wrote one cache file", c.writes, 1)
+        c.put(kw, resp)  # idempotent per content key
+        check("second write is idempotent", c.writes, 1)
+        check("record-only mode never replays", c.get(kw), None)
+        c.resume = True
+        hit = c.get(kw)
+        check("replay rehydrates content",
+              hit.choices[0].message.content if hit else None, "CACHED")
+        check("replay miss returns None", c.get(kw_diff), None)
+
+    # 6. install_meter with a cache: run 1 records (billed), run 2 replays ($0),
+    #    and --strict-resume halts on a miss.
+    call_count = {"n": 0}
+    def _mk_resp(**kw):
+        call_count["n"] += 1
+        return litellm.ModelResponse(
+            choices=[{"index": 0, "finish_reason": "stop",
+                      "message": {"role": "assistant", "content": "R"}}],
+            usage={"prompt_tokens": 100, "completion_tokens": 10})
+    with tempfile.TemporaryDirectory() as td:
+        cache_dir, log = Path(td) / "cache", str(Path(td) / "log.jsonl")
+        req = {"model": "gpt-4o-2024-11-20",
+               "messages": [{"role": "user", "content": "q"}], "temperature": 0}
+
+        # run 1: record-only — a live call happens and is billed.
+        lite1 = NS(completion=_mk_resp)
+        async def _a1(**kw): return _mk_resp(**kw)
+        lite1.acompletion = _a1
+        m1 = Meter(run_id="T", qid="d", index="IDX-T",
+                   fallback_model="gpt-4o-2024-11-20", log_path=log, abort_usd=None)
+        c1 = ResponseCache(cache_dir, resume=False, strict=False)
+        install_meter(lite1, m1, c1)
+        lite1.completion(**req)
+        check("run1 made a live call", call_count["n"], 1)
+        check("run1 billed the call", m1.summary()["cost_usd"] > 0, True)
+
+        # run 2: resume — the SAME request replays for free, no live call.
+        lite2 = NS(completion=_mk_resp)
+        async def _a2(**kw): return _mk_resp(**kw)
+        lite2.acompletion = _a2
+        m2 = Meter(run_id="T", qid="d", index="IDX-T",
+                   fallback_model="gpt-4o-2024-11-20", log_path=log, abort_usd=None)
+        c2 = ResponseCache(cache_dir, resume=True, strict=False)
+        install_meter(lite2, m2, c2)
+        before = call_count["n"]
+        lite2.completion(**req)
+        check("run2 made NO live call", call_count["n"], before)
+        check("run2 logged a replay", m2.summary()["replays"], 1)
+        check("run2 replay cost $0", m2.summary()["cost_usd"], 0.0)
+
+        # strict-resume: a request NOT in cache halts the build.
+        m3 = Meter(run_id="T", qid="d", index="IDX-T",
+                   fallback_model="gpt-4o-2024-11-20", log_path=log, abort_usd=None)
+        c3 = ResponseCache(cache_dir, resume=True, strict=True)
+        install_meter(lite2, m3, c3)
+        try:
+            lite2.completion(model="gpt-4o-2024-11-20",
+                             messages=[{"role": "user", "content": "UNSEEN"}], temperature=0)
+            check("strict-resume halts on miss", False, True)
+        except KeyboardInterrupt:
+            check("strict-resume halts on miss", True, True)
+
     if failures:
         raise SystemExit(f"self-test FAILED: {failures}")
     print("self-test OK")
@@ -403,7 +627,20 @@ def main() -> None:
     p.add_argument("--yes", action="store_true", help="skip the pre-flight confirmation")
     p.add_argument("--abort-over", type=float, default=-1,
                    help="hard-stop the build past this USD spend; "
-                        "-1 = auto (2x high estimate), 0 = disabled")
+                        "-1 = auto (2x high estimate), 0 = disabled. "
+                        "With --resume this bounds only NEW spend this run.")
+    p.add_argument("--cache-dir", type=str, default=str(REPO / "runs" / "llm-cache"),
+                   help="root of the persistent response cache (namespaced by doc stem)")
+    p.add_argument("--no-cache", action="store_true",
+                   help="disable the response cache entirely (no record, no replay)")
+    p.add_argument("--resume", action="store_true",
+                   help="replay previously recorded responses for free; only NEW "
+                        "calls hit the API. Turns an aborted build into a resumable "
+                        "down-payment (writes are always recorded regardless).")
+    p.add_argument("--strict-resume", action="store_true",
+                   help="with --resume, halt on the first cache miss instead of "
+                        "paying for a live call (proves a recorded prefix replays "
+                        "with zero divergence).")
     p.add_argument("--log", type=str, default=str(DEFAULT_LOG))
     p.add_argument("--self-test", action="store_true",
                    help="offline checks of metering, abort, and estimators")
@@ -414,6 +651,8 @@ def main() -> None:
         return
     if bool(args.pdf_path) == bool(args.md_path):
         p.error("exactly one of --pdf_path / --md_path is required")
+    if args.strict_resume:
+        args.resume = True  # strict is a mode of resume; enable it implicitly
     if args.index_label is None:
         args.index_label = f"BUILD-{Path(args.pdf_path or args.md_path).stem}"
     run_build(args)

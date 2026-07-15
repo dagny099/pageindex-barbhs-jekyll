@@ -9,5 +9,8 @@ logs/
 workspace/
 workspaces/
 
+# persistent LLM response cache (build resume/replay); runs/ itself is tracked
+runs/llm-cache/
+
 vendor/PageIndex/results/
 vendor/PageIndex/logs/

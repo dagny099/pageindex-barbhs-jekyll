@@ -53,3 +53,27 @@ def test_summaries_off_is_estimated_free(tmp_path):
     r = run(["--md_path", str(md), "--if-add-node-summary", "no",
              "--log", str(tmp_path / "usage.jsonl")], input="n\n")
     assert "0 summary calls" in r.stdout
+
+
+def test_resume_preflight_reports_cache_and_declines(tmp_path):
+    """--resume surfaces the cache in the pre-flight; declining still spends
+    nothing and records nothing (the cache dir stays empty)."""
+    md = tmp_path / "doc.md"
+    md.write_text("# Big\n" + ("word " * 400) + "\n## Small\ntiny\n", encoding="utf-8")
+    cache = tmp_path / "cache"
+    r = run(["--md_path", str(md), "--if-add-node-summary", "yes",
+             "--cache-dir", str(cache), "--resume",
+             "--log", str(tmp_path / "usage.jsonl")], input="n\n")
+    assert r.returncode != 0
+    assert "replay+record" in r.stdout           # resume mode announced
+    assert "empty cache" in r.stdout             # nothing recorded yet
+    # declining the pre-flight writes no cache files
+    assert not (cache / "doc").exists() or not list((cache / "doc").glob("*.json"))
+
+
+def test_no_cache_disables_the_cache(tmp_path):
+    md = tmp_path / "doc.md"
+    md.write_text("# Big\n" + ("word " * 400) + "\n## Small\ntiny\n", encoding="utf-8")
+    r = run(["--md_path", str(md), "--if-add-node-summary", "yes",
+             "--no-cache", "--log", str(tmp_path / "usage.jsonl")], input="n\n")
+    assert "cache:" not in r.stdout, "with --no-cache the pre-flight shows no cache line"

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
+<rect width="760" height="500" fill="#F4F0E8"/>
+<text x="40" y="44" text-anchor="start" font-size="24" font-family="Fraunces, Georgia, 'Times New Roman', serif" fill="#1C3A55" font-weight="600">Website corpus: what summaries buy, and at what price</text>
+<text x="40" y="68" text-anchor="start" font-size="13.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">mean answer score (0–5, 14 questions, single judge) vs retrieval cost — gpt-4o navigator, run 20260712T180445Z</text>
+<line x1="90" y1="120" x2="90" y2="420" stroke="#E4DDCC"/>
+<text x="90" y="440" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">$0</text>
+<line x1="242.5" y1="120" x2="242.5" y2="420" stroke="#E4DDCC"/>
+<text x="242.5" y="440" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">$1</text>
+<line x1="395" y1="120" x2="395" y2="420" stroke="#E4DDCC"/>
+<text x="395" y="440" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">$2</text>
+<line x1="547.5" y1="120" x2="547.5" y2="420" stroke="#E4DDCC"/>
+<text x="547.5" y="440" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">$3</text>
+<line x1="700" y1="120" x2="700" y2="420" stroke="#E4DDCC"/>
+<text x="700" y="440" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">$4</text>
+<line x1="90" y1="401.25" x2="700" y2="401.25" stroke="#E4DDCC"/>
+<text x="80" y="405.25" text-anchor="end" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">3.5</text>
+<line x1="90" y1="307.5" x2="700" y2="307.5" stroke="#E4DDCC"/>
+<text x="80" y="311.5" text-anchor="end" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">4.0</text>
+<line x1="90" y1="213.75" x2="700" y2="213.75" stroke="#E4DDCC"/>
+<text x="80" y="217.75" text-anchor="end" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">4.5</text>
+<line x1="90" y1="120" x2="700" y2="120" stroke="#E4DDCC"/>
+<text x="80" y="124" text-anchor="end" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">5.0</text>
+<text x="395" y="470" text-anchor="middle" font-size="12.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55">cost of the 14-question run (USD)</text>
+<text x="26" y="270" text-anchor="middle" font-size="12.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" transform="rotate(-90 26 270)">mean answer score (0–5)</text>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6B6B66"/></marker></defs>
+<line x1="591.725" y1="286.875" x2="514.225" y2="216.25" stroke="#6B6B66" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+<text x="605.725" y="202.25" text-anchor="start" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">fixing the threshold:</text>
+<text x="605.725" y="218.25" text-anchor="start" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66" font-weight="600">better AND 18% cheaper</text>
+<circle cx="212" cy="341.25" r="9" fill="#186090" stroke="#F4F0E8" stroke-width="2"/>
+<text x="212" y="325.25" text-anchor="middle" font-size="12.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#1C3A55" font-weight="600">IDX-D</text>
+<text x="212" y="371.25" text-anchor="middle" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">headings only</text>
+<circle cx="591.725" cy="286.875" r="9" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="591.725" y="270.875" text-anchor="middle" font-size="12.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#1C3A55" font-weight="600">IDX-C</text>
+<text x="591.725" y="316.875" text-anchor="middle" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">default summaries (80% verbatim)</text>
+<circle cx="500.225" cy="206.25" r="9" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="500.225" y="190.25" text-anchor="middle" font-size="12.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#1C3A55" font-weight="600">IDX-C0</text>
+<text x="500.225" y="236.25" text-anchor="middle" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">real summaries (threshold 0)</text>
+<text x="40" y="492" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">Score axis starts at 3.4 to resolve the differences; all three conditions sit in the upper band. n=1 per cell — directional.</text>
+</svg>

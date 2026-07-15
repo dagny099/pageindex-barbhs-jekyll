@@ -1,5 +1,0 @@
-qid,index,category,recall,absence,n_fetch,content_tok,note
-RA1,IDX-D-rfc9110,single-hop-lookup,1.0,False,2,25868,2/2 gold hit
-RC1,IDX-D-rfc9110,cross-reference-resolution,0.5,False,2,527,1/2 gold hit
-RA1,IDX-C0-rfc9110,single-hop-lookup,0.5,False,1,298,1/2 gold hit
-RC1,IDX-C0-rfc9110,cross-reference-resolution,0.5,False,2,62770,1/2 gold hit

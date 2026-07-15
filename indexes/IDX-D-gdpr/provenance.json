@@ -1,0 +1,33 @@
+{
+  "index_id": "IDX-D-gdpr",
+  "condition": "deterministic-markdown",
+  "description": "Deterministic heading tree over GDPR (Regulation (EU) 2016/679), Markdown converted from the official EUR-Lex XHTML by scripts/eurlex_html_to_markdown.py. No LLM, no summaries. The Markdown-native twin of IDX-PDF-textheadings-gdpr: structurally parallel (126 nodes), differing only in representation (line vs page addressing; clean HTML-derived text vs PDF extraction). NOTE: the PDF arm's node TITLES are degraded by PDF extraction (long article rubrics truncated at the first wrapped line; e.g. 'off icer' spacing) whereas this arm's titles/text are clean — an instance of the text-fidelity variable, not a structural difference. Article-id scoring is unaffected.",
+  "source": {
+    "html": "sources/gdpr-2016-679/gdpr.html",
+    "html_sha256": "b5286461f86cb7ea623be9885d95436d274f0b404f1826baecac8a0f7312538b",
+    "markdown": "workspace/gdpr.md",
+    "markdown_sha256": "8557dfa7742633b42b1b14ec6025ccea2a0f24a9fa18fe409940064f250a6565",
+    "conversion": "scripts/eurlex_html_to_markdown.py — EUR-Lex ELI/CONVEX classed paragraphs -> depth-nested Markdown headings (Chapter #, Section ##, Article ##/### by nesting, Recitals (Preamble) #). Deterministic; workspace/ is scratch, pinned here by sha256."
+  },
+  "generation": {
+    "tool": "scripts/build_index_metered.py --md_path",
+    "uses_llm": false,
+    "flags": {
+      "if_add_node_summary": "no",
+      "if_add_doc_description": "no",
+      "if_add_node_text": "yes"
+    }
+  },
+  "node_count": 126,
+  "node_fields": [
+    "title",
+    "text",
+    "node_id",
+    "line_num"
+  ],
+  "addressing": "line",
+  "pdf_twin": "IDX-PDF-textheadings-gdpr",
+  "build_cost_usd": 0.0,
+  "repo_commit": "58bf830c2f94430f40b0891872011078a12b7975",
+  "generated_at": "2026-07-15T21:48:53Z"
+}

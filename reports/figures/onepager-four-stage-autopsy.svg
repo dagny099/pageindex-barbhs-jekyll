@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
+<rect width="1080" height="1350" fill="#F4F0E8"/>
+<text x="64" y="96" text-anchor="start" font-size="44" font-family="Fraunces, Georgia, 'Times New Roman', serif" fill="#1C3A55" font-weight="600">The Four-Stage Autopsy</text>
+<text x="64" y="132" text-anchor="start" font-size="17.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">Where retrieval failures actually live — and what to open to find them</text>
+<rect x="48" y="168" width="216" height="46" rx="10" fill="#FBF8F0" stroke="#C04818" stroke-width="2.5"/>
+<text x="156" y="197" text-anchor="middle" font-size="17" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="600">representation</text>
+<text x="284" y="198" text-anchor="middle" font-size="22" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">→</text>
+<rect x="304" y="168" width="216" height="46" rx="10" fill="#FBF8F0" stroke="#C04818" stroke-width="2.5"/>
+<text x="412" y="197" text-anchor="middle" font-size="17" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="600">tree</text>
+<text x="540" y="198" text-anchor="middle" font-size="22" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">→</text>
+<rect x="560" y="168" width="216" height="46" rx="10" fill="#FBF8F0" stroke="#C04818" stroke-width="2.5"/>
+<text x="668" y="197" text-anchor="middle" font-size="17" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="600">navigation</text>
+<text x="796" y="198" text-anchor="middle" font-size="22" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">→</text>
+<rect x="816" y="168" width="216" height="46" rx="10" fill="#FBF8F0" stroke="#C04818" stroke-width="2.5"/>
+<text x="924" y="197" text-anchor="middle" font-size="17" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="600">synthesis</text>
+<text x="540" y="246" text-anchor="middle" font-size="15" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">A wrong answer is four possible failures wearing one disguise. Give each somewhere to land.</text>
+<rect x="64" y="290" width="952" height="226" rx="14" fill="#FBF8F0" stroke="#E4DDCC"/>
+<path d="M64,304 a14,14 0 0 1 14,-14 h-8 z" fill="none"/>
+<rect x="64" y="306" width="6" height="194" rx="3" fill="#C04818"/>
+<text x="98" y="330" text-anchor="start" font-size="20" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="700">1 · REPRESENTATION</text>
+<text x="98" y="358" text-anchor="start" font-size="14.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">The material the tool receives: extraction, headings, boundaries, glyphs.</text>
+<text x="98" y="394" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#C04818" font-weight="700" letter-spacing="1.2">FAILURE SEEN IN THE STUDY</text>
+<text x="98" y="418" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">PDF extraction turned p&lt;.001 into pB.001 — 39</text>
+<text x="98" y="438" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">corrupted statistics in one paper, visible before a</text>
+<text x="98" y="458" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">single retrieval run.</text>
+<text x="570" y="394" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#186090" font-weight="700" letter-spacing="1.2">WHAT TO OPEN AND CHECK</text>
+<text x="570" y="418" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">Diff the extracted text against the source. Sample</text>
+<text x="570" y="438" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">the numbers, symbols, and ligatures — before</text>
+<text x="570" y="458" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">anything downstream runs.</text>
+<rect x="64" y="534" width="952" height="226" rx="14" fill="#FBF8F0" stroke="#E4DDCC"/>
+<path d="M64,548 a14,14 0 0 1 14,-14 h-8 z" fill="none"/>
+<rect x="64" y="550" width="6" height="194" rx="3" fill="#C04818"/>
+<text x="98" y="574" text-anchor="start" font-size="20" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="700">2 · TREE</text>
+<text x="98" y="602" text-anchor="start" font-size="14.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">The navigational map built over the document.</text>
+<text x="98" y="638" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#C04818" font-weight="700" letter-spacing="1.2">FAILURE SEEN IN THE STUDY</text>
+<text x="98" y="662" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">An LLM-inferred tree cost $6.44 and dropped the</text>
+<text x="98" y="682" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">section numbers the questions keyed on. The PDF's</text>
+<text x="98" y="702" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">own embedded outline was free and matched the</text>
+<text x="98" y="722" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">authored headings 311 / 311.</text>
+<text x="570" y="638" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#186090" font-weight="700" letter-spacing="1.2">WHAT TO OPEN AND CHECK</text>
+<text x="570" y="662" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">Open the index. Count copied, empty, and duplicated</text>
+<text x="570" y="682" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">fields. Check authored headings and bookmarks before</text>
+<text x="570" y="702" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">paying to infer structure.</text>
+<rect x="64" y="778" width="952" height="226" rx="14" fill="#FBF8F0" stroke="#E4DDCC"/>
+<path d="M64,792 a14,14 0 0 1 14,-14 h-8 z" fill="none"/>
+<rect x="64" y="794" width="6" height="194" rx="3" fill="#C04818"/>
+<text x="98" y="818" text-anchor="start" font-size="20" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="700">3 · NAVIGATION</text>
+<text x="98" y="846" text-anchor="start" font-size="14.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">Which branches the agent follows — and what it actually fetches.</text>
+<text x="98" y="882" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#C04818" font-weight="700" letter-spacing="1.2">FAILURE SEEN IN THE STUDY</text>
+<text x="98" y="906" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">A local 7B model read the tree, fetched nothing, and</text>
+<text x="98" y="926" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">wrote fluent answers anyway — in 15 of 28 runs.</text>
+<text x="98" y="946" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">Fluency did not reveal the failure; the tool trace</text>
+<text x="98" y="966" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">did.</text>
+<text x="570" y="882" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#186090" font-weight="700" letter-spacing="1.2">WHAT TO OPEN AND CHECK</text>
+<text x="570" y="906" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">Save tool traces. Score “did it fetch the sections</text>
+<text x="570" y="926" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">the answer needs” separately from the answer itself.</text>
+<rect x="64" y="1022" width="952" height="226" rx="14" fill="#FBF8F0" stroke="#E4DDCC"/>
+<path d="M64,1036 a14,14 0 0 1 14,-14 h-8 z" fill="none"/>
+<rect x="64" y="1038" width="6" height="194" rx="3" fill="#C04818"/>
+<text x="98" y="1062" text-anchor="start" font-size="20" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="700">4 · SYNTHESIS</text>
+<text x="98" y="1090" text-anchor="start" font-size="14.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">The final answer composed from whatever was fetched.</text>
+<text x="98" y="1126" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#C04818" font-weight="700" letter-spacing="1.2">FAILURE SEEN IN THE STUDY</text>
+<text x="98" y="1150" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">One page said 13 years, another said 14. One model</text>
+<text x="98" y="1170" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">reported the discrepancy; another smoothed it into a</text>
+<text x="98" y="1190" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">single clean number.</text>
+<text x="570" y="1126" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#186090" font-weight="700" letter-spacing="1.2">WHAT TO OPEN AND CHECK</text>
+<text x="570" y="1150" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">Grade grounding, not fluency. Check that conflicts</text>
+<text x="570" y="1170" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">and absences survive into the answer instead of</text>
+<text x="570" y="1190" text-anchor="start" font-size="14" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">being polished away.</text>
+<line x1="64" y1="1268" x2="1016" y2="1268" stroke="#E4DDCC" stroke-width="1.5"/>
+<text x="64" y="1294" text-anchor="start" font-size="13.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">From an 11-run measurement study of PageIndex · every number traceable to a run artifact</text>
+<text x="1016" y="1294" text-anchor="end" font-size="13.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#186090" font-weight="600">barbhs.com/blog/measuring-pageindex</text>
+</svg>

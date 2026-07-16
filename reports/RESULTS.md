@@ -295,10 +295,13 @@ multiplies every question's cost, forever, by the tree size:
 
 Other cost facts worth keeping:
 
-- **Instrumented spend** (per-call ledger `runs/usage_log.jsonl`, live since 2026-07-11):
-  **$29.95 total** — $13.67 index builds (dominated by the LLM-inferred RFC PDF tree:
-  $6.44 final resumable build plus earlier aborted/variant attempts), the rest retrieval.
-  The entire 11-run experiment cost less than a hardcover book.
+- **Total spend ≈ $52**: run-level estimates across all 11 retrieval runs sum to $35.82
+  (`est_cost_usd` in `runs/*/run.json`), plus $13.67 of metered index builds (dominated
+  by the LLM-inferred RFC PDF tree: $6.44 final resumable build plus earlier
+  aborted/variant attempts), plus a few dollars of un-metered early site/paper index
+  builds. The **per-call ledger** (`runs/usage_log.jsonl`, live since 2026-07-11)
+  captured **$29.95** of that — quote the ~$52 as the study total and the $29.95 only as
+  the instrumented portion. Either way: the entire study cost less than a nice dinner.
 - Index builds are now **metered and resumable** (`scripts/build_index_metered.py`,
   content-addressed LLM cache): an aborted build replays for $0. Calibration finding: the
   "2–4× input tokens" rule of thumb under-predicts TOC-repair-heavy PDF builds by ~3×.

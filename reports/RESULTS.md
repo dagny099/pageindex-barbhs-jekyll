@@ -87,11 +87,38 @@ comparison (§2.1) instead held the index fixed and varied the navigator
   first-pass for the 98-cell V1 grid (`evaluations/scores-master.csv`); single agent judge
   for the D/C/C0 run (`runs/20260712T180445Z/scores.csv`). *Subjective, n=1 per cell —
   directional, not statistical.*
-- **Recall@fetch** (RFC 9110): objective, judge-free. Gold section IDs are projected onto
-  each index's own addressing (line ranges vs page nodes) and hit-tested against what the
-  agent actually fetched (`scripts/score_recall.py`, `runs/*/recall.csv`).
-- **Fact-score** (RFC 9110): fraction of pre-registered required facts present in the final
-  answer (`runs/*/answer_facts.csv`).
+- **Recall@fetch** (RFC 9110 / GDPR) — *did the retriever open the right pages?* Objective,
+  judge-free. Ahead of time, by hand, we label the sections whose text is actually needed to
+  answer each question (the "gold sections"). Recall@fetch is the fraction of those gold
+  sections the agent actually fetched while answering. It measures **navigation, not answer
+  quality** — like an open-book exam where we've marked which pages hold the answer and check
+  whether the student turned to them, not what they wrote down. Gold IDs live once in
+  canonical section-ID space and are projected onto each index's own addressing (line ranges
+  vs page nodes), then hit-tested against the agent's `get_page_content` calls
+  (`scripts/score_recall.py`, `runs/*/recall.csv`). Opening *every* page would trivially
+  score 1.0, so `content_tokens` fetched is reported alongside as a restraint check.
+- **Fact-score** (RFC 9110 / GDPR) — *was the final answer actually correct?* The fraction of
+  a question's pre-registered **required facts** that appear in the answer — concrete,
+  checkable atoms (status codes, header-field names, RFC numbers), matched by regex, with
+  **no LLM judge** (`scripts/score_answer_facts.py`, `runs/*/answer_facts.csv`). This grades
+  the *outcome*, where Recall@fetch grades the *process*.
+
+  **Worked example — RA1.** *"Which status code indicates the target resource has been
+  assigned a new permanent URI, and what header field does the server use to convey that
+  URI?"* The needed text lives in two RFC sections: **§15.4.2** (301 Moved Permanently) and
+  **§10.2.2** (the Location header) — those are the gold sections. The required facts are the
+  two atoms **`301`** and **`Location`**. On **IDX-D** the agent fetched both gold sections
+  (**recall 1.0**) and its answer named both atoms (**fact-score 1.0**). On the coarser
+  page-addressed **PDF-outline** arm the same question scored **recall 0.5** — not because it
+  answered worse, but because that arm's physical-page nodes bundle neighbouring sections, so
+  only one of the two gold locations registers as a distinct fetch. That gap is a
+  *representation artifact*, which is exactly what the study is trying to see.
+
+  Because one grades finding and the other grades correctness, **the two can diverge** — and
+  that divergence is informative: an agent can navigate perfectly yet answer poorly (high
+  recall, low fact-score), or answer correctly from a tight snippet or a node summary without
+  ever opening the labelled sections (low recall, high fact-score). Reporting both separates
+  *"looked in the right place"* from *"got it right."*
 - **Telemetry** (all runs): tool calls, structure tokens re-sent per turn, content tokens
   fetched, latency, estimated $ per question (`runs/*/run.json`, `runs/usage_log.jsonl`).
 

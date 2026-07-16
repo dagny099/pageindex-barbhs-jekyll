@@ -83,6 +83,25 @@ The frozen set — with per-question `expected_evidence` and `ground_truth` — 
 [`evaluations/questions.csv`](evaluations/questions.csv) and is read directly by the
 retrieval harness (`scripts/run_retrieval.py`).
 
+### What the two objective metrics mean
+
+The long-document arms (RFC 9110, GDPR) add two **judge-free** metrics that pull apart
+*finding* from *being right*:
+
+- **Recall@fetch — did the retriever open the right pages?** We pre-label, by hand, the
+  sections that actually contain each answer; recall is the fraction the agent fetched while
+  answering. It grades **navigation, not the answer** — an open-book exam where we marked the
+  pages and check whether the student turned to them.
+- **Fact-score — was the answer actually correct?** The fraction of a question's required
+  facts (concrete atoms like status codes and header names) present in the final answer.
+
+*Example (RA1):* *"Which status code marks a new permanent URI, and what header conveys it?"*
+The answer must contain **`301`** and **`Location`** (fact-score), and that text lives in RFC
+**§15.4.2** and **§10.2.2** (recall). The two can diverge — a model can answer correctly from
+a summary without opening those sections, or open them yet answer poorly — which is why both
+are reported. Full definitions and the worked example are in
+[`reports/RESULTS.md` §1.3](reports/RESULTS.md).
+
 ## Layout
 
 | Path | What it is |

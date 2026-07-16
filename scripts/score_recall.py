@@ -37,6 +37,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 SEC_RE = re.compile(r"^\s*(\d+(?:\.\d+)*)\.")  # leading dotted section number in a node title
+ART_RE = re.compile(r"^\s*Article\s+(\d+)\b")  # legal-doc article heading ("Article 17 — ...")
+REC_RE = re.compile(r"^\s*Recitals\b")         # preamble node ("Recitals (Preamble)")
 
 
 def detect_addressing(structure) -> str:
@@ -56,11 +58,19 @@ def section_map(structure) -> tuple[str, dict[str, object]]:
 
     def walk(nodes):
         for n in nodes:
-            m = SEC_RE.match(n.get("title", ""))
+            title = n.get("title", "")
+            key = None
+            m = SEC_RE.match(title)
             if m:
+                key = m.group(1)
+            elif (m := ART_RE.match(title)):
+                key = f"Article {m.group(1)}"
+            elif REC_RE.match(title):
+                key = "Recitals"
+            if key is not None:
                 loc = n.get("line_num") if addr == "line" else n.get("node_id")
                 if loc is not None:
-                    out.setdefault(m.group(1), loc)
+                    out.setdefault(key, loc)
             walk(n.get("nodes", []) or [])
     walk(structure)
     return addr, out
@@ -295,6 +305,17 @@ def _self_test() -> int:
     # node-mode: node_id present among fetched tokens hits.
     res_node = {"tool_calls": [{"tool": "get_page_content", "args": {"pages": "0202, 0300"}}]}
     check("node recall 1/2", score_result(res_node, ["15.4.2", "10.2.2"], na, nm), (1, 2, 0))
+
+    # legal-doc headings: "Article N — rubric" and the single Recitals node.
+    art_struct = [{"title": "Recitals (Preamble)", "node_id": "0000", "line_num": 3},
+                  {"title": "Article 17 — Right to erasure", "node_id": "0021", "line_num": 700},
+                  {"title": "Article 4 — Definitions", "node_id": "0007", "line_num": 400}]
+    aa, am = section_map(art_struct)
+    check("article key mapped", am["Article 17"], 700)
+    check("recitals key mapped", am["Recitals"], 3)
+    res_art = {"tool_calls": [{"tool": "get_page_content", "args": {"pages": "690-720"}}]}
+    check("article recall 1/2", score_result(res_art, ["Article 17", "Article 4"], aa, am),
+          (1, 2, 0))
 
     check("gold drops NONE", gold_list("15.4.2; NONE-for-freshness; 9.2.3"),
           (["15.4.2", "9.2.3"], True))

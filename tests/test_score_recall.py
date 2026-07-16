@@ -69,6 +69,24 @@ def test_unmappable_section_is_flagged_not_zero(tmp_path):
     assert (hits, total, unmappable) == (0, 0, 1)
 
 
+def test_article_and_recitals_keys_map_for_legal_docs():
+    """GDPR-style trees have 'Article N — rubric' headings and a single Recitals node;
+    gold is expressed as 'Article 17' / 'Recitals' and must project onto both
+    addressings, without disturbing the dotted-section (RFC) behavior."""
+    line_struct = [{"title": "Recitals (Preamble)", "node_id": "0000", "line_num": 3},
+                   {"title": "Article 17 — Right to erasure", "node_id": "0021", "line_num": 700}]
+    node_struct = [{"title": "Recitals (Preamble)", "node_id": "0000",
+                    "start_index": 1, "end_index": 30},
+                   {"title": "Article 17 — Right to erasure", "node_id": "0021",
+                    "start_index": 40, "end_index": 42}]
+    la, lm = S.section_map(line_struct)
+    na, nm = S.section_map(node_struct)
+    assert (la, lm["Article 17"], lm["Recitals"]) == ("line", 700, 3)
+    assert (na, nm["Article 17"]) == ("node", "0021")
+    res = {"tool_calls": [{"tool": "get_page_content", "args": {"pages": "690-720"}}]}
+    assert S.score_result(res, ["Article 17", "Recitals"], la, lm) == (1, 2, 0)
+
+
 def _read_csv(path):
     import csv
     return list(csv.DictReader(path.open()))

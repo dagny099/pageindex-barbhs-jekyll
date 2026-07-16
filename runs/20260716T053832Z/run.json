@@ -1,0 +1,158 @@
+{
+  "run_id": "20260716T053832Z",
+  "purpose": "retrieval",
+  "indexes": [
+    "IDX-D-gdpr",
+    "IDX-PDF-textheadings-gdpr",
+    "IDX-C0-gdpr"
+  ],
+  "retrievers": [
+    "gpt-4o-2024-11-20"
+  ],
+  "cache": "off",
+  "temperature": null,
+  "questions": [
+    "GA1"
+  ],
+  "questions_file": "evaluations/questions-gdpr.csv",
+  "corpus_version": "gdpr-md-v1 (workspace/gdpr.md, pinned by sha256)",
+  "corpus_sha256": "8557dfa7742633b42b1b14ec6025ccea2a0f24a9fa18fe409940064f250a6565",
+  "repo_commit": "160839551812c35bc0a1788e40566e624e5bf598",
+  "results": [
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Under the GDPR, there are two main tiers for administrative fines:\n\n1. **Lower maximum fines**: Up to €10,000,000 or 2% of the total worldwide annual turnover of the preceding financial year, whichever is higher. This tier applies to infringements of specific obligations, such as:\n   - Controller/processor obligations (e.g., obligations under Articles 8, 11, 25-39, 42, and 43).\n   - Certification body obligations (Articles 42 and 43).\n   - Monitoring body obligations (Article 41(4)).\n\n2. **Higher maximum fines**: Up to €20,000,000 or 4% of the total worldwide annual turnover of the preceding financial year, whichever is higher. This tier applies to breaches of fundamental provisions, including:\n   - Basic principles for processing personal data (Articles 5, 6, 7, and 9).\n   - Data subject rights (Articles 12-22).\n   - Rules on the transfer of personal data to third countries or international organizations (Articles 44-49).\n   - Compliance with supervisory authority orders under Article 58(2).\n\nThese penalties aim to be effective, proportionate, and dissuasive, as outlined in **Article 83 — General conditions for imposing administrative fines**.",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 118,
+          "output_tokens": 41
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 10506,
+          "output_tokens": 2853
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "1772-1822"
+          },
+          "output_chars": 6199,
+          "output_tokens": 1275
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 2853,
+      "content_tokens": 1275,
+      "usage": {
+        "input_tokens": 9108,
+        "output_tokens": 314,
+        "total_tokens": 9422
+      },
+      "est_cost_usd": 0.0259,
+      "latency_seconds": 4.4,
+      "index_id": "IDX-D-gdpr",
+      "qid": "GA1",
+      "category": "single-hop-lookup",
+      "question": "What are the two maximum administrative fine tiers under the GDPR, and which kinds of infringements fall into the higher tier?",
+      "expected_evidence": "",
+      "ground_truth": "",
+      "corpus_version": "",
+      "corpus_sha256": ""
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "The GDPR establishes two maximum tiers of administrative fines:\n\n1. **Up to €10,000,000 or 2% of worldwide annual turnover (whichever is higher)**\n   - This tier applies to infringements of obligations such as:\n     - Articles 8, 11, and 25–39 (e.g., obligations of controllers and processors, data protection by design and default, security of processing).\n     - Articles 42 and 43 concerning certification bodies.\n     - Article 41(4) concerning monitoring bodies.\n\n2. **Up to €20,000,000 or 4% of worldwide annual turnover (whichever is higher)**\n   - This tier applies to more severe infringements, including:\n     - Core data processing principles and conditions for consent (Articles 5, 6, 7, and 9).\n     - Data subject rights (Articles 12–22).\n     - Transfer of personal data to third countries or international organizations (Articles 44–49).\n     - Non-compliance with supervisory authority orders under Article 58(2).\n     - Obligations under Member State laws under Chapter IX.\n\nThe higher tier focuses on breaches that undermine the fundamental principles and rights of data subjects. [Source: Article 83 — General conditions for imposing administrative fines]",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 148,
+          "output_tokens": 52
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 10587,
+          "output_tokens": 2891
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "0106"
+          },
+          "output_chars": 5862,
+          "output_tokens": 1307
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 2891,
+      "content_tokens": 1307,
+      "usage": {
+        "input_tokens": 9246,
+        "output_tokens": 304,
+        "total_tokens": 9550
+      },
+      "est_cost_usd": 0.0262,
+      "latency_seconds": 5.85,
+      "index_id": "IDX-PDF-textheadings-gdpr",
+      "qid": "GA1",
+      "category": "single-hop-lookup",
+      "question": "What are the two maximum administrative fine tiers under the GDPR, and which kinds of infringements fall into the higher tier?",
+      "expected_evidence": "",
+      "ground_truth": "",
+      "corpus_version": "",
+      "corpus_sha256": ""
+    },
+    {
+      "retriever": "gpt-4o-2024-11-20",
+      "answer": "Under the GDPR, the two maximum administrative fine tiers, as specified in **Article 83**, are:\n\n1. **Up to €10 million, or 2% of the worldwide annual turnover** of the preceding financial year, whichever is higher. This fine applies to infringements related to obligations such as:\n   - The responsibilities of controllers and processors under Articles 8, 11, 25–39.\n   - Issues with certification bodies and monitoring bodies under Articles 41, 42, and 43.\n\n2. **Up to €20 million, or 4% of the worldwide annual turnover**, whichever is higher. This applies to more severe infringements, such as:\n   - Key principles for data processing, including consent requirements (Articles 5, 6, 7, and 9).\n   - Violations involving data subjects' rights (Articles 12–22).\n   - Unauthorized transfers of data (Articles 44–49).\n   - Non-compliance with Member State-specific laws under Chapter IX.\n   - Ignoring orders or limitations from supervisory authorities under Article 58(2).\n\nThese tiers ensure fines are proportionate to the severity of the infringement and the organization's size ([Article 83 — General conditions for imposing administrative fines](#)).",
+      "error": null,
+      "tool_calls": [
+        {
+          "tool": "get_document",
+          "args": {},
+          "output_chars": 344,
+          "output_tokens": 78
+        },
+        {
+          "tool": "get_document_structure",
+          "args": {},
+          "output_chars": 84187,
+          "output_tokens": 15272
+        },
+        {
+          "tool": "get_page_content",
+          "args": {
+            "pages": "1772,1822"
+          },
+          "output_chars": 6199,
+          "output_tokens": 1275
+        }
+      ],
+      "n_tool_calls": 3,
+      "structure_tokens": 15272,
+      "content_tokens": 1275,
+      "usage": {
+        "input_tokens": 34057,
+        "output_tokens": 300,
+        "total_tokens": 34357
+      },
+      "est_cost_usd": 0.0881,
+      "latency_seconds": 7.69,
+      "index_id": "IDX-C0-gdpr",
+      "qid": "GA1",
+      "category": "single-hop-lookup",
+      "question": "What are the two maximum administrative fine tiers under the GDPR, and which kinds of infringements fall into the higher tier?",
+      "expected_evidence": "",
+      "ground_truth": "",
+      "corpus_version": "gdpr-md-v1 (workspace/gdpr.md, pinned by sha256)",
+      "corpus_sha256": "8557dfa7742633b42b1b14ec6025ccea2a0f24a9fa18fe409940064f250a6565"
+    }
+  ]
+}

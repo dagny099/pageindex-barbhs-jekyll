@@ -83,6 +83,25 @@ The frozen set — with per-question `expected_evidence` and `ground_truth` — 
 [`evaluations/questions.csv`](evaluations/questions.csv) and is read directly by the
 retrieval harness (`scripts/run_retrieval.py`).
 
+### What the two objective metrics mean
+
+The long-document arms (RFC 9110, GDPR) add two **judge-free** metrics that pull apart
+*finding* from *being right*:
+
+- **Recall@fetch — did the retriever open the right pages?** We pre-label, by hand, the
+  sections that actually contain each answer; recall is the fraction the agent fetched while
+  answering. It grades **navigation, not the answer** — an open-book exam where we marked the
+  pages and check whether the student turned to them.
+- **Fact-score — was the answer actually correct?** The fraction of a question's required
+  facts (concrete atoms like status codes and header names) present in the final answer.
+
+*Example (RA1):* *"Which status code marks a new permanent URI, and what header conveys it?"*
+The answer must contain **`301`** and **`Location`** (fact-score), and that text lives in RFC
+**§15.4.2** and **§10.2.2** (recall). The two can diverge — a model can answer correctly from
+a summary without opening those sections, or open them yet answer poorly — which is why both
+are reported. Full definitions and the worked example are in
+[`reports/RESULTS.md` §1.3](reports/RESULTS.md).
+
 ## Layout
 
 | Path | What it is |
@@ -90,13 +109,16 @@ retrieval harness (`scripts/run_retrieval.py`).
 | `corpus/site-book-v1/` | Frozen input corpus (Markdown book stitched from 26 website documents) + `manifest.json` + `provenance.json`. Consumed, not produced here. |
 | `corpus/paper-book-v1/` | Frozen paper corpus (Markdown book derived from the 2009 *Visual Cognition* PDF) + manifest + provenance. Produced **in this repo** by `scripts/build_paper_book.py`. |
 | `sources/paper-2009/` | The frozen source PDF, pinned by SHA-256 in `config/paper-book-v1.yml`. |
-| `indexes/IDX-<letter>/index.json` | Curated, evaluated index variants. Currently: `IDX-D` (Deterministic). |
+| `indexes/IDX-<letter>/index.json` | Curated, evaluated index variants — one per index condition, each with its own `provenance.json`. Includes the deterministic (`IDX-D-*`), cloud-summary (`IDX-C`/`IDX-C0-*`), and PDF-derived (`IDX-PDF-outline-*`, `IDX-PDF-textheadings-*`) arms across all four corpora. |
 | `results/` | Raw PageIndex run output (gitignored scratch). |
-| `reports/` | Experimental brief / lab notebook, the Index Comparison Explorer (`V1_INDEX_COMPARISON.html`), index outlines, alignment report. (Corpus QC & normalization reports live in the website repo.) |
-| `tests/` | pytest suite for repo tooling (currently the explorer generator). Run with `python -m pytest`. |
+| `reports/` | Experimental brief / lab notebook, the consolidated results (`RESULTS.md`), figures, the Index Comparison Explorer (`V1_INDEX_COMPARISON.html`), index outlines, alignment report. (Corpus QC & normalization reports live in the website repo.) |
+| `tests/` | pytest suite for repo tooling (paper-book build, explorer generator). Run with `python -m pytest`. |
 | `notebooks/` | Read-only **analysis** notebooks (cost dashboard, cross-condition explorer, gold validator, single-run analysis) — numbered by lifecycle. See [`notebooks/README.md`](notebooks/README.md). |
 | `vendor/PageIndex/` | The PageIndex tool, pinned as a git submodule. |
-| `config/` `evaluations/` `runs/` `scripts/` | Scaffolding for run configs, eval harnesses, reporting (currently empty). |
+| `config/` | Build/run configs (corpus builders, index conditions, Ollama Modelfiles). |
+| `evaluations/` | Frozen question sets (one CSV per corpus) + scoring artifacts. |
+| `runs/` | One folder per retrieval run (`run.json`, `recall.csv`, `answer_facts.csv`) + the `usage_log.jsonl` cost ledger. |
+| `scripts/` | The tested producer layer: corpus builders, index builders, the retrieval harness, and the scorers. |
 
 ## Index Comparison Explorer (V1 inspection tool)
 

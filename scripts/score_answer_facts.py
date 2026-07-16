@@ -54,11 +54,74 @@ FACTS: dict[str, dict[str, list[str]]] = {
  "RE3": {"not defined here": ["does not define", "not define", "referenced", "not.*defined"], "6265/COOKIE": [code(6265), r"\[cookie\]", "cookie.*specification"]},
  "RE4": {"absent": ["does not define", "not define", "no.*429", "not.*specify"], "429 elsewhere": [code(429), code(6585)]},
 }
+# GDPR set (evaluations/questions-gdpr.csv). Same discipline: concrete atoms only;
+# money/percent regexes tolerate €10,000,000 / 10 000 000 EUR / "10 million" variants.
+def eur(n): return [rf"{n}\s?[,. ]?000\s?[,. ]?000", rf"{n} ?million", rf"€\s?{n}\b"]
+FACTS.update({
+ "GA1": {"10M tier": eur(10), "20M tier": eur(20), "2%": [r"2\s?%"], "4%": [r"4\s?%"],
+         "higher-tier scope": ["basic principle", "data subject", "consent", "transfer"]},
+ "GA2": {"72 hours": ["72 hours", "72-hour"], "undue delay": ["without undue delay"],
+         "reasons for delay": ["reasons? for the delay", "accompanied by (the )?reasons", "justif"]},
+ "GA3": {"identified/identifiable": ["identified or identifiable"], "natural person": ["natural person"],
+         "identifier examples": [r"\bname\b", "identification number", "location data", "online identifier"]},
+ "GA4": {"16": [r"\b16\b"], "13": [r"\b13\b"], "member-state latitude": ["member state", "lower age"]},
+ "GB1": {"high risk": ["high risk"], "consult authority": ["consult the supervisory authority", "prior consultation"],
+         "before processing": ["prior to (the )?processing", "before (the )?processing"],
+         "trigger": ["large scale", "systematic"]},
+ "GB2": {"prohibition": ["prohibit"], "explicit consent": ["explicit consent"],
+         "second ground": ["occupational medicine", "preventive medicine", "public health", "employment", "vital interests", "substantial public interest"],
+         "Art6 lawfulness": ["lawful", "legal bas"]},
+ "GB3": {"72 hours": ["72 hours", "72-hour"], "high risk threshold": ["high risk"],
+         "encryption exception": ["encrypt", "unintelligible"],
+         "disproportionate effort": ["disproportionate effort", "public communication"]},
+ "GB4": {"core activities": ["core activities"], "large scale": ["large scale"],
+         "dismissal protection": ["dismissed", "penalis", "penaliz"],
+         "highest management": ["highest management"]},
+ "GB5": {"BCRs": ["binding corporate rules"], "SCCs": ["standard data protection clauses", "standard contractual clauses"],
+         "derogations": ["derogation"], "consent derogation": ["explicit(ly)? consent"]},
+ "GB6": {"any time": ["at any time"], "not retroactive": ["not affect the lawfulness", "before its withdrawal", "prior processing"],
+         "as easy": ["as easy to withdraw"], "erasure": ["erasure", "right to be forgotten"]},
+ "GC1": {"particular situation": ["particular situation"], "compelling grounds": ["compelling legitimate grounds"],
+         "legal claims": ["legal claims"], "right to object": [r"\bobject"]},
+ "GC2": {"explicit consent": ["explicit consent"], "substantial public interest": ["substantial public interest"],
+         "suitable measures": ["suitable measures", "safeguard"]},
+ "GC3": {"legally binding": ["legally binding"], "every member": ["every member", "all members"],
+         "enforceable rights": ["enforceable rights"],
+         "specified content": ["structure", "contact details", "complaint"]},
+ "GC4": {"(h) care": ["occupational medicine", "preventive medicine", "medical diagnosis", "health or social care"],
+         "(i) public health": ["public health"], "cross-border": ["cross-border threats"]},
+ "GC5": {"20M/4% tier": eur(20) + [r"4\s?%"], "warnings": ["warning"], "reprimands": ["reprimand"],
+         "ban/limitation": ["ban on processing", "limitation", "suspension"]},
+ "GD1": {"access": [r"\baccess\b"], "rectification": ["rectif"], "erasure": ["erasure", "forgotten"],
+         "restriction": ["restriction"], "portability": ["portability"], "object": [r"\bobject"],
+         "automated decisions": ["automated"]},
+ "GD2": {"records of processing": ["records? of (its )?processing"], "breach documentation": [r"document\w*\s.{0,40}breach", r"breach\w*\s.{0,40}document"],
+         "accountability": ["accountab", "demonstrate compliance"]},
+ "GD3": {"complaint (77)": ["lodge a complaint", code(77)], "vs authority (78)": ["against a supervisory authority", code(78)],
+         "vs controller (79)": ["against a controller", code(79)], "compensation (82)": ["compensation", code(82)]},
+ "GD4": {"codes of conduct": ["codes? of conduct"], "monitoring body": ["monitoring bod"],
+         "certification": ["certification"], "certification body": ["certification bod"]},
+ "GD5": {"from the subject (13)": ["obtained from the data subject", code(13)],
+         "not from the subject (14)": ["not been obtained", "other sources", code(14)],
+         "one month": ["one month"]},
+ "GE1": {"exempt": ["does not apply", "not apply", "outside", "exempt"], "household": ["household"],
+         "purely personal": ["purely personal"]},
+ "GE2": {"not covered": ["does not apply", "not apply", "no(t)? protect"], "deceased": ["deceased"],
+         "recital location": ["recital"], "member-state latitude": ["member state"]},
+ "GE3": {"no fixed period": ["no (specific|fixed|maximum)", "does not (set|specify|prescribe|impose)", "not.{0,20}(specific|fixed|maximum)"],
+         "storage limitation": ["storage limitation"],
+         "necessity standard": ["no longer than is necessary", "as long as necessary", "necessary for the purposes"]},
+ "GE4": {"not governed": ["does not", "not concern", "not apply"], "anonymous": ["anonymous"],
+         "recital location": ["recital"]},
+})
+
 # relational facts substring-matching can't verify -> flagged, never auto-counted
 FUZZY = {
  "RB1": "correct evaluation ORDER of the 5 fields", "RA2": "the definition of idempotent",
  "RB2": "that the intersection (both) is exactly GET+HEAD", "RB3": "if-range match->206 vs no-match->200 logic",
  "RB6": "302/303 method-change contrast", "RD4": "exactly these 7 (no over/under-enumeration)",
+ "GB2": "the prohibition-vs-permission structural contrast", "GD1": "exactly the seven rights (over/under-enumeration)",
+ "GC5": "that the powers come from 58(2) specifically", "GE3": "recognizing the ABSENCE (no number exists)",
 }
 
 def present(ans: str, alts: list[str]) -> bool:
@@ -67,6 +130,8 @@ def present(ans: str, alts: list[str]) -> bool:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--run", required=True)
+    ap.add_argument("--questions", default=str(REPO / "evaluations" / "questions-rfc9110.csv"),
+                    help="question CSV (for the category breakdown)")
     args = ap.parse_args()
     rp = Path(args.run); rj = rp if rp.suffix == ".json" else rp / "run.json"
     run = json.loads(rj.read_text())
@@ -95,7 +160,7 @@ def main() -> int:
         print(f"  {idx:22s} {round(statistics.mean(rr),3) if rr else '—':>11} {len(rr):>4d}")
 
     # by category
-    q = {r["id"]: r for r in csv.DictReader(open(REPO/"evaluations"/"questions-rfc9110.csv"))}
+    q = {r["id"]: r for r in csv.DictReader(open(args.questions))}
     cats = list(dict.fromkeys(q[r["qid"]]["category"] for r in rows if r["qid"] in q))
     print("\n  by category:")
     print("  {:26s}".format("") + "".join(f"{i.replace('IDX-','').replace('-rfc9110',''):>12s}" for i in idxs))

@@ -1,0 +1,46 @@
+{
+  "index_id": "IDX-C0-gdpr",
+  "condition": "cloud-threshold0",
+  "description": "Same deterministic 126-node tree as IDX-D-gdpr, plus a REAL gpt-4o summary for every node (--summary-token-threshold 0) and a doc description. The summarized arm for the GDPR replication of the RFC summary test (reports/design-rfc-summary-test.md). Differs from IDX-D-gdpr ONLY in summaries. Verified at curation: 126/126 title parity with the twin, 0 verbatim summaries, 0 missing summaries.",
+  "corpus_version": "gdpr-md-v1 (workspace/gdpr.md, pinned by sha256)",
+  "corpus_sha256": "8557dfa7742633b42b1b14ec6025ccea2a0f24a9fa18fe409940064f250a6565",
+  "twin_of": "IDX-D-gdpr",
+  "tree_identical_to_twin": true,
+  "source": {
+    "html": "sources/gdpr-2016-679/gdpr.html",
+    "html_sha256": "b5286461f86cb7ea623be9885d95436d274f0b404f1826baecac8a0f7312538b",
+    "markdown": "workspace/gdpr.md",
+    "markdown_sha256": "8557dfa7742633b42b1b14ec6025ccea2a0f24a9fa18fe409940064f250a6565",
+    "conversion": "scripts/eurlex_html_to_markdown.py (same conversion as IDX-D-gdpr)"
+  },
+  "generation": {
+    "tool": "build_index_metered.py --md_path",
+    "uses_llm": true,
+    "model": "gpt-4o-2024-11-20",
+    "summary_token_threshold": 0,
+    "flags": {
+      "if_add_node_summary": "yes",
+      "if_add_doc_description": "yes",
+      "if_add_node_text": "yes"
+    }
+  },
+  "build": {
+    "run_id": "20260716T053659Z",
+    "llm_calls": 127,
+    "cost_usd": 0.3344,
+    "tokens_in": 86593,
+    "tokens_out": 11792
+  },
+  "node_count": 126,
+  "node_fields": [
+    "title",
+    "text",
+    "node_id",
+    "line_num",
+    "summary",
+    "prefix_summary"
+  ],
+  "addressing": "line",
+  "repo_commit": "160839551812c35bc0a1788e40566e624e5bf598",
+  "generated_at": "2026-07-16T05:38:18Z"
+}

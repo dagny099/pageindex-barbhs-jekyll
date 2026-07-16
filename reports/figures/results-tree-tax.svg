@@ -1,21 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
-<rect width="960" height="560" fill="#F4F0E8"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="690" viewBox="0 0 960 690" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
+<rect width="960" height="690" fill="#F4F0E8"/>
 <text x="40" y="44" text-anchor="start" font-size="24" font-family="Fraunces, Georgia, 'Times New Roman', serif" fill="#1C3A55" font-weight="600">The tree tax: what the agent re-sends every turn</text>
 <text x="40" y="68" text-anchor="start" font-size="13.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">structure tokens per tree dump — re-billed as input on every subsequent tool call of every question</text>
 <rect x="250" y="86" width="14" height="14" rx="3" fill="#186090"/>
 <text x="270" y="98" text-anchor="start" font-size="12.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">deterministic, no summaries</text>
 <rect x="526" y="86" width="14" height="14" rx="3" fill="#C04818"/>
 <text x="546" y="98" text-anchor="start" font-size="12.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">with generated summaries</text>
-<line x1="250" y1="116" x2="250" y2="520" stroke="#E4DDCC" stroke-width="1"/>
-<text x="250" y="538" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">0K</text>
-<line x1="381.111" y1="116" x2="381.111" y2="520" stroke="#E4DDCC" stroke-width="1"/>
-<text x="381.111" y="538" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">10K</text>
-<line x1="512.222" y1="116" x2="512.222" y2="520" stroke="#E4DDCC" stroke-width="1"/>
-<text x="512.222" y="538" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">20K</text>
-<line x1="643.333" y1="116" x2="643.333" y2="520" stroke="#E4DDCC" stroke-width="1"/>
-<text x="643.333" y="538" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">30K</text>
-<line x1="774.444" y1="116" x2="774.444" y2="520" stroke="#E4DDCC" stroke-width="1"/>
-<text x="774.444" y="538" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">40K</text>
+<line x1="250" y1="116" x2="250" y2="650" stroke="#E4DDCC" stroke-width="1"/>
+<text x="250" y="668" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">0K</text>
+<line x1="381.111" y1="116" x2="381.111" y2="650" stroke="#E4DDCC" stroke-width="1"/>
+<text x="381.111" y="668" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">10K</text>
+<line x1="512.222" y1="116" x2="512.222" y2="650" stroke="#E4DDCC" stroke-width="1"/>
+<text x="512.222" y="668" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">20K</text>
+<line x1="643.333" y1="116" x2="643.333" y2="650" stroke="#E4DDCC" stroke-width="1"/>
+<text x="643.333" y="668" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">30K</text>
+<line x1="774.444" y1="116" x2="774.444" y2="650" stroke="#E4DDCC" stroke-width="1"/>
+<text x="774.444" y="668" text-anchor="middle" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">40K</text>
 <text x="40" y="140" text-anchor="start" font-size="13.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="600">site-book-v1 (website, 339 nodes)</text>
 <path d="M250,152 h113.135 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-113.135 z" fill="#186090"/>
 <text x="240" y="169" text-anchor="end" font-size="11.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#2B2B2B">IDX-D</text>
@@ -33,12 +33,19 @@
 <path d="M250,342 h511.306 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-511.306 z" fill="#C04818"/>
 <text x="240" y="359" text-anchor="end" font-size="11.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#2B2B2B">IDX-C0-rfc9110</text>
 <text x="755.306" y="359" text-anchor="end" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#F4F0E8" font-weight="600">39.3K · real summaries (threshold 0)</text>
-<text x="40" y="418" text-anchor="start" font-size="13.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="600">paper-book-v1 (2009 paper, 28 nodes)</text>
-<path d="M250,430 h2.21467 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-2.21467 z" fill="#186090"/>
-<text x="240" y="447" text-anchor="end" font-size="11.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#2B2B2B">IDX-D-paper-book-v1</text>
-<text x="264.215" y="447" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">474 · headings only</text>
-<path d="M250,464 h55.1967 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-55.1967 z" fill="#C04818"/>
-<text x="240" y="481" text-anchor="end" font-size="11.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#2B2B2B">IDX-PDF-vanilla-paper</text>
-<text x="317.197" y="481" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">4.5K · LLM-inferred tree + summaries</text>
-<text x="40" y="546" text-anchor="start" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">Single tree dump per index (structure_tokens, runs/*/run.json). gpt-4o navigator throughout.</text>
+<text x="40" y="418" text-anchor="start" font-size="13.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="600">gdpr-md-v1 (EU law, 126 nodes)</text>
+<path d="M250,430 h33.406 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-33.406 z" fill="#186090"/>
+<text x="240" y="447" text-anchor="end" font-size="11.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#2B2B2B">IDX-D-gdpr</text>
+<text x="295.406" y="447" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">2.9K · headings only</text>
+<path d="M250,464 h196.233 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-196.233 z" fill="#C04818"/>
+<text x="240" y="481" text-anchor="end" font-size="11.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#2B2B2B">IDX-C0-gdpr</text>
+<text x="458.233" y="481" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">15.3K · real summaries (threshold 0) — 5.4×</text>
+<text x="40" y="540" text-anchor="start" font-size="13.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="600">paper-book-v1 (2009 paper, 28 nodes)</text>
+<path d="M250,552 h2.21467 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-2.21467 z" fill="#186090"/>
+<text x="240" y="569" text-anchor="end" font-size="11.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#2B2B2B">IDX-D-paper-book-v1</text>
+<text x="264.215" y="569" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">474 · headings only</text>
+<path d="M250,586 h55.1967 a4,4 0 0 1 4,4 v16 a4,4 0 0 1 -4,4 h-55.1967 z" fill="#C04818"/>
+<text x="240" y="603" text-anchor="end" font-size="11.5" font-family="'SF Mono', Menlo, Consolas, monospace" fill="#2B2B2B">IDX-PDF-vanilla-paper</text>
+<text x="317.197" y="603" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">4.5K · LLM-inferred tree + summaries</text>
+<text x="40" y="676" text-anchor="start" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">Single tree dump per index (structure_tokens, runs/*/run.json). gpt-4o navigator throughout.</text>
 </svg>

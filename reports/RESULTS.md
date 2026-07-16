@@ -1,10 +1,10 @@
 # PageIndex Experiment — Consolidated Results
 
-*Compiled 2026-07-15 from the 11 retrieval runs in `runs/` (2026-07-09 → 2026-07-15), the
+*Compiled 2026-07-16 from the 13 retrieval runs in `runs/` (2026-07-09 → 2026-07-16), the
 curated indexes in `indexes/`, and the scoring artifacts in `evaluations/` and
 `runs/*/{scores,recall,answer_facts}.csv`. This is the detailed results reference for the
 public write-up; every number below is traceable to a committed artifact (provenance table
-in §8). The experimental design and its evolution are documented in
+in §9). The experimental design and its evolution are documented in
 `reports/experimental-brief-lab-notebook.html`; mechanism deep-dives live in
 `reports/findings-summary-threshold.md`, `evaluations/V1_FINDINGS_HANDOFF.md`, and
 `reports/design-rfc-summary-test.md`.*
@@ -19,11 +19,11 @@ then let an LLM agent navigate that tree instead of doing embedding search. We d
 to improve it — we built a measurement harness around it that decomposes the pipeline into
 independently inspectable stages (**representation → tree → navigation → synthesis**) and
 asked: **how much value comes from the hierarchical tree itself, and how much more from
-model-generated node summaries — and what does each cost?** Three corpora of increasing
+model-generated node summaries — and what does each cost?** Four corpora of increasing
 navigation difficulty, three ways of obtaining the tree (deterministic from authored
 structure, LLM-inferred, deterministic-plus-generated-summaries), retrieval always by an
-agent over the tree, scored by human/agent rubric (website corpus) and by an objective
-trace-based recall metric (RFC 9110).
+agent over the tree, scored by human/agent rubric (website corpus) and by two objective
+trace-based metrics (RFC 9110 and GDPR).
 
 ### Headline findings
 
@@ -43,7 +43,12 @@ trace-based recall metric (RFC 9110).
    that dropped the section numbers the gold labels need (§3, §4.2).
 5. **The dominant retrieval cost is invisible in the demo**: the tree is re-sent as input on
    every agent turn, so index enrichment multiplies *every* question's cost by the tree size
-   — 4–5× for summary-bearing trees (§5).
+   — 4–5× for summary-bearing trees (§6).
+6. **The summary result replicated on a second hard corpus (GDPR), and mostly survived a
+   fairness check**: on EU law the summarized arm again came last and opened half the source
+   text; when we reran the questions stripped of the article numbers that had been giving the
+   deterministic arms free directions, the gap against summaries more than halved — but
+   summaries reached only *parity*, never an advantage, at 3–5× the cost (§5).
 
 ---
 
@@ -56,6 +61,7 @@ trace-based recall metric (RFC 9110).
 | `site-book-v1` | 26 pages of barbhs.com, stitched Markdown "site book" (built in the website repo, synced by SHA) | ~27.7K words | authored Markdown headings, 339 tree nodes | 14 Q, 5 categories (`evaluations/questions.csv`) |
 | `paper-book-v1` (+ `-clean` control) | Ehinger, Hidalgo-Sotelo, Torralba & Oliva (2009), *Visual Cognition* — PDF→Markdown built in-repo, glyph-corruption decoded via font-keyed map | ~10.8K words | 28 nodes | 8 Q, 6 categories (`evaluations/questions-paper-book-v1.csv`) |
 | `rfc9110-book-v1` | RFC 9110 (HTTP Semantics), 194-page PDF/HTML/TXT triplet | 311 numbered sections | deep, cross-referential | 24 Q, 5 categories, gold section labels (`evaluations/questions-rfc9110.csv`) |
+| `gdpr-md-v1` | GDPR (EU Regulation 2016/679), the EUR-Lex PDF — which has **no embedded outline** | 126 nodes (Articles + Recitals) | deep, cross-referential EU law | 24 Q, 5 categories, gold Article labels (`evaluations/questions-gdpr.csv`; paraphrase twin `questions-gdpr-paraphrase.csv`) |
 
 The corpora ladder is deliberate: the website is *easy* to navigate by headings (authored
 structure), the paper is small and self-contained, and RFC 9110 is the *hard* venue —
@@ -74,7 +80,8 @@ carry generated summaries**.
 | `IDX-O` | same headings | local qwen2.5-7b, default threshold → same defect | $0 (local) | site |
 | `IDX-C0*` | same headings | gpt-4o, **threshold 0** → real summary on every node | site ~$1 / RFC $0.70 | site, RFC |
 | `IDX-PDF-vanilla-*` | **LLM-inferred** from the PDF (PageIndex native path) | always generated (PDF path has no threshold) | paper ~$1 / RFC **$6.44** | paper, RFC |
-| `IDX-PDF-outline-*` | deterministic — the PDF's **embedded outline** (`fitz.get_toc()`), our `scripts/build_pdf_outline_index.py` | none | **$0** | RFC (+GDPR, in progress) |
+| `IDX-PDF-outline-*` | deterministic — the PDF's **embedded outline** (`fitz.get_toc()`), our `scripts/build_pdf_outline_index.py` | none | **$0** | RFC |
+| `IDX-PDF-textheadings-*` | deterministic — headings recovered from the PDF's **text layer** (for PDFs with no embedded outline, e.g. GDPR's EUR-Lex file); `--headings-from text --text-profile eu-legislation` | none | **$0** | GDPR |
 
 Retriever (navigator) held at `gpt-4o-2024-11-20` for every index comparison; the retriever
 comparison (§2.1) instead held the index fixed and varied the navigator
@@ -87,11 +94,38 @@ comparison (§2.1) instead held the index fixed and varied the navigator
   first-pass for the 98-cell V1 grid (`evaluations/scores-master.csv`); single agent judge
   for the D/C/C0 run (`runs/20260712T180445Z/scores.csv`). *Subjective, n=1 per cell —
   directional, not statistical.*
-- **Recall@fetch** (RFC 9110): objective, judge-free. Gold section IDs are projected onto
-  each index's own addressing (line ranges vs page nodes) and hit-tested against what the
-  agent actually fetched (`scripts/score_recall.py`, `runs/*/recall.csv`).
-- **Fact-score** (RFC 9110): fraction of pre-registered required facts present in the final
-  answer (`runs/*/answer_facts.csv`).
+- **Recall@fetch** (RFC 9110 / GDPR) — *did the retriever open the right pages?* Objective,
+  judge-free. Ahead of time, by hand, we label the sections whose text is actually needed to
+  answer each question (the "gold sections"). Recall@fetch is the fraction of those gold
+  sections the agent actually fetched while answering. It measures **navigation, not answer
+  quality** — like an open-book exam where we've marked which pages hold the answer and check
+  whether the student turned to them, not what they wrote down. Gold IDs live once in
+  canonical section-ID space and are projected onto each index's own addressing (line ranges
+  vs page nodes), then hit-tested against the agent's `get_page_content` calls
+  (`scripts/score_recall.py`, `runs/*/recall.csv`). Opening *every* page would trivially
+  score 1.0, so `content_tokens` fetched is reported alongside as a restraint check.
+- **Fact-score** (RFC 9110 / GDPR) — *was the final answer actually correct?* The fraction of
+  a question's pre-registered **required facts** that appear in the answer — concrete,
+  checkable atoms (status codes, header-field names, RFC numbers), matched by regex, with
+  **no LLM judge** (`scripts/score_answer_facts.py`, `runs/*/answer_facts.csv`). This grades
+  the *outcome*, where Recall@fetch grades the *process*.
+
+  **Worked example — RA1.** *"Which status code indicates the target resource has been
+  assigned a new permanent URI, and what header field does the server use to convey that
+  URI?"* The needed text lives in two RFC sections: **§15.4.2** (301 Moved Permanently) and
+  **§10.2.2** (the Location header) — those are the gold sections. The required facts are the
+  two atoms **`301`** and **`Location`**. On **IDX-D** the agent fetched both gold sections
+  (**recall 1.0**) and its answer named both atoms (**fact-score 1.0**). On the coarser
+  page-addressed **PDF-outline** arm the same question scored **recall 0.5** — not because it
+  answered worse, but because that arm's physical-page nodes bundle neighbouring sections, so
+  only one of the two gold locations registers as a distinct fetch. That gap is a
+  *representation artifact*, which is exactly what the study is trying to see.
+
+  Because one grades finding and the other grades correctness, **the two can diverge** — and
+  that divergence is informative: an agent can navigate perfectly yet answer poorly (high
+  recall, low fact-score), or answer correctly from a tight snippet or a node summary without
+  ever opening the labelled sections (low recall, high fact-score). Reporting both separates
+  *"looked in the right place"* from *"got it right."*
 - **Telemetry** (all runs): tool calls, structure tokens re-sent per turn, content tokens
   fetched, latency, estimated $ per question (`runs/*/run.json`, `runs/usage_log.jsonl`).
 
@@ -282,7 +316,116 @@ Markdown index.
 
 ---
 
-## 5. Cost: the re-send amplification is the whole story
+## 5. Part 4 — GDPR (EU law): does the RFC result replicate, and does it survive fair questions?
+
+RFC 9110 showed summaries *hurt* navigation (§4.1). The open question was whether that is a
+fact about summaries or a fact about one hard document. GDPR is the second hard venue, chosen
+to be as different from RFC as possible while staying difficult: EU law rather than a network
+protocol, numbered **Articles and Recitals** rather than sections, and — usefully — an
+official EUR-Lex PDF with **no embedded outline**, so the free deterministic tree had to be
+rebuilt from the PDF's text layer (`IDX-PDF-textheadings-gdpr`, 126 nodes, $0). All three arms
+share that identical 126-node tree, so they differ only in *how the tree was obtained* and
+*whether nodes carry summaries*:
+
+- **IDX-D-gdpr** — deterministic Markdown headings, no summaries ($0).
+- **IDX-PDF-textheadings-gdpr** — the deterministic PDF-text-heading twin, no summaries ($0).
+- **IDX-C0-gdpr** — the same tree plus a real gpt-4o summary on every node ($0.33 to build).
+
+Navigator gpt-4o, 24 questions with hand-labeled gold Articles, scored the same judge-free way
+as RFC: **recall@fetch** (did it open the right Articles?) and **fact-score** (was the answer
+right?) — both defined in §1.3. Recall uses span mode (`--line-hit span`, decided before the
+run) because GDPR Articles are long.
+
+### 5.1 The replication (original questions) — the RFC direction holds
+
+| Arm (all share the 126-node tree) | Recall@fetch | Fact-score | Source text opened | Tree re-sent/turn | Cost, 24 Q |
+|---|---|---|---|---|---|
+| IDX-D (Markdown headings) | 0.958 | 0.920 | 71.1K tok | 2,853 | $0.72 |
+| IDX-PDF-textheadings (PDF text layer) | **1.000** | **0.944** | 102.9K tok | 2,891 | $0.83 |
+| IDX-C0 (real summaries) | **0.917** | **0.875** | **37.4K tok** | 15,272 | $2.27 |
+
+The summarized arm came **last on both metrics**, and it opened barely half the source text
+(37K vs 71K tokens) — the same tell as RFC: the agent answered from the summaries sitting in
+the tree instead of fetching the Article itself. The two deterministic arms tied or beat it for
+a third of the cost, and the summary tree is **5.4× larger to re-send every turn** (15,272 vs
+2,853 tokens). So the RFC finding is not a one-document fluke: it replicates in a second,
+unrelated hard corpus.
+
+### 5.2 The paraphrase fair-test — the null softens but survives
+
+One objection could explain the whole result away (§5.3, bias #1). These questions were written
+while looking at the Article structure, and several named their target outright — the original
+GC1 literally read *"Article 17(1)(c) permits erasure where the data subject objects 'pursuant
+to Article 21(1)'…"*. When the question hands over the address, plain heading navigation is
+trivially enough and a summary has nothing to add. So we reran the **same 24 questions with
+byte-identical gold**, but every Article number and structural cue stripped out — phrased the
+way a real user would ask (*"If a person objects to a company using their data, when can the
+company refuse to stop?"*). $3.49, `evaluations/questions-gdpr-paraphrase.csv`.
+
+| Arm | Recall: original → paraphrased | Fact-score: original → paraphrased |
+|---|---|---|
+| IDX-D (Markdown headings) | 0.958 → 0.840 | 0.920 → 0.861 |
+| IDX-PDF-textheadings | 1.000 → 0.840 | 0.944 → **0.899** |
+| IDX-C0 (real summaries) | 0.917 → 0.819 | 0.875 → **0.861** |
+| **C0's gap to the best deterministic arm** | **−0.083 → −0.021** | **−0.069 → −0.038** |
+
+Two things happened. First, the rewrite worked as intended: **recall fell on every arm** once
+the prompts stopped naming targets — direct proof the deterministic arms had been riding the
+free addresses. Second, the fair-test result: **the penalty against summaries more than halved,
+but did not disappear.** C0's gap to the best deterministic arm shrank from −0.083 to −0.021 on
+recall and from −0.069 to −0.038 on facts. The reason is *resilience* — C0's answer-correctness
+barely moved (−0.014) while the deterministic arms fell three to four times as far, so on
+realistic questions **C0 ties the Markdown-heading arm exactly on answer correctness (0.861
+each)**, though the PDF-heading arm still leads (0.899). The token gap closed as well: with no
+address to aim at, the deterministic arms fetched *less* and answered slightly worse, converging
+on C0's roughly-flat fetch volume.
+
+The honest reading: paraphrasing gives summaries their best chapter yet — they buy robustness to
+vaguely-phrased questions, enough to reach *parity* on the outcome that matters — but not enough
+to beat a $0 structural index, and not enough to justify their 3–5× re-send cost. **A tie,
+bought at triple the price.**
+
+### 5.3 Known biases of the GDPR evaluation
+
+Four caveats bound the reading above. They don't overturn it; they mark where it is soft.
+
+1. **The original questions were navigation-friendly by construction.** Written while looking at
+   the Article structure, several named their target in the prompt. When the question hands the
+   agent the address, heading navigation is trivially sufficient — and summaries exist precisely
+   for the case where titles *don't* telegraph the answer. This was the most serious bias, which
+   is why we ran the paraphrase test in §5.2; it shrank the anti-summary result but did not
+   reverse it.
+
+2. **Recall@fetch is stacked against summaries by definition.** It rewards opening the primary
+   text — but *not needing to open it* is the whole point of a summary tree, and the fact-scores
+   essentially tied. So the fair objective statement is not "summaries made retrieval worse" but
+   "summaries delivered equal answers at 3–5× the cost, while shifting the grounding from the
+   source text to a paraphrase." The cost half is certain; calling the grounding shift "worse"
+   is a reasonable judgment for law and specs, not a universal fact.
+
+3. **Two questions rest on a contestable answer key.** GE2 (deceased persons) and GE4 (anonymous
+   information) are addressed only in the GDPR's *Recitals* — the preamble, which is interpretive
+   context, not binding law. Our answer key treated the Recital as the authoritative location; a
+   lawyer could argue that reasoning from the binding definition of "personal data" is the
+   stronger answer, with the Recital as support. The effect is real but "failure" overstates two
+   questions under one navigator.
+
+4. **One answer key was changed after seeing the results — a "forking-paths" move** (choosing an
+   analysis rule after glimpsing the data, the thing pre-registration exists to prevent). GC3's
+   gold was narrowed after the run from {Article 46, Article 47} to {Article 47}, because all
+   three arms answered fully from Article 47 alone and demanding a fetch of the *citing* Article
+   penalized everyone equally. The reasoning is sound and documented in
+   `evaluations/questions-gdpr.csv`, but it is labeled here as **post-hoc**, not "a correction."
+   (The span-mode recall rule, by contrast, was fixed before the run and is clean.)
+
+Caveats on the numbers themselves: n=24, one judge, one navigator; four questions (GB2, GC5,
+GD1, GE3) were fuzzy-matched by the fact-scorer and flagged for manual confirmation; and the two
+Recital questions (bias #3) sit at 0.5 recall across all three arms — the single biggest drag on
+the paraphrased scores.
+
+---
+
+## 6. Cost: the re-send amplification is the whole story
 
 The demo-invisible mechanism: the tree dump is a tool result that persists in the agent's
 context and is **re-billed as input on every subsequent turn**. Index enrichment therefore
@@ -292,16 +435,21 @@ multiplies every question's cost, forever, by the tree size:
 |---|---|---|---|
 | site-book (14 Q) | IDX-D $0.80 | IDX-C0 $2.69 / IDX-C $3.29 | 3.4–4.1× |
 | RFC 9110 (24 Q) | IDX-D $1.30 | IDX-C0 $6.01 | 4.6× |
+| GDPR (24 Q) | IDX-D $0.72 | IDX-C0 $2.27 | 3.2× (tree size 5.4×) |
+
+The GDPR row shows the two multipliers can diverge: the summary *tree* is 5.4× larger to
+re-send, but the per-question *cost* multiplier is only 3.2× here because GDPR's shorter
+answers ran fewer agent turns, so the enlarged tree was re-billed fewer times.
 
 Other cost facts worth keeping:
 
-- **Total spend ≈ $52**: run-level estimates across all 11 retrieval runs sum to $35.82
-  (`est_cost_usd` in `runs/*/run.json`), plus $13.67 of metered index builds (dominated
-  by the LLM-inferred RFC PDF tree: $6.44 final resumable build plus earlier
-  aborted/variant attempts), plus a few dollars of un-metered early site/paper index
-  builds. The **per-call ledger** (`runs/usage_log.jsonl`, live since 2026-07-11)
-  captured **$29.95** of that — quote the ~$52 as the study total and the $29.95 only as
-  the instrumented portion. Either way: the entire study cost less than a nice dinner.
+- **Total spend ≈ $60**: run-level estimates across all 13 retrieval runs sum to $43.13
+  (`est_cost_usd` in `runs/*/run.json`; the two GDPR runs added $3.82 + $3.49), plus ~$14 of
+  metered index builds (dominated by the LLM-inferred RFC PDF tree: $6.44 final resumable
+  build plus earlier aborted/variant attempts; the GDPR summary index added $0.33), plus a
+  few dollars of un-metered early site/paper index builds. The **per-call ledger**
+  (`runs/usage_log.jsonl`, live since 2026-07-11, and where the GDPR runs are fully logged)
+  captured the instrumented portion. Either way: the entire study cost less than a nice dinner.
 - Index builds are now **metered and resumable** (`scripts/build_index_metered.py`,
   content-addressed LLM cache): an aborted build replays for $0. Calibration finding: the
   "2–4× input tokens" rule of thumb under-predicts TOC-repair-heavy PDF builds by ~3×.
@@ -313,7 +461,7 @@ Other cost facts worth keeping:
 
 ---
 
-## 6. What we now claim (and won't)
+## 7. What we now claim (and won't)
 
 Defensible claims, at the narrowest level the evidence supports:
 
@@ -325,9 +473,11 @@ Defensible claims, at the narrowest level the evidence supports:
    unchanged on upstream `main` — which equals our pinned `f413c66` — on 2026-07-15).
 3. **Properly generated summaries are a corpus-dependent trade, not an upgrade**: +0.7 mean
    rubric score on the discursive website corpus; **−0.23 objective recall at 4.6× cost** on
-   the deep technical spec, with answers propped up by the summaries themselves
-   (moderate-high confidence; the RFC result is objective and pre-registered, but
-   single-run, single-navigator).
+   the deep technical spec, with answers propped up by the summaries themselves. This
+   **replicated on a second hard corpus (GDPR)**: summaries again came last, and even after
+   the questions were rewritten to remove the article numbers that favored the deterministic
+   arms, summaries reached only parity — never advantage — at 3–5× cost (§5). (Moderate-high
+   confidence; the RFC and GDPR results are objective, but single-run and single-navigator.)
 4. **Deterministic structure beats paid inference where authored structure exists** —
    Markdown headings or a PDF's embedded outline give an equal-or-better tree for $0
    vs $6.44 (high confidence for this document class: born-digital, well-bookmarked).
@@ -337,28 +487,37 @@ Defensible claims, at the narrowest level the evidence supports:
 Guardrails — do **not** claim: PageIndex vs vector RAG (no baseline was run); "summaries
 are useless" (they helped the website corpus); "Sonnet is better than gpt-4o" in general
 (scoped to navigation behavior on this corpus); any category-level rate as statistically
-powered (2–6 questions per cell); generalization of the $0-outline result to scanned or
-outline-less PDFs (GDPR's EUR-Lex PDF has no usable outline — that replication, via
-text-layer heading extraction, is in progress).
+powered (2–6 questions per cell); generalization of the $0-deterministic-tree result to
+**scanned or image-only PDFs** (for GDPR's outline-less EUR-Lex PDF we recovered headings
+from its *text layer* — still $0, and it matched or beat the summary arm, §5 — but a scanned
+PDF has no text layer to recover, so that route would not apply).
 
 Known weaknesses of the evidence: subjective 0–5 scoring is n=1 per cell with non-blind
 judges (website corpus); most runs are single-shot (the paper pair and the twice-replicated
 IDX-D RFC arm are the exceptions); all ground truth author-written; one navigator family
-(gpt-4o) carried every index comparison.
+(gpt-4o) carried every index comparison. The GDPR evaluation carries four additional,
+corpus-specific biases — question wording that telegraphed targets, a metric stacked against
+summaries, two contestable recital answer keys, and one post-hoc answer-key change — all
+detailed in §5.3.
 
 ---
 
-## 7. Figures
+## 8. Figures
 
 | Figure | Shows |
 |---|---|
-| `figures/results-tree-tax.svg` | Tree tokens re-sent per agent turn, by index condition and corpus — the amplification mechanism |
+| `figures/results-tree-tax.svg` | Tree tokens re-sent per agent turn, by index condition and corpus (incl. GDPR) — the amplification mechanism |
 | `figures/results-website-quality-cost.svg` | Website corpus: answer quality vs cost for IDX-D / IDX-C / IDX-C0 — C0 dominates C; headings are the value baseline |
 | `figures/results-rfc-recall.svg` | RFC 9110 recall@fetch by category: summaries hurt (D vs C0); representation barely matters (D vs PDF-outline) |
+| `figures/results-gdpr-paraphrase.svg` | GDPR: recall + fact-score for all three arms, original vs paraphrased questions — the summary gap narrows but doesn't close |
+
+All four are generated by `scripts/render_results_figures.py --overwrite` from numbers
+verified against `runs/`; regenerate them after any results change (they are derived
+artifacts, never hand-edited).
 
 ---
 
-## 8. Provenance: the 11 runs
+## 9. Provenance: the 13 runs
 
 | # | Run | Corpus | Index arm(s) | Navigator(s) | Q | Purpose | Est. $ |
 |---|---|---|---|---|---|---|---|
@@ -373,21 +532,26 @@ IDX-D RFC arm are the exceptions); all ground truth author-written; one navigato
 | 9 | `20260715T003239Z` | paper | PDF-vanilla, D, D-clean | gpt-4o | 8 | representation, rep 2 | $0.65 |
 | 10 | `20260715T051258Z` | rfc9110 | IDX-D, IDX-C0 | gpt-4o | 24 | summary stress test (recall + facts) | $7.31 |
 | 11 | `20260715T174748Z` | rfc9110 | IDX-D, IDX-PDF-outline | gpt-4o | 24 | representation study (recall) | $2.51 |
+| 12 | `20260716T055341Z` | gdpr | IDX-D, IDX-PDF-textheadings, IDX-C0 | gpt-4o | 24 | summary + representation, original Qs (recall + facts) | $3.82 |
+| 13 | `20260716T195845Z` | gdpr | IDX-D, IDX-PDF-textheadings, IDX-C0 | gpt-4o | 24 | paraphrased Qs — fair test for bias #1 (recall + facts) | $3.49 |
 
 Every run folder carries `run.json` (full tool traces, per-question telemetry) and `run.md`
 (human-readable). Corpus and index integrity are pinned by SHA-256 in each
 `corpus/*/provenance.json` and `indexes/IDX-*/provenance.json`; PageIndex submodule at
 `f413c66` throughout. Scoring artifacts: `evaluations/scores-master.csv` (runs 4–6),
 `runs/20260712T180445Z/scores.csv` (run 7), `runs/20260715T051258Z/{recall,answer_facts}.csv`
-(run 10), `runs/20260715T174748Z/recall.csv` (run 11). Analysis notebooks (read-only layer):
-`notebooks/*.ipynb`.
+(run 10), `runs/20260715T174748Z/recall.csv` (run 11),
+`runs/20260716T055341Z/{recall,answer_facts}.csv` (run 12, telegraphed GDPR),
+`runs/20260716T195845Z/{recall,answer_facts}.csv` (run 13, paraphrased GDPR).
+Analysis notebooks (read-only layer) consume these directly — the two GDPR runs are already
+in `runs/usage_log.jsonl` and carry `recall.csv`/`answer_facts.csv`, so `notebooks/*.ipynb`
+pick them up with no code change (point notebooks 1–2's gold-set variable at
+`evaluations/questions-gdpr.csv`).
 
 ### What's next
 
-- **GDPR replication** (in progress): EUR-Lex PDF has *no* embedded outline — the
-  deterministic extractor grew a text-layer heading mode (`--headings-from text`,
-  `--text-profile eu-legislation`; `IDX-PDF-textheadings-gdpr`, 126 nodes, $0). Pending:
-  HTML-derived twin, gold questions in article space, runs.
+- **GDPR replication — done** (§5). Optional extension still open: an HTML-derived twin of the
+  GDPR tree (a third representation, alongside Markdown and PDF-text-layer).
 - **IDX-O0** (local threshold-0 summaries) and the P3 weak-navigator prediction.
 - Repeatable multi-judge scoring (`scripts/score_run.py`) and n>1 for the subjective grid.
 - Live capture of the prompt-cache write premium.

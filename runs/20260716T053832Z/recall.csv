@@ -1,0 +1,4 @@
+qid,index,category,recall,absence,n_fetch,content_tok,unmappable,note
+GA1,IDX-D-gdpr,single-hop-lookup,1.0,False,1,1275,0,1/1 gold hit
+GA1,IDX-PDF-textheadings-gdpr,single-hop-lookup,1.0,False,1,1307,0,1/1 gold hit
+GA1,IDX-C0-gdpr,single-hop-lookup,1.0,False,2,1275,0,1/1 gold hit

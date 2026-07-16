@@ -37,6 +37,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 SEC_RE = re.compile(r"^\s*(\d+(?:\.\d+)*)\.")  # leading dotted section number in a node title
+ART_RE = re.compile(r"^\s*Article\s+(\d+)\b")  # legal-doc article heading ("Article 17 — ...")
+REC_RE = re.compile(r"^\s*Recitals\b")         # preamble node ("Recitals (Preamble)")
 
 
 def detect_addressing(structure) -> str:
@@ -56,11 +58,19 @@ def section_map(structure) -> tuple[str, dict[str, object]]:
 
     def walk(nodes):
         for n in nodes:
-            m = SEC_RE.match(n.get("title", ""))
+            title = n.get("title", "")
+            key = None
+            m = SEC_RE.match(title)
             if m:
+                key = m.group(1)
+            elif (m := ART_RE.match(title)):
+                key = f"Article {m.group(1)}"
+            elif REC_RE.match(title):
+                key = "Recitals"
+            if key is not None:
                 loc = n.get("line_num") if addr == "line" else n.get("node_id")
                 if loc is not None:
-                    out.setdefault(m.group(1), loc)
+                    out.setdefault(key, loc)
             walk(n.get("nodes", []) or [])
     walk(structure)
     return addr, out
@@ -70,6 +80,29 @@ def section_line_map(tree_path: Path) -> dict[str, int]:
     """Legacy single-tree section->line map (used only when --tree is passed)."""
     _, m = section_map(json.loads(tree_path.read_text())["structure"])
     return m
+
+
+def line_span_map(structure) -> dict[str, tuple[int, int]]:
+    """Section key -> (start_line, end_line) for a line-addressed index. A section's
+    span runs from its heading line to the line before the NEXT heading of any node in
+    the tree (mapped or not), so long sections (a 40-line article, the whole recitals
+    block) are hit by any fetch that lands inside them, not only fetches that cover the
+    heading line itself."""
+    _, keyed = section_map(structure)
+    all_lines: list[int] = []
+
+    def walk(nodes):
+        for n in nodes:
+            if n.get("line_num") is not None:
+                all_lines.append(n["line_num"])
+            walk(n.get("nodes", []) or [])
+    walk(structure)
+    all_lines.sort()
+    out = {}
+    for key, start in keyed.items():
+        later = [l for l in all_lines if l > start]
+        out[key] = (start, (later[0] - 1) if later else 10**9)
+    return out
 
 
 def parse_spans(pages: str) -> list[tuple[int, int]]:
@@ -113,8 +146,13 @@ def fetched_tokens(result: dict) -> set[str]:
     return toks
 
 
-def covered(line: int, spans: list[tuple[int, int]]) -> bool:
-    return any(lo <= line <= hi for lo, hi in spans)
+def covered(loc, spans: list[tuple[int, int]]) -> bool:
+    """loc is a heading line (int, default mode) or a (start, end) section span
+    (--line-hit span): a span is hit by any overlapping fetch."""
+    if isinstance(loc, tuple):
+        s, e = loc
+        return any(lo <= e and s <= hi for lo, hi in spans)
+    return any(lo <= loc <= hi for lo, hi in spans)
 
 
 def gold_list(raw: str) -> tuple[list[str], bool]:
@@ -125,15 +163,22 @@ def gold_list(raw: str) -> tuple[list[str], bool]:
     return parts, False
 
 
-def projection_for(index_id: str, indexes_dir: Path, tree_override: Path | None):
+def projection_for(index_id: str, indexes_dir: Path, tree_override: Path | None,
+                   line_hit: str = "heading"):
     """(addressing, section->locator) for one index. Self-projects from the index's
-    own structure; if --tree was passed, line-addressed indexes use that map instead."""
+    own structure; if --tree was passed, line-addressed indexes use that map instead.
+    line_hit='span' maps line-addressed sections to (start, end) spans so any fetch
+    inside a long section counts (needed for legal docs; RFC runs keep 'heading')."""
     p = indexes_dir / index_id / "index.json"
     if not p.is_file():
         return None
-    addr, own = section_map(json.loads(p.read_text())["structure"])
-    if addr == "line" and tree_override is not None:
-        return addr, section_line_map(tree_override)
+    structure = json.loads(p.read_text())["structure"]
+    addr, own = section_map(structure)
+    if addr == "line":
+        if tree_override is not None:
+            return addr, section_line_map(tree_override)
+        if line_hit == "span":
+            return addr, line_span_map(structure)
     return addr, own
 
 
@@ -162,6 +207,11 @@ def main() -> int:
     ap.add_argument("--tree", default=None,
                     help="LEGACY: force one line-addressed section->line map for all "
                          "line indexes (default: each index self-projects)")
+    ap.add_argument("--line-hit", choices=["heading", "span"], default="heading",
+                    help="line-addressed hit test: 'heading' (default; RFC-compatible: "
+                         "fetch must cover the section's heading line) or 'span' (any "
+                         "fetch overlapping the section's line span counts — use for "
+                         "long-section corpora like GDPR)")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args()
 
@@ -187,7 +237,8 @@ def main() -> int:
         n_fetch = len(fetched_spans(res)) + (0 if fetched_spans(res) else len(fetched_tokens(res)))
         content_tok = res.get("content_tokens", 0)
         if idx_id not in proj_cache:
-            proj_cache[idx_id] = projection_for(idx_id, indexes_dir, tree_override)
+            proj_cache[idx_id] = projection_for(idx_id, indexes_dir, tree_override,
+                                                line_hit=args.line_hit)
         proj = proj_cache[idx_id]
         if res.get("error") or proj is None:
             rows.append(dict(qid=qid, index=idx_id, category=meta.get("category", "?"),
@@ -295,6 +346,30 @@ def _self_test() -> int:
     # node-mode: node_id present among fetched tokens hits.
     res_node = {"tool_calls": [{"tool": "get_page_content", "args": {"pages": "0202, 0300"}}]}
     check("node recall 1/2", score_result(res_node, ["15.4.2", "10.2.2"], na, nm), (1, 2, 0))
+
+    # span mode: a fetch inside a long section hits without covering the heading line.
+    span_struct = [{"title": "Recitals (Preamble)", "line_num": 3},
+                   {"title": "Article 83 — Fines", "line_num": 1780},
+                   {"title": "Article 84 — Penalties", "line_num": 1830}]
+    sm = line_span_map(span_struct)
+    check("span map recitals", sm["Recitals"], (3, 1779))
+    check("span map open end", sm["Article 84"][1], 10**9)
+    res_mid = {"tool_calls": [{"tool": "get_page_content", "args": {"pages": "1799-1816"}}]}
+    check("span-mode mid-section hit",
+          score_result(res_mid, ["Article 83"], "line", sm), (1, 1, 0))
+    check("heading-mode mid-section miss",
+          score_result(res_mid, ["Article 83"], "line", {"Article 83": 1780}), (0, 1, 0))
+
+    # legal-doc headings: "Article N — rubric" and the single Recitals node.
+    art_struct = [{"title": "Recitals (Preamble)", "node_id": "0000", "line_num": 3},
+                  {"title": "Article 17 — Right to erasure", "node_id": "0021", "line_num": 700},
+                  {"title": "Article 4 — Definitions", "node_id": "0007", "line_num": 400}]
+    aa, am = section_map(art_struct)
+    check("article key mapped", am["Article 17"], 700)
+    check("recitals key mapped", am["Recitals"], 3)
+    res_art = {"tool_calls": [{"tool": "get_page_content", "args": {"pages": "690-720"}}]}
+    check("article recall 1/2", score_result(res_art, ["Article 17", "Article 4"], aa, am),
+          (1, 2, 0))
 
     check("gold drops NONE", gold_list("15.4.2; NONE-for-freshness; 9.2.3"),
           (["15.4.2", "9.2.3"], True))

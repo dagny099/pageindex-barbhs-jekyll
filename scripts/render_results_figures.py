@@ -85,7 +85,7 @@ def svg(w, h, body):
 # --------------------------------------------------------------------------
 
 def fig_tree_tax():
-    W, H = 960, 560
+    W, H = 960, 690
     groups = [
         ("site-book-v1 (website, 339 nodes)", [
             ("IDX-D", "headings only", 8934, P["cobalt"]),
@@ -95,6 +95,10 @@ def fig_tree_tax():
         ("rfc9110-book-v1 (spec, 311 nodes)", [
             ("IDX-D-rfc9110", "headings only", 6793, P["cobalt"]),
             ("IDX-C0-rfc9110", "real summaries (threshold 0)", 39303, P["primary"]),
+        ]),
+        ("gdpr-md-v1 (EU law, 126 nodes)", [
+            ("IDX-D-gdpr", "headings only", 2853, P["cobalt"]),
+            ("IDX-C0-gdpr", "real summaries (threshold 0) — 5.4×", 15272, P["primary"]),
         ]),
         ("paper-book-v1 (2009 paper, 28 nodes)", [
             ("IDX-D-paper-book-v1", "headings only", 474, P["cobalt"]),
@@ -278,10 +282,77 @@ def fig_rfc_recall():
     return svg(W, H, body)
 
 
+# --------------------------------------------------------------------------
+# Figure 4 — GDPR: original vs paraphrased questions (the fair test)
+# --------------------------------------------------------------------------
+
+def fig_gdpr_paraphrase():
+    W, H = 1015, 520
+    # (label, colour, original, paraphrased) per arm, per metric panel
+    panels = [
+        ("A. Recall@fetch — did it open the right Article?",
+         [("IDX-D (Markdown headings)", P["cobalt"], 0.958, 0.840),
+          ("IDX-PDF-textheadings", P["cobalt"], 1.000, 0.840),
+          ("IDX-C0 (summaries)", P["primary"], 0.917, 0.819)]),
+        ("B. Fact-score — was the answer correct?",
+         [("IDX-D (Markdown headings)", P["cobalt"], 0.920, 0.861),
+          ("IDX-PDF-textheadings", P["cobalt"], 0.944, 0.899),
+          ("IDX-C0 (summaries)", P["primary"], 0.875, 0.861)]),
+    ]
+    body = title_block(
+        W, "GDPR: what happens when questions stop naming their target",
+        "same 24 questions and identical answer key, article numbers stripped out — "
+        "open dot = original wording, filled dot = paraphrased")
+    # shared legend: dot semantics
+    body.append(f'<circle cx="46" cy="92" r="7" fill="{P["ground"]}" '
+                f'stroke="{P["muted"]}" stroke-width="2"/>')
+    body.append(text(60, 96, "original (names the Article)", size=12.5, fill=P["text"]))
+    body.append(f'<circle cx="300" cy="92" r="7" fill="{P["muted"]}"/>')
+    body.append(text(314, 96, "paraphrased (real-user wording)", size=12.5, fill=P["text"]))
+    pw = 430
+    lo, hi = 0.75, 1.0
+    for pi, (ptitle, rows) in enumerate(panels):
+        ox = 40 + pi * (pw + 60)
+        x0, x1 = ox + 200, ox + pw
+        vx = lambda v: x0 + (v - lo) / (hi - lo) * (x1 - x0)
+        body.append(text(ox, 134, ptitle, size=14.5, fill=P["ink"], weight=600))
+        gy0, gy1 = 156, 430
+        for v in (0.75, 0.80, 0.85, 0.90, 0.95, 1.0):
+            gx = vx(v)
+            body.append(f'<line x1="{gx:g}" y1="{gy0}" x2="{gx:g}" y2="{gy1}" stroke="{P["grid"]}"/>')
+            body.append(text(gx, gy1 + 18, f"{v:.2f}", size=10.5, fill=P["muted"], anchor="middle"))
+        y = 196
+        for name, color, orig, para in rows:
+            body.append(text(x0 - 12, y + 4, name, size=11.5, fill=P["text"], anchor="end"))
+            xo, xp = vx(orig), vx(para)
+            body.append(f'<line x1="{min(xo, xp):g}" y1="{y:g}" x2="{max(xo, xp):g}" y2="{y:g}" '
+                        f'stroke="{color}" stroke-width="2.5" opacity="0.5"/>')
+            # original = open (ground fill, coloured ring); paraphrased = filled
+            body.append(f'<circle cx="{xo:g}" cy="{y:g}" r="7" fill="{P["ground"]}" '
+                        f'stroke="{color}" stroke-width="2.5"/>')
+            body.append(f'<circle cx="{xp:g}" cy="{y:g}" r="7" fill="{color}" '
+                        f'stroke="{P["ground"]}" stroke-width="1.5"/>')
+            body.append(text(xo, y - 13, f"{orig:.2f}", size=10, fill=P["muted"], anchor="middle"))
+            body.append(text(xp, y + 20, f"{para:.2f}", size=10, fill=P["text"],
+                             anchor="middle", weight=600))
+            y += 74
+        note = ("every arm drops — the deterministic arms had ridden the free addresses"
+                if pi == 0 else
+                "summaries (orange) end level with Markdown headings: 0.86 = 0.86")
+        body.append(text(ox, 462, note, size=11.5, fill=P["text"]))
+    body.append(text(40, H - 14,
+                     "gpt-4o navigator, 24 questions, recall in span mode. Runs "
+                     "20260716T055341Z (original) / 20260716T195845Z (paraphrased). "
+                     "C0's gap to the best free arm: recall −0.083→−0.021, facts −0.069→−0.038.",
+                     size=10.5, fill=P["muted"]))
+    return svg(W, H, body)
+
+
 FIGS = {
     "results-tree-tax.svg": fig_tree_tax,
     "results-website-quality-cost.svg": fig_quality_cost,
     "results-rfc-recall.svg": fig_rfc_recall,
+    "results-gdpr-paraphrase.svg": fig_gdpr_paraphrase,
 }
 
 

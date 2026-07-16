@@ -307,5 +307,6 @@ Before publishing, we checked whether this behavior still exists upstream:
   summary/threshold/verbatim/get_node_summary; nearest hits #340/#341/#23/#129 are
   unrelated).
 
-An upstream behavior report is drafted at `reports/upstream-issue-draft.md` (to be filed
-against VectifyAI/PageIndex; link will be added here once it exists).
+The upstream behavior report was **filed 2026-07-15**:
+[VectifyAI/PageIndex#355](https://github.com/VectifyAI/PageIndex/issues/355)
+(archived source: `reports/upstream-issue-draft.md`).

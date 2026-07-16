@@ -388,6 +388,7 @@ Every run folder carries `run.json` (full tool traces, per-question telemetry) a
 - **IDX-O0** (local threshold-0 summaries) and the P3 weak-navigator prediction.
 - Repeatable multi-judge scoring (`scripts/score_run.py`) and n>1 for the subjective grid.
 - Live capture of the prompt-cache write premium.
-- Upstream issue **drafted** (`reports/upstream-issue-draft.md`): the verbatim-copy
-  summary semantics and the Markdown/PDF path divergence. Verified unchanged on upstream
-  `main` (= `f413c66`) on 2026-07-15; no existing upstream report. Awaiting review + filing.
+- Upstream issue **filed** ([VectifyAI/PageIndex#355](https://github.com/VectifyAI/PageIndex/issues/355),
+  2026-07-15): the verbatim-copy summary semantics and the Markdown/PDF path divergence.
+  Verified unchanged on upstream `main` (= `f413c66`) at filing; no prior report existed.
+  Archived body: `reports/upstream-issue-draft.md`.

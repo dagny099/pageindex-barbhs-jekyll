@@ -1,16 +1,12 @@
-# DRAFT — upstream issue for VectifyAI/PageIndex
+# Upstream issue for VectifyAI/PageIndex — FILED
 
-*Status: draft for Barbara's review. Not yet filed. Once approved, file with:*
-
-```bash
-gh issue create --repo VectifyAI/PageIndex \
-  --title "Markdown path: below --summary-token-threshold, node text is copied verbatim into summary (undocumented; diverges from PDF path)" \
-  --body-file <this file, from the marker below>
-```
+*Status: **filed 2026-07-15** as
+[VectifyAI/PageIndex#355](https://github.com/VectifyAI/PageIndex/issues/355)
+(reported by dagny099). This file is the archived source of the issue body.*
 
 *Verified against upstream `main` (= `f413c66`, 2026-07-15). No existing issue or PR
-covers this (searched: summary/threshold/verbatim/get_node_summary). Everything below
-the marker is the proposed issue body.*
+covered this at filing time (searched: summary/threshold/verbatim/get_node_summary).
+Everything below the marker is the issue body as filed.*
 
 ---8<--- issue body starts here ---
 
@@ -22,10 +18,10 @@ their **raw text is copied verbatim into the `summary` field**, with no LLM call
 heading-dense documents this means most of the tree: on our 339-node corpus, **80.5% of
 nodes** carried a "summary" that was byte-for-byte identical to their own text.
 
-This behavior isn't documented anywhere (README, `--help`, or code comments), and it
-differs from the PDF path, which always generates a real summary for every node. Users
-can reasonably believe they built a summary-enriched index when most of it is copied
-text.
+This verbatim-copy behavior isn't documented anywhere — the `--help` text notes the flag
+is "markdown only", but nothing says what happens below the threshold — and it differs
+from the PDF path, which always generates a real summary for every node. Users can
+reasonably believe they built a summary-enriched index when most of it is copied text.
 
 I realize the threshold is a sensible cost optimization — "don't pay to summarize a node
 that's already short" is defensible. The issue is that the *semantics* (verbatim copy

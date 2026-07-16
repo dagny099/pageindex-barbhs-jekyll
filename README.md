@@ -109,13 +109,16 @@ are reported. Full definitions and the worked example are in
 | `corpus/site-book-v1/` | Frozen input corpus (Markdown book stitched from 26 website documents) + `manifest.json` + `provenance.json`. Consumed, not produced here. |
 | `corpus/paper-book-v1/` | Frozen paper corpus (Markdown book derived from the 2009 *Visual Cognition* PDF) + manifest + provenance. Produced **in this repo** by `scripts/build_paper_book.py`. |
 | `sources/paper-2009/` | The frozen source PDF, pinned by SHA-256 in `config/paper-book-v1.yml`. |
-| `indexes/IDX-<letter>/index.json` | Curated, evaluated index variants. Currently: `IDX-D` (Deterministic). |
+| `indexes/IDX-<letter>/index.json` | Curated, evaluated index variants — one per index condition, each with its own `provenance.json`. Includes the deterministic (`IDX-D-*`), cloud-summary (`IDX-C`/`IDX-C0-*`), and PDF-derived (`IDX-PDF-outline-*`, `IDX-PDF-textheadings-*`) arms across all four corpora. |
 | `results/` | Raw PageIndex run output (gitignored scratch). |
-| `reports/` | Experimental brief / lab notebook, the Index Comparison Explorer (`V1_INDEX_COMPARISON.html`), index outlines, alignment report. (Corpus QC & normalization reports live in the website repo.) |
-| `tests/` | pytest suite for repo tooling (currently the explorer generator). Run with `python -m pytest`. |
+| `reports/` | Experimental brief / lab notebook, the consolidated results (`RESULTS.md`), figures, the Index Comparison Explorer (`V1_INDEX_COMPARISON.html`), index outlines, alignment report. (Corpus QC & normalization reports live in the website repo.) |
+| `tests/` | pytest suite for repo tooling (paper-book build, explorer generator). Run with `python -m pytest`. |
 | `notebooks/` | Read-only **analysis** notebooks (cost dashboard, cross-condition explorer, gold validator, single-run analysis) — numbered by lifecycle. See [`notebooks/README.md`](notebooks/README.md). |
 | `vendor/PageIndex/` | The PageIndex tool, pinned as a git submodule. |
-| `config/` `evaluations/` `runs/` `scripts/` | Scaffolding for run configs, eval harnesses, reporting (currently empty). |
+| `config/` | Build/run configs (corpus builders, index conditions, Ollama Modelfiles). |
+| `evaluations/` | Frozen question sets (one CSV per corpus) + scoring artifacts. |
+| `runs/` | One folder per retrieval run (`run.json`, `recall.csv`, `answer_facts.csv`) + the `usage_log.jsonl` cost ledger. |
+| `scripts/` | The tested producer layer: corpus builders, index builders, the retrieval harness, and the scorers. |
 
 ## Index Comparison Explorer (V1 inspection tool)
 

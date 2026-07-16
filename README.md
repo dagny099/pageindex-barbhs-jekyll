@@ -94,6 +94,7 @@ retrieval harness (`scripts/run_retrieval.py`).
 | `results/` | Raw PageIndex run output (gitignored scratch). |
 | `reports/` | Experimental brief / lab notebook, the Index Comparison Explorer (`V1_INDEX_COMPARISON.html`), index outlines, alignment report. (Corpus QC & normalization reports live in the website repo.) |
 | `tests/` | pytest suite for repo tooling (currently the explorer generator). Run with `python -m pytest`. |
+| `notebooks/` | Read-only **analysis** notebooks (cost dashboard, cross-condition explorer, gold validator, single-run analysis) — numbered by lifecycle. See [`notebooks/README.md`](notebooks/README.md). |
 | `vendor/PageIndex/` | The PageIndex tool, pinned as a git submodule. |
 | `config/` `evaluations/` `runs/` `scripts/` | Scaffolding for run configs, eval harnesses, reporting (currently empty). |
 

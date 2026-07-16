@@ -213,3 +213,29 @@ The payoff — the tooling is general. For a new bookmarked PDF `sources/<doc>/<
 **The one rule that makes replication work:** gold is expressed as **section/heading
 identifiers that appear in node titles**. Everything else — addressing, page vs line, which
 representation — the tools handle automatically.
+
+---
+
+## 8. Analyzing results — notebooks (read-only)
+
+Notebooks are the **read-only analysis layer**: they consume `runs/`, `indexes/`, and
+`evaluations/` outputs and never re-implement build/score/spend logic (they import the tested
+functions or shell out to the scripts). They need the analysis extras — `pandas`, `altair`,
+`ipykernel` — from `requirements.txt`; charts use the brand palette via `scripts/viz_theme.py`.
+
+```bash
+.venv/bin/pip install -r requirements.txt            # once: pandas + altair + ipykernel
+.venv/bin/python -m ipykernel install --user --name pageindex   # register .venv as a kernel
+```
+
+Numbered by the **experiment lifecycle** (see [`notebooks/README.md`](../notebooks/README.md)):
+
+| # | Notebook | When / what it answers |
+|---|----------|------------------------|
+| 1 | `notebooks/1_validate_gold.ipynb` | **before spending:** do a corpus's gold sections resolve to nodes in an index? |
+| 2 | `notebooks/2_analyze_one_run.ipynb` | after one run: recall + per-question pivot + drill-down (Steps 1–4) |
+| 3 | `notebooks/3_compare_conditions.ipynb` | after several runs: recall heatmap, efficiency frontier, biggest gaps |
+| 4 | `notebooks/4_cost_dashboard.ipynb` | anytime (cross-cutting): spend by phase/run/source, cache-replay, amplification |
+
+Convention: commit notebooks with **outputs cleared** (tools, not results); if a chart becomes a
+finding worth keeping, export it to `reports/` as static HTML/SVG.

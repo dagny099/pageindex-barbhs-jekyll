@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1015" height="520" viewBox="0 0 1015 520" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif">
+<rect width="1015" height="520" fill="#F4F0E8"/>
+<text x="40" y="44" text-anchor="start" font-size="24" font-family="Fraunces, Georgia, 'Times New Roman', serif" fill="#1C3A55" font-weight="600">RFC 9110: gold-section recall@fetch (objective, judge-free)</text>
+<text x="40" y="68" text-anchor="start" font-size="13.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">did the agent fetch the sections the answer needs — gold labels projected onto each index's own addressing</text>
+<text x="40" y="112" text-anchor="start" font-size="15" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="600">A. Do summaries help navigation? — no</text>
+<text x="40" y="130" text-anchor="start" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">same 311-node tree, summaries on vs off · run 20260715T051258Z</text>
+<rect x="40" y="146" width="14" height="14" rx="3" fill="#186090"/>
+<text x="60" y="158" text-anchor="start" font-size="12.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">IDX-D (headings)</text>
+<rect x="228" y="146" width="14" height="14" rx="3" fill="#C04818"/>
+<text x="248" y="158" text-anchor="start" font-size="12.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">IDX-C0 (summaries)</text>
+<line x1="190" y1="172" x2="190" y2="428" stroke="#E4DDCC"/>
+<text x="190" y="446" text-anchor="middle" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">0.4</text>
+<line x1="283.333" y1="172" x2="283.333" y2="428" stroke="#E4DDCC"/>
+<text x="283.333" y="446" text-anchor="middle" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">0.6</text>
+<line x1="376.667" y1="172" x2="376.667" y2="428" stroke="#E4DDCC"/>
+<text x="376.667" y="446" text-anchor="middle" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">0.8</text>
+<line x1="470" y1="172" x2="470" y2="428" stroke="#E4DDCC"/>
+<text x="470" y="446" text-anchor="middle" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">1.0</text>
+<text x="180" y="204" text-anchor="end" font-size="12" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">overall (21)</text>
+<line x1="323.933" y1="200" x2="431.733" y2="200" stroke="#E4DDCC" stroke-width="2.5"/>
+<circle cx="431.733" cy="200" r="7" fill="#186090" stroke="#F4F0E8" stroke-width="2"/>
+<circle cx="323.933" cy="200" r="7" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="311.933" y="204" text-anchor="end" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.69</text>
+<text x="443.733" y="204" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.92</text>
+<text x="180" y="250" text-anchor="end" font-size="12" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">single-hop (4)</text>
+<line x1="411.667" y1="246" x2="470" y2="246" stroke="#E4DDCC" stroke-width="2.5"/>
+<circle cx="470" cy="246" r="7" fill="#186090" stroke="#F4F0E8" stroke-width="2"/>
+<circle cx="411.667" cy="246" r="7" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="399.667" y="250" text-anchor="end" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.88</text>
+<text x="482" y="250" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">1.00</text>
+<text x="180" y="296" text-anchor="end" font-size="12" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">multi-hop (6)</text>
+<line x1="297.8" y1="292" x2="414.467" y2="292" stroke="#E4DDCC" stroke-width="2.5"/>
+<circle cx="414.467" cy="292" r="7" fill="#186090" stroke="#F4F0E8" stroke-width="2"/>
+<circle cx="297.8" cy="292" r="7" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="285.8" y="296" text-anchor="end" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.63</text>
+<text x="426.467" y="296" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.88</text>
+<text x="180" y="342" text-anchor="end" font-size="12" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">cross-reference (5)</text>
+<line x1="260" y1="338" x2="376.667" y2="338" stroke="#E4DDCC" stroke-width="2.5"/>
+<circle cx="376.667" cy="338" r="7" fill="#186090" stroke="#F4F0E8" stroke-width="2"/>
+<circle cx="260" cy="338" r="7" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="248" y="342" text-anchor="end" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.55</text>
+<text x="388.667" y="342" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.80</text>
+<text x="180" y="388" text-anchor="end" font-size="12" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">scattered-enum (5)</text>
+<line x1="320.667" y1="384" x2="470" y2="384" stroke="#E4DDCC" stroke-width="2.5"/>
+<circle cx="470" cy="384" r="7" fill="#186090" stroke="#F4F0E8" stroke-width="2"/>
+<circle cx="320.667" cy="384" r="7" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="308.667" y="388" text-anchor="end" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.68</text>
+<text x="482" y="388" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">1.00</text>
+<text x="40" y="462" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">cost: $1.30 vs $6.01 (4.6×) · answer fact-scores tied (0.95)</text>
+<text x="530" y="112" text-anchor="start" font-size="15" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#1C3A55" font-weight="600">B. Does representation matter? — barely</text>
+<text x="530" y="130" text-anchor="start" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">same structure, Markdown lines vs PDF pages · run 20260715T174748Z</text>
+<rect x="530" y="146" width="14" height="14" rx="3" fill="#186090"/>
+<text x="550" y="158" text-anchor="start" font-size="12.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">IDX-D (Markdown)</text>
+<rect x="718" y="146" width="14" height="14" rx="3" fill="#C04818"/>
+<text x="738" y="158" text-anchor="start" font-size="12.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">IDX-PDF-outline (PDF)</text>
+<line x1="680" y1="172" x2="680" y2="428" stroke="#E4DDCC"/>
+<text x="680" y="446" text-anchor="middle" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">0.4</text>
+<line x1="773.333" y1="172" x2="773.333" y2="428" stroke="#E4DDCC"/>
+<text x="773.333" y="446" text-anchor="middle" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">0.6</text>
+<line x1="866.667" y1="172" x2="866.667" y2="428" stroke="#E4DDCC"/>
+<text x="866.667" y="446" text-anchor="middle" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">0.8</text>
+<line x1="960" y1="172" x2="960" y2="428" stroke="#E4DDCC"/>
+<text x="960" y="446" text-anchor="middle" font-size="11" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">1.0</text>
+<text x="670" y="204" text-anchor="end" font-size="12" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">overall (21)</text>
+<line x1="876.467" y1="200" x2="916.133" y2="200" stroke="#E4DDCC" stroke-width="2.5"/>
+<circle cx="916.133" cy="200" r="7" fill="#186090" stroke="#F4F0E8" stroke-width="2"/>
+<circle cx="876.467" cy="200" r="7" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="864.467" y="204" text-anchor="end" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.82</text>
+<text x="928.133" y="204" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.91</text>
+<text x="670" y="250" text-anchor="end" font-size="12" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">single-hop (4)</text>
+<line x1="901.667" y1="246" x2="960" y2="246" stroke="#E4DDCC" stroke-width="2.5"/>
+<circle cx="960" cy="246" r="7" fill="#186090" stroke="#F4F0E8" stroke-width="2"/>
+<circle cx="901.667" cy="246" r="7" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="889.667" y="250" text-anchor="end" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.88</text>
+<text x="972" y="250" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">1.00</text>
+<text x="670" y="296" text-anchor="end" font-size="12" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">multi-hop (6)</text>
+<line x1="846.133" y1="292" x2="884.867" y2="292" stroke="#E4DDCC" stroke-width="2.5"/>
+<circle cx="884.867" cy="292" r="7" fill="#186090" stroke="#F4F0E8" stroke-width="2"/>
+<circle cx="846.133" cy="292" r="7" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="834.133" y="296" text-anchor="end" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.76</text>
+<text x="896.867" y="296" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.84</text>
+<text x="670" y="342" text-anchor="end" font-size="12" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">cross-reference (5)</text>
+<circle cx="866.667" cy="338" r="9" fill="#186090"/>
+<circle cx="866.667" cy="338" r="5" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="880.667" y="342" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66" font-weight="600">both 0.80</text>
+<text x="670" y="388" text-anchor="end" font-size="12" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">scattered-enum (5)</text>
+<line x1="885.333" y1="384" x2="960" y2="384" stroke="#E4DDCC" stroke-width="2.5"/>
+<circle cx="960" cy="384" r="7" fill="#186090" stroke="#F4F0E8" stroke-width="2"/>
+<circle cx="885.333" cy="384" r="7" fill="#C04818" stroke="#F4F0E8" stroke-width="2"/>
+<text x="873.333" y="388" text-anchor="end" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">0.84</text>
+<text x="972" y="388" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B" font-weight="600">1.00</text>
+<text x="530" y="462" text-anchor="start" font-size="11.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#2B2B2B">cost parity ($1.27 vs $1.24) · page nodes bundle neighbors</text>
+<text x="40" y="506" text-anchor="start" font-size="10.5" font-family="'Hanken Grotesk', 'Public Sans', 'Helvetica Neue', Arial, sans-serif" fill="#6B6B66">Recall axis starts at 0.4 (dot plot — position, not length). 24 questions; 3 absence questions have no gold recall. gpt-4o navigator.</text>
+</svg>

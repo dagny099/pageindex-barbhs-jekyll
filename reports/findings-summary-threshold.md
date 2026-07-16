@@ -58,10 +58,11 @@ that's already short. Defensible in principle. Two things make it a trap in prac
 1. **The default (200) is high relative to a heading-dense document.** Most sections in our
    corpus are under 200 tokens, so most nodes take the verbatim branch — "add summaries"
    mostly *doesn't*.
-2. **It is undocumented.** PageIndex's README "Optional parameters" list stops at
-   `--if-add-doc-description`; `--summary-token-threshold` and its copy-below-threshold
-   behavior are not mentioned. There was no way to know from the docs — only from inspecting
-   the output.
+2. **The verbatim semantics are undocumented.** To be precise about what is and isn't
+   disclosed: the CLI `--help` does describe `--summary-token-threshold` as "(markdown
+   only)", but the flag is absent from the README's "Optional parameters" list, and the
+   copy-below-threshold behavior — raw node text emitted as the `summary` — is documented
+   nowhere. That part was only discoverable by inspecting the emitted index.
 
 ### The two paths do NOT behave the same
 
@@ -291,3 +292,21 @@ enrichment step's *default configuration* can invert its own value proposition.
   repetition (n>1) for a real distribution, before any strong quantitative claim is published.
 - `IDX-O0` (local Ollama, threshold 0) — is the summary benefit reachable without the API bill?
   Deferred behind this result, which establishes that the benefit exists at all.
+
+---
+
+## Addendum (2026-07-15): verified current upstream; issue drafted
+
+Before publishing, we checked whether this behavior still exists upstream:
+
+- Our pinned submodule commit `f413c66` **is** upstream `main` HEAD (nothing has moved
+  since 2026-07-03) — everything in this note describes the current release.
+- `get_node_summary`'s verbatim branch, the always-generate PDF path (`utils.py:590`),
+  and the Markdown-only flag wiring (`run_pageindex.py`) are all unchanged on `main`.
+- No existing upstream issue or PR covers it (searched issues/PRs for
+  summary/threshold/verbatim/get_node_summary; nearest hits #340/#341/#23/#129 are
+  unrelated).
+
+The upstream behavior report was **filed 2026-07-15**:
+[VectifyAI/PageIndex#355](https://github.com/VectifyAI/PageIndex/issues/355)
+(archived source: `reports/upstream-issue-draft.md`).

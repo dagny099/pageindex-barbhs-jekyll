@@ -46,6 +46,29 @@ from pathlib import Path
 
 EXPECTED_PYMUPDF = "1.26.4"   # reproducibility pin (override with --expected-pymupdf)
 
+# --headings-from text: some born-digital PDFs (e.g. the EUR-Lex Official Journal
+# rendition of an EU regulation) carry NO usable embedded outline — fitz.get_toc()
+# returns a single title entry — yet their structure is perfectly regular in the
+# text layer (a number line + a rubric line). A profile names, per structural kind,
+# a MULTILINE regex whose group(1) is the item number and group(2) the rubric line.
+# Articles nest under a Section when one is open in the current chapter, else
+# directly under the chapter. Add profiles for other doc families here; nothing
+# below is EU-specific.
+KIND_LABEL = {"chapter": "Chapter", "section": "Section", "article": "Article"}
+
+TEXT_PROFILES = {
+    "eu-legislation": {
+        "patterns": {
+            "chapter": re.compile(r"(?m)^[ \t]*CHAPTER[ \t]+([IVXLC]+)\b[ \t]*\n[ \t]*(.+?)[ \t]*$"),
+            "section": re.compile(r"(?m)^[ \t]*Section[ \t]+(\d+)\b[ \t]*\n[ \t]*(.+?)[ \t]*$"),
+            "article": re.compile(r"(?m)^[ \t]*Article[ \t]+(\d+)\b[ \t]*\n[ \t]*(.+?)[ \t]*$"),
+        },
+        # Text before the first matched heading (citations + recitals) becomes a
+        # leading level-1 node instead of being silently dropped.
+        "preamble_title": "Recitals (Preamble)",
+    },
+}
+
 
 # --------------------------------------------------------------------------
 # Pure helpers (unit-tested offline, no PDF/LLM)
@@ -122,22 +145,49 @@ def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def build_flat_entries(toc: list, pages: list[str]) -> list[dict]:
-    """Map an outline `[(level, title, start_page), ...]` + per-page text into
-    flat entries with non-overlapping heading-to-next-heading text and physical
-    page ranges. Text assignment mirrors md_to_tree: each entry owns the text
-    from its own heading up to the next entry's heading."""
-    # Concatenate pages, remembering where each page begins.
-    full, page_starts, cur = [], [], 0
+def page_starts_of(pages: list[str]) -> list[int]:
+    """Start char offset of each page in the ""-concatenated document text."""
+    starts, cur = [], 0
     for p in pages:
-        page_starts.append(cur)
-        full.append(p)
+        starts.append(cur)
         cur += len(p)
-    text = "".join(full)
+    return starts
 
-    # Locate each heading, scanning forward and monotonically (a section number
-    # can appear as a cross-reference earlier; anchoring at the outline's start
-    # page and never searching before the previous heading avoids false hits).
+
+def slice_entries(positions: list[int], titles: list[str], levels: list[int],
+                  pages: list[str]) -> list[dict]:
+    """Core slicer, shared by both heading sources. Given each heading's exact
+    char offset (ascending, non-overlapping) plus its title and level, assign
+    non-overlapping heading-to-next-heading text and physical page ranges. Text
+    assignment mirrors md_to_tree: each entry owns the text from its own heading
+    up to the next heading."""
+    text = "".join(pages)
+    page_starts = page_starts_of(pages)
+    entries, n = [], len(positions)
+    for i in range(n):
+        start_char = positions[i]
+        end_char = positions[i + 1] if i + 1 < n else len(text)
+        body = text[start_char:end_char].strip()
+        start_page = char_to_page(start_char, page_starts)
+        end_page = char_to_page(max(start_char, end_char - 1), page_starts)
+        entries.append({
+            "level": levels[i],
+            "title": titles[i].strip(),
+            "start_index": start_page,
+            "end_index": end_page,
+            "text": body,
+        })
+    return entries
+
+
+def build_flat_entries(toc: list, pages: list[str]) -> list[dict]:
+    """Outline (bookmark) source: map `[(level, title, start_page), ...]` onto the
+    text layer by locating each title, then slice. Titles are located scanning
+    forward and monotonically (a section number can appear as a cross-reference
+    earlier; anchoring at the outline's start page and never searching before the
+    previous heading avoids false hits)."""
+    page_starts = page_starts_of(pages)
+    text = "".join(pages)
     positions: list[int] = []
     prev_end = 0
     for level, title, page in toc:
@@ -148,22 +198,42 @@ def build_flat_entries(toc: list, pages: list[str]) -> list[dict]:
             pos = start                          # fallback: never move backwards
         positions.append(pos)
         prev_end = pos + len(title)
+    titles = [t for _, t, _ in toc]
+    levels = [l for l, _, _ in toc]
+    return slice_entries(positions, titles, levels, pages)
 
-    entries = []
-    for i, (level, title, page) in enumerate(toc):
-        start_char = positions[i]
-        end_char = positions[i + 1] if i + 1 < len(toc) else len(text)
-        body = text[start_char:end_char].strip()
-        start_page = char_to_page(start_char, page_starts)
-        end_page = char_to_page(max(start_char, end_char - 1), page_starts)
-        entries.append({
-            "level": level,
-            "title": title.strip(),
-            "start_index": start_page,
-            "end_index": end_page,
-            "text": body,
-        })
-    return entries
+
+def scan_text_headings(pages: list[str], profile: dict) -> list[tuple[int, int, str]]:
+    """Text-layer source: find headings by regex when a PDF lacks a usable
+    outline. Returns `[(char_offset, level, title), ...]` in document order.
+    Levels: chapter=1, section=2, article=2 (or 3 when a section is open in the
+    current chapter). An optional preamble node captures pre-heading text."""
+    text = "".join(pages)
+    page_starts = page_starts_of(pages)
+    raw: list[tuple[int, str, str, str]] = []
+    for kind, rx in profile["patterns"].items():
+        for m in rx.finditer(text):
+            raw.append((m.start(), kind, m.group(1), m.group(2).strip()))
+    raw.sort(key=lambda h: h[0])
+
+    hits: list[tuple[int, int, str]] = []
+    section_open = False
+    for off, kind, num, rubric in raw:
+        if kind == "chapter":
+            level, section_open = 1, False
+        elif kind == "section":
+            level, section_open = 2, True
+        else:  # article
+            level = 3 if section_open else 2
+        title = f"{KIND_LABEL[kind]} {num}"
+        if rubric:
+            title = f"{title} — {rubric}"
+        hits.append((off, level, title))
+
+    pre = profile.get("preamble_title")
+    if pre and hits and hits[0][0] > 0:
+        hits.insert(0, (0, 1, pre))
+    return hits
 
 
 def page_text_reading_order(page) -> str:
@@ -178,7 +248,8 @@ def page_text_reading_order(page) -> str:
     return "".join(b[4] for b in blocks)
 
 
-def build_index(pdf_path: Path, expected_pymupdf: str) -> dict:
+def build_index(pdf_path: Path, expected_pymupdf: str,
+                headings_from: str = "outline", text_profile: str = "eu-legislation") -> dict:
     import fitz  # PyMuPDF
     ver = fitz.__version__.split()[0] if isinstance(fitz.__version__, str) else str(fitz.VersionBind)
     if ver != expected_pymupdf:
@@ -186,14 +257,31 @@ def build_index(pdf_path: Path, expected_pymupdf: str) -> dict:
             f"ERROR: PyMuPDF {ver} != pinned {expected_pymupdf}; reproducibility "
             f"not guaranteed. Re-pin with --expected-pymupdf {ver} if intentional.")
     doc = fitz.open(str(pdf_path))
-    toc = doc.get_toc()
-    if not toc:
-        raise SystemExit(
-            f"ERROR: {pdf_path} has no embedded outline (fitz.get_toc() empty). "
-            f"This approach needs a bookmarked PDF; use PageIndex's inference path instead.")
     pages = [page_text_reading_order(doc[i]) for i in range(doc.page_count)]
 
-    flat = build_flat_entries(toc, pages)
+    if headings_from == "text":
+        profile = TEXT_PROFILES.get(text_profile)
+        if profile is None:
+            raise SystemExit(f"unknown --text-profile {text_profile!r}; "
+                             f"known: {', '.join(TEXT_PROFILES)}")
+        hits = scan_text_headings(pages, profile)
+        if not hits:
+            raise SystemExit(
+                f"ERROR: profile {text_profile!r} matched no headings in {pdf_path}. "
+                f"Check the profile's regexes against the PDF text layer.")
+        positions = [h[0] for h in hits]
+        levels = [h[1] for h in hits]
+        titles = [h[2] for h in hits]
+        flat = slice_entries(positions, titles, levels, pages)
+    else:
+        toc = doc.get_toc()
+        if not toc:
+            raise SystemExit(
+                f"ERROR: {pdf_path} has no embedded outline (fitz.get_toc() empty). "
+                f"Either the PDF is bookmarked and this is a bug, or use "
+                f"--headings-from text with a matching --text-profile to derive "
+                f"structure from the text layer instead.")
+        flat = build_flat_entries(toc, pages)
     node_ids = assign_node_ids(len(flat))
     for e, nid in zip(flat, node_ids):
         e["node_id"] = nid
@@ -214,22 +302,40 @@ def count_nodes(structure: list[dict]) -> int:
 # --------------------------------------------------------------------------
 
 def write_provenance(index_dir: Path, pdf_path: Path, index: dict,
-                     expected_pymupdf: str, twin: str | None) -> None:
+                     expected_pymupdf: str, twin: str | None,
+                     headings_from: str = "outline",
+                     text_profile: str | None = None) -> None:
     node_fields = ["title", "node_id", "start_index", "end_index", "text"]
-    prov = {
-        "index_id": index_dir.name,
-        "condition": "deterministic-pdf-outline (embedded bookmarks; no LLM)",
-        "description": (
+    if headings_from == "text":
+        condition = (f"deterministic-pdf-text-headings (regex profile "
+                     f"{text_profile!r}; no outline, no LLM)")
+        description = (
+            "Deterministic PageIndex-shaped index derived from the PDF's TEXT LAYER "
+            "by a regular-heading regex profile, used because this PDF carries no "
+            "usable embedded outline (fitz.get_toc() empty). Structure comes from the "
+            "document's own regular numbering (e.g. CHAPTER / Section / Article), not "
+            "from an LLM. Still the honest 'deterministic PDF representation' arm — the "
+            "structure source is a parser rather than bookmarks.")
+        gen_mode = "pdf-text-headings"
+    else:
+        condition = "deterministic-pdf-outline (embedded bookmarks; no LLM)"
+        description = (
             "Deterministic PageIndex-shaped index derived from the PDF's embedded "
             "outline (fitz.get_toc()); per-node text sliced from the PDF text layer "
             "at heading boundaries. The honest 'PDF representation' arm: same section "
             "structure as the Markdown twin, differing only in addressing (physical "
-            "page vs line) and text fidelity (PDF extraction vs HTML-derived)."),
+            "page vs line) and text fidelity (PDF extraction vs HTML-derived).")
+        gen_mode = "pdf-outline"
+    prov = {
+        "index_id": index_dir.name,
+        "condition": condition,
+        "description": description,
         "source": str(pdf_path),
         "source_pdf_sha256": sha256_file(pdf_path),
         "generation": {
             "tool": "scripts/build_pdf_outline_index.py",
-            "mode": "pdf-outline",
+            "mode": gen_mode,
+            "text_profile": text_profile if headings_from == "text" else None,
             "uses_llm": False,
             "pymupdf_version": expected_pymupdf,
             "cost_usd": 0.0,
@@ -300,6 +406,31 @@ def self_test() -> None:
 
     check("assign_node_ids", assign_node_ids(3), ["0000", "0001", "0002"])
 
+    # scan_text_headings: EU-style number-line + rubric-line, section-aware levels
+    # and preamble capture. Two pages; a chapter with a bare article, then a
+    # section whose article must drop to level 3.
+    prof = TEXT_PROFILES["eu-legislation"]
+    tpages = [
+        "recital text here \nCHAPTER I \nGeneral provisions \nArticle 1 \nScope \nbody one \n",
+        "CHAPTER II \nRights \nSection 1 \nAccess \nArticle 2 \nRight of access \nbody two \n",
+    ]
+    hits = scan_text_headings(tpages, prof)
+    kinds = [t for _, _, t in hits]
+    check("scan preamble first", hits[0][2], "Recitals (Preamble)")
+    check("scan chapter title", "Chapter I — General provisions" in kinds, True)
+    check("scan article rubric", "Article 1 — Scope" in kinds, True)
+    lvl = {t: lv for _, lv, t in hits}
+    check("scan bare article level 2", lvl["Article 1 — Scope"], 2)
+    check("scan sectioned article level 3", lvl["Article 2 — Right of access"], 3)
+    check("scan section level 2", lvl["Section 1 — Access"], 2)
+    check("scan no cross-ref false hit", sum(k.startswith("Article") for k in kinds), 2)
+    # end-to-end slice via the shared slicer
+    ent = slice_entries([h[0] for h in hits], [h[2] for h in hits],
+                        [h[1] for h in hits], tpages)
+    check("scan preamble owns pre-heading text", ent[0]["text"].startswith("recital text"), True)
+    check("scan article1 text isolated", "body one" in ent[2]["text"] and "body two" not in ent[2]["text"], True)
+    check("scan article2 start page", ent[-1]["start_index"], 2)
+
     if failures:
         raise SystemExit(f"self-test FAILED: {failures}")
     print("self-test OK")
@@ -315,6 +446,11 @@ def main() -> None:
                    help="curated index dir to also write index.json + provenance.json into")
     p.add_argument("--twin", type=str, default=None,
                    help="markdown IDX-D twin index id for provenance (e.g. IDX-D-rfc9110)")
+    p.add_argument("--headings-from", choices=["outline", "text"], default="outline",
+                   help="structure source: 'outline' = embedded bookmarks (default); "
+                        "'text' = regex over the text layer (for PDFs with no outline)")
+    p.add_argument("--text-profile", choices=sorted(TEXT_PROFILES), default="eu-legislation",
+                   help="heading regex profile for --headings-from text")
     p.add_argument("--expected-pymupdf", type=str, default=EXPECTED_PYMUPDF,
                    help="pinned PyMuPDF version for reproducibility")
     p.add_argument("--overwrite", action="store_true")
@@ -331,9 +467,10 @@ def main() -> None:
     if not pdf_path.is_file():
         raise SystemExit(f"PDF not found: {pdf_path}")
 
-    index = build_index(pdf_path, args.expected_pymupdf)
+    index = build_index(pdf_path, args.expected_pymupdf,
+                        headings_from=args.headings_from, text_profile=args.text_profile)
     n = count_nodes(index["structure"])
-    print(f"outline -> {n} nodes ({index['doc_name']})")
+    print(f"{args.headings_from} -> {n} nodes ({index['doc_name']})")
 
     out_path = Path(args.out) if args.out else Path("results") / f"{pdf_path.stem}-outline_structure.json"
     if out_path.exists() and not args.overwrite:
@@ -350,7 +487,9 @@ def main() -> None:
         if idx_file.exists() and not args.overwrite:
             raise SystemExit(f"{idx_file} exists; pass --overwrite to replace it")
         idx_file.write_text(payload, encoding="utf-8")
-        write_provenance(idx_dir, pdf_path, index, args.expected_pymupdf, args.twin)
+        write_provenance(idx_dir, pdf_path, index, args.expected_pymupdf, args.twin,
+                         headings_from=args.headings_from,
+                         text_profile=args.text_profile if args.headings_from == "text" else None)
         print(f"curated index + provenance written: {idx_dir}")
 
 

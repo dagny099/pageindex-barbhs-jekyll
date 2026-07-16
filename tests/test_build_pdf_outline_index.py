@@ -94,6 +94,53 @@ def test_rfc_index_is_byte_deterministic(tmp_path):
     assert (tmp_path / "a.json").read_bytes() == (tmp_path / "b.json").read_bytes()
 
 
+GDPR_PDF = ROOT / "sources" / "gdpr-2016-679" / "gdpr.pdf"
+
+
+def _build_gdpr_via_venv(out: Path):
+    """Build the GDPR index via --headings-from text (the PDF has no usable
+    embedded outline). Returns the parsed index, or None to skip."""
+    if not GDPR_PDF.is_file() or not VENV_PY.exists():
+        return None
+    r = subprocess.run([PY, str(SCRIPT), "--pdf", str(GDPR_PDF), "--out", str(out),
+                        "--headings-from", "text", "--text-profile", "eu-legislation",
+                        "--overwrite"], capture_output=True, text=True)
+    if r.returncode != 0:
+        if "PyMuPDF" in (r.stdout + r.stderr) or "No module" in (r.stdout + r.stderr):
+            return None
+        raise AssertionError(r.stdout + r.stderr)
+    return json.loads(out.read_text())
+
+
+def test_gdpr_text_headings_structure_is_clean(tmp_path):
+    idx = _build_gdpr_via_venv(tmp_path / "gdpr.json")
+    if idx is None:
+        import pytest
+        pytest.skip("gdpr.pdf / pinned PyMuPDF not available")
+    nodes = list(_preorder(idx["structure"]))
+    # every node carries page addressing and non-empty text (no empty-content bug)
+    assert all("start_index" in n and "end_index" in n for n in nodes)
+    assert all(n.get("text", "").strip() for n in nodes), "every node must carry text"
+    # the regular numbering must be recovered exactly: 99 articles, 11 chapters
+    arts = sorted(int(re.match(r"Article (\d+)", n["title"]).group(1))
+                  for n in nodes if n["title"].startswith("Article "))
+    chaps = [n for n in nodes if n["title"].startswith("Chapter ")]
+    assert arts == list(range(1, 100)), "articles must be contiguous 1..99, no dupes/gaps"
+    assert len(chaps) == 11
+    # a preamble node captures pre-heading recitals from page 1
+    pre = [n for n in nodes if n["title"].startswith("Recitals")]
+    assert len(pre) == 1 and pre[0]["start_index"] == 1
+
+
+def test_gdpr_text_headings_is_byte_deterministic(tmp_path):
+    a = _build_gdpr_via_venv(tmp_path / "a.json")
+    if a is None:
+        import pytest
+        pytest.skip("gdpr.pdf / pinned PyMuPDF not available")
+    _build_gdpr_via_venv(tmp_path / "b.json")
+    assert (tmp_path / "a.json").read_bytes() == (tmp_path / "b.json").read_bytes()
+
+
 def _preorder(structure):
     for n in structure:
         yield n

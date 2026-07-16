@@ -373,6 +373,50 @@ judges (website corpus); most runs are single-shot (the paper pair and the twice
 IDX-D RFC arm are the exceptions); all ground truth author-written; one navigator family
 (gpt-4o) carried every index comparison.
 
+### 6.1 Known biases of the GDPR evaluation
+
+The three-arm GDPR run (`20260716T055341Z`: IDX-D / IDX-PDF-textheadings / IDX-C0, 24
+questions) replicates the RFC direction — the summarized arm (C0) came last on both
+recall@fetch (0.917 vs 0.958 deterministic, 1.000 PDF-text-headings) and fact-score (0.875
+vs 0.920 / 0.944), while fetching roughly half the source text (37K vs 71K content tokens),
+i.e. it leaned on paraphrase instead of opening the article. Before that null is read as
+"summaries never help," four biases in *this* evaluation must be stated plainly. They do not
+overturn the finding; they bound it.
+
+1. **The questions are navigation-friendly by construction.** They were authored while
+   looking at the article structure, and several cross-reference questions literally named
+   their targets in the prompt ("Article 17(1)(c) permits erasure where the data subject
+   objects 'pursuant to Article 21(1)'…"). When the question hands the agent the address,
+   heading navigation is trivially sufficient — and summaries exist precisely for the case
+   where titles don't telegraph the answer. So this GDPR null is partly a property of the
+   question-authoring style, not only of the corpus. Real user questions ("can we email
+   people who unsubscribed?") don't arrive pre-aligned with headings. This is the most
+   serious bias; the paraphrase run below (`questions-gdpr-paraphrase.csv`) is the fair test.
+
+2. **Recall@fetch is definitionally anti-summary.** It scores "did you fetch the primary
+   text" — but *not needing to fetch* is the summary tree's intended value, and the
+   fact-scores essentially tied. The honest objective claim is therefore not "summaries made
+   retrieval worse" but "summaries delivered equal measured outcomes at 3–5× cost while
+   shifting grounding from source text to paraphrase." The cost half is ironclad; calling the
+   grounding shift "worse" is a defensible value judgment for law and specs, not a
+   context-free fact.
+
+3. **Two questions rest on a contestable gold choice.** GE2 (deceased persons) and GE4
+   (anonymous information) are answered only in the GDPR's *recitals*, which are non-operative
+   interpretive aids, not binding provisions. Gold declared the recital the authoritative
+   location; a lawyer could argue a deduction from the operative definition of "personal
+   data" is the legally stronger answer with the recital as support. The phenomenon
+   (the agent didn't open the text addressing the question) is real, but "failure" overstates
+   n=2 questions under one navigator.
+
+4. **The GC3 gold was changed after seeing results — a forking-paths move.** Post-run, GC3's
+   gold was narrowed from {Article 46, Article 47} to {Article 47} on the ground that all
+   three arms answered fully from Article 47 alone and requiring a fetch of the citing article
+   over-penalized uniformly. The reasoning is sound and documented in
+   `evaluations/questions-gdpr.csv`, but it is exactly the practice pre-registration exists to
+   prevent, so it is labeled here as **post-hoc**, not "a correction." (The span-overlap
+   recall mode, `--line-hit span`, was decided pre-run and is clean.)
+
 ---
 
 ## 7. Figures
